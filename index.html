@@ -143,6 +143,59 @@
       <div class="body-wrap">
         
   
+    <article id="post-Markdown" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Typora-—-极简的-Markdown-编辑器"><a href="#Typora-—-极简的-Markdown-编辑器" class="headerlink" title="Typora — 极简的 Markdown 编辑器"></a>Typora — 极简的 Markdown 编辑器</h2><p><strong>Markdown</strong> 是一种用来自写作的轻量级<strong>标记语言</strong>，相比 HTML 真的是很简单，你可以只专心于文字内容而不是排版，字体设置等等繁琐事。今天我就带来一个 Markdown 草鸡好用的 IDE：<strong>Typora</strong>。在介绍 Typora 之前，我们先讲一下 Markdown 的基础语法。</p>
+<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>‘# 一级标题  ## 二级标题  ### 三级标题（依次类推）— 文章主题’</p>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>无序列表：在文字前加上 - 或者 * 即可。</p>
+<p>有序列表：在文字前加上1. 2. 3. 即可，注意，符号和文字之间要有一个空格。</p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>在文本前加入 &gt; 即可。</p>
+<h4 id="图片和链接"><a href="#图片和链接" class="headerlink" title="图片和链接"></a>图片和链接</h4><p>图片：! [] (URL) </p>
+<p>链接：[] (URL)</p>
+<p>在 ! 和 [] 、() 之间没有空格的，我这样写是因为我也是用 Typora !</p>
+<p><img src="http://p1.bpimg.com/567571/c1beda49525ac247.jpg" alt=""></p>
+<p>放一个图床用于生成 URL ：<a href="http://yotuku.cn/" target="_blank" rel="external">极简图床</a> 。当然你用了 Typora 之后，可以本地直接拖拽图片自动生成。</p>
+<h4 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h4><p>两个 <em> 包含的文本为粗体，一个 </em> 包含的文本为斜体。</p>
+<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><p>这里我就用 Typora 的语法，快捷键：Ctrl + T , 因为 Mrakdown 创建表格真的很废。</p>
+<h4 id="Typora-主题"><a href="#Typora-主题" class="headerlink" title="Typora 主题"></a>Typora 主题</h4><p>Typora 提供五套主题，爽到爆炸，默认当然是 gayhub 啦。主题是基于 CSS 样式的，这就意味着你可以自己写主题。</p>
+<h4 id="Typora-代码和数学公式"><a href="#Typora-代码和数学公式" class="headerlink" title="Typora 代码和数学公式"></a>Typora 代码和数学公式</h4><p>Typora 基本支持所有主流语言代码高亮，数学公式更不在话下，虽然我没怎么用过。</p>
+<p><img src="http://p1.bpimg.com/567571/c38769695ee277a6.gif" alt=""></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>光听就高潮了？赶紧动手去做啊。</p>
+<p>Typora 下载地址：<a href="http://www.typora.io/" target="_blank" rel="external">喵喵喵</a></p>
+<p>Markdown 中文网：<a href="http://www.markdown.cn/" target="_blank" rel="external">汪汪汪</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/07/Markdown/" class="archive-article-date">
+  	<time datetime="2016-12-07T05:25:11.645Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-07</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -357,50 +410,6 @@
       
       <a href="/2016/11/24/暴利解压/" class="archive-article-date">
   	<time datetime="2016-11-24T02:06:20.368Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-24</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-80端口被占用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="解决80端口被占用的尴尬处境"><a href="#解决80端口被占用的尴尬处境" class="headerlink" title="解决80端口被占用的尴尬处境"></a>解决80端口被占用的尴尬处境</h2><ol>
-<li><p>首先打开cmd输入命令netstat-ano查看80端口被占用情况，如果PID为4，这说明是hhtp服务占用了80端口，这时候输入命令net stop http服务。也可以输入taskkill / pid 4 /f或者ntsd -c q -p 4。如果是其他进程，查看PID之后在任务管理器里结束该进程。</p>
-</li>
-<li><p>打开注册表把start值改为零之后重启。（来自网上的办法，亲测没效，自己也可以试试）</p>
-</li>
-<li><p>如果你装了SQL，或许是SQL serve的某些进程占用了，这时候可以在计算机管理里面打开服务结束SQL Serve Reporting Services，或者在cmd中net stop ReportServe。</p>
-<p>​</p>
-</li>
-</ol>
-<h5 id="最后建议自己好好看看-Http-Serve-API"><a href="#最后建议自己好好看看-Http-Serve-API" class="headerlink" title="最后建议自己好好看看 Http Serve API "></a>最后建议自己好好看看 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364510" target="_blank" rel="external">Http Serve API </a></h5>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/22/80端口被占用/" class="archive-article-date">
-  	<time datetime="2016-11-22T15:34:13.964Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
 </a>
       
       
