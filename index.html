@@ -196,6 +196,71 @@
 
 
   
+    <article id="post-爬虫入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="爬虫入门之爬美眉图"><a href="#爬虫入门之爬美眉图" class="headerlink" title="爬虫入门之爬美眉图"></a>爬虫入门之爬美眉图</h2><p>总有人说我们撸码的整天面对电脑是不是特别无趣 ？听这话我当时我就不爽了，什么叫有趣 ？聊妹 ？恕我直言啊，都是 Low B 。今天就让我这个老司机给大家上一课，用 python 抓美眉图 。当然首先要选一个站点爬，就是这个了：<a href="http://www.mzitu.com/" target="_blank" rel="external">十八岁以下请自觉捂眼</a></p>
+<p><img src="http://p1.bqimg.com/567571/92d879cee44b0db4.jpg" alt=""></p>
+<p>效果图：<img src="http://p1.bpimg.com/567571/6cfbcb01055f6d82.png" alt="羞涩"></p>
+<p><img src="http://p1.bqimg.com/567571/5140cb8786e4335b.jpg" alt=""></p>
+<p>下面讲一下环境搭建以及库的安装：</p>
+<p>安装 Python : 可在官网下载最新版本：<a href="https://www.python.org/downloads/" target="_blank" rel="external">https://www.python.org/downloads/</a> 如果你感觉下的巨慢，我这有 Python 3.5  64位的：<a href="http://pan.baidu.com/s/1geW6o2v" target="_blank" rel="external">http://pan.baidu.com/s/1geW6o2v</a> 密码：qhnv</p>
+<p>安装 Anaconda : 链接：<a href="http://pan.baidu.com/s/1eRGtt1g" target="_blank" rel="external">http://pan.baidu.com/s/1eRGtt1g</a> 密码：iw7n</p>
+<p>Request 、Beautifulsoup4 、Lxml 的安装 ：直接在  C:\WINDOWS\system32\ 依次输入一下命令：conda install requests , conda  install baeutifulsoup4 , conda install lxml 。</p>
+<p>Requests : 官方文档 ：<a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="external">http://docs.python-requests.org/zh_CN/latest/user/quickstart.html</a> ( 虽然对我这个辣鸡来说看的恍恍惚惚)</p>
+<p><img src="http://p1.bqimg.com/567571/42151185fd0f169a.gif" alt=""></p>
+<p>Beautifulsoup4 : 官方文档 ：<a href="http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#" target="_blank" rel="external">http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#</a> ( 贼详细 )</p>
+<p>LXML : 官方文档 ：<a href="http://lxml.de/" target="_blank" rel="external">http://lxml.de/</a></p>
+<p>Python IDE 下载：<a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="external">PyCharm</a> 下载完之后打开 PyCharm File 下的 settings 按如下图配置：<img src="http://p1.bqimg.com/567571/f583c5bce1d10f0f.png" alt=""></p>
+<p><img src="http://p1.bqimg.com/567571/007835a1b51af7b0.jpg" alt=""></p>
+<p>是时候展现真正的技术了 ！</p>
+<p>思路：找到你要图片的位置，打开 <a href="http://www.mzitu.com/all" target="_blank" rel="external">http://www.mzitu.com/all</a> ，F12 后 Ctrl + Shift +C 切换到开发者模式，如下图：<img src="http://p1.bqimg.com/567571/fc18dbb423583ec6.png" alt=""></p>
+<p>发现了什么？没错，所有的套图都放在 class =“all” 下的 li 标签里。（此处建议学点 HTML 基础）这就好办了，废话不多说，直接上code：</p>
+<p><img src="http://p1.bqimg.com/567571/f895cbaad9e16073.png" alt=""></p>
+<p>为了看的清楚，代码放在了sublime中显示，下图为运行结果：</p>
+<p><img src="http://i1.piimg.com/567571/271d450e758d4b8a.png" alt=""></p>
+<p>看着红红火火恍恍惚惚的链接是不是很激动？</p>
+<p><img src="http://i1.piimg.com/567571/65b1e8a205674658.jpg" alt=""></p>
+<p>接下来就是提取 ‘<a>‘ 标签的 href 属性和文本。如下图：</a></p>
+<p><img src="http://i1.piimg.com/567571/4577bbfd70b1f17b.png" alt=""></p>
+<p>接下来找图片的实际地址，如果你有 HTML 基础，就知道所有的图片都放在 img 标签里，如下图：</p>
+<p><img src="http://p1.bqimg.com/567571/60bb3934e802551e.png" alt=""></p>
+<p>code：</p>
+<p><img src="http://i1.piimg.com/567571/e1c9a619a0e6fcb3.png" alt=""></p>
+<p>这样写，感觉巨乱，恕我直言。就当是练手了。</p>
+<p><img src="http://p1.bqimg.com/567571/00e4edbeffa841b7.jpg" alt=""></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/06/爬虫入门/" class="archive-article-date">
+  	<time datetime="2016-12-05T23:48:24.070Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-06</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -369,47 +434,6 @@
       
       <a href="/2016/12/04/HTML+CSS/" class="archive-article-date">
   	<time datetime="2016-12-03T16:19:15.029Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-04</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-暴利解压" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="暴力美学，手动滑稽"><a href="#暴力美学，手动滑稽" class="headerlink" title="暴力美学，手动滑稽"></a>暴力美学，手动滑稽</h2><h4 id="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"><a href="#有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。" class="headerlink" title="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"></a>有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。</h4><ol>
-<li>破解RAR ：<a href="链接：http://pan.baidu.com/s/1c1Togco 密码：84vu">滴滴</a></li>
-<li>破解Zip：<a href="链接：http://pan.baidu.com/s/1eR4hBm6 密码：iaox">滴滴</a></li>
-</ol>
-<p>顺便放点字典文件：<a href="链接：http://pan.baidu.com/s/1kVdPpHX 密码：z75q">滴滴</a></p>
-<p>当然，如果感觉是盲目穷举，也可以自己输入个人信息，猜测可能的密码，业界良心：<a href="http://caimima.net/" target="_blank" rel="external">滴滴</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/24/暴利解压/" class="archive-article-date">
-  	<time datetime="2016-11-24T02:06:20.368Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-24</time>
 </a>
       
       
