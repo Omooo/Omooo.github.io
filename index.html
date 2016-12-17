@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-随笔" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,13 +152,37 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="喜欢一个傻逼是有多么傻逼"><a href="#喜欢一个傻逼是有多么傻逼" class="headerlink" title="喜欢一个傻逼是有多么傻逼"></a>喜欢一个傻逼是有多么傻逼</h2><h4 id="那就是比傻逼还傻逼"><a href="#那就是比傻逼还傻逼" class="headerlink" title="那就是比傻逼还傻逼"></a>那就是比傻逼还傻逼</h4>
+<h2 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h2><h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>本文敏感信息均已打码，因为漏洞还没提交厂商，大致讲一下注入过程。</p>
+<p>​          <img src="http://i1.piimg.com/567571/6b23936fbf0a4165.png" alt=""></p>
+<h4 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h4><p>SQL注入是发生于应用程序之数据库层的安全漏洞。简而言之，是再输入字符串中注入SQL命令，在设计不良的程序当中忽略了检查，那么这些注入进去的指令就会被数据库服务器误认为是正常的SQL命令而运行，因此遭到破坏或是入侵。</p>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>安装 Python 2.7 、Sqlmap ，最新版本的 Python 3.5  还不支持 Sqlmap 。</p>
+<h4 id="ASP-Acess-数据库手工注入"><a href="#ASP-Acess-数据库手工注入" class="headerlink" title="ASP + Acess 数据库手工注入"></a>ASP + Acess 数据库手工注入</h4><p>可能存在注入的站点一般都是这个样式：<a href="http://www.xxx.com/xxx.asp?id=N" target="_blank" rel="external">http://www.xxx.com/xxx.asp?id=N</a></p>
+<p>这里可以用 Google 语法（inurl:asp?id=N( N 是任意数字)）来找一些站点试试。</p>
+<p><img src="http://i1.piimg.com/567571/00e0ce00f7e5d43f.jpg" alt=""></p>
+<ul>
+<li>手工尝试</li>
+</ul>
+<p>1 = 1 没报错，1 = 2 报错，即说明存在 SQL 注入漏洞。接下来开始猜测表名是否存在：and exists(select * from admin) ，未报错则说明存在 admin 表。接着就是爆字段长度：order by N ( N 可以逐渐增加，知道报错，例如 order by 8 显示正常，order by 9 报错，就说明字段长度为 8) 。接着就是爆字段的值：union 1,2,3,4,5,6,7,8 from admin ( 这里的 8 就是字段的长度)。最后在显示的部位用 username 和 password 就好了，爆出来的密码通常用 MD5 加密，再去 <a href="http://www.cmd5.com/" target="_blank" rel="external">在线MD5解密</a>。</p>
+<ul>
+<li>利用工具</li>
+</ul>
+<p>Sqlmap 可谓是注入神器，语法也很简单。这次我们讲的是 Access 数据库，Access 的首要标识是 tables–columns–dump（表–字段–值）。</p>
+<p>测试是否是注入点：sqlmap.py -u “URL”</p>
+<p>接着爆表：sqlmap.py -u “URL” –tables</p>
+<p>接着爆字段：sqlmap.py -u “URL” -T 表名 –columns</p>
+<p>爆字段的值：sqlmap.py  “URL” -T  表名 -C “username,password” –dump</p>
+<p>这个过程会让你选择线程，或者是否解密，多看看 Sqlmap 手册，做一个脚本小子还是很简单的。当然最糟糕的可能就是站点有防火墙（WAF、IPS/IDS等等），这里可以看一下  <a href="http://www.freebuf.com/articles/1000.html" target="_blank" rel="external">Sqlmap 绕过 WAF</a> 。</p>
+<p>效果图：<img src="http://i1.piimg.com/567571/b983c7b706f20d0a.png" alt=""></p>
+<p>管理员的账号和密码就爆出来了，这时候可以去找一下后台，推荐 <a href="http://pan.baidu.com/s/1hrTNokW" target="_blank" rel="external">御剑后台扫描工具</a> 密码：5wvg</p>
+<p>这里就只讲爆账号和密码，因为上传木马、拿 shell 我自己并不是很懂。</p>
+<p><img src="http://i1.piimg.com/567571/51ad314f47406abf.gif" alt=""></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/12/13/随笔/" class="archive-article-date">
-  	<time datetime="2016-12-12T16:01:41.370Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-13</time>
+      <a href="/2016/12/17/sql注入/" class="archive-article-date">
+  	<time datetime="2016-12-17T03:03:57.219Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-17</time>
 </a>
       
       
