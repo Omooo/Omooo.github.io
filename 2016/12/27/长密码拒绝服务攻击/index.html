@@ -8,12 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="长密码拒绝服务攻击0X01今天在用AWVS扫一个站点时，发现一个Long password denial of service高危漏洞。通常情况下，我们都强调用复杂的密码来防止被爆破，然而过长的密码也可能被Hacker用来发起DOS攻击。Hacker故意反复发送长度较长，让服务器进行复杂的计算，可能导致服务器不响应或者资源耗尽。
+0X02这里假设在一个网站上注册一个用户，用户名会被明文存储，而密">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/12/27/长密码拒绝服务攻击/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="长密码拒绝服务攻击0X01今天在用AWVS扫一个站点时，发现一个Long password denial of service高危漏洞。通常情况下，我们都强调用复杂的密码来防止被爆破，然而过长的密码也可能被Hacker用来发起DOS攻击。Hacker故意反复发送长度较长，让服务器进行复杂的计算，可能导致服务器不响应或者资源耗尽。
+0X02这里假设在一个网站上注册一个用户，用户名会被明文存储，而密">
+<meta property="og:image" content="http://yoursite.com/file:///C:/Users/ssc/Pictures/t0109886b1b8b90da39.gif">
+<meta property="og:updated_time" content="2016-12-27T13:56:54.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="长密码拒绝服务攻击0X01今天在用AWVS扫一个站点时，发现一个Long password denial of service高危漏洞。通常情况下，我们都强调用复杂的密码来防止被爆破，然而过长的密码也可能被Hacker用来发起DOS攻击。Hacker故意反复发送长度较长，让服务器进行复杂的计算，可能导致服务器不响应或者资源耗尽。
+0X02这里假设在一个网站上注册一个用户，用户名会被明文存储，而密">
+<meta name="twitter:image" content="http://yoursite.com/file:///C:/Users/ssc/Pictures/t0109886b1b8b90da39.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,9 +150,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-暴利解压" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-长密码拒绝服务攻击" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,19 +159,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="暴力美学，手动滑稽"><a href="#暴力美学，手动滑稽" class="headerlink" title="暴力美学，手动滑稽"></a>暴力美学，手动滑稽</h2><h4 id="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"><a href="#有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。" class="headerlink" title="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"></a>有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。</h4><ol>
-<li>破解RAR ：<a href="http://pan.baidu.com/s/1c1Togco" target="_blank" rel="external">滴滴</a> 密码：84vu</li>
-<li>破解Zip：<a href="http://pan.baidu.com/s/1eR4hBm6" target="_blank" rel="external">滴滴</a> 密码：iaox</li>
-</ol>
-<p>顺便放点字典文件：<a href="http://pan.baidu.com/s/1kVdPpHX" target="_blank" rel="external">滴滴</a>  密码：z75q</p>
-<p>当然，如果感觉是盲目穷举，也可以自己输入个人信息，猜测可能的密码，业界良心：<a href="http://caimima.net/" target="_blank" rel="external">滴滴</a></p>
+<h2 id="长密码拒绝服务攻击"><a href="#长密码拒绝服务攻击" class="headerlink" title="长密码拒绝服务攻击"></a>长密码拒绝服务攻击</h2><h4 id="0X01"><a href="#0X01" class="headerlink" title="0X01"></a>0X01</h4><p>今天在用AWVS扫一个站点时，发现一个<strong>Long password denial of service</strong>高危漏洞。通常情况下，我们都强调用复杂的密码来防止被爆破，然而过长的密码也可能被Hacker用来发起DOS攻击。Hacker故意反复发送长度较长，让服务器进行复杂的计算，可能导致服务器不响应或者资源耗尽。</p>
+<h4 id="0X02"><a href="#0X02" class="headerlink" title="0X02"></a>0X02</h4><p>这里假设在一个网站上注册一个用户，用户名会被明文存储，而密码一般都用 MD5 加密存储，如果密码设置的过长，服务器就要进行大量的计算出该密码对对应的 MD5 值，这个过程可能会使服务器宕机，所以一般网站都会对密码的长度进行限制，不只是最短长度。</p>
+<p>测试执行（以我扫的那个站为例）：</p>
+<ul>
+<li>password of 1000000 characters =&gt; <strong>30.015 s</strong></li>
+<li>password of 100 characters =&gt; <strong>0.047 s</strong></li>
+<li>password of 100000 characters =&gt; <strong>30.03 s</strong></li>
+<li>password of 1100000 characters =&gt; <strong>29.999 s</strong></li>
+<li>password of 500 characters =&gt; <strong>0.078 s</strong></li>
+</ul>
+<p><img src="file:///C:/Users/ssc/Pictures/t0109886b1b8b90da39.gif" alt=""></p>
+<p>这里，为极简图床默哀一秒。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/24/暴利解压/" class="archive-article-date">
-  	<time datetime="2016-11-24T02:06:20.368Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-24</time>
+      <a href="/2016/12/27/长密码拒绝服务攻击/" class="archive-article-date">
+  	<time datetime="2016-12-27T12:48:12.206Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-27</time>
 </a>
       
       
@@ -174,189 +187,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-80端口被占用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="解决80端口被占用的尴尬处境"><a href="#解决80端口被占用的尴尬处境" class="headerlink" title="解决80端口被占用的尴尬处境"></a>解决80端口被占用的尴尬处境</h2><ol>
-<li><p>首先打开cmd输入命令netstat-ano查看80端口被占用情况，如果PID为4，这说明是hhtp服务占用了80端口，这时候输入命令net stop http服务。也可以输入taskkill / pid 4 /f或者ntsd -c q -p 4。如果是其他进程，查看PID之后在任务管理器里结束该进程。</p>
-</li>
-<li><p>打开注册表把start值改为零之后重启。（来自网上的办法，亲测没效，自己也可以试试）</p>
-</li>
-<li><p>如果你装了SQL，或许是SQL serve的某些进程占用了，这时候可以在计算机管理里面打开服务结束SQL Serve Reporting Services，或者在cmd中net stop ReportServe。</p>
-<p>​</p>
-</li>
-</ol>
-<h5 id="最后建议自己好好看看-Http-Serve-API"><a href="#最后建议自己好好看看-Http-Serve-API" class="headerlink" title="最后建议自己好好看看 Http Serve API "></a>最后建议自己好好看看 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364510" target="_blank" rel="external">Http Serve API </a></h5>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/22/80端口被占用/" class="archive-article-date">
-  	<time datetime="2016-11-22T15:34:13.964Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ZeroNet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ZeroNet"><a href="#ZeroNet" class="headerlink" title="ZeroNet"></a>ZeroNet</h1><p><em>ZeroNet</em>是一个基于比特币加密技术和BT网络技术的去中心化的开放开源的网络和交流系统。</p>
-<h4 id="为什么要用它？（官方介绍）"><a href="#为什么要用它？（官方介绍）" class="headerlink" title="为什么要用它？（官方介绍）"></a>为什么要用它？（官方介绍）</h4><ol>
-<li><p>我们想要开放的，自由的未经审查的网络和交流。</p>
-</li>
-<li><p>永远在线：只要还有一个节点存在内容，就不会消失。</p>
-</li>
-<li><p>不用花钱买主机，内容都存在访问者电脑上。</p>
-</li>
-<li><p>不可能关闭：哪里都找不到它，因为它无处不在。</p>
-</li>
-<li><p>速度快且可以离线浏览：你可以在甚至没有网络的情况下访问这些节点。</p>
-<p>​</p>
-</li>
-</ol>
-<h4 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h4><ol>
-<li><p>实时更新站点。</p>
-</li>
-<li><p>Namecoin.bit支持。</p>
-</li>
-<li><p>使用简单：解压，运行即可。</p>
-</li>
-<li><p>基于BIP32的无密码认证：比特币也是用这种方式加密保护你的钱包。</p>
-</li>
-<li><p>内建带P2P数据同步的SQL serve：建站更简单，载入更快。</p>
-</li>
-<li><p>匿名性：完全支持Tor。</p>
-</li>
-<li><p>TLS加密连接。</p>
-</li>
-<li><p>自动uPnP端口开放。</p>
-</li>
-<li><p>多用户插件支持</p>
-</li>
-<li><p>支持任何操作系统和浏览器。</p>
-<p>​</p>
-<p>​</p>
-</li>
-</ol>
-<h4 id="如何安装和使用？"><a href="#如何安装和使用？" class="headerlink" title="如何安装和使用？"></a>如何安装和使用？</h4><p><a href="[https://github.com/HelloZeroNet/ZeroBundle/releases/download/0.1.1/ZeroBundle-v0.1.1.zip](https://github.com/HelloZeroNet/ZeroBundle/releases/download/0.1.1/ZeroBundle-v0.1.1.zip">下载地址</a>)</p>
-<p>解压后运行ZeroNet.cmd会自动调用默认浏览器打开127.0.0.1:43110</p>
-<h4 id="放一波资源站："><a href="#放一波资源站：" class="headerlink" title="放一波资源站："></a>放一波资源站：</h4><p><a href="http://127.0.0.1:43110/1PLAYgDQboKojowD3kwdb3CtWmWaokXvfp/?Popular" target="_blank" rel="external">海盗湾种子站</a></p>
-<p><a href="http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/" target="_blank" rel="external">MSDN资源站</a></p>
-<p><a href="http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/" target="_blank" rel="external">kindle电子书</a></p>
-<p><a href="http://127.0.0.1:43110/1NzWeweqJ32aRVdM5UzFnYCszuvG5xV3vS" target="_blank" rel="external">中文导航</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/22/ZeroNet/" class="archive-article-date">
-  	<time datetime="2016-11-22T08:35:02.481Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Crazy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/22/Crazy/">Crazy</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Don’t understand how Hexo think, HTML is not quite good? Why I write in Markdown? I have a horse of wheat should know about.</p>
-<p>– S</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/22/Crazy/" class="archive-article-date">
-  	<time datetime="2016-11-22T07:02:21.487Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+    <a href="/2016/12/22/IIS目录枚举漏洞/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="长密码拒绝服务攻击" data-title="" data-url="http://yoursite.com/2016/12/27/长密码拒绝服务攻击/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -378,8 +266,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
