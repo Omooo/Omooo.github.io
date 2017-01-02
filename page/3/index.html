@@ -143,6 +143,117 @@
       <div class="body-wrap">
         
   
+    <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696" target="_blank" rel="external">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
+<h4 id="简述TCP-UDP的区别"><a href="#简述TCP-UDP的区别" class="headerlink" title="简述TCP/UDP的区别"></a>简述TCP/UDP的区别</h4><pre><code>TCP和UDP是OSI模型中的传输层中的协议。TCP提供可靠的通信传输，而UDP则常被用于让广播和细节控制交给应用的通信传输。两者的区别大致如下：
+</code></pre><ul>
+<li>TCP 面向连接，UDP面向非连接即发送数据前不需要建立连接</li>
+<li>TCP 提供可靠的服务（数据传输），UDP 无法保证</li>
+<li>TCP 面向字节流，UDP 面向报文</li>
+<li>TCP 数据传输慢，UDP 数据传输快</li>
+</ul>
+<p>详细了解：<a href="http://blog.csdn.net/yipiankongbai/article/details/24435977" target="_blank" rel="external">http://blog.csdn.net/yipiankongbai/article/details/24435977</a></p>
+<h4 id="简述你了解的端口以及对应的服务"><a href="#简述你了解的端口以及对应的服务" class="headerlink" title="简述你了解的端口以及对应的服务"></a>简述你了解的端口以及对应的服务</h4><p><img src="http://p1.bqimg.com/567571/23ff33efe1aa85f6.png" alt=""></p>
+<p>更多阅读：<a href="http://blog.sina.com.cn/s/blog_66ea0e2801011vb3.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_66ea0e2801011vb3.html</a></p>
+<h4 id="简述-TCP-的三次握手"><a href="#简述-TCP-的三次握手" class="headerlink" title="简述 TCP 的三次握手"></a>简述 TCP 的三次握手</h4><p>在 TCP/IP 协议中，TCP 协议提供可靠的连接服务，连接时是通过三次握手进行初始化的。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP 宽口大小信息。</p>
+<p>第一次握手：建立连接，客户端发送连接请求报文段，将 SYN 位置为1，Sequnence Number为x；然后，客户端进去 SYN_SEND 状态，等待服务器确认。</p>
+<p>第二次握手：服务端收到客户端的SYN报文，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1（Sequence Number +1）;同时，自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为 y ;服务端将上诉所有信息放到一个报文段（即 SYN + ACK报文段）中，一并发送给客户端，此时服务器进入 SYN_RECV状态。</p>
+<p>第三次握手：客户端接受到 SYN_ACK 报文段。然后将 Acknowledgment Number 设置为 y+1，向服务器发送 ACK 报文段，这个报文段发送完毕之后，客户端和服务端都进入 ESTABLISHED 状态，完成 TCP 三次握手。</p>
+<p>详细了解：<a href="http://www.jellythink.com/archives/705" target="_blank" rel="external">http://www.jellythink.com/archives/705</a></p>
+<h4 id="简述有哪些私有（保留）地址"><a href="#简述有哪些私有（保留）地址" class="headerlink" title="简述有哪些私有（保留）地址"></a>简述有哪些私有（保留）地址</h4><ul>
+<li>A类：10.0.0.0  —   10.255.255.255</li>
+<li>B类：172.16.0.0   —   172.31.255.255</li>
+<li>C类：192.168.0.0   —   192.168.255.255</li>
+</ul>
+<h4 id="简述-IP-地址分为哪几类"><a href="#简述-IP-地址分为哪几类" class="headerlink" title="简述 IP 地址分为哪几类"></a>简述 IP 地址分为哪几类</h4><p><img src="http://i1.piimg.com/567571/571638ecdde69dbe.png" alt=""></p>
+<p>IPv6 — 采用128bit ，首部固定部分为 40 字节。</p>
+<h4 id="简述浏览器输入网址后会发生什么"><a href="#简述浏览器输入网址后会发生什么" class="headerlink" title="简述浏览器输入网址后会发生什么"></a>简述浏览器输入网址后会发生什么</h4><ul>
+<li>查找域名对应的 IP 地址。这一步会依次查找浏览器缓存，系统缓存，路由器缓存，ISPDNS缓存，根域名服务器</li>
+<li>浏览器向 IP 对应的 web 服务器发送一个 HTTP 请求</li>
+<li>服务器响应请求，发回网页内容</li>
+<li>浏览器解析网页内容</li>
+</ul>
+<p>详述：<a href="http://www.itmian4.com/forum.php?mod=viewthread&amp;tid=1655&amp;fromuid=1931" target="_blank" rel="external">http://www.itmian4.com/forum.php? mod=viewthread&amp;tid=1655&amp;fromuid=1931</a></p>
+<p>​           <a href="https://www.nowcoder.com/discuss/1937" target="_blank" rel="external">https://www.nowcoder.com/discuss/1937</a></p>
+<h4 id="简单解释一些-ARP-协议的工作过程"><a href="#简单解释一些-ARP-协议的工作过程" class="headerlink" title="简单解释一些 ARP 协议的工作过程"></a>简单解释一些 ARP 协议的工作过程</h4><ol>
+<li>首先，每个主机都会在自己的 ARP 缓冲区中建立一个 ARP 列表，以表示  IP 地址和 MAC 地址之间的对应关系。</li>
+<li>当源主机要发送数据时，首先检查 ARP  列表中是否有对应的 IP 地址的目的主机的 MAC 地址，如果有，则直接发送数据。如果没有，就向本网段的所有主机发送 ARP 数据包，该数据包包括的内容有：源主机 IP 地址，源主机 MAC 地址，目的主机的 IP 地址。</li>
+<li>当本网络的所有主机收到该 ARP 数据包时，首先检查数据包中的 IP 地址是否是自己的 IP 地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的 IP 地址和 MAC 地址写入到 ARP 列表中，如果已经存在，则覆盖，然后将自己的 MAC 地址写入 ARP 响应包中，告诉源主机自己是它想要找的 MAC 地址。</li>
+<li>源主机收到 ARP 响应包后，将目的主机的 IP 和 MAC 地址写入 ARP 列表，并利用此信息发送数据。如果源主机一直没有收到 ARP 响应包，表示 ARP 查询失败。</li>
+</ol>
+<p>解释来源：<a href="http://blog.csdn.net/shadowkiss/article/details/6552144" target="_blank" rel="external">http://blog.csdn.net/shadowkiss/article/details/6552144</a></p>
+<p>详细了解：<a href="http://blog.csdn.net/microtong/article/details/3029931" target="_blank" rel="external">http://blog.csdn.net/microtong/article/details/3029931</a></p>
+<h4 id="简述-OSI-七层模型"><a href="#简述-OSI-七层模型" class="headerlink" title="简述 OSI 七层模型"></a>简述 OSI 七层模型</h4><p><img src="http://p1.bpimg.com/567571/0c3bd15436e320da.png" alt=""></p>
+<p>图片来源：<a href="http://blog.csdn.net/yaopeng_2005/article/details/7064869" target="_blank" rel="external">http://blog.csdn.net/yaopeng_2005/article/details/7064869</a></p>
+<h4 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP/IP四层模型"></a>TCP/IP四层模型</h4><ol>
+<li>主机到网络层：实际上 TCP/IP 参考模型没有真正的描述这一层的实现，只是要求能够提供给其上层–网络互连层一个访问接口，以便在在其上传递 IP 分组。由于这一层未被定义，所以其具体的实现方法将随着网络类型的不同而不同。</li>
+<li>网络互连层：网络互连层是整个 TCP/IP 协议栈的核心。它的功能是把分组发往目标网络或主机。同时，为了尽快地发送分组，可能需要沿不同的路径同时进行分组传递。因此，分组到达的顺序和发送的顺序可能不同，这就需要上层必须对分组进行排序。</li>
+</ol>
+<p>​       网络互连层定义了分组格式和协议，即 IP 协议。</p>
+<p>​       网络互连层除了需要完成路由的功能外，也可以完成将在不同类型的网络（异构网）互连的任务。除此之外，网络互连层还需要完成拥塞控制的功能。</p>
+<ol>
+<li><p>传输层：在 TCP/IP 模型中，传输层的功能是使源主机和目标主机上的对等实体可以进行会话。在传输层定义了两种服务质量不同的协议。即：传输控制协议 TCP 和用户数据协议 UDP。</p>
+<p>TCP 协议是一个面向连接的、可靠的协议。它将一台主机发出的字节流无差错地发往互联网上的其他主机。在发送端，它负责把上层传送下来的字节流分成报文段并传递给下层。在接收端，它负责把收到的报文进行重组后递交给上层。TCP 协议还要处理端到端的流量控制，以避免缓慢接收的接收方没有足够的缓冲区接收发送方发送的大量数据。</p>
+<p>UDP 协议是一个不可靠的、无连接协议，主要适用于不需要对报文进行排序和流量控制的场合。</p>
+</li>
+<li><p>应用层：TCP/IP 模型将 OSI 参考模型中的会话层和表示层的功能合并到应用层实现。</p>
+</li>
+</ol>
+<p>​       应用层面向不同的网络应用引入了不同的应用层协议。其中，有基于 TCP 协议的，如文件传输协议、虚拟终端协议、超文本链接协议，也有基于 UDP 协议的。。</p>
+<p>详细了解：<a href="http://www.cnblogs.com/BlueTzar/articles/811160.html" target="_blank" rel="external">http://www.cnblogs.com/BlueTzar/articles/811160.html</a></p>
+<h4 id="简述-HTTP-协议包括哪些请求"><a href="#简述-HTTP-协议包括哪些请求" class="headerlink" title="简述 HTTP 协议包括哪些请求"></a>简述 HTTP 协议包括哪些请求</h4><ul>
+<li>GET : 对服务器资源的简单请求</li>
+<li>POST : 用于发送包含用户提交数据的请求</li>
+<li>HEAD : 类似 GET 请求，不过返回的响应中没有具体内容，用于获取报头</li>
+<li>DELETE : 发送一个删除指定文档的请求</li>
+<li>TRACE : 发送一个请求副本，以跟踪其处理进程</li>
+<li>OPTIONS : 返回所有可用的方法，检查服务器支持哪些方法</li>
+<li>CONNECT : 用于 SS 隧道的基于代理的请求</li>
+</ul>
+<h4 id="简述-HTTP-中-GET-和-POST-的区别"><a href="#简述-HTTP-中-GET-和-POST-的区别" class="headerlink" title="简述 HTTP 中 GET 和 POST 的区别"></a>简述 HTTP 中 GET 和 POST 的区别</h4><p>从原理来看：</p>
+<ul>
+<li>根据 HTTP 规范，GET 用于信息获取，而且应该是安全和幂等的（幂等性是指一次和多次请求某一个资源应该具有同样的副作用）</li>
+<li>根据 HTTP 规范，POST 请求表示可能修改服务器上资源的请求</li>
+</ul>
+<p>从表面看：</p>
+<ul>
+<li>GET 请求的数据会附在 URL 后面，POST 的数据放在 HTTP 包体</li>
+<li>POST 安全性比 GET 安全性高</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/05/计算机知识点总结/" class="archive-article-date">
+  	<time datetime="2016-12-05T01:22:44.237Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-05</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-小计俩耍耍" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -292,84 +403,6 @@
       
       <a href="/2016/11/22/80端口被占用/" class="archive-article-date">
   	<time datetime="2016-11-22T15:34:13.964Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ZeroNet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ZeroNet"><a href="#ZeroNet" class="headerlink" title="ZeroNet"></a>ZeroNet</h1><p><em>ZeroNet</em>是一个基于比特币加密技术和BT网络技术的去中心化的开放开源的网络和交流系统。</p>
-<h4 id="为什么要用它？（官方介绍）"><a href="#为什么要用它？（官方介绍）" class="headerlink" title="为什么要用它？（官方介绍）"></a>为什么要用它？（官方介绍）</h4><ol>
-<li><p>我们想要开放的，自由的未经审查的网络和交流。</p>
-</li>
-<li><p>永远在线：只要还有一个节点存在内容，就不会消失。</p>
-</li>
-<li><p>不用花钱买主机，内容都存在访问者电脑上。</p>
-</li>
-<li><p>不可能关闭：哪里都找不到它，因为它无处不在。</p>
-</li>
-<li><p>速度快且可以离线浏览：你可以在甚至没有网络的情况下访问这些节点。</p>
-<p>​</p>
-</li>
-</ol>
-<h4 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h4><ol>
-<li><p>实时更新站点。</p>
-</li>
-<li><p>Namecoin.bit支持。</p>
-</li>
-<li><p>使用简单：解压，运行即可。</p>
-</li>
-<li><p>基于BIP32的无密码认证：比特币也是用这种方式加密保护你的钱包。</p>
-</li>
-<li><p>内建带P2P数据同步的SQL serve：建站更简单，载入更快。</p>
-</li>
-<li><p>匿名性：完全支持Tor。</p>
-</li>
-<li><p>TLS加密连接。</p>
-</li>
-<li><p>自动uPnP端口开放。</p>
-</li>
-<li><p>多用户插件支持</p>
-</li>
-<li><p>支持任何操作系统和浏览器。</p>
-<p>​</p>
-<p>​</p>
-</li>
-</ol>
-<h4 id="如何安装和使用？"><a href="#如何安装和使用？" class="headerlink" title="如何安装和使用？"></a>如何安装和使用？</h4><p><a href="[https://github.com/HelloZeroNet/ZeroBundle/releases/download/0.1.1/ZeroBundle-v0.1.1.zip](https://github.com/HelloZeroNet/ZeroBundle/releases/download/0.1.1/ZeroBundle-v0.1.1.zip">下载地址</a>)</p>
-<p>解压后运行ZeroNet.cmd会自动调用默认浏览器打开127.0.0.1:43110</p>
-<h4 id="放一波资源站："><a href="#放一波资源站：" class="headerlink" title="放一波资源站："></a>放一波资源站：</h4><p><a href="http://127.0.0.1:43110/1PLAYgDQboKojowD3kwdb3CtWmWaokXvfp/?Popular" target="_blank" rel="external">海盗湾种子站</a></p>
-<p><a href="http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/" target="_blank" rel="external">MSDN资源站</a></p>
-<p><a href="http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/" target="_blank" rel="external">kindle电子书</a></p>
-<p><a href="http://127.0.0.1:43110/1NzWeweqJ32aRVdM5UzFnYCszuvG5xV3vS" target="_blank" rel="external">中文导航</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/22/ZeroNet/" class="archive-article-date">
-  	<time datetime="2016-11-22T08:35:02.481Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
 </a>
       
       
