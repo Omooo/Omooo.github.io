@@ -6,14 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Apache Tomcat 样例目录 Session 操纵漏洞0X00Apache Tomcat 默认安装包含“/examples” 目录，里面存在很多样例，其中 Session 样例允许用户对 Session 进行操纵，因为 Session 是全局通的，所以用户可以通过操纵 Session 获取管理员权限。
+例如下图：
+
+0X01Session 在 /examples/servlets/ser">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/Apache Tomcat样例目录session操纵漏洞/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Apache Tomcat 样例目录 Session 操纵漏洞0X00Apache Tomcat 默认安装包含“/examples” 目录，里面存在很多样例，其中 Session 样例允许用户对 Session 进行操纵，因为 Session 是全局通的，所以用户可以通过操纵 Session 获取管理员权限。
+例如下图：
+
+0X01Session 在 /examples/servlets/ser">
+<meta property="og:image" content="http://p1.bqimg.com/567571/3d5d1397372ceb51.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/fd7e2d10432016da.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/b5d73ee4b24fefaf.jpg">
+<meta property="og:updated_time" content="2017-01-04T07:48:02.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Apache Tomcat 样例目录 Session 操纵漏洞0X00Apache Tomcat 默认安装包含“/examples” 目录，里面存在很多样例，其中 Session 样例允许用户对 Session 进行操纵，因为 Session 是全局通的，所以用户可以通过操纵 Session 获取管理员权限。
+例如下图：
+
+0X01Session 在 /examples/servlets/ser">
+<meta name="twitter:image" content="http://p1.bqimg.com/567571/3d5d1397372ceb51.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,85 +158,99 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Apache Tomcat样例目录session操纵漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <hr>
+<h2 id="Apache-Tomcat-样例目录-Session-操纵漏洞"><a href="#Apache-Tomcat-样例目录-Session-操纵漏洞" class="headerlink" title="Apache Tomcat 样例目录 Session 操纵漏洞"></a>Apache Tomcat 样例目录 Session 操纵漏洞</h2><h4 id="0X00"><a href="#0X00" class="headerlink" title="0X00"></a>0X00</h4><p>Apache Tomcat 默认安装包含“/examples” 目录，里面存在很多样例，其中 Session 样例允许用户对 Session 进行操纵，因为 Session 是全局通的，所以用户可以通过操纵 Session 获取管理员权限。</p>
+<p>例如下图：</p>
+<p><img src="http://p1.bqimg.com/567571/3d5d1397372ceb51.png" alt=""></p>
+<h4 id="0X01"><a href="#0X01" class="headerlink" title="0X01"></a>0X01</h4><p>Session 在 /examples/servlets/servlet/SessionExample 目录下。</p>
+<p>在Name of Session Attribute: 里输入login</p>
+<p>在Value of Session Attribute:里输入admin</p>
+<p>刷新可看到已经以admin身份登录进了，如下：</p>
+<p><img src="http://p1.bqimg.com/567571/fd7e2d10432016da.png" alt=""></p>
+<p><img src="http://p1.bqimg.com/567571/b5d73ee4b24fefaf.jpg" alt=""></p>
+<p>修复就一个字，删 ！</p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/01/04/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
   	<time datetime="2017-01-04T07:49:04.927Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-04</time>
 </a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/02/爆破密码/" class="archive-article-date">
-  	<time datetime="2017-01-02T12:58:15.320Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-02</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/新年/" class="archive-article-date">
-  	<time datetime="2017-01-01T05:40:13.818Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-01</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/02/爆破密码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Apache Tomcat样例目录session操纵漏洞" data-title="" data-url="http://yoursite.com/2017/01/04/Apache Tomcat样例目录session操纵漏洞/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -242,8 +273,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
