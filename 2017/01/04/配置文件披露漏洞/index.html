@@ -6,14 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/1 | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="敏感信息泄露0X00本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。
+0X01   配置文件披露该文件包含 Web 应用程序部署的相关描述，通常存储在文件 /WEB-INF/web.xml 中。
+
+0X02   CVS 网络库CVS 仓库 Repository 存储了用于版本控制的所有文件和目录的副本，包含存储库的路径。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/2017/01/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/配置文件披露漏洞/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="敏感信息泄露0X00本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。
+0X01   配置文件披露该文件包含 Web 应用程序部署的相关描述，通常存储在文件 /WEB-INF/web.xml 中。
+
+0X02   CVS 网络库CVS 仓库 Repository 存储了用于版本控制的所有文件和目录的副本，包含存储库的路径。">
+<meta property="og:image" content="http://i1.piimg.com/567571/000611a414cd15f0.png">
+<meta property="og:image" content="http://p1.bpimg.com/567571/9760abd5917992a7.png">
+<meta property="og:image" content="http://p1.bpimg.com/567571/c1ad9741b72c9a2d.gif">
+<meta property="og:updated_time" content="2017-01-04T14:10:36.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="敏感信息泄露0X00本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。
+0X01   配置文件披露该文件包含 Web 应用程序部署的相关描述，通常存储在文件 /WEB-INF/web.xml 中。
+
+0X02   CVS 网络库CVS 仓库 Repository 存储了用于版本控制的所有文件和目录的副本，包含存储库的路径。">
+<meta name="twitter:image" content="http://i1.piimg.com/567571/000611a414cd15f0.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,106 +158,100 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-配置文件披露漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <hr>
+<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><h4 id="0X00"><a href="#0X00" class="headerlink" title="0X00"></a>0X00</h4><p>本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。</p>
+<h4 id="0X01-配置文件披露"><a href="#0X01-配置文件披露" class="headerlink" title="0X01   配置文件披露"></a>0X01   配置文件披露</h4><p>该文件包含 Web 应用程序部署的相关描述，通常存储在文件 /WEB-INF/web.xml 中。</p>
+<p><img src="http://i1.piimg.com/567571/000611a414cd15f0.png" alt=""></p>
+<h4 id="0X02-CVS-网络库"><a href="#0X02-CVS-网络库" class="headerlink" title="0X02   CVS 网络库"></a>0X02   CVS 网络库</h4><p>CVS 仓库 Repository 存储了用于版本控制的所有文件和目录的副本，包含存储库的路径。</p>
+<p><img src="http://p1.bpimg.com/567571/9760abd5917992a7.png" alt=""></p>
+<h4 id="0X03-目录遍历"><a href="#0X03-目录遍历" class="headerlink" title="0X03   目录遍历"></a>0X03   目录遍历</h4><p>目录遍历允许攻击者访问受限制和执行命令外的 web 服务器的根目录。这主要来源于上面的配置文件泄露。</p>
+<p>防护：过滤用户输入</p>
+<h4 id="0X04-IBM-WebSphere应用程序源文件"><a href="#0X04-IBM-WebSphere应用程序源文件" class="headerlink" title="0X04   IBM WebSphere应用程序源文件"></a>0X04   IBM WebSphere应用程序源文件</h4><p>WebSphere Application Server允许远程攻击者绕过安全限制，攻击者可以利用此漏洞来查看或者执行服务器上包含 war 的文件，打开特定的应用程序文件，这个漏洞也会影响 WebSphere 管理控制台的安全性。</p>
+<h4 id="0X05-Web-xml-配置文件披露"><a href="#0X05-Web-xml-配置文件披露" class="headerlink" title="0X05   Web .xml 配置文件披露"></a>0X05   Web .xml 配置文件披露</h4><p>.xml 部署文件描述文件如何部署在一个应用程序中（如 Tomcat web 应用程序），通常情况下，该文件不可被访问。</p>
+<h4 id="0X06"><a href="#0X06" class="headerlink" title="0X06"></a>0X06</h4><p>好吧，我承认，后面三种漏洞都是源于配置文件的披露而产生的。。。</p>
+<p><img src="http://p1.bpimg.com/567571/c1ad9741b72c9a2d.gif" alt=""></p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/配置文件披露漏洞/" class="archive-article-date">
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/01/04/配置文件披露漏洞/" class="archive-article-date">
   	<time datetime="2017-01-04T14:11:56.505Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-04</time>
 </a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
-  	<time datetime="2017-01-04T07:49:04.927Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-04</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/02/爆破密码/" class="archive-article-date">
-  	<time datetime="2017-01-02T12:58:15.320Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-02</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/04/Apache Tomcat样例目录session操纵漏洞/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/新年/" class="archive-article-date">
-  	<time datetime="2017-01-01T05:40:13.818Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-01</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="配置文件披露漏洞" data-title="" data-url="http://yoursite.com/2017/01/04/配置文件披露漏洞/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -263,8 +274,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
