@@ -143,65 +143,6 @@
       <div class="body-wrap">
         
   
-    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="SQL注入实战一之-ASP-Access数据库注入"><a href="#SQL注入实战一之-ASP-Access数据库注入" class="headerlink" title="SQL注入实战一之 ASP + Access数据库注入"></a>SQL注入实战一之 ASP + Access数据库注入</h2><h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>本文敏感信息均已打码，因为漏洞还没提交厂商，大致讲一下注入过程。</p>
-<p>​          <img src="http://i1.piimg.com/567571/6b23936fbf0a4165.png" alt=""></p>
-<h4 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h4><p>SQL注入是发生于应用程序之数据库层的安全漏洞。简而言之，是再输入字符串中注入SQL命令，在设计不良的程序当中忽略了检查，那么这些注入进去的指令就会被数据库服务器误认为是正常的SQL命令而运行，因此遭到破坏或是入侵。</p>
-<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>安装 Python 2.7 、Sqlmap ，最新版本的 Python 3.5  还不支持 Sqlmap 。</p>
-<h4 id="ASP-Acess-数据库手工注入"><a href="#ASP-Acess-数据库手工注入" class="headerlink" title="ASP + Acess 数据库手工注入"></a>ASP + Acess 数据库手工注入</h4><p>可能存在注入的站点一般都是这个样式：<a href="http://www.xxx.com/xxx.asp?id=N" target="_blank" rel="external">http://www.xxx.com/xxx.asp?id=N</a></p>
-<p>这里可以用 Google 语法（inurl:asp?id=N( N 是任意数字)）来找一些站点试试。</p>
-<p><img src="http://i1.piimg.com/567571/00e0ce00f7e5d43f.jpg" alt=""></p>
-<ul>
-<li>手工尝试</li>
-</ul>
-<p>1 = 1 没报错，1 = 2 报错，即说明存在 SQL 注入漏洞。接下来开始猜测表名是否存在：and exists(select * from admin) ，未报错则说明存在 admin 表。接着就是爆字段长度：order by N ( N 可以逐渐增加，知道报错，例如 order by 8 显示正常，order by 9 报错，就说明字段长度为 8) 。接着就是爆字段的值：union 1,2,3,4,5,6,7,8 from admin ( 这里的 8 就是字段的长度)。最后在显示的部位用 username 和 password 就好了，爆出来的密码通常用 MD5 加密，再去 <a href="http://www.cmd5.com/" target="_blank" rel="external">在线MD5解密</a>。</p>
-<ul>
-<li>利用工具</li>
-</ul>
-<p>Sqlmap 可谓是注入神器，语法也很简单。这次我们讲的是 Access 数据库，Access 的首要标识是 tables–columns–dump（表–字段–值）。</p>
-<p>测试是否是注入点：sqlmap.py -u “URL”</p>
-<p>接着爆表：sqlmap.py -u “URL” –tables</p>
-<p>接着爆字段：sqlmap.py -u “URL” -T 表名 –columns</p>
-<p>爆字段的值：sqlmap.py  “URL” -T  表名 -C “username,password” –dump</p>
-<p>这个过程会让你选择线程，或者是否解密，多看看 Sqlmap 手册，做一个脚本小子还是很简单的。当然最糟糕的可能就是站点有防火墙（WAF、IPS/IDS等等），这里可以看一下  <a href="http://www.freebuf.com/articles/1000.html" target="_blank" rel="external">Sqlmap 绕过 WAF</a> 。</p>
-<p>效果图：<img src="http://i1.piimg.com/567571/b983c7b706f20d0a.png" alt=""></p>
-<p>管理员的账号和密码就爆出来了，这时候可以去找一下后台，推荐 <a href="http://pan.baidu.com/s/1hrTNokW" target="_blank" rel="external">御剑后台扫描工具</a> 密码：5wvg</p>
-<p>这里就只讲爆账号和密码，因为上传木马、拿 shell 我自己并不是很懂。</p>
-<p><img src="http://i1.piimg.com/567571/51ad314f47406abf.gif" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/12/17/sql注入/" class="archive-article-date">
-  	<time datetime="2016-12-17T03:03:57.219Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-17</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-图片识别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -216,24 +157,9 @@
 <p>恕我直言，心情犹如吃 si 一样。</p>
 <p><img src="http://i1.piimg.com/567571/bb31fb7d83c6256e.jpg" alt=""></p>
 <p>我这么单纯为什么要这样对我？还我一个真实的世界吧。如何辨别网图或者被P过的图片呢？</p>
-<h4 id="第一种办法："><a href="#第一种办法：" class="headerlink" title="第一种办法："></a>第一种办法：</h4><p>我们可以试试找一下图片的来源，网址：<a href="http://www.tineye.com/" target="_blank" rel="external">http://www.tineye.com/</a></p>
-<p>原图：</p>
-<p><img src="http://i1.piimg.com/567571/0c80c84389273376.jpg" alt=""></p>
-<p>下图为查询结果：</p>
-<p><img src="http://i1.piimg.com/567571/c89e278bcfa6a1fc.png" alt=""></p>
-<h4 id="第二种办法（网上教程）"><a href="#第二种办法（网上教程）" class="headerlink" title="第二种办法（网上教程）"></a>第二种办法（网上教程）</h4><p>新建一个文本文档，然后打开，直接将你要验证的照片拉进去会出项一串乱码。如下图：</p>
-<p><img src="http://i1.piimg.com/567571/0cd248635e1f75ad.png" alt=""></p>
-<p>明显可以看到用了PS，当然你也可以试试 Ctrl +F 来查找关键字 Adobe。</p>
-<h4 id="第三种方法"><a href="#第三种方法" class="headerlink" title="第三种方法"></a>第三种方法</h4><p>用软件JPEGsnoop，很简单。仍然是分析上图：</p>
-<p><img src="http://i1.piimg.com/567571/fba761839f3a8135.png" alt=""></p>
-<p>尼康相机拍摄，都是英文，我慌了，有道翻译下。</p>
-<p><img src="http://i1.piimg.com/567571/81a59c2dd34da8c4.jpg" alt=""></p>
-<p><img src="http://i1.piimg.com/567571/862a2972aeeffeb7.png" alt=""><img src="http://i1.piimg.com/567571/21e547e1ecebabed.png" alt=""><img src="http://i1.piimg.com/567571/e17a303e61736841.png" alt=""><img src="http://i1.piimg.com/567571/680b4ea644b8b95d.png" alt=""></p>
-<h4 id="第四种办法："><a href="#第四种办法：" class="headerlink" title="第四种办法："></a>第四种办法：</h4><p>网站分析：<a href="http://fotoforensics.com/" target="_blank" rel="external">http://fotoforensics.com/</a></p>
-<p><img src="http://i1.piimg.com/567571/0f36bc2aeb910e90.png" alt=""></p>
-<p>还自带原图模式，虽然看起来有点 Low B。</p>
-<h4 id="P图其实不是最气的，最气的是我本想在QQ上找一个美眉的P图来实验，却TMD发现QQ妹子没几个，空间还不对我开放！！！于是找了一个网图，心情复杂！！！"><a href="#P图其实不是最气的，最气的是我本想在QQ上找一个美眉的P图来实验，却TMD发现QQ妹子没几个，空间还不对我开放！！！于是找了一个网图，心情复杂！！！" class="headerlink" title="P图其实不是最气的，最气的是我本想在QQ上找一个美眉的P图来实验，却TMD发现QQ妹子没几个，空间还不对我开放！！！于是找了一个网图，心情复杂！！！"></a>P图其实不是最气的，最气的是我本想在QQ上找一个美眉的P图来实验，却TMD发现QQ妹子没几个，空间还不对我开放！！！于是找了一个网图，心情复杂！！！</h4><p><img src="http://i1.piimg.com/567571/aebeb4d1b6781e10.jpg" alt=""></p>
-
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/10/图片识别/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -268,25 +194,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="Typora-—-极简的-Markdown-编辑器"><a href="#Typora-—-极简的-Markdown-编辑器" class="headerlink" title="Typora — 极简的 Markdown 编辑器"></a>Typora — 极简的 Markdown 编辑器</h2><p><strong>Markdown</strong> 是一种用来自写作的轻量级<strong>标记语言</strong>，相比 HTML 真的是很简单，你可以只专心于文字内容而不是排版，字体设置等等繁琐事。今天我就带来一个 Markdown 草鸡好用的 IDE：<strong>Typora</strong>。在介绍 Typora 之前，我们先讲一下 Markdown 的基础语法。</p>
-<h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>‘# 一级标题  ## 二级标题  ### 三级标题（依次类推）— 文章主题’</p>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>无序列表：在文字前加上 - 或者 * 即可。</p>
-<p>有序列表：在文字前加上1. 2. 3. 即可，注意，符号和文字之间要有一个空格。</p>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>在文本前加入 &gt; 即可。</p>
-<h4 id="图片和链接"><a href="#图片和链接" class="headerlink" title="图片和链接"></a>图片和链接</h4><p>图片：! [] (URL) </p>
-<p>链接：[] (URL)</p>
-<p>在 ! 和 [] 、() 之间没有空格的，我这样写是因为我也是用 Typora !</p>
-<p><img src="http://p1.bpimg.com/567571/c1beda49525ac247.jpg" alt=""></p>
-<p>放一个图床用于生成 URL ：<a href="http://yotuku.cn/" target="_blank" rel="external">极简图床</a> 。当然你用了 Typora 之后，可以本地直接拖拽图片自动生成。</p>
-<h4 id="粗体与斜体"><a href="#粗体与斜体" class="headerlink" title="粗体与斜体"></a>粗体与斜体</h4><p>两个 <em> 包含的文本为粗体，一个 </em> 包含的文本为斜体。</p>
-<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><p>这里我就用 Typora 的语法，快捷键：Ctrl + T , 因为 Mrakdown 创建表格真的很废。</p>
-<h4 id="Typora-主题"><a href="#Typora-主题" class="headerlink" title="Typora 主题"></a>Typora 主题</h4><p>Typora 提供五套主题，爽到爆炸，默认当然是 gayhub 啦。主题是基于 CSS 样式的，这就意味着你可以自己写主题。</p>
-<h4 id="Typora-代码和数学公式"><a href="#Typora-代码和数学公式" class="headerlink" title="Typora 代码和数学公式"></a>Typora 代码和数学公式</h4><p>Typora 基本支持所有主流语言代码高亮，数学公式更不在话下，虽然我没怎么用过。</p>
-<p><img src="http://p1.bpimg.com/567571/c38769695ee277a6.gif" alt=""></p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>光听就高潮了？赶紧动手去做啊。</p>
-<p>Typora 下载地址：<a href="http://www.typora.io/" target="_blank" rel="external">喵喵喵</a></p>
-<p>Markdown 中文网：<a href="http://www.markdown.cn/" target="_blank" rel="external">汪汪汪</a></p>
-
+<h2 id="Typora-—-极简的-Markdown-编辑器"><a href="#Typora-—-极简的-Markdown-编辑器" class="headerlink" title="Typora — 极简的 Markdown 编辑器"></a>Typora — 极简的 Markdown 编辑器</h2><p><strong>Markdown</strong> 是一种用来自写作的轻量级<strong>标记语言</strong>，相比 HTML 真的是很简单，你可以只专心于文字内容而不是排版，字体设置等等繁琐事。今天我就带来一个 Markdown 草鸡好用的 IDE：<strong>Typora</strong>。
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/07/Markdown/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -321,37 +232,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="爬虫入门之爬美眉图"><a href="#爬虫入门之爬美眉图" class="headerlink" title="爬虫入门之爬美眉图"></a>爬虫入门之爬美眉图</h2><p>总有人说我们撸码的整天面对电脑是不是特别无趣 ？听这话我当时我就不爽了，什么叫有趣 ？聊妹 ？恕我直言啊，都是 Low B 。今天就让我这个老司机给大家上一课，用 python 抓美眉图 。当然首先要选一个站点爬，就是这个了：<a href="http://www.mzitu.com/" target="_blank" rel="external">十八岁以下请自觉捂眼</a></p>
+<h2 id="爬虫入门之爬美眉图"><a href="#爬虫入门之爬美眉图" class="headerlink" title="爬虫入门之爬美眉图"></a>爬虫入门之爬美眉图</h2><p>总有人说我们撸码的整天面对电脑是不是特别无趣 ？听这话我当时我就不爽了，什么叫有趣 ？聊妹 ？恕我直言啊，都是 Low B 。今天就让我这个老司机给大家上一课，用 python 抓美眉图 。当然首先要选一个站点爬，就是这个了：<a href="http://www.mzitu.com/">十八岁以下请自觉捂眼</a></p>
 <p><img src="http://p1.bqimg.com/567571/92d879cee44b0db4.jpg" alt=""></p>
-<p>效果图：<img src="http://p1.bpimg.com/567571/6cfbcb01055f6d82.png" alt="羞涩"></p>
-<p><img src="http://p1.bqimg.com/567571/5140cb8786e4335b.jpg" alt=""></p>
-<p>下面讲一下环境搭建以及库的安装：</p>
-<p>安装 Python : 可在官网下载最新版本：<a href="https://www.python.org/downloads/" target="_blank" rel="external">https://www.python.org/downloads/</a> 如果你感觉下的巨慢，我这有 Python 3.5  64位的：<a href="http://pan.baidu.com/s/1geW6o2v" target="_blank" rel="external">http://pan.baidu.com/s/1geW6o2v</a> 密码：qhnv</p>
-<p>安装 Anaconda : 链接：<a href="http://pan.baidu.com/s/1eRGtt1g" target="_blank" rel="external">http://pan.baidu.com/s/1eRGtt1g</a> 密码：iw7n</p>
-<p>Request 、Beautifulsoup4 、Lxml 的安装 ：直接在  C:\WINDOWS\system32\ 依次输入一下命令：conda install requests , conda  install baeutifulsoup4 , conda install lxml 。</p>
-<p>Requests : 官方文档 ：<a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="external">http://docs.python-requests.org/zh_CN/latest/user/quickstart.html</a> ( 虽然对我这个辣鸡来说看的恍恍惚惚)</p>
-<p><img src="http://p1.bqimg.com/567571/42151185fd0f169a.gif" alt=""></p>
-<p>Beautifulsoup4 : 官方文档 ：<a href="http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#" target="_blank" rel="external">http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#</a> ( 贼详细 )</p>
-<p>LXML : 官方文档 ：<a href="http://lxml.de/" target="_blank" rel="external">http://lxml.de/</a></p>
-<p>Python IDE 下载：<a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="external">PyCharm</a> 下载完之后打开 PyCharm File 下的 settings 按如下图配置：<img src="http://p1.bqimg.com/567571/f583c5bce1d10f0f.png" alt=""></p>
-<p><img src="http://p1.bqimg.com/567571/007835a1b51af7b0.jpg" alt=""></p>
-<p>是时候展现真正的技术了 ！</p>
-<p>思路：找到你要图片的位置，打开 <a href="http://www.mzitu.com/all" target="_blank" rel="external">http://www.mzitu.com/all</a> ，F12 后 Ctrl + Shift +C 切换到开发者模式，如下图：<img src="http://p1.bqimg.com/567571/fc18dbb423583ec6.png" alt=""></p>
-<p>发现了什么？没错，所有的套图都放在 class =“all” 下的 li 标签里。（此处建议学点 HTML 基础）这就好办了，废话不多说，直接上code：</p>
-<p><img src="http://p1.bqimg.com/567571/f895cbaad9e16073.png" alt=""></p>
-<p>为了看的清楚，代码放在了sublime中显示，下图为运行结果：</p>
-<p><img src="http://i1.piimg.com/567571/271d450e758d4b8a.png" alt=""></p>
-<p>看着红红火火恍恍惚惚的链接是不是很激动？</p>
-<p><img src="http://i1.piimg.com/567571/65b1e8a205674658.jpg" alt=""></p>
-<p>接下来就是提取 ‘<a>‘ 标签的 href 属性和文本。如下图：</a></p>
-<p><img src="http://i1.piimg.com/567571/4577bbfd70b1f17b.png" alt=""></p>
-<p>接下来找图片的实际地址，如果你有 HTML 基础，就知道所有的图片都放在 img 标签里，如下图：</p>
-<p><img src="http://p1.bqimg.com/567571/60bb3934e802551e.png" alt=""></p>
-<p>code：</p>
-<p><img src="http://i1.piimg.com/567571/e1c9a619a0e6fcb3.png" alt=""></p>
-<p>这样写，感觉巨乱，恕我直言。就当是练手了。</p>
-<p><img src="http://p1.bqimg.com/567571/00e4edbeffa841b7.jpg" alt=""></p>
-
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/06/爬虫入门/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -386,83 +271,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696" target="_blank" rel="external">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
-<h4 id="简述TCP-UDP的区别"><a href="#简述TCP-UDP的区别" class="headerlink" title="简述TCP/UDP的区别"></a>简述TCP/UDP的区别</h4><pre><code>TCP和UDP是OSI模型中的传输层中的协议。TCP提供可靠的通信传输，而UDP则常被用于让广播和细节控制交给应用的通信传输。两者的区别大致如下：
-</code></pre><ul>
-<li>TCP 面向连接，UDP面向非连接即发送数据前不需要建立连接</li>
-<li>TCP 提供可靠的服务（数据传输），UDP 无法保证</li>
-<li>TCP 面向字节流，UDP 面向报文</li>
-<li>TCP 数据传输慢，UDP 数据传输快</li>
-</ul>
-<p>详细了解：<a href="http://blog.csdn.net/yipiankongbai/article/details/24435977" target="_blank" rel="external">http://blog.csdn.net/yipiankongbai/article/details/24435977</a></p>
-<h4 id="简述你了解的端口以及对应的服务"><a href="#简述你了解的端口以及对应的服务" class="headerlink" title="简述你了解的端口以及对应的服务"></a>简述你了解的端口以及对应的服务</h4><p><img src="http://p1.bqimg.com/567571/23ff33efe1aa85f6.png" alt=""></p>
-<p>更多阅读：<a href="http://blog.sina.com.cn/s/blog_66ea0e2801011vb3.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_66ea0e2801011vb3.html</a></p>
-<h4 id="简述-TCP-的三次握手"><a href="#简述-TCP-的三次握手" class="headerlink" title="简述 TCP 的三次握手"></a>简述 TCP 的三次握手</h4><p>在 TCP/IP 协议中，TCP 协议提供可靠的连接服务，连接时是通过三次握手进行初始化的。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP 宽口大小信息。</p>
-<p>第一次握手：建立连接，客户端发送连接请求报文段，将 SYN 位置为1，Sequnence Number为x；然后，客户端进去 SYN_SEND 状态，等待服务器确认。</p>
-<p>第二次握手：服务端收到客户端的SYN报文，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1（Sequence Number +1）;同时，自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为 y ;服务端将上诉所有信息放到一个报文段（即 SYN + ACK报文段）中，一并发送给客户端，此时服务器进入 SYN_RECV状态。</p>
-<p>第三次握手：客户端接受到 SYN_ACK 报文段。然后将 Acknowledgment Number 设置为 y+1，向服务器发送 ACK 报文段，这个报文段发送完毕之后，客户端和服务端都进入 ESTABLISHED 状态，完成 TCP 三次握手。</p>
-<p>详细了解：<a href="http://www.jellythink.com/archives/705" target="_blank" rel="external">http://www.jellythink.com/archives/705</a></p>
-<h4 id="简述有哪些私有（保留）地址"><a href="#简述有哪些私有（保留）地址" class="headerlink" title="简述有哪些私有（保留）地址"></a>简述有哪些私有（保留）地址</h4><ul>
-<li>A类：10.0.0.0  —   10.255.255.255</li>
-<li>B类：172.16.0.0   —   172.31.255.255</li>
-<li>C类：192.168.0.0   —   192.168.255.255</li>
-</ul>
-<h4 id="简述-IP-地址分为哪几类"><a href="#简述-IP-地址分为哪几类" class="headerlink" title="简述 IP 地址分为哪几类"></a>简述 IP 地址分为哪几类</h4><p><img src="http://i1.piimg.com/567571/571638ecdde69dbe.png" alt=""></p>
-<p>IPv6 — 采用128bit ，首部固定部分为 40 字节。</p>
-<h4 id="简述浏览器输入网址后会发生什么"><a href="#简述浏览器输入网址后会发生什么" class="headerlink" title="简述浏览器输入网址后会发生什么"></a>简述浏览器输入网址后会发生什么</h4><ul>
-<li>查找域名对应的 IP 地址。这一步会依次查找浏览器缓存，系统缓存，路由器缓存，ISPDNS缓存，根域名服务器</li>
-<li>浏览器向 IP 对应的 web 服务器发送一个 HTTP 请求</li>
-<li>服务器响应请求，发回网页内容</li>
-<li>浏览器解析网页内容</li>
-</ul>
-<p>详述：<a href="http://www.itmian4.com/forum.php?mod=viewthread&amp;tid=1655&amp;fromuid=1931" target="_blank" rel="external">http://www.itmian4.com/forum.php? mod=viewthread&amp;tid=1655&amp;fromuid=1931</a></p>
-<p>​           <a href="https://www.nowcoder.com/discuss/1937" target="_blank" rel="external">https://www.nowcoder.com/discuss/1937</a></p>
-<h4 id="简单解释一些-ARP-协议的工作过程"><a href="#简单解释一些-ARP-协议的工作过程" class="headerlink" title="简单解释一些 ARP 协议的工作过程"></a>简单解释一些 ARP 协议的工作过程</h4><ol>
-<li>首先，每个主机都会在自己的 ARP 缓冲区中建立一个 ARP 列表，以表示  IP 地址和 MAC 地址之间的对应关系。</li>
-<li>当源主机要发送数据时，首先检查 ARP  列表中是否有对应的 IP 地址的目的主机的 MAC 地址，如果有，则直接发送数据。如果没有，就向本网段的所有主机发送 ARP 数据包，该数据包包括的内容有：源主机 IP 地址，源主机 MAC 地址，目的主机的 IP 地址。</li>
-<li>当本网络的所有主机收到该 ARP 数据包时，首先检查数据包中的 IP 地址是否是自己的 IP 地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的 IP 地址和 MAC 地址写入到 ARP 列表中，如果已经存在，则覆盖，然后将自己的 MAC 地址写入 ARP 响应包中，告诉源主机自己是它想要找的 MAC 地址。</li>
-<li>源主机收到 ARP 响应包后，将目的主机的 IP 和 MAC 地址写入 ARP 列表，并利用此信息发送数据。如果源主机一直没有收到 ARP 响应包，表示 ARP 查询失败。</li>
-</ol>
-<p>解释来源：<a href="http://blog.csdn.net/shadowkiss/article/details/6552144" target="_blank" rel="external">http://blog.csdn.net/shadowkiss/article/details/6552144</a></p>
-<p>详细了解：<a href="http://blog.csdn.net/microtong/article/details/3029931" target="_blank" rel="external">http://blog.csdn.net/microtong/article/details/3029931</a></p>
-<h4 id="简述-OSI-七层模型"><a href="#简述-OSI-七层模型" class="headerlink" title="简述 OSI 七层模型"></a>简述 OSI 七层模型</h4><p><img src="http://p1.bpimg.com/567571/0c3bd15436e320da.png" alt=""></p>
-<p>图片来源：<a href="http://blog.csdn.net/yaopeng_2005/article/details/7064869" target="_blank" rel="external">http://blog.csdn.net/yaopeng_2005/article/details/7064869</a></p>
-<h4 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP/IP四层模型"></a>TCP/IP四层模型</h4><ol>
-<li>主机到网络层：实际上 TCP/IP 参考模型没有真正的描述这一层的实现，只是要求能够提供给其上层–网络互连层一个访问接口，以便在在其上传递 IP 分组。由于这一层未被定义，所以其具体的实现方法将随着网络类型的不同而不同。</li>
-<li>网络互连层：网络互连层是整个 TCP/IP 协议栈的核心。它的功能是把分组发往目标网络或主机。同时，为了尽快地发送分组，可能需要沿不同的路径同时进行分组传递。因此，分组到达的顺序和发送的顺序可能不同，这就需要上层必须对分组进行排序。</li>
-</ol>
-<p>​       网络互连层定义了分组格式和协议，即 IP 协议。</p>
-<p>​       网络互连层除了需要完成路由的功能外，也可以完成将在不同类型的网络（异构网）互连的任务。除此之外，网络互连层还需要完成拥塞控制的功能。</p>
-<ol>
-<li><p>传输层：在 TCP/IP 模型中，传输层的功能是使源主机和目标主机上的对等实体可以进行会话。在传输层定义了两种服务质量不同的协议。即：传输控制协议 TCP 和用户数据协议 UDP。</p>
-<p>TCP 协议是一个面向连接的、可靠的协议。它将一台主机发出的字节流无差错地发往互联网上的其他主机。在发送端，它负责把上层传送下来的字节流分成报文段并传递给下层。在接收端，它负责把收到的报文进行重组后递交给上层。TCP 协议还要处理端到端的流量控制，以避免缓慢接收的接收方没有足够的缓冲区接收发送方发送的大量数据。</p>
-<p>UDP 协议是一个不可靠的、无连接协议，主要适用于不需要对报文进行排序和流量控制的场合。</p>
-</li>
-<li><p>应用层：TCP/IP 模型将 OSI 参考模型中的会话层和表示层的功能合并到应用层实现。</p>
-</li>
-</ol>
-<p>​       应用层面向不同的网络应用引入了不同的应用层协议。其中，有基于 TCP 协议的，如文件传输协议、虚拟终端协议、超文本链接协议，也有基于 UDP 协议的。。</p>
-<p>详细了解：<a href="http://www.cnblogs.com/BlueTzar/articles/811160.html" target="_blank" rel="external">http://www.cnblogs.com/BlueTzar/articles/811160.html</a></p>
-<h4 id="简述-HTTP-协议包括哪些请求"><a href="#简述-HTTP-协议包括哪些请求" class="headerlink" title="简述 HTTP 协议包括哪些请求"></a>简述 HTTP 协议包括哪些请求</h4><ul>
-<li>GET : 对服务器资源的简单请求</li>
-<li>POST : 用于发送包含用户提交数据的请求</li>
-<li>HEAD : 类似 GET 请求，不过返回的响应中没有具体内容，用于获取报头</li>
-<li>DELETE : 发送一个删除指定文档的请求</li>
-<li>TRACE : 发送一个请求副本，以跟踪其处理进程</li>
-<li>OPTIONS : 返回所有可用的方法，检查服务器支持哪些方法</li>
-<li>CONNECT : 用于 SS 隧道的基于代理的请求</li>
-</ul>
-<h4 id="简述-HTTP-中-GET-和-POST-的区别"><a href="#简述-HTTP-中-GET-和-POST-的区别" class="headerlink" title="简述 HTTP 中 GET 和 POST 的区别"></a>简述 HTTP 中 GET 和 POST 的区别</h4><p>从原理来看：</p>
-<ul>
-<li>根据 HTTP 规范，GET 用于信息获取，而且应该是安全和幂等的（幂等性是指一次和多次请求某一个资源应该具有同样的副作用）</li>
-<li>根据 HTTP 规范，POST 请求表示可能修改服务器上资源的请求</li>
-</ul>
-<p>从表面看：</p>
-<ul>
-<li>GET 请求的数据会附在 URL 后面，POST 的数据放在 HTTP 包体</li>
-<li>POST 安全性比 GET 安全性高</li>
-</ul>
-
+<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/05/计算机知识点总结/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -488,9 +300,47 @@
 
 
   
+    <article id="post-小计俩耍耍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="小计俩"><a href="#小计俩" class="headerlink" title="小计俩"></a>小计俩</h2><p>​       以后这里就放一下在学习过程中那些很微妙很奇怪的小计俩吧。
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/04/小计俩耍耍/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/04/小计俩耍耍/" class="archive-article-date">
+  	<time datetime="2016-12-04T07:45:13.691Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 

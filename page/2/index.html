@@ -143,54 +143,6 @@
       <div class="body-wrap">
         
   
-    <article id="post-新年" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="新的一年，未雨绸缪"><a href="#新的一年，未雨绸缪" class="headerlink" title="新的一年，未雨绸缪"></a>新的一年，未雨绸缪</h2><p>转眼又是新的一年了，大学时光也所剩不多了，在这里，例一下自己的新年计划，以此次勉励自己：</p>
-<ol>
-<li>过了四级英语。</li>
-<li>认真看完五本书。</li>
-<li>系统学习前端，做个小项目。</li>
-<li>Rank ++</li>
-<li>沉默，专注。</li>
-<li>经济独立。</li>
-<li>卸载所有游戏。</li>
-<li>早起，吃早餐，锻炼身体，尽量不再熬夜。</li>
-</ol>
-<p>我不想发财，也不想谈恋爱，如果真能实现我的一个愿望的话，那就赐给我一个  0day 吧。</p>
-<p><img src="https://ooo.0o0.ooo/2017/01/01/5868a03206a1c.jpg" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/01/01/新年/" class="archive-article-date">
-  	<time datetime="2017-01-01T05:40:13.818Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-01</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-XSS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -213,17 +165,9 @@
 <li><p>是一种被动的攻击手法</p>
 </li>
 <li><p>对 website 有 http-only、crossdomain.xml 没有用   </p>
-<p>但是渗透测试人员并没有冷落该漏洞，原因只有一个：<strong>XSS几乎每个网站都存在 ！</strong></p>
-<p>这里以<a href="http://www.syjgxx.cn/Account/SignIn.aspx" target="_blank" rel="external">三亚技师学院</a>为例，这个存在一个XSS漏洞，这里我们可以构造恶意代码，找到参数<em>returnUrl</em>，值设置为<em>../Admin/Index.aspx”onmouseover=sRst(9467) bad=”</em>，然后再源码里看看:</p>
-<p><img src="https://ooo.0o0.ooo/2016/12/28/58634fd9e278f.png" alt=""></p>
-<p>构造好代码之后，把URL变为短连接发送给管理员，诱惑管理员打开就可以获取到cookie，所以经常说不要随便打开来历不明的链接。</p>
-<p>这里推荐用<a href="http://webxss.net/index.php" target="_blank" rel="external">XSS Platform </a>，默默等待吧。最后想说，对于学生站还是稳一点，恍恍惚惚。</p>
-<p><img src="https://ooo.0o0.ooo/2016/12/28/586351483dfa5.jpg" alt=""></p>
-<p>​</p>
-<p>​</p>
-</li>
-</ol>
-
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/28/XSS/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -305,20 +249,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="IIS-目录枚举漏洞"><a href="#IIS-目录枚举漏洞" class="headerlink" title="IIS 目录枚举漏洞"></a>IIS 目录枚举漏洞</h2><h4 id="Microsoft-IIS-tilde-directory-enumeration"><a href="#Microsoft-IIS-tilde-directory-enumeration" class="headerlink" title="Microsoft IIS tilde directory enumeration"></a>Microsoft IIS tilde directory enumeration</h4><p>当使用 IIS，你可以从某个目录中枚举所有短名的列表，这可能是一个大问题，如果你能设法猜测或者暴力破解这些短名称完整的文件或目录名。该漏洞暴漏问题如下：</p>
-<ul>
-<li>利用“~”字符猜解暴露短文件/文件夹名。</li>
-<li>.Net Framework 的拒绝服务攻击</li>
-</ul>
-<p>在 cmd 下输入“dir /x” 即可以看到短文件名的效果。</p>
-<p>不多逼逼了，放一个猜解短文件扫描器：<a href="http://pan.baidu.com/s/1mi15zPA" target="_blank" rel="external">点我下载</a> 密码：a9b8</p>
-<p>在文件里打开命令行，输入java scanner 可以看到有四种方式。这里我就直接写 java scanner 2 20 URL 开始扫描。（需要 Java 环境）</p>
-<p>详细了解：<a href="http://www.freebuf.com/articles/4908.html" target="_blank" rel="external">传送门</a></p>
-<p>运行截图：</p>
-<p><img src="http://i1.piimg.com/567571/80f4089da9dcd5e1.png" alt=""></p>
-<p>虽然最后毛都没枚举出来，但是不失为一种思路。</p>
-<p><img src="http://p1.bqimg.com/567571/980417cbeab13c82.jpg" alt=""></p>
-
+<h2 id="IIS-目录枚举漏洞"><a href="#IIS-目录枚举漏洞" class="headerlink" title="IIS 目录枚举漏洞"></a>IIS 目录枚举漏洞</h2><h4 id="Microsoft-IIS-tilde-directory-enumeration"><a href="#Microsoft-IIS-tilde-directory-enumeration" class="headerlink" title="Microsoft IIS tilde directory enumeration"></a>Microsoft IIS tilde directory enumeration</h4><p>当使用 IIS，你可以从某个目录中枚举所有短名的列表，这可能是一个大问题，如果你能设法猜测或者暴力破解这些短名称完整的文件或目录名。
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/22/IIS目录枚举漏洞/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -353,28 +287,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="SQL注入实战二之-PHP-MySql数据库注入"><a href="#SQL注入实战二之-PHP-MySql数据库注入" class="headerlink" title="SQL注入实战二之 PHP + MySql数据库注入"></a>SQL注入实战二之 PHP + MySql数据库注入</h2><h4 id="监测注入"><a href="#监测注入" class="headerlink" title="监测注入"></a>监测注入</h4><p>仍然和ASP站监测注入一样，不过这里要说的是，在报错的页面上，你可能会发现爆出了站点的物理路径，如下图，后面你就知道有什么用了。</p>
-<p><img src="http://i1.piimg.com/567571/0a94882a00ec643b.png" alt=""></p>
-<h4 id="首要标识"><a href="#首要标识" class="headerlink" title="首要标识"></a>首要标识</h4><p>需要数据库：-dbs</p>
-<p>得到数据库名称，需要表：-D xxx -tables</p>
-<p>得到表名需要段：-D xxx -T xxxx -columns</p>
-<p>段内有admin ,password,需要值：-D xxx -T xxxx -C “admin,password” -dump</p>
-<p>这里在爆数据库名时候，要记得MySQL有三个默认数据库名，即 mysql、test、information_schema 。成功爆出用户名和密码如下：</p>
-<p><img src="http://p1.bpimg.com/567571/15b26830ae6adde1.jpg" alt=""></p>
-<p>这里我没有找到后台路径，很是尴尬，于是就只能拿Shell爆库。</p>
-<h4 id="Root权限写shell"><a href="#Root权限写shell" class="headerlink" title="Root权限写shell"></a>Root权限写shell</h4><ol>
-<li>知道网站的物理路径，基于报错信息（如上文所说），phpinfo.php（最常用）等等。</li>
-<li>有足够大的权限（可以用select …. from mysql.user测试），查看用户权限（–privileges）</li>
-<li>magic_quotes_gpc()=OFF 魔术方法开启之后 不能向服务器写文件，， 打开之后可以防止sql注入</li>
-</ol>
-<p>–file-read  读取文件</p>
-<p>–file-write 上传文件   用菜刀连上就OK了。</p>
-<h4 id="恍恍惚惚"><a href="#恍恍惚惚" class="headerlink" title="恍恍惚惚"></a>恍恍惚惚</h4><p>最装逼的命令：–dump-all -v 0 导出所有数据库和表内的内容</p>
-<p>​                           –dump-all -exclude-sysdbs -v 0 只导出用户自己新建的数据库和表的内容</p>
-<p><img src="http://p1.bqimg.com/567571/49169a561314cb80.png" alt=""></p>
-<p>虽然只有一条记录，只要是该站点没有注册登录功能，心疼自己一秒。</p>
-<p><img src="http://i1.piimg.com/567571/f29a3c9704fd4f0f.gif" alt=""></p>
-
+<h2 id="SQL注入实战二之-PHP-MySql数据库注入"><a href="#SQL注入实战二之-PHP-MySql数据库注入" class="headerlink" title="SQL注入实战二之 PHP + MySql数据库注入"></a>SQL注入实战二之 PHP + MySql数据库注入</h2><p>看到标题是不是很激动？那就一起来日站吧。
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/18/php+mysql/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -400,9 +316,47 @@
 
 
   
+    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="SQL注入实战一之-ASP-Access数据库注入"><a href="#SQL注入实战一之-ASP-Access数据库注入" class="headerlink" title="SQL注入实战一之 ASP + Access数据库注入"></a>SQL注入实战一之 ASP + Access数据库注入</h2><p>本文简述一下 SQL 注入的原理，同时手工实战一下，大牛请轻拍。
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/12/17/sql注入/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/12/17/sql注入/" class="archive-article-date">
+  	<time datetime="2016-12-17T03:03:57.219Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-17</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
