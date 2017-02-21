@@ -8,27 +8,25 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从容依旧，踽踽独行渐渐地，渐渐地，明白了，即使是和自己有血浓于水关系的父母，也有别离的一天；即使是关系再好的朋友也有因自己的生活还顾不上你的时刻；即使是有再喜欢的女孩也有渴望独处的时光。
-总有一天，你会明白，独处的能力有多重要。
-
-生病了只有自己知道难受，悲伤了没人能擦干你心里的眼泪，失意了没人在乎你的执着和理想。">
+  <meta name="description" content="文件上传漏洞写在前面
+已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》
+00x0 原理概述
+文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/2017/01/12/我的2016/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/02/21/文件上传漏洞/index.html">
 <meta property="og:site_name" content="沐小晨曦">
-<meta property="og:description" content="从容依旧，踽踽独行渐渐地，渐渐地，明白了，即使是和自己有血浓于水关系的父母，也有别离的一天；即使是关系再好的朋友也有因自己的生活还顾不上你的时刻；即使是有再喜欢的女孩也有渴望独处的时光。
-总有一天，你会明白，独处的能力有多重要。
-
-生病了只有自己知道难受，悲伤了没人能擦干你心里的眼泪，失意了没人在乎你的执着和理想。">
-<meta property="og:image" content="http://p1.bpimg.com/567571/f3c684be3a4c5713.jpg">
-<meta property="og:updated_time" content="2017-01-12T16:17:44.499Z">
+<meta property="og:description" content="文件上传漏洞写在前面
+已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》
+00x0 原理概述
+文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。">
+<meta property="og:updated_time" content="2017-02-21T14:12:02.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
-<meta name="twitter:description" content="从容依旧，踽踽独行渐渐地，渐渐地，明白了，即使是和自己有血浓于水关系的父母，也有别离的一天；即使是关系再好的朋友也有因自己的生活还顾不上你的时刻；即使是有再喜欢的女孩也有渴望独处的时光。
-总有一天，你会明白，独处的能力有多重要。
-
-生病了只有自己知道难受，悲伤了没人能擦干你心里的眼泪，失意了没人在乎你的执着和理想。">
-<meta name="twitter:image" content="http://p1.bpimg.com/567571/f3c684be3a4c5713.jpg">
+<meta name="twitter:description" content="文件上传漏洞写在前面
+已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》
+00x0 原理概述
+文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -156,7 +154,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-我的2016" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-文件上传漏洞" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -165,18 +163,40 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="从容依旧，踽踽独行"><a href="#从容依旧，踽踽独行" class="headerlink" title="从容依旧，踽踽独行"></a>从容依旧，踽踽独行</h2><p>渐渐地，渐渐地，明白了，即使是和自己有血浓于水关系的父母，也有别离的一天；即使是关系再好的朋友也有因自己的生活还顾不上你的时刻；即使是有再喜欢的女孩也有渴望独处的时光。</p>
-<p>总有一天，你会明白，独处的能力有多重要。</p>
-<p><img src="http://p1.bpimg.com/567571/f3c684be3a4c5713.jpg" alt=""></p>
-<p>生病了只有自己知道难受，悲伤了没人能擦干你心里的眼泪，失意了没人在乎你的执着和理想。<a id="more"></a></p>
-<p>放弃那些对别人没必要的期待吧，没人能等你到最后，人生路上，踽踽独行。</p>
+<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p><strong>写在前面</strong></p>
+<p>已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》</p>
+<p><strong>00x0 原理概述</strong></p>
+<p>文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。</p>
+<a id="more"></a>
+<p><strong>00x1 FCKEditor 文件上传漏洞</strong></p>
+<p>FCKEditor 是一款非常流行的富文本编辑器，为了方便用户，它自带了一个文件上传功能。</p>
+<p><strong>00x2 绕过文件上传检查功能</strong></p>
+<p>针对上传文件的检查中，很多应用都是通过判断文件的后缀名来验证文件的安全性。如果攻击者手动修改了上传过程中的 POST 包，在文件名后面添加一个 %00 字节，则可以截断某些函数对文件名的判断。因为在很多语言的函数中，比如 C 、Php 等语言的常用字符串处理函数中，0x00 被认为是终止符。比如原本应该只允许上传 JPG 图片，则可以构造文件名为 xxx.php[\0].jpg，其中 [\0] 为十六进制的 00x0 字符。</p>
+<p>除了常见的检查文件名后缀的方法外，有的应用还会通过判断上传文件的文件头来验证文件的类型。浏览器的 MIMF Sniff 功能实际上也是通过读取文件的前 256 个字节，来判断文件类型的。</p>
+<p><strong>00x3 Apache 文件解析漏洞</strong></p>
+<p>比如在 Apache 1.x 、2.x 中，对文件名的解析就存在以下特点。Apache 对于文件名的解析是从后往前解析的，知道遇见一个 Apache 认识的文件类型为止。比如 Phpshell.php.rar.rar ，会被当做 php 文件执行。</p>
+<p><strong>00x4 IIS 6.0 解析漏洞</strong></p>
+<p>IIS 6.0 在处理文件解析时，会把分号 “;” 当做截断字符。比如 xxx.asp;xx.jpg 会被解析为 asp 文件。</p>
+<p><strong>00x5 安全策略</strong> </p>
+<ul>
+<li>文件上传的目录设置为不可执行</li>
+</ul>
+<p>只要 Web 容器无法解析该目录下的文件，其实攻击者上传了脚本文件，服务器本身也不会受到影响，因此这点至关重要。在实际应用中，很多大型网站的上传应用，文件上传后会放到独立存储上，做静态文件处理，一方面方便使用缓存加速，降低性能损耗；另一方面也杜绝了脚本执行的可能。</p>
+<ul>
+<li>判断文件类型</li>
+</ul>
+<p>在判断文件类型时，可以结合使用 MIME Type 、后缀检查等方式。在文件类型检查中，强烈推荐白名单的方式，黑名单的方式被无数次证明是不可靠的。此外，对于图片的处理，可以使用压缩函数或者 resize 函数，在处理图片的同时破坏图片中可能包含的 HTML 代码。</p>
+<ul>
+<li>使用随机数改写文件名和文件路径</li>
+</ul>
+<p>文件上传如果要执行代码，则需要用户能够访问到这个文件。在某些情况下，用户能上传，但不能访问。如果应用使用随机数改写了文件名和路径，将极大地增加攻击的成本。与此同时，像 shell.php.rar.rar 这种文件，或者是 crossdomain.xml 这种文件，都将因为文件名被改写而无法成功实施攻击。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/01/12/我的2016/" class="archive-article-date">
-  	<time datetime="2017-01-12T15:37:53.418Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-12</time>
+      <a href="/2017/02/21/文件上传漏洞/" class="archive-article-date">
+  	<time datetime="2017-02-21T14:11:32.063Z" itemprop="datePublished"><i class="icon-clock"></i>2017-02-21</time>
 </a>
       
       
@@ -189,17 +209,8 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/02/21/文件上传漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/01/04/配置文件披露漏洞/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/01/12/我的2016/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
@@ -234,7 +245,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="我的2016" data-title="" data-url="http://yoursite.com/2017/01/12/我的2016/"></div>
+	<div class="ds-thread" data-thread-key="文件上传漏洞" data-title="" data-url="http://yoursite.com/2017/02/21/文件上传漏洞/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
