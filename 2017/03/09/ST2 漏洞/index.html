@@ -20,7 +20,7 @@ Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目
 ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行漏洞（CNNVD">
 <meta property="og:image" content="http://p1.bqimg.com/567571/e853f40eae3e5213.jpg">
 <meta property="og:image" content="http://p1.bpimg.com/567571/6929e2b968ea5497.png">
-<meta property="og:updated_time" content="2017-03-09T01:10:50.220Z">
+<meta property="og:updated_time" content="2017-03-09T23:50:40.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
 <meta name="twitter:description" content="Apache Struts2（S2-045） 漏洞00x0 漏洞简介
@@ -164,7 +164,7 @@ ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行�
       
         <hr>
 <h2 id="Apache-Struts2（S2-045）-漏洞"><a href="#Apache-Struts2（S2-045）-漏洞" class="headerlink" title="Apache Struts2（S2-045） 漏洞"></a>Apache Struts2（S2-045） 漏洞</h2><p><strong>00x0 漏洞简介</strong></p>
-<p>Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目，是一套用于创建企业级 <code>Java</code> Web 应用的开源 MVC 框架，主要提供两个版本框架产品：Struts 1 和 Struts 2。</p>
+<p>Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目，是一套用于创建企业级 Java Web 应用的开源 MVC 框架，主要提供两个版本框架产品：Struts 1 和 Struts 2。</p>
 <p>ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行漏洞（CNNVD-201703-152，CVE-2017-5638）。该漏洞是由于上传功能的异常处理函数没有正确处理用户输入的错误信息。导致远程攻击者可以通过发送恶意的数据包，利用该漏洞在受影响的服务器上执行任意命令。</p>
 <p><img src="http://p1.bqimg.com/567571/e853f40eae3e5213.jpg" alt=""></p>
 <a id="more"></a>
@@ -173,59 +173,13 @@ ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行�
 <p><strong>00x2 漏洞修复</strong></p>
 <p>通过判断Content-Type头是否为白名单类型，来限制非法的 Content-Type的攻击。</p>
 <p>加固代码如下：</p>
-<p>import java.io.IOException;<br>import javax.servlet.Filter;<br>import javax.servlet.FilterChain;<br>import javax.servlet.FilterConfig;<br>import javax.servlet.ServletException;<br>import javax.servlet.ServletRequest;<br>import javax.servlet.ServletResponse;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
-<p>public class SecurityFilter extends HttpServlet implements Filter {</p>
-<pre><code>import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-public class SecurityFilter extends HttpServlet implements Filter {
-
-/**
- * 
- */
-private static final long serialVersionUID = 1L;
-public final String www_url_encode= &quot;application/x-www-form-urlencoded&quot;;
-public final String mul_data= &quot;multipart/form-data &quot;;
-public final String txt_pla= &quot;text/plain&quot;;
-
-public void doFilter(ServletRequest arg0, ServletResponse arg1,
-        FilterChain arg2) throws IOException, ServletException {
-
-    HttpServletRequest request = (HttpServletRequest) arg0;
-    HttpServletResponse response = (HttpServletResponse) arg1;
-
-    String contenType=request.getHeader(&quot;conTent-type&quot;);
-
-    if(contenType!=null&amp;&amp;!contenType.equals(&quot;&quot;)&amp;&amp;!contenType.equalsIgnoreCase(www_url_encode)&amp;&amp;!contenType.equalsIgnoreCase(mul_data)&amp;&amp;!contenType.equalsIgnoreCase(txt_pla)){
-
-        response.setContentType(&quot;text/html;charset=UTF-8&quot;);
-        response.getWriter().write(&quot;非法请求Content-Type！&quot;);
-        return;
-    }
-    arg2.doFilter(request, response);
-}
-
-public void init(FilterConfig arg0) throws ServletException {
-
-}
-}
-</code></pre><ol>
-<li>将 Java 编译后的 “SecurityFilter.class” 复制到应用的 WEB-INF/classes目录下。</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">import java.io.IOException;</div><div class="line">import javax.servlet.Filter;</div><div class="line">import javax.servlet.FilterChain;</div><div class="line">import javax.servlet.FilterConfig;</div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.ServletRequest;</div><div class="line">import javax.servlet.ServletResponse;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line">public class SecurityFilter extends HttpServlet implements Filter &#123;</div><div class="line">import java.io.IOException;</div><div class="line">import javax.servlet.Filter;</div><div class="line">import javax.servlet.FilterChain;</div><div class="line">import javax.servlet.FilterConfig;</div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.ServletRequest;</div><div class="line">import javax.servlet.ServletResponse;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line">public class SecurityFilter extends HttpServlet implements Filter &#123;</div><div class="line">/**</div><div class="line"> * </div><div class="line"> */</div><div class="line">private static final long serialVersionUID = 1L;</div><div class="line">public final String www_url_encode= &quot;application/x-www-form-urlencoded&quot;;</div><div class="line">public final String mul_data= &quot;multipart/form-data &quot;;</div><div class="line">public final String txt_pla= &quot;text/plain&quot;;</div><div class="line">public void doFilter(ServletRequest arg0, ServletResponse arg1,</div><div class="line">        FilterChain arg2) throws IOException, ServletException &#123;</div><div class="line">    HttpServletRequest request = (HttpServletRequest) arg0;</div><div class="line">    HttpServletResponse response = (HttpServletResponse) arg1;</div><div class="line">    String contenType=request.getHeader(&quot;conTent-type&quot;);</div><div class="line"> if(contenType!=null&amp;&amp;!contenType.equals(&quot;&quot;)&amp;&amp;!contenType.equalsIgnoreCase(www_url_encode)&amp;&amp;!contenType.equalsIgnoreCase(mul_data)&amp;&amp;!contenType.equalsIgnoreCase(txt_pla))&#123;</div><div class="line"> response.setContentType(&quot;text/html;charset=UTF-8&quot;);</div><div class="line"> response.getWriter().write(&quot;非法请求Content-Type！&quot;);</div><div class="line"> return;</div><div class="line">    &#125;</div><div class="line">    arg2.doFilter(request, response);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public void init(FilterConfig arg0) throws ServletException &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>将 Java 编译后的 “SecurityFilter.class” 复制到应用的 WEB-INF/classes目录下。</p>
+</li>
 <li><p>配置Filter 将下面的代码加入WEB-INF/web.xml文件中。</p>
-<p> <filter></filter></p>
-<pre><code>&lt;filter-name&gt;SecurityFilter&lt;/filter-name&gt;
-&lt;filter-class&gt;SecurityFilter&lt;/filter-class&gt;
-</code></pre><p> <filter><br> <filter-mapping></filter-mapping></filter></p>
-<pre><code>&lt;filter-name&gt;SecurityFilter&lt;/filter-name&gt;
-&lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-</code></pre><p> <br>/<em> 代表拦截所有请求，进行攻击代码检查，</em>.action 结尾的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;filter-name&gt;SecurityFilter&lt;/filter-name&gt;</div><div class="line">&lt;filter-class&gt;SecurityFilter&lt;/filter-class&gt;</div><div class="line">&lt;filter-name&gt;SecurityFilter&lt;/filter-name&gt;</div><div class="line">&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div></pre></td></tr></table></figure>
+<p>/<em> 代表拦截所有请求，进行攻击代码检查，</em>.action 结尾的请求。</p>
 </li>
 <li><p>重启应用。</p>
 </li>

