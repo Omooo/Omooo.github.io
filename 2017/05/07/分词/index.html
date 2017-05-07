@@ -6,14 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="听了那么多逼哥，逼哥到底再讲什么？00x1 前言
+作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/page/6/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/07/分词/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="听了那么多逼哥，逼哥到底再讲什么？00x1 前言
+作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/07/590f3db2c020f.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/07/590f40451a92b.png">
+<meta property="og:updated_time" content="2017-05-07T15:52:19.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="听了那么多逼哥，逼哥到底再讲什么？00x1 前言
+作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,131 +152,114 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-分词" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="听了那么多逼哥，逼哥到底再讲什么？"><a href="#听了那么多逼哥，逼哥到底再讲什么？" class="headerlink" title="听了那么多逼哥，逼哥到底再讲什么？"></a>听了那么多逼哥，逼哥到底再讲什么？</h2><p><strong>00x1 前言</strong></p>
+<p>作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg" alt=""></p>
+<a id="more"></a>
+<p><strong>00x2 环境及第三方类库</strong></p>
+<p>数据分析嘛，毋庸置疑，Python。安装jieba，可以直接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install jieba 或者 pip install jieba</div></pre></td></tr></table></figure>
+<p>但是我的总会出错，可能是因为我本地装了两个版本的python吧，于是我下载了jieba解压之后运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>下载地址：<a href="https://pypi.python.org/pypi/jieba/" target="_blank" rel="external">https://pypi.python.org/pypi/jieba/</a></p>
+<p><strong>00x3 源码以及歌词文本</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import xlrd  #操作Excel</div><div class="line">import jieba # 分词包</div><div class="line">import numpy #统计</div><div class="line">import codecs #字符编码，读取文件</div><div class="line">import pandas #数据处理</div><div class="line"></div><div class="line">file = codecs.open(&quot;C:\\李志歌词.txt&quot;,&apos;r&apos;,&apos;gbk&apos;)</div><div class="line">content = file.read()</div><div class="line">file.close()</div><div class="line">segments = []</div><div class="line">segs = jieba.cut(content)</div><div class="line">for seg in segs:</div><div class="line">    if len(seg)&gt;1:</div><div class="line">        segments.append(seg)</div><div class="line">segmentDF = pandas.DataFrame(&#123;&apos;segment&apos;:segments&#125;)</div><div class="line">df = segmentDF.groupby(&quot;segment&quot;)[&quot;segment&quot;].agg(&#123;&quot;计数&quot;:numpy.size&#125;).reset_index().sort(columns = [&apos;计数&apos;],ascending = False)</div><div class="line">print(df.head(100))</div><div class="line">df.to_excel(&apos;李志-分词.xls&apos;, sheet_name=&apos;sheet1&apos;)</div></pre></td></tr></table></figure>
+<p>歌词下载页：<a href="http://t.cn/RaGeQiZ" target="_blank" rel="external">歌词下载</a></p>
+<p>运行结果：</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/07/590f3db2c020f.png" alt=""></p>
+<p>这让人心慌啊！这能分析出来个鸡毛呀？对不起，我又骗了大家。</p>
+<p><strong>00x4 可能遇到的问题</strong></p>
+<ol>
+<li>文本的编码问题，可能出现 UnicodeDecodeError 报错，可以把gbk改为 utf-8试试。</li>
+<li>文本路径存放问题，建议像我一样存放在C盘，如果你放在桌面，例如：C:\Users\ssc\Desktop\py\李志歌词.txt，运行一定会报错，因为目录下的\U会被编译器认为是八进制。</li>
+</ol>
+<p><strong>00x5 最后想说</strong></p>
+<p>jieba还是蛮强大的，支持多种分词模式，而且还有多个语言版本。详细见 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="external">ReadME</a></p>
+<p>最后，怀念过去 1s（逃</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/07/590f40451a92b.png" alt="女神"></p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28661549&auto=1&height=66"></iframe>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/05/07/分词/" class="archive-article-date">
+  	<time datetime="2017-05-07T15:52:43.982Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-07</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/07/Markdown/" class="archive-article-date">
-  	<time datetime="2016-12-07T05:25:11.645Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-07</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/06/爬虫入门/" class="archive-article-date">
-  	<time datetime="2016-12-05T23:48:24.070Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-06</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/05/计算机知识点总结/" class="archive-article-date">
-  	<time datetime="2016-12-05T01:22:44.237Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-05</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/04/21/树莓派/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/04/小计俩耍耍/" class="archive-article-date">
-  	<time datetime="2016-12-04T07:45:13.691Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-04</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/04/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2016-12-03T16:19:15.029Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-04</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/5/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/archives/page/7/">7</a><a class="extend next" rel="next" href="/archives/page/7/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="分词" data-title="" data-url="http://yoursite.com/2017/05/07/分词/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +282,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
