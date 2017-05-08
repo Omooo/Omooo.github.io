@@ -6,14 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="WordCloud — 词云00x0 前言
+上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：
+
+从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/page/4/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/08/WordCloud/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="WordCloud — 词云00x0 前言
+上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：
+
+从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/08/591012b229819.jpg">
+<meta property="og:updated_time" content="2017-05-08T07:10:31.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="WordCloud — 词云00x0 前言
+上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：
+
+从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/08/591012b229819.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,131 +156,113 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-WordCloud" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="WordCloud-—-词云"><a href="#WordCloud-—-词云" class="headerlink" title="WordCloud — 词云"></a>WordCloud — 词云</h2><p><strong>00x0 前言</strong></p>
+<p>上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/08/591012b229819.jpg" alt=""></p>
+<p>从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。</p>
+<a id="more"></a>
+<p><strong>00x1 库的安装</strong></p>
+<p>这里需要安装第三方库 WordCloud。这里强烈建议看官方文档：<a href="https://github.com/amueller/word_cloud" target="_blank" rel="external">ReadMe</a></p>
+<p>安装是很简单的，如果出现了一下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error: Unable to find vcvarsall.bat</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PackageNotFoundError: Package missing in current win-64 channels:</div><div class="line">  - wordcloud</div></pre></td></tr></table></figure>
+<p>很大的可能性就是你和我一样，在Win上开发Python。凡是安装和操作系统底层密切相关的Python扩展，机会都会遇到这个错误。那怎么解决呢？—&gt;<a href="http://www.360doc.com/content/15/0414/23/12067640_463261796.shtml" target="_blank" rel="external">参照我</a> 网上找的大多数都是参照这篇文章的。不过很不幸，我参照上面的弄了一上午还是没搞定，如果你有更好的建议，欢迎邮件—&gt; admin@omooo.top，谢谢。所以这里最好用 Linux 系统来撸，这个Bug是真的烦。</p>
+<p><strong>00x2 源码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># 导入了画图的库matplotlib，词云生成库wordcloud 和 jieba的分词库；</div><div class="line">import matplotlib.pyplot as plt</div><div class="line">from wordcloud import WordCloud</div><div class="line">import jieba</div><div class="line"># 读取本地的文件</div><div class="line">text_from_file_with_apath = open(&apos;/Users/hecom/23tips.txt&apos;).read()</div><div class="line">#使用jieba进行分词</div><div class="line">wordlist_after_jieba = jieba.cut(text_from_file_with_apath, cut_all = True)</div><div class="line">wl_space_split = &quot; &quot;.join(wordlist_after_jieba)</div><div class="line">#生成词云</div><div class="line">my_wordcloud = WordCloud().generate(wl_space_split)</div><div class="line">#用pyplot展示词云图</div><div class="line">plt.imshow(my_wordcloud)</div><div class="line">plt.axis(&quot;off&quot;)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><strong>00x3 关于更多</strong></p>
+<p>请参照一下链接：</p>
+<ol>
+<li><a href="https://github.com/amueller/word_cloud" target="_blank" rel="external">https://github.com/amueller/word_cloud</a></li>
+<li><a href="http://www.techug.com/post/generate-word-cloud-by-python.html" target="_blank" rel="external">http://www.techug.com/post/generate-word-cloud-by-python.html</a></li>
+<li><a href="https://amueller.github.io/word_cloud/auto_examples/colored.html#colored-py" target="_blank" rel="external">https://amueller.github.io/word_cloud/auto_examples/colored.html#colored-py</a></li>
+</ol>
+<p>最后不能放妹子图了，昨晚都没好好睡，怎么说？如果你能听懂下面这首歌，可能，，，嗯，依旧很难说。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=3932159&auto=1&height=66"></iframe>
+
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/05/08/WordCloud/" class="archive-article-date">
+  	<time datetime="2017-05-08T07:10:58.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-08</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/12/我的2016/" class="archive-article-date">
-  	<time datetime="2017-01-12T15:37:53.418Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-12</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/配置文件披露漏洞/" class="archive-article-date">
-  	<time datetime="2017-01-04T14:11:56.505Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-04</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
-  	<time datetime="2017-01-04T07:49:04.927Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-04</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/07/分词/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/02/爆破密码/" class="archive-article-date">
-  	<time datetime="2017-01-02T12:58:15.320Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-02</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/新年/" class="archive-article-date">
-  	<time datetime="2017-01-01T05:40:13.818Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-01</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/3/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><a class="extend next" rel="next" href="/archives/page/5/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="WordCloud" data-title="" data-url="http://yoursite.com/2017/05/08/WordCloud/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +285,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
