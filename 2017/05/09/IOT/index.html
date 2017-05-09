@@ -8,12 +8,24 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="物联网当下的安全问题前言突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。
+物联网安全概述万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/09/IOT/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="物联网当下的安全问题前言突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。
+物联网安全概述万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/09/59117e3e18693.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/09/59119b000cb57.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/09/59119bf564a42.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/09/59119c129b000.png">
+<meta property="og:updated_time" content="2017-05-09T10:45:43.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="物联网当下的安全问题前言突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。
+物联网安全概述万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/09/59117e3e18693.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,9 +153,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-sql注入" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-IOT" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,16 +162,42 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="SQL注入实战一之-ASP-Access数据库注入"><a href="#SQL注入实战一之-ASP-Access数据库注入" class="headerlink" title="SQL注入实战一之 ASP + Access数据库注入"></a>SQL注入实战一之 ASP + Access数据库注入</h2><p>本文简述一下 SQL 注入的原理，同时手工实战一下，大牛请轻拍。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/12/17/sql注入/#more">more >></a>
-        </p>
+<h2 id="物联网当下的安全问题"><a href="#物联网当下的安全问题" class="headerlink" title="物联网当下的安全问题"></a>物联网当下的安全问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。</p>
+<h4 id="物联网安全概述"><a href="#物联网安全概述" class="headerlink" title="物联网安全概述"></a>物联网安全概述</h4><p>万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私、企业信息安全甚至国家关键设施的头号安全威胁。试想一下，无论家用或者企业级的互联网设备，如接入互联网的交通指示灯、恒温器或者医用监控设备遭到攻击，后果将会变得非常可怕。</p>
+<a id="more"></a>
+<h4 id="典型的IoT设备漏洞"><a href="#典型的IoT设备漏洞" class="headerlink" title="典型的IoT设备漏洞"></a>典型的IoT设备漏洞</h4><p><img src="https://ooo.0o0.ooo/2017/05/09/59117e3e18693.png" alt=""></p>
+<p>僵尸网络、多态蠕虫和DDoS将会是主要的威胁。这里尤其要说的是CVH公司遭受的DDoS，攻击者利用物联网黑入CCTV包括14万多个摄像头，可达到1.5T/s的流量，真是打谁谁残。</p>
+<h4 id="物联网体系架构"><a href="#物联网体系架构" class="headerlink" title="物联网体系架构"></a>物联网体系架构</h4><p>通常由执行器、网关、传感器、云和移动App五部分组成。</p>
+<p>执行器：通过物理过程控制事物，如空调机组、门锁、窗帘等。</p>
+<p>网关：用于收集传感器信息和控制中心。</p>
+<p>传感器：用于检测环境，例如：光、运动、温度、湿度、水/电量等。</p>
+<p>云：Web界面或者API托管用于收集数据的云端Web应用和大型数据集分析。</p>
+<p>移动App：实现在手机端控制IoT环境。</p>
+<p>物联网根据业务形态主要分为工业控制物联网、车载物联网、智能家居物联网。</p>
+<h4 id="简单复现"><a href="#简单复现" class="headerlink" title="简单复现"></a>简单复现</h4><p>就从我在傻蛋上找的裸奔摄像头为例吧。摄像头这东西，你以为很安全，可能别人在通过这个监视你。在物联网搜索引擎上搜一些国内比较大的摄像头厂商比如大华、海康威视等等。大商场，工业基地，甚至是个人居所，都存在严重的摄像头弱口令漏洞。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/09/59119b000cb57.png" alt=""><img src="https://ooo.0o0.ooo/2017/05/09/59119bf564a42.png" alt=""><img src="https://ooo.0o0.ooo/2017/05/09/59119c129b000.png" alt=""></p>
+<p>嗯，你也可能会搜到一些不良内容，请自我和谐。下面给出国内外比较厉害的物联网搜索引擎：</p>
+<ul>
+<li><a href="https://www.zoomeye.org/" target="_blank" rel="external">钟馗之眼</a></li>
+<li><a href="https://www.oshadan.com/" target="_blank" rel="external">傻蛋</a></li>
+<li><a href="https://www.shodan.io/" target="_blank" rel="external">https://www.shodan.io/</a></li>
+</ul>
+<h4 id="参考文章以及想要了解更多"><a href="#参考文章以及想要了解更多" class="headerlink" title="参考文章以及想要了解更多"></a>参考文章以及想要了解更多</h4><p><a href="http://www.freebuf.com/articles/terminal/128148.html" target="_blank" rel="external">一张图看懂IoT发展及安全性现状</a></p>
+<p><a href="http://www.freebuf.com/articles/terminal/125947.html" target="_blank" rel="external">物联网究竟有多不安全？2016年IOT设备漏洞情况汇总</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5MTA3Nzk4MQ==&amp;mid=2650170047&amp;idx=1&amp;sn=7bae4b539ad9bd682f19a73c167418ed&amp;chksm=beb9c18d89ce489be2fba894009f34952574586ca98577399bd9ff3d794e8d5c7df940b3756b&amp;scene=0#rd" target="_blank" rel="external">安天透过北美DDoS事件解读IoT设备安全</a></p>
+<p><a href="http://www.mottoin.com/91246.html" target="_blank" rel="external">IoT: 物联网安全测试经验总结</a></p>
+<p><a href="http://www.freebuf.com/articles/terminal/133668.html" target="_blank" rel="external">物联网安全风险威胁报告</a></p>
+<p><a href="http://edu.aqniu.com/open/course/15" target="_blank" rel="external">物联网安全，知多少</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/25246919" target="_blank" rel="external">2017年度企业即将面临的最大物联网IoT安全威胁</a></p>
+<p><a href="一个新IoT僵尸网络正在HTTP 81上大范围传播">一个新IoT僵尸网络正在HTTP 81上大范围传播</a></p>
+<p><a href="http://www.freebuf.com/news/116722.html" target="_blank" rel="external">中国制造IOT设备遭恶意软件Mirai感染成为近期DDOS攻击主力</a></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/12/17/sql注入/" class="archive-article-date">
-  	<time datetime="2016-12-17T03:03:57.219Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-17</time>
+      <a href="/2017/05/09/IOT/" class="archive-article-date">
+  	<time datetime="2017-05-09T10:47:10.979Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-09</time>
 </a>
       
       
@@ -171,178 +207,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-图片识别" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="美眉别唬我，我很单纯"><a href="#美眉别唬我，我很单纯" class="headerlink" title="美眉别唬我，我很单纯"></a>美眉别唬我，我很单纯</h2><p>今天看到小基友发了这张图，瞬间心情复杂。</p>
-<p><img src="http://i1.piimg.com/567571/049695cb0ae0ea21.png" alt=""></p>
-<p>恕我直言，心情犹如吃 si 一样。</p>
-<p><img src="http://i1.piimg.com/567571/bb31fb7d83c6256e.jpg" alt=""></p>
-<p>我这么单纯为什么要这样对我？还我一个真实的世界吧。如何辨别网图或者被P过的图片呢？</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/12/10/图片识别/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/12/10/图片识别/" class="archive-article-date">
-  	<time datetime="2016-12-10T02:22:08.931Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-10</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Typora-—-极简的-Markdown-编辑器"><a href="#Typora-—-极简的-Markdown-编辑器" class="headerlink" title="Typora — 极简的 Markdown 编辑器"></a>Typora — 极简的 Markdown 编辑器</h2><p><strong>Markdown</strong> 是一种用来自写作的轻量级<strong>标记语言</strong>，相比 HTML 真的是很简单，你可以只专心于文字内容而不是排版，字体设置等等繁琐事。今天我就带来一个 Markdown 草鸡好用的 IDE：<strong>Typora</strong>。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/12/07/Markdown/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/12/07/Markdown/" class="archive-article-date">
-  	<time datetime="2016-12-07T05:25:11.645Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-07</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-爬虫入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="爬虫入门之爬美眉图"><a href="#爬虫入门之爬美眉图" class="headerlink" title="爬虫入门之爬美眉图"></a>爬虫入门之爬美眉图</h2><p>总有人说我们撸码的整天面对电脑是不是特别无趣 ？听这话我当时我就不爽了，什么叫有趣 ？聊妹 ？恕我直言啊，都是 Low B 。今天就让我这个老司机给大家上一课，用 python 抓美眉图 。当然首先要选一个站点爬，就是这个了：<a href="http://www.mzitu.com/">十八岁以下请自觉捂眼</a></p>
-<p><img src="http://p1.bqimg.com/567571/92d879cee44b0db4.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/12/06/爬虫入门/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/12/06/爬虫入门/" class="archive-article-date">
-  	<time datetime="2016-12-05T23:48:24.070Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-06</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/12/05/计算机知识点总结/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/12/05/计算机知识点总结/" class="archive-article-date">
-  	<time datetime="2016-12-05T01:22:44.237Z" itemprop="datePublished"><i class="icon-clock"></i>2016-12-05</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
-    </nav>
+    <a href="/2017/05/08/WordCloud/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="IOT" data-title="" data-url="http://yoursite.com/2017/05/09/IOT/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -364,8 +286,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
