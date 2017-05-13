@@ -6,14 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/5 | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="勒索软件，该怎么玩？前言今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。
+想到以前撸过的一个加密文件的成品，今天就来介绍一下。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/2017/05/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/05/13/加密文件/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="勒索软件，该怎么玩？前言今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。
+想到以前撸过的一个加密文件的成品，今天就来介绍一下。">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/13/5916caccb7d11.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/13/5916d3867c047.gif">
+<meta property="og:updated_time" content="2017-05-13T09:38:10.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="勒索软件，该怎么玩？前言今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。
+想到以前撸过的一个加密文件的成品，今天就来介绍一下。">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,106 +152,104 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-加密文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <hr>
+<h2 id="勒索软件，该怎么玩？"><a href="#勒索软件，该怎么玩？" class="headerlink" title="勒索软件，该怎么玩？"></a>勒索软件，该怎么玩？</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。</p>
+<p>想到以前撸过的一个加密文件的成品，今天就来介绍一下。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png" alt=""></p>
+<a id="more"></a>
+<h4 id="SHinoLocker"><a href="#SHinoLocker" class="headerlink" title="SHinoLocker"></a>SHinoLocker</h4><p>实际上，SHinoLocker是一款勒索软件模拟器，它与真正的勒索软件的区别就是我们可以免费获得解密密钥。勒索软件的核心就是加密算法、加密密钥（如果是对称加密，还有初始化向量的确定），所以说，一旦染上，只有交钱别无他法。</p>
+<p>下载地址：<a href="https://github.com/Omooo/ShinoLocker" target="_blank" rel="external">ShinoLocker</a></p>
+<p>下完之后在DoS界面打开执行：</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/13/5916caccb7d11.png" alt=""></p>
+<p>直接打开会加密全盘的文件，当然，你也可以部分加密，上面给出了参数，-E 为加密，-D 为解密。加密之后会给你HOST ID 和 TRANSACTION，你可以去官网解密。—-&gt;<a href="https://shinolocker.com/" target="_blank" rel="external">官网</a></p>
+<p>官网又更详细的DEMO和文档。</p>
+<h4 id="Onion"><a href="#Onion" class="headerlink" title="Onion"></a>Onion</h4><p>我们可以看到在这些报道中onion频繁出现，那么onion到底是什么呢？Onion可以说是一项匿名技术，它可以使得信息提供商与用户难以被中间经过的网络主机或外界用户所追踪，真正实现无痕上网。</p>
+<h4 id="Tor"><a href="#Tor" class="headerlink" title="Tor"></a>Tor</h4><p>Onion需要特定的浏览器Tor才能访问，Tor（洋葱路由器）是实现匿名通信的自由软件。Tor浏览器在后台启动Tor进程并透过其连接网络，一旦程序断开连接，Tor浏览器就会自动删除所有可能会泄露隐私的数据，如cookie和浏览历史记录等等。不过显然，现在Tor很大程度上被滥用了，暗网服务都活跃在Tor上。配置Tor也超简单，当然，你也可以Google一下Onion City。</p>
+<h4 id="Bitcoin"><a href="#Bitcoin" class="headerlink" title="Bitcoin"></a>Bitcoin</h4><p>比特币是一种全球通用的互联网加密货币，他的价值在于去中心化，没有中央的发行结构，由于其特殊的隐秘性无法溯源，加上不必经过第三方金融机构，因为除了重视隐私的用户外，也被经常拿来非法交易。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>有点尴尬，好像自己跑题了，嗯，忍不住。。其实关于此的还有一个AES加密没说，原因嘛，毕竟不太了解，我想我要去看看外面的世界了，玛德眼累。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/13/5916d3867c047.gif" alt=""></p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/13/加密文件/" class="archive-article-date">
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/05/13/加密文件/" class="archive-article-date">
   	<time datetime="2017-05-13T09:38:41.932Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-13</time>
 </a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/09/IOT/" class="archive-article-date">
-  	<time datetime="2017-05-09T10:47:10.979Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-09</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/08/WordCloud/" class="archive-article-date">
-  	<time datetime="2017-05-08T07:10:58.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-08</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/09/IOT/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/07/分词/" class="archive-article-date">
-  	<time datetime="2017-05-07T15:52:43.982Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-07</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="加密文件" data-title="" data-url="http://yoursite.com/2017/05/13/加密文件/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -263,8 +272,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
