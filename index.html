@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-C#验证码" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-长密码拒绝服务攻击" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,17 +152,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="C-实现验证码"><a href="#C-实现验证码" class="headerlink" title="C# 实现验证码"></a>C# 实现验证码</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本文用C#实现从最初的数字验证码到图文验证码再到汉字验证码。搞那些花里花俏的已经不适合我了，潜心学习。</p>
-<p><img src="https://ooo.0o0.ooo/2017/06/12/593e6982a77a3.gif" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/06/13/C#验证码/#more">more >></a>
-        </p>
+<h2 id="长密码拒绝服务攻击"><a href="#长密码拒绝服务攻击" class="headerlink" title="长密码拒绝服务攻击"></a>长密码拒绝服务攻击</h2><h4 id="0X01"><a href="#0X01" class="headerlink" title="0X01"></a>0X01</h4><p>今天在用AWVS扫一个站点时，发现一个<strong>Long password denial of service</strong>高危漏洞。通常情况下，我们都强调用复杂的密码来防止被爆破，然而过长的密码也可能被Hacker用来发起DOS攻击。Hacker故意反复发送长度较长，让服务器进行复杂的计算，可能导致服务器不响应或者资源耗尽。</p>
+<h4 id="0X02"><a href="#0X02" class="headerlink" title="0X02"></a>0X02</h4><p>这里假设在一个网站上注册一个用户，用户名会被明文存储，而密码一般都用 MD5 加密存储，如果密码设置的过长，服务器就要进行大量的计算出该密码对对应的 MD5 值，这个过程可能会使服务器宕机，所以一般网站都会对密码的长度进行限制，不只是最短长度。</p>
+<p>测试执行（以我扫的那个站为例）：</p>
+<ul>
+<li>password of 1000000 characters =&gt; <strong>30.015 s</strong></li>
+<li>password of 100 characters =&gt; <strong>0.047 s</strong></li>
+<li>password of 100000 characters =&gt; <strong>30.03 s</strong></li>
+<li>password of 1100000 characters =&gt; <strong>29.999 s</strong></li>
+<li>password of 500 characters =&gt; <strong>0.078 s</strong></li>
+</ul>
+<p><img src="https://ooo.0o0.ooo/2016/12/27/58628420f254b.gif" alt=""></p>
+<p>这里，为极简图床默哀一秒。</p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/06/13/C#验证码/" class="archive-article-date">
-  	<time datetime="2017-06-13T04:24:43.401Z" itemprop="datePublished"><i class="icon-clock"></i>2017-06-13</time>
+      <a href="/2017/07/14/长密码拒绝服务攻击/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.383Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -182,7 +190,7 @@
 
 
   
-    <article id="post-Webmagic" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-配置文件披露漏洞" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -191,17 +199,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="WebMagic-–-炒鸡实用的Java爬虫框架"><a href="#WebMagic-–-炒鸡实用的Java爬虫框架" class="headerlink" title="WebMagic – 炒鸡实用的Java爬虫框架"></a>WebMagic – 炒鸡实用的Java爬虫框架</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>WebMagic 的核心部分是一个精简的、模块化的爬虫实现，作者封装了大量的实用性功能。其中Spider是WebMagic内部流程的核心，它封装了爬虫的创建、启动、停止、多线程等功能。其实我们并不需要关注太多，大部分模块WebMagic都已经默认实现，我们只需要写Process部分。</p>
-<h4 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h4><p>我们可以直接下载jar包放在我们的项目下就行了，下载地址 : <a href="https://github.com/code4craft/webmagic/releases/tag/webmagic-parent-0.6.1">https://github.com/code4craft/webmagic/releases/tag/webmagic-parent-0.6.1</a> 这里只需要下载第一个文件，源代码没必要下载。</p>
+<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><h4 id="0X00"><a href="#0X00" class="headerlink" title="0X00"></a>0X00</h4><p>本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/22/Webmagic/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/配置文件披露漏洞/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/22/Webmagic/" class="archive-article-date">
-  	<time datetime="2017-05-22T02:46:31.605Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-22</time>
+      <a href="/2017/07/14/配置文件披露漏洞/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.376Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -221,7 +228,7 @@
 
 
   
-    <article id="post-smtp" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -230,17 +237,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="ASP-NET-邮件发送"><a href="#ASP-NET-邮件发送" class="headerlink" title="ASP.NET 邮件发送"></a>ASP.NET 邮件发送</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>基于ASP.NET发送邮件，其实最开始的想法是做一个类似注册验证邮件，本文只是做了一点微小的工作，先挖个坑吧。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/20/591fb7590fb87.gif" alt=""></p>
+<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/20/smtp/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/计算机知识点总结/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/20/smtp/" class="archive-article-date">
-  	<time datetime="2017-05-20T03:47:40.070Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-20</time>
+      <a href="/2017/07/14/计算机知识点总结/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.370Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -260,7 +266,7 @@
 
 
   
-    <article id="post-加密文件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-爬虫入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -269,18 +275,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="勒索软件，该怎么玩？"><a href="#勒索软件，该怎么玩？" class="headerlink" title="勒索软件，该怎么玩？"></a>勒索软件，该怎么玩？</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。</p>
-<p>想到以前撸过的一个加密文件的成品，今天就来介绍一下。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png" alt=""></p>
+<h2 id="爬虫入门之爬美眉图"><a href="#爬虫入门之爬美眉图" class="headerlink" title="爬虫入门之爬美眉图"></a>爬虫入门之爬美眉图</h2><p>总有人说我们撸码的整天面对电脑是不是特别无趣 ？听这话我当时我就不爽了，什么叫有趣 ？聊妹 ？恕我直言啊，都是 Low B 。今天就让我这个老司机给大家上一课，用 python 抓美眉图 。当然首先要选一个站点爬，就是这个了：<a href="http://www.mzitu.com/">十八岁以下请自觉捂眼</a></p>
+<p><img src="http://p1.bqimg.com/567571/92d879cee44b0db4.jpg" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/13/加密文件/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/爬虫入门/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/13/加密文件/" class="archive-article-date">
-  	<time datetime="2017-05-13T09:38:41.932Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-13</time>
+      <a href="/2017/07/14/爬虫入门/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.365Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -300,7 +305,7 @@
 
 
   
-    <article id="post-IOT" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-爆破密码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -309,17 +314,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="物联网当下的安全问题"><a href="#物联网当下的安全问题" class="headerlink" title="物联网当下的安全问题"></a>物联网当下的安全问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。</p>
-<h4 id="物联网安全概述"><a href="#物联网安全概述" class="headerlink" title="物联网安全概述"></a>物联网安全概述</h4><p>万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私、企业信息安全甚至国家关键设施的头号安全威胁。试想一下，无论家用或者企业级的互联网设备，如接入互联网的交通指示灯、恒温器或者医用监控设备遭到攻击，后果将会变得非常可怕。</p>
+<h2 id="你是怎样聊妹的？"><a href="#你是怎样聊妹的？" class="headerlink" title="你是怎样聊妹的？"></a>你是怎样聊妹的？</h2><h4 id="情景再现"><a href="#情景再现" class="headerlink" title="情景再现"></a>情景再现</h4><p>上机的时候看到一个巨正的妹子，这时候想要联系方式，但是羞涩的我怎么可能这么直白呢？难道你要尾随？毛线，我可没这么猥琐。路过她的身边，淡淡的香水味，清新脱俗，好想~~~（咔咔，进入正题）</p>
+<p><img src="https://ooo.0o0.ooo/2017/01/02/5869cad27c2df.jpg" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/09/IOT/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/爆破密码/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/09/IOT/" class="archive-article-date">
-  	<time datetime="2017-05-09T10:47:10.979Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-09</time>
+      <a href="/2017/07/14/爆破密码/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.358Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正则表达式快速入门小栗子写在前面在写本文之前，我也是对正则完全没接触，在做爬虫的时候看别人用正则匹配数据很酷炫，感觉像乱码一样很烦很烦。然而万事开头难，勇于尝试才是解决之道。本文不跟你多逼逼，直接拿栗子上手三十分钟入门正则。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦">
+<meta property="og:url" content="http://yoursite.com/2017/07/14/正则表达式快速入门/index.html">
+<meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="正则表达式快速入门小栗子写在前面在写本文之前，我也是对正则完全没接触，在做爬虫的时候看别人用正则匹配数据很酷炫，感觉像乱码一样很烦很烦。然而万事开头难，勇于尝试才是解决之道。本文不跟你多逼逼，直接拿栗子上手三十分钟入门正则。">
+<meta property="og:image" content="http://i2.buimg.com/567571/e345c134c2bf14d1.jpg">
+<meta property="og:image" content="http://i2.buimg.com/567571/97f9f33c0deb4368.jpg">
+<meta property="og:updated_time" content="2017-03-23T12:03:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="正则表达式快速入门小栗子写在前面在写本文之前，我也是对正则完全没接触，在做爬虫的时候看别人用正则匹配数据很酷炫，感觉像乱码一样很烦很烦。然而万事开头难，勇于尝试才是解决之道。本文不跟你多逼逼，直接拿栗子上手三十分钟入门正则。">
+<meta name="twitter:image" content="http://i2.buimg.com/567571/e345c134c2bf14d1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-正则表达式快速入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="正则表达式快速入门小栗子"><a href="#正则表达式快速入门小栗子" class="headerlink" title="正则表达式快速入门小栗子"></a>正则表达式快速入门小栗子</h2><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a><strong>写在前面</strong></h3><p>在写本文之前，我也是对正则完全没接触，在做爬虫的时候看别人用正则匹配数据很酷炫，感觉像乱码一样很烦很烦。然而万事开头难，勇于尝试才是解决之道。本文不跟你多逼逼，直接拿栗子上手三十分钟入门正则。</p>
+<p><img src="http://i2.buimg.com/567571/e345c134c2bf14d1.jpg" alt=""></p>
+<a id="more"></a>
+<p><strong>小栗子：</strong></p>
+<p><strong>\bhi\b</strong></p>
+<p>精确查找hi这个单词</p>
+<p>\b 是正则表达式规定的一个元字符，代表单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是 /b 并不匹配这些单词分隔字符中的任何一个，它<strong>只匹配一个位置</strong>。</p>
+<p><strong>\bhi\b.*\bXSS\b</strong></p>
+<p>匹配一个单词hi，然后是任意个任意字符（非换行符），最后是XSS这个单词。这里 . 是另一个元字符，匹配除了换行符以外的任意字符。<em> 同样是元字符，不过它代表的不是字符，也不是位置，而是数量，它指定 </em> 前面的内容可以连续重复任意次使整个表达式得到匹配。因此，.* 连在一起就意味着 任意数量的不包含换行的字符。</p>
+<p><strong>0\d\d-\d\d\d\d\d</strong></p>
+<p>匹配以0开头，然后是两个数字，然后是一个连字符“-”，最后是五位数字。\d 是个新的元字符，匹配一位数字，- 不是元字符，只匹配它本身。</p>
+<p><strong>\ba\w*\b</strong></p>
+<p>匹配以字母 a 开头的字符串。</p>
+<p>\w 是匹配字母或数字或下划线或汉字等。</p>
+<p><strong>\b\w{6}\b</strong></p>
+<p>匹配刚好6个字符的字符串。{n}表示重复n次，属于限定符。</p>
+<p><strong>\d+</strong></p>
+<p>匹配一个或者更多连续的数字。</p>
+<p>这里的+是和 <em> 类似的元字符，不同的是 </em> 是匹配重复任意次（可能是0次），而+则匹配重复一次或更多次。</p>
+<p><strong>^\d{5,12}$</strong></p>
+<p>匹配五位到十二位的数字。</p>
+<p>元字符^(和数字6在同一个键位)和$都匹配一个位置。^匹配你要用来查找的字符串的开头，美元符匹配结尾。这两个元字符在验证输入的内容非常有用。</p>
+<p>(?0\d{2}[) -]?\d{8}匹配几种格式的电话号码，例如：(010)23333333和022-23333333首先是一个转义字符 (，因为（和）都是元字符，它可能出现0次或1次( ? )，然后是一个0，后面跟着两个数字(\d{2})，然后是)或-或空格中的一个，它出现0次或1次( ? )，最后是八个数字(\d{8})。<br>0\d{2}-\d{8}|0\d{3}-\d{7}匹配两种以连字符分隔的数字，例010-23333333和0376-2333333| 能把不同的规则分隔开，可以实现正则表达式中的分支条件。使用分支条件时，要注意各个条件的顺序。<br>(\d{1,3}.){3}\d{1,3}匹配一个简单的IP地址。\d{1,3}匹配一到三位的数字，(\d{1,3}.){3}，在之前的基础上加一个点(转义.)然后把这个整体重复三次，最后再加上一个一到三位的数字(\d{1,3})。不幸的是，它也可以匹配233.233.233.256这种不可能存在的 IP 地址。如果能使用算数比较的话，或许就简单的解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的 IP 地址： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)。<br><a[^>]+&gt;匹配用尖括号括起来的以 a 开头的字符串。这里讲一下反义，有时候需要查找不属于某个能简单定义的字符类的字符。如下：表3.常用的反义代码代码/语法说明\W匹配任意不是字母，数字，下划线，汉字的字符\S匹配任意不是空白符的字符\D匹配任意非数字的字符\B匹配不是单词开头或结束的位置[^x]匹配除了x以外的任意字符[^aeiou]匹配除了aeiou这几个字母以外的任意字符<br>\b(\w+)\b\s+\1\b用来匹配重复的字符串。例: xss xss这个表达式首先是一个单词，也就是单词的开始处和结束处之间的多于一个的字母或者数字(\b(\w+)\b)，这个字符串会被捕获到编号为1的分组中，然后是一个或几个空白符(\s+)，最后是分组1中捕获的内容(也就是前面匹配的那个单词)(\1)。这里讲的是后向引用:使用一个小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其他程序中做进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是:从左往右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。<br>表4.常用分组语法分类代码/语法说明捕获(exp)匹配exp,并捕获文本到自动命名的组里(?<name>exp)匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)(?:exp)匹配exp,不捕获匹配的文本，也不给此分组分配组号零宽断言(?=exp)匹配exp前面的位置(?&lt;=exp)匹配exp后面的位置(?!exp)匹配后面跟的不是exp的位置(?&lt;!exp)匹配前面不是exp的位置注释(?#comment)这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读<br>(?=exp)零宽度正预测先行断言它断言自身出现的位置的后面能匹配表达式exp。比如 \b\w+(?=ing\b),匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找 I’m singing while you’re dancing. 时，它会匹配 sing 和 danc。<br>(?<exp)零宽度正回顾后发断言它断言自身出现的位置的前面能匹配表达式exp。比如(?<=\bre)\w+\b会匹配以re开头的字符串的后半部分(除了re以外的部分)，例如在查找reading a="" book="" 时，它匹配="" ading。="" (?<="\s)\d+(?=\s)匹配以空白符间隔的数字(不包括空白符)。使用了以上两个断言，断言用来声明一个应该为真的事实。正则表达式中只有当断言为真时才会继续进行匹配。" \b\w*q(?u)\w*\b匹配包含后面不是字母u的字母q的字符串。(?!exp)被称为零宽度负预测先行断言，断言此位置的后面不能匹配表达式exp，再例如:\d{3}(?!\d)匹配三位数字，而且这三位数字的后面不能是数字。\b((?!abc)\w)+\b匹配不包含连续字符串abc的字符串。="">).<em>(?=&lt;\/\1&gt;)匹配不包含属性的简单HTML标签里的内容。(?&lt;=&lt;(\w+)&gt;)指定这样的前缀:被尖括号括起来的字符串(例如:<p>)，然后是 .</p></em>(任意的字符串)，最后是一个后缀(?=&lt;\/\1)。注意后缀里的 \/，它用到了前面提过的字符转义；\1则是一个反向引用，引用的正是捕获的第一组，前面的(\w+)匹配的内容，这样如果前缀是<p>的话，后缀就是</p>了。整个表达式匹配的就是<p>和</p>之间的内容。(不包括前缀后缀本身)<br>a.<em>b匹配最长的以a开头，以b结尾的字符串。但是，当搜索aabab时，它会匹配aabab，也就是说会匹配最长的字符串，这被称为贪婪匹配。<br>a.</em>?b匹配最短的，以a开始，以b结束的字符串。这被称为懒惰匹配，只有在它后面加一个问号?。表5.懒惰限定符代码/语法说明*?重复任意次，但尽可能少重复+?重复1次或更多次，但尽可能少重复??重复0次或1次，但尽可能少重复{n,m}?重复n到m次，但尽可能少重复{n,}?重复n次以上，但尽可能少重复</exp)零宽度正回顾后发断言它断言自身出现的位置的前面能匹配表达式exp。比如(?<=\bre)\w+\b会匹配以re开头的字符串的后半部分(除了re以外的部分)，例如在查找reading></name></a[^></p>
+<p><strong>C:\Windows</strong></p>
+<p>匹配C:\Windows</p>
+<p>如果想查找元字符本身的话，我们可以用 \ 来取消这些字符的特殊意义，属于转义字符。</p>
+<p><strong>[.?!]</strong></p>
+<p>匹配标点符号(. 或 ? 或 ! )</p>
+<p>[]可以指定一个字符的范围，像[0-9]代表的含义和 \d 完全一致：匹配一位数字。</p>
+<p><strong>(?0\d{2}[) -]?\d{8}</strong></p>
+<p>匹配几种格式的电话号码，例如：(010)23333333和022-23333333</p>
+<p>首先是一个转义字符 (，因为（和）都是元字符，它可能出现0次或1次( ? )，然后是一个0，后面跟着两个数字(\d{2})，然后是)或-或空格中的一个，它出现0次或1次( ? )，最后是八个数字(\d{8})。</p>
+<p><strong>0\d{2}-\d{8}|0\d{3}-\d{7}</strong></p>
+<p>匹配两种以连字符分隔的数字，例010-23333333和0376-2333333</p>
+<p>| 能把不同的规则分隔开，可以实现正则表达式中的分支条件。使用分支条件时，要注意各个条件的顺序。</p>
+<p><strong>(\d{1,3}.){3}\d{1,3}</strong></p>
+<p>匹配一个简单的IP地址。</p>
+<p>\d{1,3}匹配一到三位的数字，(\d{1,3}.){3}，在之前的基础上加一个点(转义.)然后把这个整体重复三次，最后再加上一个一到三位的数字(\d{1,3})。不幸的是，它也可以匹配233.233.233.256这种不可能存在的 IP 地址。如果能使用算数比较的话，或许就简单的解决这个问题，但是正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的 IP 地址： ((2[0-4]\d|25[0-5]|[01]?\d\d?).){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)。</p>
+<p><strong><a[^>]+&gt;</a[^></strong></p>
+<p>匹配用尖括号括起来的以 a 开头的字符串。</p>
+<p>这里讲一下反义，有时候需要查找不属于某个能简单定义的字符类的字符。</p>
+<p><strong>\b(\w+)\b\s+\1\b</strong></p>
+<p>用来匹配重复的字符串。例: xss xss</p>
+<p>这个表达式首先是一个单词，也就是单词的开始处和结束处之间的多于一个的字母或者数字(\b(\w+)\b)，这个字符串会被捕获到编号为1的分组中，然后是一个或几个空白符(\s+)，最后是分组1中捕获的内容(也就是前面匹配的那个单词)(\1)。这里讲的是后向引用:使用一个小括号指定一个子表达式后，<strong>匹配这个子表达式的文本</strong>(也就是此分组捕获的内容)可以在表达式或其他程序中做进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是:从左往右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。</p>
+<p><strong>(?=exp)</strong></p>
+<p>零宽度正预测先行断言</p>
+<p>它断言自身出现的位置的后面能匹配表达式exp。比如 \b\w+(?=ing\b),匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找 I’m singing while you’re dancing. 时，它会匹配 sing 和 danc。</p>
+<p><strong>(?&lt;exp)</strong></p>
+<p>零宽度正回顾后发断言</p>
+<p>它断言自身出现的位置的前面能匹配表达式exp。比如(?&lt;=\bre)\w+\b会匹配以re开头的字符串的后半部分(除了re以外的部分)，例如在查找reading a book 时，它匹配 ading。</p>
+<p><strong>(?&lt;=\s)\d+(?=\s)</strong></p>
+<p>匹配以空白符间隔的数字(不包括空白符)。</p>
+<p>使用了以上两个断言，断言用来声明一个应该为真的事实。正则表达式中只有当断言为真时才会继续进行匹配。</p>
+<p><strong>\b\w<em>q(?u)\w </em>\b</strong></p>
+<p>匹配包含后面不是字母u的字母q的字符串。</p>
+<p>(?!exp)被称为零宽度负预测先行断言，断言此位置的后面不能匹配表达式exp，再例如:\d{3}(?!\d)匹配三位数字，而且这三位数字的后面不能是数字。\b((?!abc)\w)+\b匹配不包含连续字符串abc的字符串。</p>
+<p><strong>(?&lt;=(\w+)&gt;).*(?=&lt;\/\1&gt;)</strong></p>
+<p>匹配不包含属性的简单HTML标签里的内容。</p>
+<p>(?&lt;=&lt;(\w+)&gt;)指定这样的前缀:被尖括号括起来的字符串(例如:</p><p>)，然后是 .*(任意的字符串)，最后是一个后缀(?=&lt;\/\1)。注意后缀里的 \/，它用到了前面提过的字符转义；\1则是一个反向引用，引用的正是捕获的第一组，前面的(\w+)匹配的内容，这样如果前缀是</p><p>的话，后缀就是</p>了。整个表达式匹配的就是<p>和</p>之间的内容。(不包括前缀后缀本身)<p></p>
+<p><strong>a.*b</strong></p>
+<p>匹配最长的以a开头，以b结尾的字符串。</p>
+<p>但是，当搜索aabab时，它会匹配aabab，也就是说会匹配最长的字符串，这被称为贪婪匹配。</p>
+<p><strong>a.*?b</strong></p>
+<p>匹配最短的，以a开始，以b结束的字符串。</p>
+<p>这被称为懒惰匹配，只有在它后面加一个问号?。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>感谢 deerchao 的教程，<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">原文地址</a> 当然，说好的三十分钟入门，可能你会花了很多时间，如果没有看懂，那没事，试着像我一样把正则表达式加文档自己码一遍也许会理解更深哟。</p>
+<p>下面放几个很实用的链接吧。</p>
+<p><a href="https://c.runoob.com/front-end/854" target="_blank" rel="external">正则表达式在线测试</a> 当然里面有好多常见的正则，可以直接伸手哦。</p>
+<p><a href="https://msdn.microsoft.com/zh-cn/library/az24scfc.aspx" target="_blank" rel="external">MSDN正则快速参考</a> 这个就不用多说了，稳得一批。</p>
+<p><img src="http://i2.buimg.com/567571/97f9f33c0deb4368.jpg" alt=""></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/14/正则表达式快速入门/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.348Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/07/14/渗透思路/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/14/树莓派/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="正则表达式快速入门" data-title="" data-url="http://yoursite.com/2017/07/14/正则表达式快速入门/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

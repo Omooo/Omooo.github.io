@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVCMVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：
+
+Model (模型) : 表示应用程序的核心 (比如数据库记录列表)
+View (视图) : 对数据 (数据库记录) 进行显示
+Controller (控制器) 处理输入 (写入数据库记录)
+
+MVC 模型同时提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦">
+<meta property="og:url" content="http://yoursite.com/2017/07/14/七天精通 ASP.NET MVC/index.html">
+<meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVCMVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：
+
+Model (模型) : 表示应用程序的核心 (比如数据库记录列表)
+View (视图) : 对数据 (数据库记录) 进行显示
+Controller (控制器) 处理输入 (写入数据库记录)
+
+MVC 模型同时提">
+<meta property="og:image" content="http://i4.buimg.com/567571/bf0f4ef87220b368.png">
+<meta property="og:image" content="http://i2.muimg.com/567571/1643d42c5b4bdff1.png">
+<meta property="og:image" content="http://i4.buimg.com/567571/2ceed4a40f6ed2f5.png">
+<meta property="og:image" content="http://i2.muimg.com/567571/6fa71983a34652b8.png">
+<meta property="og:image" content="http://i4.buimg.com/567571/c3f69fb4a5c9ffcf.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/d289a20ff494c5b6.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/db7d700bdfd70a59.png">
+<meta property="og:updated_time" content="2017-04-03T05:14:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVCMVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：
+
+Model (模型) : 表示应用程序的核心 (比如数据库记录列表)
+View (视图) : 对数据 (数据库记录) 进行显示
+Controller (控制器) 处理输入 (写入数据库记录)
+
+MVC 模型同时提">
+<meta name="twitter:image" content="http://i4.buimg.com/567571/bf0f4ef87220b368.png">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-七天精通 ASP.NET MVC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC"><a href="#七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC" class="headerlink" title="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC"></a>七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC</h2><p>MVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：</p>
+<ul>
+<li>Model (模型) : 表示应用程序的核心 (比如数据库记录列表)</li>
+<li>View (视图) : 对数据 (数据库记录) 进行显示</li>
+<li>Controller (控制器) 处理输入 (写入数据库记录)</li>
+</ul>
+<p>MVC 模型同时提供对 HTML、CSS、以及Javascript 的完整控制。</p>
+<p>MVC 模型通过三个逻辑层来定义 web 应用程序 :</p>
+<ul>
+<li>business layer （业务层、模型逻辑）</li>
+<li>display layer （显示层、视图逻辑）</li>
+<li>input control （输入控件、控制器逻辑）</li>
+</ul>
+<a id="more"></a>
+<p><strong>模型 :</strong></p>
+<p>模型是对应用程序中用于处理应用程序数据逻辑的部分。</p>
+<p>通常模型对象在数据库中存取数据。</p>
+<p><strong>视图 :</strong></p>
+<p>视图是应用程序中处理数据显示的部分。</p>
+<p>通常从模型数据中创建视图。</p>
+<p><strong>控制器 :</strong></p>
+<p>控制器是应用程序中处理用户交互的部分。</p>
+<p>通常控制器从视图读取数据、控制用户输入，并向模型发送数据。</p>
+<p>MVC 的这种拆分有助于我们管理复杂的应用程序，因为你能够在同一时间关注一个方面。例如，你可以在不依赖业务逻辑的情况下对视图进行设计，同时对应用程序的设计也更加容易。这种拆分同时简化了分组开发，不同开发人员可以同时开发视图、控制器逻辑和业务逻辑。</p>
+<p>ASP.NET 支持三种开发模式 :</p>
+<p>Web Pages、MVC、Web Forms</p>
+<p><strong>ASP.NET Web Forms</strong> </p>
+<p>Web Forms 最主要的优势就是可视化编程，但是微软为什么还要推出ASP.NET MVC呢？主要是因为ASP.NET Webform的性能问题。在Web应用程序中从两个方面来定义性能 :</p>
+<ol>
+<li>响应时间 : 服务器响应请求的耗时</li>
+<li>带宽消耗 : 同时可传输多少数据</li>
+</ol>
+<p>响应时间 :</p>
+<p><img src="http://i4.buimg.com/567571/bf0f4ef87220b368.png" alt=""></p>
+<p>在使用 Web Forms 时，每一次请求都有转换逻辑，运行并转换服务器控件为 HTML 输出。如果我们的页面使用表格，树形控件等复杂控件，转换就会变得很糟蹋并且很复杂。HTML 输出也是非常复杂的，由于这些不必要的转换从而增加了响应时间。该问题的解决方案就是摆脱后台代码，写成纯 HTML 代码。</p>
+<p>带宽消耗 :</p>
+<p>ASP.NET 开发人员都非常熟悉 Viewstates,因为它能够自动保存 post 返回的状态，减少开发时间。但是这种开发时间的减少会带来巨大的消耗，Viewstate增加了页面的大小。在做加载测试中，与 MVC 相比，我们发现 Viewstate增加了两倍的页面存储。以下是测试结果 :</p>
+<p><img src="http://i2.muimg.com/567571/1643d42c5b4bdff1.png" alt=""></p>
+<p>页面尺寸的增加是因为 Viewstate 产生了额外的字节。</p>
+<p><strong>ASP.NET MVC :</strong></p>
+<p>后台代码和服务器控件是一切问题的根源。</p>
+<p>ASP.NET MVC 请求流的通用步骤 :</p>
+<ol>
+<li>首先获取控制器</li>
+<li>依赖行为控制器创建Model对象，Model通过转换调用数据访问层</li>
+<li>数据填充Model之后，传递到View显示层，实现显示的目的</li>
+</ol>
+<p><strong>ASP.NET MVC Controller :</strong></p>
+<p>控制器是 MVC 体系架构的核心部分。Controllers 文件夹包含负者处理用户输入和响应的控制器类。MVC 要求所有的控制器的名称都必须以 “Controller” 结尾。Web 服务器通常会将进入的 URL 请求直接映射到服务器上的磁盘文件。例如某个 : www.xx.com/index.php 将映射到服务器根目录上的文件 “index.php”。然而 MVC 框架的映射方式有所不同，<strong>MVC 将 URL 映射到方法，这些方法在类中被称为“控制器”</strong> 。控制器负者处理进入的请求。处理输入、保存数据，并把响应发送回客户端。</p>
+<p>小栗子 :</p>
+<p>运行 VS 依次 文件–&gt;新建–&gt;项目–&gt;Web–&gt;ASP.NET MVC应用程序，在 Controller 文件夹里添加一个 TestController (必须要有关键字 Controller)控制器，打开新建的TestController 类，可以看到已经生成了 Index方法，将该方法注释掉之后，写一个新方法，如下 :</p>
+<p><img src="http://i4.buimg.com/567571/2ceed4a40f6ed2f5.png" alt=""></p>
+<p>在浏览器里打开 :</p>
+<p><img src="http://i2.muimg.com/567571/6fa71983a34652b8.png" alt=""></p>
+<p>很显然的可以看到我们访问的是一个类中的方法，这个TestController类是一个控制器。</p>
+<p>当然，我们也可以限制访问某个方法，如下 :</p>
+<p><img src="http://i4.buimg.com/567571/c3f69fb4a5c9ffcf.png" alt=""></p>
+<p><strong>ASP.NET MVC View</strong></p>
+<p>Controller 是处理用户请求，并作出响应，通常情况下响应都是以显示贼气浏览器中，使用 HTML 代码，浏览器才可以识别。HTML 有图像，文本，输入控件等。通常称为用户界面的设计即 UI 层，在 ASP.NET MVC称为 View。Views 文件夹存储的是与应用程序显示 (用户界面) 相关的文件 (HTML 文件)。根据语言的不同，这些文件的扩展名可能是html、asp、aspx、cshtml 或 vbhtml。<strong>Views 文件夹包含每个控制器对应的一个文件夹。</strong></p>
+<p>Visual Web Developer 已经创建了一个 Account 文件夹、一个 Home 文件夹、一个 Shared 文件夹 (在 Views 文件夹内)。</p>
+<p>Account 文件夹包含用于注册并登陆用户账号的页面。</p>
+<p>Home 文件夹用于存储诸如首页和关于页之类的应用程序页面。</p>
+<p>Shared 文件夹用于存储控制器间分享的视图 (模板页和布局页)。</p>
+<p>小栗子 :</p>
+<p>我们在 Test 控制器里新建一个 Action方法，并点击该方法右键添加 View，命名为MyView，取消选中的“使用布局”。可以在资源管理器中的 Views文件夹下的 Test文件夹下多出一个MyView视图。</p>
+<p>如下 :</p>
+<p><img src="http://i1.piimg.com/567571/d289a20ff494c5b6.png" alt=""></p>
+<p>然后我们在该视图里写一段话并在浏览器里访问这个控制器对应的方法，如下 ：</p>
+<p><img src="http://i1.piimg.com/567571/db7d700bdfd70a59.png" alt=""></p>
+<p>上面我们说过，Views 文件夹包含每个控制器对应的一个文件夹，而 View 是与放置在特定目录下的 Controller 相关。这个特定文件夹是以ControllerName命名的，所以我们新建的视图放在了Test文件夹下，而这个Test文件夹又放在Views文件夹下。</p>
+<p>当然，多个控制器也可以重用 View ，不过我们需要把这些文件放在特定的 Shared 文件夹中，将 View 放在 Shared 文件夹中所有的 Controller 都可以用。</p>
+<p>同样的，一个 Action方法也可以引用多个 View ，ASP.NET MVC 的 View 和 Controller 不是严格匹配的，一个 Action 方法可以引用多个 view，而一个 view 也可以被多个Controller使用。</p>
+<p>创建 ViewResult 对象将会渲染成视图来给用户反馈。ViewResult 是HTML响应，而ContentResult是标准的文本响应，仅返回字符串类型。区别就在于ContentResult是ActionResult的子类。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/14/七天精通 ASP.NET MVC/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.277Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/07/14/分词/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/14/ZeroNet/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="七天精通 ASP.NET MVC" data-title="" data-url="http://yoursite.com/2017/07/14/七天精通 ASP.NET MVC/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-WordCloud" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-渗透思路" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,19 +152,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="WordCloud-—-词云"><a href="#WordCloud-—-词云" class="headerlink" title="WordCloud — 词云"></a>WordCloud — 词云</h2><p><strong>00x0 前言</strong></p>
-<p>上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/08/591012b229819.jpg" alt=""></p>
-<p>从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。</p>
+<h2 id="你是如何渗透一个网站的？"><a href="#你是如何渗透一个网站的？" class="headerlink" title="你是如何渗透一个网站的？"></a>你是如何渗透一个网站的？</h2><blockquote>
+<p>以下内容来自 i 春秋社区</p>
+</blockquote>
+<p>在获取<strong>书面授权</strong>的前提下。</p>
+<p><strong>00x0 信息收集</strong></p>
+<ol>
+<li>获取域名的whois信息，获取注册者邮箱姓名电话等。</li>
+<li>查询服务器旁站以及子域名站点，因为主站一般比较难，所以先看看旁站有没有通用的cms或者其他漏洞。</li>
+<li>查看服务器操作系统版本，web中间件，看看是否存在已知的漏洞，比如 IIS、Apache、Nginx 的解析漏洞。</li>
+<li>查看 IP，进行IP地址端口扫描，对响应的端口进行漏洞探测，比如rsync、心脏出血、MySQL、FTP、SSH弱口令等。</li>
+<li>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露，比如PHP探针。</li>
+<li>Google hack 进一步探测网站的信息、后台、敏感文件。</li>
+</ol>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/08/WordCloud/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/渗透思路/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/08/WordCloud/" class="archive-article-date">
-  	<time datetime="2017-05-08T07:10:58.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-08</time>
+      <a href="/2017/07/14/渗透思路/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.353Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -184,7 +193,7 @@
 
 
   
-    <article id="post-分词" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-正则表达式快速入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -193,18 +202,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="听了那么多逼哥，逼哥到底再讲什么？"><a href="#听了那么多逼哥，逼哥到底再讲什么？" class="headerlink" title="听了那么多逼哥，逼哥到底再讲什么？"></a>听了那么多逼哥，逼哥到底再讲什么？</h2><p><strong>00x1 前言</strong></p>
-<p>作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg" alt=""></p>
+<h2 id="正则表达式快速入门小栗子"><a href="#正则表达式快速入门小栗子" class="headerlink" title="正则表达式快速入门小栗子"></a>正则表达式快速入门小栗子</h2><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a><strong>写在前面</strong></h3><p>在写本文之前，我也是对正则完全没接触，在做爬虫的时候看别人用正则匹配数据很酷炫，感觉像乱码一样很烦很烦。然而万事开头难，勇于尝试才是解决之道。本文不跟你多逼逼，直接拿栗子上手三十分钟入门正则。</p>
+<p><img src="http://i2.buimg.com/567571/e345c134c2bf14d1.jpg" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/05/07/分词/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/正则表达式快速入门/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/05/07/分词/" class="archive-article-date">
-  	<time datetime="2017-05-07T15:52:43.982Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-07</time>
+      <a href="/2017/07/14/正则表达式快速入门/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.348Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -236,14 +244,14 @@
 <h2 id="上手树莓派，开心的一批"><a href="#上手树莓派，开心的一批" class="headerlink" title="上手树莓派，开心的一批"></a>上手树莓派，开心的一批</h2><h4 id="00x1-写在前面"><a href="#00x1-写在前面" class="headerlink" title="00x1 写在前面"></a>00x1 写在前面</h4><p>其实早就想买一个树莓派上手玩了，起初因为自己手残就一直犹犹豫豫。与其犹豫不决内心矛盾，不如管TM的棒棒糖上来就是撸。奢侈一把买了一个三代，好不好玩现在还没深究，重点是真的贵。仅售35美刀的那个就是裸奔，我们还需要一根电源线和一根网线。我比较屌丝，所以显示屏和小键盘都没买，不过买了一个小风扇，原因便宜。</p>
 <p><img src="http://i4.buimg.com/567571/42d815c1afc352ae.jpg" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/04/21/树莓派/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/树莓派/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/04/21/树莓派/" class="archive-article-date">
-  	<time datetime="2017-04-21T14:59:49.620Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-21</time>
+      <a href="/2017/07/14/树莓派/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.343Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -263,7 +271,7 @@
 
 
   
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-暴利解压" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -272,18 +280,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="史上最浅显易懂的-Git-教程"><a href="#史上最浅显易懂的-Git-教程" class="headerlink" title="史上最浅显易懂的 Git 教程"></a>史上最浅显易懂的 Git 教程</h2><p><strong>写在前面</strong></p>
-<p>讲道理，这次不是标题党。没错，就是这么猖狂。我为什么敢这么说？看完就懂了，彩蛋在文末。</p>
-<h4 id="Git-简介"><a href="#Git-简介" class="headerlink" title="Git 简介"></a>Git 简介</h4><p>Git 是目前世界最先进的分布式版本控制系统（没有之一）。那什么是版本控制？简单来说就是能记录文件的每次改动。那为什么有分布式一说？这里就要先说集中式版本控制系统了。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/04/10/git/#more">more >></a>
-        </p>
+<h2 id="暴力美学，手动滑稽"><a href="#暴力美学，手动滑稽" class="headerlink" title="暴力美学，手动滑稽"></a>暴力美学，手动滑稽</h2><h4 id="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"><a href="#有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。" class="headerlink" title="有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。"></a>有时候发现了资源却发现有解压密码时是不是很绝望？一点都不虚，在这里安利两个软件暴力破解密码。</h4><ol>
+<li>破解RAR ：<a href="http://pan.baidu.com/s/1c1Togco" target="_blank" rel="external">滴滴</a> 密码：84vu</li>
+<li>破解Zip：<a href="http://pan.baidu.com/s/1eR4hBm6" target="_blank" rel="external">滴滴</a> 密码：iaox</li>
+</ol>
+<p>顺便放点字典文件：<a href="http://pan.baidu.com/s/1kVdPpHX" target="_blank" rel="external">滴滴</a>  密码：z75q</p>
+<p>当然，如果感觉是盲目穷举，也可以自己输入个人信息，猜测可能的密码，业界良心：<a href="http://caimima.net/" target="_blank" rel="external">滴滴</a></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/04/10/git/" class="archive-article-date">
-  	<time datetime="2017-04-10T13:19:25.557Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-10</time>
+      <a href="/2017/07/14/暴利解压/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.337Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -303,7 +312,7 @@
 
 
   
-    <article id="post-实例演示参数化查询防止SQL注入" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-新年" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -312,17 +321,26 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="实例演示参数化查询防止-SQL-注入"><a href="#实例演示参数化查询防止-SQL-注入" class="headerlink" title="实例演示参数化查询防止 SQL 注入"></a>实例演示参数化查询防止 SQL 注入</h2><h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>SQL 注入的危害就不用我多说了，之前也有文章从攻的层面写过关于此的。今天主要是从防的层面来写这篇文章。本篇从两个角度来防止SQL注入，前端验证用户输入，后端做参数化查询。</p>
-<p><img src="http://i4.buimg.com/567571/c98d46651511b01f.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/04/08/实例演示参数化查询防止SQL注入/#more">more >></a>
-        </p>
+<h2 id="新的一年，未雨绸缪"><a href="#新的一年，未雨绸缪" class="headerlink" title="新的一年，未雨绸缪"></a>新的一年，未雨绸缪</h2><p>转眼又是新的一年了，大学时光也所剩不多了，在这里，例一下自己的新年计划，以此次勉励自己：</p>
+<ol>
+<li>过了四级英语。</li>
+<li>认真看完五本书。</li>
+<li>系统学习前端，做个小项目。</li>
+<li>Rank ++</li>
+<li>沉默，专注。</li>
+<li>经济独立。</li>
+<li>卸载所有游戏。</li>
+<li>早起，吃早餐，锻炼身体，尽量不再熬夜。</li>
+</ol>
+<p>我不想发财，也不想谈恋爱，如果真能实现我的一个愿望的话，那就赐给我一个  0day 吧。</p>
+<p><img src="https://ooo.0o0.ooo/2017/01/01/5868a03206a1c.jpg" alt=""></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/04/08/实例演示参数化查询防止SQL注入/" class="archive-article-date">
-  	<time datetime="2017-04-08T06:19:42.312Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-08</time>
+      <a href="/2017/07/14/新年/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.332Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       

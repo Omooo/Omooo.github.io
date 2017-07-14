@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-渗透思路" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-图片识别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,28 +152,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="你是如何渗透一个网站的？"><a href="#你是如何渗透一个网站的？" class="headerlink" title="你是如何渗透一个网站的？"></a>你是如何渗透一个网站的？</h2><blockquote>
-<p>以下内容来自 i 春秋社区</p>
-</blockquote>
-<p>在获取<strong>书面授权</strong>的前提下。</p>
-<p><strong>00x0 信息收集</strong></p>
-<ol>
-<li>获取域名的whois信息，获取注册者邮箱姓名电话等。</li>
-<li>查询服务器旁站以及子域名站点，因为主站一般比较难，所以先看看旁站有没有通用的cms或者其他漏洞。</li>
-<li>查看服务器操作系统版本，web中间件，看看是否存在已知的漏洞，比如 IIS、Apache、Nginx 的解析漏洞。</li>
-<li>查看 IP，进行IP地址端口扫描，对响应的端口进行漏洞探测，比如rsync、心脏出血、MySQL、FTP、SSH弱口令等。</li>
-<li>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露，比如PHP探针。</li>
-<li>Google hack 进一步探测网站的信息、后台、敏感文件。</li>
-</ol>
+<h2 id="美眉别唬我，我很单纯"><a href="#美眉别唬我，我很单纯" class="headerlink" title="美眉别唬我，我很单纯"></a>美眉别唬我，我很单纯</h2><p>今天看到小基友发了这张图，瞬间心情复杂。</p>
+<p><img src="http://i1.piimg.com/567571/049695cb0ae0ea21.png" alt=""></p>
+<p>恕我直言，心情犹如吃 si 一样。</p>
+<p><img src="http://i1.piimg.com/567571/bb31fb7d83c6256e.jpg" alt=""></p>
+<p>我这么单纯为什么要这样对我？还我一个真实的世界吧。如何辨别网图或者被P过的图片呢？</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/03/10/渗透思路/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/图片识别/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/03/10/渗透思路/" class="archive-article-date">
-  	<time datetime="2017-03-10T04:25:29.819Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-10</time>
+      <a href="/2017/07/14/图片识别/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.300Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -211,14 +203,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxx.com/NewsType.asp?SmallClass=&apos; union select 0,username+CHR(124)+password,2,3,4,5,6,7,8,9 from admin union select * from news where 1=2 and &apos;&apos;=&apos;</div></pre></td></tr></table></figure>
 <p>拿 shell 方法貌似有三种：</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/03/10/南方0day/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/南方0day/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/03/10/南方0day/" class="archive-article-date">
-  	<time datetime="2017-03-09T23:39:47.341Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-10</time>
+      <a href="/2017/07/14/南方0day/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.294Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -238,7 +230,7 @@
 
 
   
-    <article id="post-ST2 漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-加密文件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -247,19 +239,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="Apache-Struts2（S2-045）-漏洞"><a href="#Apache-Struts2（S2-045）-漏洞" class="headerlink" title="Apache Struts2（S2-045） 漏洞"></a>Apache Struts2（S2-045） 漏洞</h2><p><strong>00x0 漏洞简介</strong></p>
-<p>Apache Struts 是美国阿帕奇软件基金会负责维护的一个开源项目，是一套用于创建企业级 Java Web 应用的开源 MVC 框架，主要提供两个版本框架产品：Struts 1 和 Struts 2。</p>
-<p>ApacheStruts 2.3.5 -2.3.31 版本及 2.5-2.5.10 版本存在远程代码执行漏洞（CNNVD-201703-152，CVE-2017-5638）。该漏洞是由于上传功能的异常处理函数没有正确处理用户输入的错误信息。导致远程攻击者可以通过发送恶意的数据包，利用该漏洞在受影响的服务器上执行任意命令。</p>
-<p><img src="http://p1.bqimg.com/567571/e853f40eae3e5213.jpg" alt=""></p>
+<h2 id="勒索软件，该怎么玩？"><a href="#勒索软件，该怎么玩？" class="headerlink" title="勒索软件，该怎么玩？"></a>勒索软件，该怎么玩？</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。</p>
+<p>想到以前撸过的一个加密文件的成品，今天就来介绍一下。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/03/09/ST2 漏洞/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/加密文件/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/03/09/ST2 漏洞/" class="archive-article-date">
-  	<time datetime="2017-03-09T01:11:42.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-09</time>
+      <a href="/2017/07/14/加密文件/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.288Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -279,7 +270,7 @@
 
 
   
-    <article id="post-TCP 空闲扫描" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-分词" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -288,18 +279,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="信息收集之-–-TCP-空闲扫描"><a href="#信息收集之-–-TCP-空闲扫描" class="headerlink" title="信息收集之 – TCP 空闲扫描"></a>信息收集之 – TCP 空闲扫描</h2><p><strong>00x0  写在前面</strong></p>
-<p>今天安利的 TCP 空闲扫描是属于信息收集，在我刚刚入门 Web 安全的时候（可能现在还没入门，安全博大精深），对于信息收集其实是很忽略的，但是随着学习的不断深入，才发现信息收集是渗透测试及其重要的一个环节，也是黑阔区别于脚本小子很明显的一个特征。</p>
-<p><img src="http://p1.bpimg.com/567571/c160a005d6291792.jpg" alt=""></p>
+<h2 id="听了那么多逼哥，逼哥到底再讲什么？"><a href="#听了那么多逼哥，逼哥到底再讲什么？" class="headerlink" title="听了那么多逼哥，逼哥到底再讲什么？"></a>听了那么多逼哥，逼哥到底再讲什么？</h2><p><strong>00x1 前言</strong></p>
+<p>作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。</p>
+<p><img src="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg" alt=""></p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/03/09/TCP 空闲扫描/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/分词/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/03/09/TCP 空闲扫描/" class="archive-article-date">
-  	<time datetime="2017-03-08T23:31:20.927Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-09</time>
+      <a href="/2017/07/14/分词/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.283Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -319,7 +310,7 @@
 
 
   
-    <article id="post-文件上传漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-七天精通 ASP.NET MVC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -328,19 +319,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p><strong>写在前面</strong></p>
-<p>已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》</p>
-<p><strong>00x0 原理概述</strong></p>
-<p>文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。</p>
+<h2 id="七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC"><a href="#七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC" class="headerlink" title="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC"></a>七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC</h2><p>MVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：</p>
+<ul>
+<li>Model (模型) : 表示应用程序的核心 (比如数据库记录列表)</li>
+<li>View (视图) : 对数据 (数据库记录) 进行显示</li>
+<li>Controller (控制器) 处理输入 (写入数据库记录)</li>
+</ul>
+<p>MVC 模型同时提供对 HTML、CSS、以及Javascript 的完整控制。</p>
+<p>MVC 模型通过三个逻辑层来定义 web 应用程序 :</p>
+<ul>
+<li>business layer （业务层、模型逻辑）</li>
+<li>display layer （显示层、视图逻辑）</li>
+<li>input control （输入控件、控制器逻辑）</li>
+</ul>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/02/21/文件上传漏洞/#more">more >></a>
+          <a class="article-more-a"  href="/2017/07/14/七天精通 ASP.NET MVC/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/02/21/文件上传漏洞/" class="archive-article-date">
-  	<time datetime="2017-02-21T14:11:32.063Z" itemprop="datePublished"><i class="icon-clock"></i>2017-02-21</time>
+      <a href="/2017/07/14/七天精通 ASP.NET MVC/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.277Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
