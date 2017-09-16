@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — BaseAdapter 的使用以及优化前言BaseAdapter数据适配器，连接数据源与视图界面的桥梁。BaseAdapter是一个抽象类，使用BaseAdapter必须写一个类继承它，并且实现它的四个方法。首先我们应该清楚流程，当系统绘制ListView的时候，首先调用getCount()方法，获取ListView的长度，然后再调用getView()方法，根据这个长度逐一绘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦">
+<meta property="og:url" content="http://yoursite.com/2017/09/16/Android --- BaseAdapter/index.html">
+<meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Android — BaseAdapter 的使用以及优化前言BaseAdapter数据适配器，连接数据源与视图界面的桥梁。BaseAdapter是一个抽象类，使用BaseAdapter必须写一个类继承它，并且实现它的四个方法。首先我们应该清楚流程，当系统绘制ListView的时候，首先调用getCount()方法，获取ListView的长度，然后再调用getView()方法，根据这个长度逐一绘">
+<meta property="og:image" content="https://i.loli.net/2017/08/11/598cf6aebcc20.png">
+<meta property="og:updated_time" content="2017-08-11T01:27:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Android — BaseAdapter 的使用以及优化前言BaseAdapter数据适配器，连接数据源与视图界面的桥梁。BaseAdapter是一个抽象类，使用BaseAdapter必须写一个类继承它，并且实现它的四个方法。首先我们应该清楚流程，当系统绘制ListView的时候，首先调用getCount()方法，获取ListView的长度，然后再调用getView()方法，根据这个长度逐一绘">
+<meta name="twitter:image" content="https://i.loli.net/2017/08/11/598cf6aebcc20.png">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">生活不只是眼前的苟且，还有诗和远方</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- BaseAdapter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-BaseAdapter-的使用以及优化"><a href="#Android-—-BaseAdapter-的使用以及优化" class="headerlink" title="Android — BaseAdapter 的使用以及优化"></a>Android — BaseAdapter 的使用以及优化</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>BaseAdapter数据适配器，连接数据源与视图界面的桥梁。BaseAdapter是一个抽象类，使用BaseAdapter必须写一个类继承它，并且实现它的四个方法。首先我们应该清楚流程，当系统绘制ListView的时候，首先调用getCount()方法，获取ListView的长度，然后再调用getView()方法，根据这个长度逐一绘制ListView的每一行。也就是说，如果getCount返回1，那么就只显示一行。而getItem()和getItemId()则需要处理和取得Adapter中的数据时调用。而数据量很大的时候就需要绘制很多行，极大的消耗资源，导致ListView滑动非常慢，那应该怎么优化呢？本节我们搭配ListView使用BaseAdapter，并逐渐来优化BaseAdapter。</p>
+<a id="more"></a>
+<h4 id="布局："><a href="#布局：" class="headerlink" title="布局："></a>布局：</h4><p>activity_mian.xml：也就一个ListView。</p>
+<p>item.xml：类似新闻布局。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;&gt;</div><div class="line"></div><div class="line">    &lt;ImageView</div><div class="line">        android:id=&quot;@+id/imageView1&quot;</div><div class="line">        android:src=&quot;@mipmap/ic_launcher&quot;</div><div class="line">        android:layout_width=&quot;60dp&quot;</div><div class="line">        android:layout_height=&quot;60dp&quot; /&gt;</div><div class="line">    &lt;TextView</div><div class="line">        android:id=&quot;@+id/iv_title&quot;</div><div class="line">        android:text=&quot;Title&quot;</div><div class="line">        android:gravity=&quot;center&quot;</div><div class="line">        android:textSize=&quot;25sp&quot;</div><div class="line">        android:layout_toEndOf=&quot;@+id/imageView1&quot;</div><div class="line">        android:layout_toRightOf=&quot;@+id/imageView1&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;30dp&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=&quot;@+id/iv_content&quot;</div><div class="line">        android:layout_below=&quot;@+id/iv_title&quot;</div><div class="line">        android:text=&quot;Content&quot;</div><div class="line">        android:gravity=&quot;center_vertical&quot;</div><div class="line">        android:textSize=&quot;20sp&quot;</div><div class="line">        android:layout_toEndOf=&quot;@+id/imageView1&quot;</div><div class="line">        android:layout_toRightOf=&quot;@+id/imageView1&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;30dp&quot; /&gt;</div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><ol>
+<li>创建ItemBean来封装数据</li>
+</ol>
+<p>ItemBean.class ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">package top.omooo.admin.mybaseadapter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Omooo on 2017/8/9.</div><div class="line"> */</div><div class="line"></div><div class="line">public class ItemBean &#123;</div><div class="line">    public int ItemImageResid;</div><div class="line">    public String ItemContent;</div><div class="line">    public String ItemTitle;</div><div class="line"></div><div class="line">    public ItemBean(int itemImageResid, String itemContent, String itemTitle) &#123;</div><div class="line">        ItemImageResid = itemImageResid;</div><div class="line">        ItemContent = itemContent;</div><div class="line">        ItemTitle = itemTitle;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>MainActivity来生成数据源</li>
+</ol>
+<p>MainActivity.class : </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">package top.omooo.admin.mybaseadapter;</div><div class="line"></div><div class="line">import android.support.v7.app.AppCompatActivity;</div><div class="line">import android.os.Bundle;</div><div class="line">import android.widget.ListView;</div><div class="line"></div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">public class MainActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        List&lt;ItemBean&gt; itemBeen = new ArrayList&lt;&gt;();</div><div class="line">        for (int i = 0; i &lt; 20; i++) &#123;</div><div class="line">            itemBeen.add(new ItemBean(</div><div class="line">                    R.mipmap.ic_launcher,</div><div class="line">                    &quot;我是标题&quot;+i,</div><div class="line">                    &quot;我是内容&quot;+i</div><div class="line">            ));</div><div class="line">        &#125;</div><div class="line">        ListView listView = (ListView) findViewById(R.id.listView1);</div><div class="line">        listView.setAdapter(new MyAdapter(this,itemBeen));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>创建数据适配器</li>
+</ol>
+<p>MyAdapter.class :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">package top.omooo.admin.mybaseadapter;</div><div class="line"></div><div class="line">import android.content.Context;</div><div class="line">import android.util.Log;</div><div class="line">import android.view.LayoutInflater;</div><div class="line">import android.view.View;</div><div class="line">import android.view.ViewGroup;</div><div class="line">import android.widget.BaseAdapter;</div><div class="line">import android.widget.ImageView;</div><div class="line">import android.widget.TextView;</div><div class="line"></div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Omooo on 2017/8/9.</div><div class="line"> */</div><div class="line"></div><div class="line">public class MyAdapter extends BaseAdapter &#123;</div><div class="line">    //数据源与数据适配器绑定</div><div class="line">    private List&lt;ItemBean&gt; mList;</div><div class="line">    //布局装载器对象</div><div class="line">    private LayoutInflater mLayoutInflater;</div><div class="line">    //记录总共消耗的时间</div><div class="line">    private long mSumTime;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 将XML转换为View</div><div class="line">     * @param context 使用当前得Adapter的界面对象</div><div class="line">     * @param list 数据源</div><div class="line">     */</div><div class="line">    public MyAdapter(Context context,List&lt;ItemBean&gt; list) &#123;</div><div class="line">        mList=list;</div><div class="line">        mLayoutInflater=LayoutInflater.from(context);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public int getCount() &#123;</div><div class="line">        return mList.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int i) &#123;</div><div class="line">        return mList.get(i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int i) &#123;</div><div class="line">        return i;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 返回每一项的数据内容</div><div class="line">     * @param i</div><div class="line">     * @param convertView</div><div class="line">     * @param viewGroup</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public View getView(int i, View convertView, ViewGroup viewGroup) &#123;</div><div class="line">        //都比式</div><div class="line">//        View view = mLayoutInflater.inflate(R.layout.item, null);</div><div class="line">//        ImageView imageView = view.findViewById(R.id.imageView1);</div><div class="line">//        TextView title = view.findViewById(R.id.iv_title);</div><div class="line">//        TextView content = view.findViewById(R.id.iv_content);</div><div class="line">//        ItemBean bean = mList.get(i);</div><div class="line">//        Log.i(&quot;233&quot;, &quot;getView: &quot;+ mList.get(i));</div><div class="line">//        imageView.setImageResource(mList.get(i).ItemImageResid);</div><div class="line">//        title.setText(bean.ItemTitle);</div><div class="line">//        content.setText(bean.ItemContent);</div><div class="line">//        return view;</div><div class="line"></div><div class="line">        //普通式</div><div class="line">//        if (convertView == null) &#123;</div><div class="line">//            convertView=mLayoutInflater.inflate(R.layout.item, null);</div><div class="line">//        &#125;</div><div class="line">//        ImageView imageView = convertView.findViewById(R.id.imageView1);</div><div class="line">//        TextView title = convertView.findViewById(R.id.iv_title);</div><div class="line">//        TextView content = convertView.findViewById(R.id.iv_content);</div><div class="line">//        ItemBean bean = mList.get(i);</div><div class="line">//        imageView.setImageResource(mList.get(i).ItemImageResid);</div><div class="line">//        title.setText(bean.ItemTitle);</div><div class="line">//        content.setText(bean.ItemContent);</div><div class="line">//        return convertView;</div><div class="line"></div><div class="line">        //文艺式</div><div class="line">        /**</div><div class="line">         * 不仅利用了ListView的缓存，更通过ViewHolder类来实现显示数据的视图的缓存，避免多次findViewById寻找控件。</div><div class="line">         */</div><div class="line">        //计时 获取系统的纳秒时间</div><div class="line">        long start = System.nanoTime();</div><div class="line">        ViewHolder viewHolder;</div><div class="line">        if (convertView == null) &#123;</div><div class="line">            viewHolder = new ViewHolder();</div><div class="line">            convertView=mLayoutInflater.inflate(R.layout.item, null);</div><div class="line">            viewHolder.imageView=convertView.findViewById(R.id.imageView1);</div><div class="line">            viewHolder.title=convertView.findViewById(R.id.iv_title);</div><div class="line">            viewHolder.content=convertView.findViewById(R.id.iv_content);</div><div class="line">            convertView.setTag(viewHolder);</div><div class="line">        &#125;else&#123;</div><div class="line">            viewHolder = (ViewHolder) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        ItemBean bean = mList.get(i);</div><div class="line">        viewHolder.imageView.setImageResource(mList.get(i).ItemImageResid);</div><div class="line">        viewHolder.title.setText(bean.ItemTitle);</div><div class="line">        viewHolder.content.setText(bean.ItemContent);</div><div class="line">        long end = System.nanoTime();</div><div class="line">        long dValue = end - start;</div><div class="line">        mSumTime += dValue;</div><div class="line">        Log.i(&quot;233&quot;, String.valueOf(mSumTime));</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line">    //避免重复的findViewById操作</div><div class="line">    class ViewHolder &#123;</div><div class="line">        public ImageView imageView;</div><div class="line">        public TextView title;</div><div class="line">        public TextView content;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="详解："><a href="#详解：" class="headerlink" title="详解："></a>详解：</h4><p>第一次我们使用了最传统的写法，即都比式写法。我们完全可以不用所谓的convertView和ViewHolder，直接导入布局内容就可以了，但是这样也就意味着有多少行数据就要绘制多少行ListView，这显然是不可取的，然后你可以试验一下，打印log输出convertView的内容，当我们没滚动ListView的时候，convertView的值为0，然而我们向下滚动ListView时，上面的数据不可见，下面出现新的数据项，这时convertView的值不在为空了，而是创建了一系列的convertView值。也就是说，convertView相当于一个缓存，开始为0，当有数据变为不可见，它就开始缓存它的数据，后面出来的数据只需要更新就可以了，这样做也就大大的节省了系统资源的开销。当然，我们还可以继续优化，虽然重复利用了已经绘制的view，但是需要得到其中的空间，还是要通过findViewById()来获得，所以就有了第三种写法 — 文艺式。当convertView为空时，用setTag()方法为每一个View绑定一个存放控件的ViewHolder对象。当convertView不为空，重复利用已经创建的view，使用setTag()获取绑定的ViewHolder对象，这样也就避免了findViewById()对控件的层层查询，从而快速定位到控件。</p>
+<h4 id="预览："><a href="#预览：" class="headerlink" title="预览："></a>预览：</h4><p><img src="https://i.loli.net/2017/08/11/598cf6aebcc20.png" alt=""></p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><ol>
+<li><a href="http://www.imooc.com/learn/365" target="_blank" rel="external">慕课网</a></li>
+<li><a href="http://www.runoob.com/w3cnote/android-tutorial-baseadapter.html" target="_blank" rel="external">BaseAdapter优化</a></li>
+<li><a href="http://www.open-open.com/lib/view/open1339485728006.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1339485728006.html</a></li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/16/Android --- BaseAdapter/" class="archive-article-date">
+  	<time datetime="2017-09-16T00:54:08.217Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-16</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/10/Android ---  AsyncTask 异步加载/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- BaseAdapter" data-title="" data-url="http://yoursite.com/2017/09/16/Android --- BaseAdapter/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
