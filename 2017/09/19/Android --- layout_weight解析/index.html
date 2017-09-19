@@ -6,14 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — layout_weight 解析前言
+LinerLayout可以为其包含的控件指定填充权值layout_weight。这样就允许其包含的控件可以填充屏幕上的剩余控件，避免了所有控件挤成一堆的情况，剩余的空间会按这些控件的权值比例分配屏幕。
+默认情况下，weight的值为0，表示按控件的实际大小显示；如果weight值设置高于0，剩余空间会按控件的weight值所占所有控件we">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/page/8/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/Android --- layout_weight解析/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Android — layout_weight 解析前言
+LinerLayout可以为其包含的控件指定填充权值layout_weight。这样就允许其包含的控件可以填充屏幕上的剩余控件，避免了所有控件挤成一堆的情况，剩余的空间会按这些控件的权值比例分配屏幕。
+默认情况下，weight的值为0，表示按控件的实际大小显示；如果weight值设置高于0，剩余空间会按控件的weight值所占所有控件we">
+<meta property="og:image" content="https://i.loli.net/2017/09/05/59ae2bc9817d2.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/05/59ae2c513aa9c.png">
+<meta property="og:updated_time" content="2017-09-05T05:13:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Android — layout_weight 解析前言
+LinerLayout可以为其包含的控件指定填充权值layout_weight。这样就允许其包含的控件可以填充屏幕上的剩余控件，避免了所有控件挤成一堆的情况，剩余的空间会按这些控件的权值比例分配屏幕。
+默认情况下，weight的值为0，表示按控件的实际大小显示；如果weight值设置高于0，剩余空间会按控件的weight值所占所有控件we">
+<meta name="twitter:image" content="https://i.loli.net/2017/09/05/59ae2bc9817d2.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,131 +154,104 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android --- layout_weight解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-layout-weight-解析"><a href="#Android-—-layout-weight-解析" class="headerlink" title="Android — layout_weight 解析"></a>Android — layout_weight 解析</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ol>
+<li>LinerLayout可以为其包含的控件指定填充权值layout_weight。这样就允许其包含的控件可以填充屏幕上的剩余控件，避免了所有控件挤成一堆的情况，剩余的空间会按这些控件的权值比例分配屏幕。</li>
+<li>默认情况下，weight的值为0，表示按控件的实际大小显示；如果weight值设置高于0，剩余空间会按控件的weight值所占所有控件weight的比例分配给该控件。比如有两个控件，一个weight值为1，另一个为2，则剩余空间会把1/3的部分给控件一，剩下的2/3分配给控件二，也就是说权值越大，重要度越高。</li>
+<li>如果LinerLayout包含子LinerLayout，子LinerLayout之间的权值越大，重要程度越小。如果有LinerLayout A包含LinerLayout C D，C权值为1，D权值为2，则屏幕的2/3会分配给C，1/3分给D。在LinerLayout嵌套的情况下，子LinerLayout必须要设置权值，否则默认情况下是未设置权值的子LinerLayout占据整个屏幕。</li>
+</ol>
+<p>下面我们来测试一下，并讲解一个通用的计算方法。</p>
+<a id="more"></a>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p><img src="https://i.loli.net/2017/09/05/59ae2bc9817d2.png" alt=""></p>
+<p>这个就比较好理解了，按权重划分，当把子控件android:layout_width=”match_parent”时，一下：</p>
+<p><img src="https://i.loli.net/2017/09/05/59ae2c513aa9c.png" alt=""></p>
+<p>那么是怎么计算的呢？比较容易理解的解法是这样的滴：</p>
+<p>既然三个TextView都是充满父类容器，那么剩下的空间就是1（match_parent）-3（match_parent）=-2（match_parent），然后剩下的空间按照权值分配，所以第一个TextView所占的空间为：1（match_parent）+（-2（match_parent）*1/6）=2/3（match_parent），第二个TextView所占的空间为：1（match_parent）+（-2（match_parent）2/6）=1/3（match_parent），第三个TextView也就不占空间了。</p>
+<p>当然你也可以试试把LinearLaylout的android:orientation=”vertical”，也是一样的算法，屡试不爽。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/pi9nc/article/details/9215297" target="_blank" rel="external">http://blog.csdn.net/pi9nc/article/details/9215297</a></p>
+<p><a href="http://www.cnblogs.com/w-y-f/p/4123056.html" target="_blank" rel="external">http://www.cnblogs.com/w-y-f/p/4123056.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/19/Android --- layout_weight解析/" class="archive-article-date">
+  	<time datetime="2017-09-19T14:39:47.196Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-19</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/16/Android --- BaseAdapter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/git/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.198Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Docker/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/7/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/9/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- layout_weight解析" data-title="" data-url="http://yoursite.com/2017/09/19/Android --- layout_weight解析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +274,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
