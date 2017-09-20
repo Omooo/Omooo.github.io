@@ -143,6 +143,56 @@
       <div class="body-wrap">
         
   
+    <article id="post-渗透思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="你是如何渗透一个网站的？"><a href="#你是如何渗透一个网站的？" class="headerlink" title="你是如何渗透一个网站的？"></a>你是如何渗透一个网站的？</h2><blockquote>
+<p>以下内容来自 i 春秋社区</p>
+</blockquote>
+<p>在获取<strong>书面授权</strong>的前提下。</p>
+<p><strong>00x0 信息收集</strong></p>
+<ol>
+<li>获取域名的whois信息，获取注册者邮箱姓名电话等。</li>
+<li>查询服务器旁站以及子域名站点，因为主站一般比较难，所以先看看旁站有没有通用的cms或者其他漏洞。</li>
+<li>查看服务器操作系统版本，web中间件，看看是否存在已知的漏洞，比如 IIS、Apache、Nginx 的解析漏洞。</li>
+<li>查看 IP，进行IP地址端口扫描，对响应的端口进行漏洞探测，比如rsync、心脏出血、MySQL、FTP、SSH弱口令等。</li>
+<li>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露，比如PHP探针。</li>
+<li>Google hack 进一步探测网站的信息、后台、敏感文件。</li>
+</ol>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/07/14/渗透思路/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/14/渗透思路/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.353Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-正则表达式快速入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -291,47 +341,6 @@
       
       <a href="/2017/07/14/新年/" class="archive-article-date">
   	<time datetime="2017-07-14T07:28:51.332Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-文件上传漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p><strong>写在前面</strong></p>
-<p>已经好久没更新博客了，可能每个人都会遇到瓶颈期吧。这次我想写一个关于文件上传漏洞的简要概述，共勉。声明：以下大多数表述都是来自《白帽子讲 Web 安全》</p>
-<p><strong>00x0 原理概述</strong></p>
-<p>文件上传漏洞是指用户上传一个可执行的脚本文件，并通过此脚本获得了执行服务器端的命令的能力。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/文件上传漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/文件上传漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.327Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
