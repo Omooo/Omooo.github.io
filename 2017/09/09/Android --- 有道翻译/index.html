@@ -8,12 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 有道翻译前言利用有道提供的API，写一个自动识别语言的翻译软件。支持汉译英，英译汉，小语种，短语句子等。实现也很简单，简单来说就是拼接URL然后请求网络返回接收数据后解析到UI中。
+效果预览">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/page/9/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/09/09/Android --- 有道翻译/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Android — 有道翻译前言利用有道提供的API，写一个自动识别语言的翻译软件。支持汉译英，英译汉，小语种，短语句子等。实现也很简单，简单来说就是拼接URL然后请求网络返回接收数据后解析到UI中。
+效果预览">
+<meta property="og:image" content="https://i.loli.net/2017/08/13/598fe5fc69801.png">
+<meta property="og:updated_time" content="2017-08-13T06:57:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Android — 有道翻译前言利用有道提供的API，写一个自动识别语言的翻译软件。支持汉译英，英译汉，小语种，短语句子等。实现也很简单，简单来说就是拼接URL然后请求网络返回接收数据后解析到UI中。
+效果预览">
+<meta name="twitter:image" content="https://i.loli.net/2017/08/13/598fe5fc69801.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,216 +150,109 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-Android --- 有道翻译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-有道翻译"><a href="#Android-—-有道翻译" class="headerlink" title="Android — 有道翻译"></a>Android — 有道翻译</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>利用有道提供的API，写一个自动识别语言的翻译软件。支持汉译英，英译汉，小语种，短语句子等。实现也很简单，简单来说就是拼接URL然后请求网络返回接收数据后解析到UI中。</p>
+<h4 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h4><p><img src="https://i.loli.net/2017/08/13/598fe5fc69801.png" alt=""></p>
+<a id="more"></a>
+<h4 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h4><ol>
+<li>阅读官方API文档：<a href="http://ai.youdao.com/docs/api.s" target="_blank" rel="external">http://ai.youdao.com/docs/api.s</a> 可以看到拼接URL需要sign(签名)，这里通过md5(appKey+q+salt+密钥)生成，所以要写一个方法生成MD5，传入我们拼接好的字符串就好了。即：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">private String getMD5Str(String str) &#123;</div><div class="line">    MessageDigest messageDigest = null;</div><div class="line"></div><div class="line">    try &#123;</div><div class="line">        messageDigest = MessageDigest.getInstance(&quot;MD5&quot;);</div><div class="line"></div><div class="line">        messageDigest.reset();</div><div class="line"></div><div class="line">        messageDigest.update(str.getBytes(&quot;UTF-8&quot;));</div><div class="line">    &#125; catch (NoSuchAlgorithmException e) &#123;</div><div class="line">        System.out.println(&quot;NoSuchAlgorithmException caught!&quot;);</div><div class="line">        System.exit(-1);</div><div class="line">    &#125; catch (UnsupportedEncodingException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    byte[] byteArray = messageDigest.digest();</div><div class="line"></div><div class="line">    StringBuffer md5StrBuff = new StringBuffer();</div><div class="line"></div><div class="line">    for (int i = 0; i &lt; byteArray.length; i++) &#123;</div><div class="line">        if (Integer.toHexString(0xFF &amp; byteArray[i]).length() == 1)</div><div class="line">            md5StrBuff.append(&quot;0&quot;).append(Integer.toHexString(0xFF &amp; byteArray[i]));</div><div class="line">        else</div><div class="line">            md5StrBuff.append(Integer.toHexString(0xFF &amp; byteArray[i]));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //16位加密取32位加密的第9位到25位</div><div class="line">    return md5StrBuff.toString().toUpperCase();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>拼接好URL之后写异步类来处理网络请求，即MyAsync类，返回的结果传到jieXi.class用来解析json数据，再在异步类回调方法onPostExecute()更新UI就完事了。</li>
+</ol>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p><a href="https://github.com/Omooo/YouDaoTrans" target="_blank" rel="external">https://github.com/Omooo/YouDaoTrans</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/09/Android --- 有道翻译/" class="archive-article-date">
+  	<time datetime="2017-09-09T03:21:35.860Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/09/10/Android --- Activity详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-  
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="史上最浅显易懂的-Git-教程"><a href="#史上最浅显易懂的-Git-教程" class="headerlink" title="史上最浅显易懂的 Git 教程"></a>史上最浅显易懂的 Git 教程</h2><p><strong>写在前面</strong></p>
-<p>讲道理，这次不是标题党。没错，就是这么猖狂。我为什么敢这么说？看完就懂了，彩蛋在文末。</p>
-<h4 id="Git-简介"><a href="#Git-简介" class="headerlink" title="Git 简介"></a>Git 简介</h4><p>Git 是目前世界最先进的分布式版本控制系统（没有之一）。那什么是版本控制？简单来说就是能记录文件的每次改动。那为什么有分布式一说？这里就要先说集中式版本控制系统了。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/git/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/git/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.198Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="使用Docker打造自己的渗透测试容器之—理论篇"><a href="#使用Docker打造自己的渗透测试容器之—理论篇" class="headerlink" title="使用Docker打造自己的渗透测试容器之—理论篇"></a>使用Docker打造自己的渗透测试容器之—理论篇</h2><p><strong>00x0 Docker简介</strong></p>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。几乎没有性能开销，可以很容易地在机器和数据中心中运行。最重要的是，他们不依赖任何语言、框架，甚至操作系统。</p>
-<p><img src="http://i4.buimg.com/588926/2bf24bbe9e78cff3.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/Docker/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Docker/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Crazy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          (no title)
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/14/Crazy/">Crazy</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Don’t understand how Hexo think, HTML is not quite good? Why I write in Markdown? I have a horse of wheat should know about.</p>
-<p>– S</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Crazy/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.188Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-C#验证码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="C-实现验证码"><a href="#C-实现验证码" class="headerlink" title="C# 实现验证码"></a>C# 实现验证码</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本文用C#实现从最初的数字验证码到图文验证码再到汉字验证码。搞那些花里花俏的已经不适合我了，潜心学习。</p>
-<p><img src="https://ooo.0o0.ooo/2017/06/12/593e6982a77a3.gif" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/C#验证码/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/C#验证码/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.184Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Apache Tomcat样例目录session操纵漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Apache-Tomcat-样例目录-Session-操纵漏洞"><a href="#Apache-Tomcat-样例目录-Session-操纵漏洞" class="headerlink" title="Apache Tomcat 样例目录 Session 操纵漏洞"></a>Apache Tomcat 样例目录 Session 操纵漏洞</h2><h4 id="0X00"><a href="#0X00" class="headerlink" title="0X00"></a>0X00</h4><p>Apache Tomcat 默认安装包含“/examples” 目录，里面存在很多样例，其中 Session 样例允许用户对 Session 进行操纵，因为 Session 是全局通的，所以用户可以通过操纵 Session 获取管理员权限。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/Apache Tomcat样例目录session操纵漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.178Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+      </div>
+    </a>
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
-    </nav>
+    <a href="/2017/07/14/长密码拒绝服务攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 有道翻译" data-title="" data-url="http://yoursite.com/2017/09/09/Android --- 有道翻译/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -372,8 +274,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
