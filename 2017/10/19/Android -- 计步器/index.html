@@ -8,28 +8,25 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android – 计步器
-前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
+  <meta name="description" content="Android – 计步器的实现前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
 原文链接：http://www.jianshu.com/p/cfc2a200e46d
 两种计步方式
-加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步数；">
+加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/2017/10/19/计步器/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/Android -- 计步器/index.html">
 <meta property="og:site_name" content="沐小晨曦">
-<meta property="og:description" content="Android – 计步器
-前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
+<meta property="og:description" content="Android – 计步器的实现前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
 原文链接：http://www.jianshu.com/p/cfc2a200e46d
 两种计步方式
-加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步数；">
-<meta property="og:updated_time" content="2017-10-19T02:46:45.805Z">
+加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步">
+<meta property="og:updated_time" content="2017-10-19T02:52:05.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
-<meta name="twitter:description" content="Android – 计步器
-前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
+<meta name="twitter:description" content="Android – 计步器的实现前言之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。
 原文链接：http://www.jianshu.com/p/cfc2a200e46d
 两种计步方式
-加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步数；">
+加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -157,7 +154,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-计步器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android -- 计步器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -165,8 +162,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Android – 计步器</p>
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。</p>
+        <hr>
+<h2 id="Android-–-计步器的实现"><a href="#Android-–-计步器的实现" class="headerlink" title="Android – 计步器的实现"></a>Android – 计步器的实现</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。</p>
 <p>原文链接：<a href="http://www.jianshu.com/p/cfc2a200e46d" target="_blank" rel="external">http://www.jianshu.com/p/cfc2a200e46d</a></p>
 <h4 id="两种计步方式"><a href="#两种计步方式" class="headerlink" title="两种计步方式"></a>两种计步方式</h4><ol>
 <li><p>加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步数；</p>
@@ -184,7 +181,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/10/19/计步器/" class="archive-article-date">
+      <a href="/2017/10/19/Android -- 计步器/" class="archive-article-date">
   	<time datetime="2017-10-19T02:47:09.228Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-19</time>
 </a>
       
@@ -234,7 +231,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="计步器" data-title="" data-url="http://yoursite.com/2017/10/19/计步器/"></div>
+	<div class="ds-thread" data-thread-key="Android -- 计步器" data-title="" data-url="http://yoursite.com/2017/10/19/Android -- 计步器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
