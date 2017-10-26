@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android – 6.0 动态权限前言很早就知道Android 6.0新功能动态权限申请，但是一直没接触过，因为特殊权限也没怎么用过。但是最近看到好多文章阐述，一时技痒，就搞搞看。做过之后才知道，掌握这个知识点还是很有必要的，因为在Android 6.0 以上的设备上，一些特殊权限必须是在运行时动态赋予给用户的。如果直接Intent跳转的话，应用直接Crash了。
+申请步骤
+targetSdk">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/2017/page/11/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/26/Android -- 动态权限/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Android – 6.0 动态权限前言很早就知道Android 6.0新功能动态权限申请，但是一直没接触过，因为特殊权限也没怎么用过。但是最近看到好多文章阐述，一时技痒，就搞搞看。做过之后才知道，掌握这个知识点还是很有必要的，因为在Android 6.0 以上的设备上，一些特殊权限必须是在运行时动态赋予给用户的。如果直接Intent跳转的话，应用直接Crash了。
+申请步骤
+targetSdk">
+<meta property="og:updated_time" content="2017-10-26T06:18:55.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Android – 6.0 动态权限前言很早就知道Android 6.0新功能动态权限申请，但是一直没接触过，因为特殊权限也没怎么用过。但是最近看到好多文章阐述，一时技痒，就搞搞看。做过之后才知道，掌握这个知识点还是很有必要的，因为在Android 6.0 以上的设备上，一些特殊权限必须是在运行时动态赋予给用户的。如果直接Intent跳转的话，应用直接Crash了。
+申请步骤
+targetSdk">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,89 +151,109 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android -- 动态权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-–-6-0-动态权限"><a href="#Android-–-6-0-动态权限" class="headerlink" title="Android – 6.0 动态权限"></a>Android – 6.0 动态权限</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>很早就知道Android 6.0新功能动态权限申请，但是一直没接触过，因为特殊权限也没怎么用过。但是最近看到好多文章阐述，一时技痒，就搞搞看。做过之后才知道，掌握这个知识点还是很有必要的，因为在Android 6.0 以上的设备上，一些特殊权限必须是在运行时动态赋予给用户的。如果直接Intent跳转的话，应用直接Crash了。</p>
+<h4 id="申请步骤"><a href="#申请步骤" class="headerlink" title="申请步骤"></a>申请步骤</h4><ul>
+<li>targetSdkVersion &gt;= 32</li>
+<li>AndroidManifest.xml中申请需要的权限，包括普通权限和特殊权限</li>
+<li>开始动态申请权限 </li>
+</ul>
+<p>​        （1）：检查是否有此权限 ContextCompat.checkSelfPermission()，返回整形，和PackageManager.PERMISSION_GRANTED对比，相等则说明有此权限，如果有此权限，完全OK</p>
+<p>​    （2）：没有此权限，则判断是否需要向用户解释为何申请权限 shouldShowRequestPermissionRationale() ，然后通过ActivityCompat.requestPermissions()方法申请权限，该方法有三个参数，即当前Activity，要申请的权限(字符串数组)，requestCode。这样就可以知道一次可以申请多个权限，而requestCode就是用来在第三部回调的时候判断是谁申请了权限。</p>
+<p>​    （3）：在当前Activity中的onRequestPermissionsResult()方法中处理用户是否授予了此权限。</p>
+<h4 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h4><ol>
+<li>在小米5上测试的时候，发现当用户拒绝了权限，之后在点击就不会在弹出提示框，而在原生的Android系统中，拒绝一次之后再次点击，第二次弹出申请权限的对话框中会出现”以后不再弹出“的复选框。参考网上一个比较好的做法是，在再次点击的时候打开当前应用的信息界面，让用户可以手动来赋予权限。代码如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);</div><div class="line">String pkg = &quot;com.android.settings&quot;;</div><div class="line">String cls = &quot;com.android.settings.applications.InstalledAppDetails&quot;;</div><div class="line">intent.setComponent(new ComponentName(pkg, cls));</div><div class="line">intent.setData(Uri.parse(&quot;package:&quot; + getPackageName()));</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+<ol>
+<li>测试了两个权限，一个是打开相册权限，一个是拨打电话权限，在点击提示框赋予权限之后，可以直接跳转的系统相册界面，但是在赋予通话权限之后，还需要再次点击才能进去通话界面，主要是通电话的Intent不能写入到onRequestPermissionsResult()方法中，提示“  Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with checkPermission) or explicitly handle a potential SecurityException “，这不是开玩笑吗？留个坑吧，待解决。</li>
+</ol>
+<h4 id="Demo-地址："><a href="#Demo-地址：" class="headerlink" title="Demo 地址："></a>Demo 地址：</h4><p><a href="https://github.com/Omooo/DynPermissionsDemo" target="_blank" rel="external">https://github.com/Omooo/DynPermissionsDemo</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1110/3670.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1110/3670.html</a></p>
+<p><a href="http://www.jianshu.com/p/a51593817825" target="_blank" rel="external">http://www.jianshu.com/p/a51593817825</a></p>
+<p><a href="http://www.cnblogs.com/dubo-/p/6018262.html" target="_blank" rel="external">http://www.cnblogs.com/dubo-/p/6018262.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/10/26/Android -- 动态权限/" class="archive-article-date">
+  	<time datetime="2017-10-26T06:19:42.294Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-26</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/C#验证码/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.184Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Apache Tomcat样例目录session操纵漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.178Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/80端口被占用/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.173Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/24/1024/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/10/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/9/">9</a><a class="page-number" href="/archives/2017/page/10/">10</a><span class="page-number current">11</span>
-    </nav>
-  
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android -- 动态权限" data-title="" data-url="http://yoursite.com/2017/10/26/Android -- 动态权限/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -246,8 +276,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
