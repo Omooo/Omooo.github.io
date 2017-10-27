@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android – 内存泄漏前言又是一个经常听到的概念，又是一时忍不住想去了解它。内存泄露，即部分对象虽然已经不在使用，但是因为有root持有引用，所以并没有销毁，所占用的内存一直没有被释放。简单的来说就是程序在向系统申请分配内存空间后，在使用完毕后未释放，结果导致一直占据该内存单元。一两次发生影响不大，如果频繁发生，那么可用内存会逐渐不足，最终在某一次请求内存的时候发现内存不足而OOM（内存溢">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/page/10/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/28/Android -- 内存泄露/index.html">
 <meta property="og:site_name" content="沐小晨曦">
+<meta property="og:description" content="Android – 内存泄漏前言又是一个经常听到的概念，又是一时忍不住想去了解它。内存泄露，即部分对象虽然已经不在使用，但是因为有root持有引用，所以并没有销毁，所占用的内存一直没有被释放。简单的来说就是程序在向系统申请分配内存空间后，在使用完毕后未释放，结果导致一直占据该内存单元。一两次发生影响不大，如果频繁发生，那么可用内存会逐渐不足，最终在某一次请求内存的时候发现内存不足而OOM（内存溢">
+<meta property="og:image" content="https://i.loli.net/2017/10/26/59f1d77b70856.jpg">
+<meta property="og:updated_time" content="2017-10-26T14:57:50.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
+<meta name="twitter:description" content="Android – 内存泄漏前言又是一个经常听到的概念，又是一时忍不住想去了解它。内存泄露，即部分对象虽然已经不在使用，但是因为有root持有引用，所以并没有销毁，所占用的内存一直没有被释放。简单的来说就是程序在向系统申请分配内存空间后，在使用完毕后未释放，结果导致一直占据该内存单元。一两次发生影响不大，如果频繁发生，那么可用内存会逐渐不足，最终在某一次请求内存的时候发现内存不足而OOM（内存溢">
+<meta name="twitter:image" content="https://i.loli.net/2017/10/26/59f1d77b70856.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦" type="application/atom+xml">
   
@@ -141,131 +147,120 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android -- 内存泄露" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-–-内存泄漏"><a href="#Android-–-内存泄漏" class="headerlink" title="Android – 内存泄漏"></a>Android – 内存泄漏</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>又是一个经常听到的概念，又是一时忍不住想去了解它。内存泄露，即部分对象虽然已经不在使用，但是因为有root持有引用，所以并没有销毁，所占用的内存一直没有被释放。简单的来说就是<strong>程序在向系统申请分配内存空间后，在使用完毕后未释放</strong>，结果导致一直占据该内存单元。一两次发生影响不大，如果频繁发生，那么可用内存会逐渐不足，最终在某一次请求内存的时候发现内存不足而OOM（内存溢出：程序向系统申请的内存空间超出了系统能给的）。这里要明确一个概念，只有强引用会发生内存泄露，而弱引用因为其特殊机制，所以影响不大。（什么是强弱引用？？？我也不知道耶，QAQ 逃！先Mark下！下面会讲到。</p>
+<p><img src="https://i.loli.net/2017/10/26/59f1d77b70856.jpg" alt=""></p>
+<a id="more"></a>
+<h4 id="Java-垃圾回收机制"><a href="#Java-垃圾回收机制" class="headerlink" title="Java 垃圾回收机制"></a>Java 垃圾回收机制</h4><p>这又是一个值得深入理解的一个概念，引用他人的见解，文末会给出引用链接。在大部分虚拟机（包括Android的ART）中，Java都采用了“可达性分析”算法来进行内存回收，原理是：会有几个引用作为root节点，对于任意对象来说，如果从root层层遍历，如果找不到对于他的引用链，那么这个对象就被标记为无用，就会在GC时被销毁。<strong>垃圾回收用于释放不可达的对象所占据的内存。</strong></p>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>JAVA是在JVM所虚拟出的内存环境中运行的，JVM的内存可以分为三个区：堆（heap），栈（stack）和方法区（method）。</p>
+<ul>
+<li>栈：先进后出</li>
+<li>堆：堆内存用来存放有new创建的对象和数组</li>
+<li>方法区：又叫静态区，包含所有的class和static变量</li>
+</ul>
+<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><ol>
+<li>强引用（Strong reference）</li>
+</ol>
+<p>最常见的一种引用类型，常见形式如：A a = new A(); 。强引用本身存储在栈内存中，其存储指向对内存中对象的地址。一般情况下，当对内存中的对象不再有任何强引用指向它时，垃圾回收机器开始考虑可能要对此内存进行垃圾回收。如当进行a=null，此时，刚刚在堆中分配地址并新建的a对象没有其他的任何引用，当系统进行辣鸡回收时，堆内存将会被垃圾回收。</p>
+<ol>
+<li>软引用（Soft reference）</li>
+</ol>
+<p>软引用所指示的对象进行垃圾回收需要满足以下两个条件：</p>
+<p>（1）：当前指示的对象没有任何强引用指向它；</p>
+<p>（2）：虚拟机内存不足</p>
+<ol>
+<li>弱引用（Weak reference）</li>
+</ol>
+<p>软引用不改变原有强引用对象的垃圾回收时机，一旦其指示对象没有任何强引用对象时，此对象即进入正常的垃圾回收流程。</p>
+<ol>
+<li>虚引用（Phantom reference）</li>
+</ol>
+<p>虚引用只有一个构造函数，不管有无强引用指向虚引用的指示对象，虚引用的get()方法返回结果都是null，虚引用并不会改变其指示对象的垃圾回收时机。</p>
+<h4 id="内存泄露原因"><a href="#内存泄露原因" class="headerlink" title="内存泄露原因"></a>内存泄露原因</h4><p>如果持有对象的强引用，垃圾回收是无法在内存中回收这个对象，对象无法被GC回收就是造成内存泄露的原因。</p>
+<h4 id="引用至："><a href="#引用至：" class="headerlink" title="引用至："></a>引用至：</h4><p><a href="http://www.jianshu.com/p/bf159a9c391a" target="_blank" rel="external">http://www.jianshu.com/p/bf159a9c391a</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&amp;mid=2649550576&amp;idx=1&amp;sn=33a865164d795aa02b4230777a94a701&amp;chksm=f118058dc66f8c9bf5b360316f32b80d90b4df7d1446952f0976800e7304849ec4e7ca8bbaf9&amp;mpshare=1&amp;scene=24&amp;srcid=1023HeR5CoUlZvcUoEKaniFp#rd" target="_blank" rel="external">一文搞懂为啥你的应用内存泄漏？</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/10/28/Android -- 内存泄露/" class="archive-article-date">
+  	<time datetime="2017-10-27T23:52:13.607Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-28</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/php+mysql/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.225Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Markdown/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.219Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/27/Android -- 非UI线程更新UI？？？/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/9/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/archives/page/11/">11</a><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/11/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android -- 内存泄露" data-title="" data-url="http://yoursite.com/2017/10/28/Android -- 内存泄露/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +283,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

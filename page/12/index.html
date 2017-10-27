@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦</title>
+  <title>沐小晨曦</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="沐小晨曦">
-<meta property="og:url" content="http://yoursite.com/archives/page/10/index.html">
+<meta property="og:url" content="http://yoursite.com/page/12/index.html">
 <meta property="og:site_name" content="沐小晨曦">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦">
@@ -143,127 +143,53 @@
       <div class="body-wrap">
         
   
-  
+    <article id="post-80端口被占用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="解决80端口被占用的尴尬处境"><a href="#解决80端口被占用的尴尬处境" class="headerlink" title="解决80端口被占用的尴尬处境"></a>解决80端口被占用的尴尬处境</h2><ol>
+<li><p>首先打开cmd输入命令netstat-ano查看80端口被占用情况，如果PID为4，这说明是hhtp服务占用了80端口，这时候输入命令net stop http服务。也可以输入taskkill / pid 4 /f或者ntsd -c q -p 4。如果是其他进程，查看PID之后在任务管理器里结束该进程。</p>
+</li>
+<li><p>打开注册表把start值改为零之后重启。（来自网上的办法，亲测没效，自己也可以试试）</p>
+</li>
+<li><p>如果你装了SQL，或许是SQL serve的某些进程占用了，这时候可以在计算机管理里面打开服务结束SQL Serve Reporting Services，或者在cmd中net stop ReportServe。</p>
+<p>​</p>
+</li>
+</ol>
+<h5 id="最后建议自己好好看看-Http-Serve-API"><a href="#最后建议自己好好看看-Http-Serve-API" class="headerlink" title="最后建议自己好好看看 Http Serve API "></a>最后建议自己好好看看 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364510" target="_blank" rel="external">Http Serve API </a></h5>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/14/80端口被占用/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.173Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/php+mysql/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.225Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Markdown/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.219Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
+  
+  
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/9/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/archives/page/11/">11</a><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/11/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span>
     </nav>
   
 
@@ -287,9 +213,9 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
