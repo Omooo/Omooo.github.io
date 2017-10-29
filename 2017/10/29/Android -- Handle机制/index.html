@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android – Handle消息传递机制前言Android为了线程安全，并不会允许我们在UI线程外操作UI，很多时候我们做界面刷新都需要通过Handle来通知UI更新。当我们的子线程想修改Activity中的UI组件，我们可以新建一个Handle对象，通过这个对象向主线程发送消息。而我们发送的消息会先到主线程的MessageQueue进行等待，由Looper按先入先出的顺序取出，再根据Mes">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/page/11/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/Android -- Handle机制/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android – Handle消息传递机制前言Android为了线程安全，并不会允许我们在UI线程外操作UI，很多时候我们做界面刷新都需要通过Handle来通知UI更新。当我们的子线程想修改Activity中的UI组件，我们可以新建一个Handle对象，通过这个对象向主线程发送消息。而我们发送的消息会先到主线程的MessageQueue进行等待，由Looper按先入先出的顺序取出，再根据Mes">
+<meta property="og:updated_time" content="2017-10-29T01:45:35.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android – Handle消息传递机制前言Android为了线程安全，并不会允许我们在UI线程外操作UI，很多时候我们做界面刷新都需要通过Handle来通知UI更新。当我们的子线程想修改Activity中的UI组件，我们可以新建一个Handle对象，通过这个对象向主线程发送消息。而我们发送的消息会先到主线程的MessageQueue进行等待，由Looper按先入先出的顺序取出，再根据Mes">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,137 +145,111 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android -- Handle机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-–-Handle消息传递机制"><a href="#Android-–-Handle消息传递机制" class="headerlink" title="Android – Handle消息传递机制"></a>Android – Handle消息传递机制</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Android为了线程安全，并不会允许我们在UI线程外操作UI，很多时候我们做界面刷新都需要通过Handle来通知UI更新。当我们的子线程想修改Activity中的UI组件，我们可以新建一个Handle对象，通过这个对象向主线程发送消息。而我们发送的消息会先到主线程的MessageQueue进行等待，由Looper按先入先出的顺序取出，再根据Message对象的what属性进行分发给对应的Handle进行处理。</p>
+<h4 id="Handle怎么用？"><a href="#Handle怎么用？" class="headerlink" title="Handle怎么用？"></a>Handle怎么用？</h4><ol>
+<li>post(Runnable)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mHandler.post(new Runnable() &#123;</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">        mTextViewResult.setText(&quot;执行Handle的post方法成功&quot;);</div><div class="line">        &#125;</div><div class="line">     &#125;);</div></pre></td></tr></table></figure>
+<ol>
+<li>postDelayed(Runnable,long)</li>
+</ol>
+<p>这里我们可以写一个类继承至Runnable，重写run方法，在里面处理UI更新，然后在主线程调用。</p>
+<ol>
+<li>sendMessage()</li>
+</ol>
+<p>子线程sendMessage()传入一个Message对象，可以是int型，也可以为一个object对象，然后在主线程handleMessage(Message msg)里取出信息更新UI。</p>
+<ol>
+<li>sendMessageDelayed()</li>
+</ol>
+<p>和上面大同小异。</p>
+<p>Demo：<a href="https://github.com/Omooo/HandleDemo" target="_blank" rel="external">https://github.com/Omooo/HandleDemo</a></p>
+<p>四个按钮点击事件对应Handle的四种方法，也很简单清晰。</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="http://www.imooc.com/learn/267" target="_blank" rel="external">Android面试常客Handler详解</a></p>
+<p><a href="http://www.cnblogs.com/xirihanlin/archive/2011/04/11/2012746.html" target="_blank" rel="external">Android中的Handler, Looper, MessageQueue和Thread</a></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>因为是看慕课网的课程来了解的Handle，学的并不深入。关于Looper还有MessageQueue的道理都懂，但是实际上我还没用到，我太菜了，深入之后再更新，留个坑吧。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/10/29/Android -- Handle机制/" class="archive-article-date">
+  	<time datetime="2017-10-29T01:45:58.188Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-29</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/git/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.198Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/28/对不起，RNG/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Docker/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Crazy/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.188Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/Crazy/">Crazy</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/10/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/9/">9</a><a class="page-number" href="/archives/2017/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/archives/2017/page/12/">12</a><a class="extend next" rel="next" href="/archives/2017/page/12/">Next &raquo;</a>
-    </nav>
-  
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android -- Handle机制" data-title="" data-url="http://yoursite.com/2017/10/29/Android -- Handle机制/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -294,8 +272,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
