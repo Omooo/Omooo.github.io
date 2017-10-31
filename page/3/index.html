@@ -143,6 +143,54 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android -- 计步器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-–-计步器的实现"><a href="#Android-–-计步器的实现" class="headerlink" title="Android – 计步器的实现"></a>Android – 计步器的实现</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前对微信的计步器一直很感兴趣，当时并不知道怎么实现，今天看到简书上的一篇文章，实现了和微信计步几乎一致的效果，以此记录，并了解一下实现原理。</p>
+<p>原文链接：<a href="http://www.jianshu.com/p/cfc2a200e46d" target="_blank" rel="external">http://www.jianshu.com/p/cfc2a200e46d</a></p>
+<h4 id="两种计步方式"><a href="#两种计步方式" class="headerlink" title="两种计步方式"></a>两种计步方式</h4><ol>
+<li><p>加速度传感器 Sensor.TYPE_ACCELEROME 计步方式：这种方式是有开源的算法根据加速度传感器进行计算步数；</p>
+<p>优点：只要有加速度传感器的设备都可以使用，相对来说可以使用的设备较多。</p>
+<p>缺点：步数的准确性取决于算法且算法比较难优化；需要后台保活 Service 否则不能计步；计步算法比较耗电；部分手机锁屏不能计步；</p>
+</li>
+<li><p>计步传感器 Sensor.TYPE_STEP_COUNTER 计步方式：这种传感器是返回手机系统启动到当前时间的所有步数。手机系统重启传感器返回步数为0。还返回一个时间戳，表示最后一次步数的时间。这个计步传感器是一个硬件，功耗非常低。如果你想记录步数，注册该传感器不要注销，他能自动在后台计步，在app唤醒的时候返回计步总数。应用程序需要注册该传感器，否则不能不能记步。</p>
+<p>优点：硬件计步准确性高；功耗小；只要注册不用后台 Service 自动计步；</p>
+<p>缺点：Android4.4系统以上的部分手机；手机系统重启计步器清零；不能返回步数明细（步数对应时间），只是返回当前时间的总步数。</p>
+</li>
+</ol>
+<h4 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h4><p>Github 地址：<a href="https://github.com/jiahongfei/TodayStepCounter" target="_blank" rel="external">https://github.com/jiahongfei/TodayStepCounter</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/10/19/Android -- 计步器/" class="archive-article-date">
+  	<time datetime="2017-10-19T02:47:09.228Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-香格里拉" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -322,51 +370,9 @@
 
 
   
-    <article id="post-什么样的人比较可怕" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="什么样的人很可怕？"><a href="#什么样的人很可怕？" class="headerlink" title="什么样的人很可怕？"></a>什么样的人很可怕？</h2><p>今天下雨了。</p>
-<p>什么样的人很可怕呢？嗯，我可能会想到，哇，这个人智商高的可怕。但是，曾经在知乎上看到一个回答，说的是有<strong>勇气</strong>有<strong>毅力</strong>的人很可怕，冷静分析，好像的确是这样。</p>
-<p>如果努力坚持做一件事，你觉得你的胜算是多少呢？你肯定会说，嗯，肯定会成功啦。那么问题来了，你明明知道会是很好的结果，为什么不选择去尝试坚持呢？</p>
-<p>我，，，我，坚持不住。是的，很多时候，我们做事都会半途而废，更可怜的是那些还不敢于尝试的人。</p>
-<p>快要毕业了，是不是应该约束一下自己了呢？把计划都刻在脑海里，不要轻易说出来。</p>
-<p>本来要去跑步的，于是有了这篇博客。</p>
-<p>感觉以后也会很少写博客了，欢迎关注我的Github。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/09/20/什么样的人比较可怕/" class="archive-article-date">
-  	<time datetime="2017-09-20T11:01:07.891Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-20</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
