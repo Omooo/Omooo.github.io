@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — TextInputLayout前言最近看到一个蛮实用的 “效果” ，一图胜前言：（刷新页面重新看）
+
+我以为作者写的呢，今天无意试了一下Android Studio 内置登录页面，运行一看，哇，效果一模一样，最后发现是 Android 特喵的有这么一个控件。。。控件。。。可能是我过于挑剔吧，看着还是有点丑陋，只是一个 hint 上移的动画感觉很一般。深入了解一下，emmmm，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2017/11/09/Android -- TextInputLayout/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — TextInputLayout前言最近看到一个蛮实用的 “效果” ，一图胜前言：（刷新页面重新看）
+
+我以为作者写的呢，今天无意试了一下Android Studio 内置登录页面，运行一看，哇，效果一模一样，最后发现是 Android 特喵的有这么一个控件。。。控件。。。可能是我过于挑剔吧，看着还是有点丑陋，只是一个 hint 上移的动画感觉很一般。深入了解一下，emmmm，">
+<meta property="og:image" content="https://i.loli.net/2017/11/08/5a03180cb9777.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/09/5a04571d3d5ea.gif">
+<meta property="og:updated_time" content="2017-11-09T13:48:30.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — TextInputLayout前言最近看到一个蛮实用的 “效果” ，一图胜前言：（刷新页面重新看）
+
+我以为作者写的呢，今天无意试了一下Android Studio 内置登录页面，运行一看，哇，效果一模一样，最后发现是 Android 特喵的有这么一个控件。。。控件。。。可能是我过于挑剔吧，看着还是有点丑陋，只是一个 hint 上移的动画感觉很一般。深入了解一下，emmmm，">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/08/5a03180cb9777.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android -- TextInputLayout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-TextInputLayout"><a href="#Android-—-TextInputLayout" class="headerlink" title="Android — TextInputLayout"></a>Android — TextInputLayout</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近看到一个蛮实用的 “效果” ，一图胜前言：（刷新页面重新看）</p>
+<p><img src="https://i.loli.net/2017/11/08/5a03180cb9777.gif" alt=""></p>
+<p>我以为作者写的呢，今天无意试了一下Android Studio 内置登录页面，运行一看，哇，效果一模一样，最后发现是 Android 特喵的有这么一个控件。。。控件。。。可能是我过于挑剔吧，看着还是有点丑陋，只是一个 hint 上移的动画感觉很一般。深入了解一下，emmmm，发现这个控件不简单，可以做到一下几点：</p>
+<ol>
+<li>自定义样式，拒绝原本简单丑陋的动画</li>
+<li>实时错误检查，并自定义错误提示</li>
+</ol>
+<p>实现效果如下：</p>
+<p><img src="https://i.loli.net/2017/11/09/5a04571d3d5ea.gif" alt=""></p>
+<p>当有错误的时候，把 Button 设置为不可点击。感觉效果不错，实用性也很强。那么，下面就记录记录一下这个控件的使用。</p>
+<a id="more"></a>
+<h4 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h4><p>添加依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">implementation <span class="string">'com.android.support:design:26.1.0'</span></div></pre></td></tr></table></figure>
+<p>介绍这个控件的几个属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:errorEnabled=<span class="string">"true"</span> <span class="comment">//开启错误提示</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:counterEnabled=<span class="string">"true"</span> <span class="comment">//开启计数</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:counterTextAppearance=<span class="string">"@style/CounterText"</span> <span class="comment">//为计数字体设置样式</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:counterOverflowTextAppearance=<span class="string">"@style/CounterTextError"</span> <span class="comment">//当数字超出时的字体样式</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:counterMaxLength=<span class="string">"8"</span> <span class="comment">//设置最大长度</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:hintTextAppearance=<span class="string">"@style/InputHint"</span> <span class="comment">//设置 hint 文本的样式</span></div></pre></td></tr></table></figure>
+<h4 id="布局："><a href="#布局：" class="headerlink" title="布局："></a>布局：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">    <span class="attr">tools:context</span>=<span class="string">"top.omooo.testlogin.MainActivity"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.TextInputLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/inputLayoutUsername"</span></div><div class="line">        <span class="attr">app:errorEnabled</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">app:counterEnabled</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">app:counterTextAppearance</span>=<span class="string">"@style/CounterText"</span></div><div class="line">        <span class="attr">app:counterOverflowTextAppearance</span>=<span class="string">"@style/CounterTextError"</span></div><div class="line">        <span class="attr">app:counterMaxLength</span>=<span class="string">"8"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"8dp"</span></div><div class="line">        <span class="attr">app:hintTextAppearance</span>=<span class="string">"@style/InputHint"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">EditText</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/et_username"</span></div><div class="line">            <span class="attr">android:hint</span>=<span class="string">"用户名"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"@color/inputHint"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.TextInputLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.TextInputLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/inputLayoutPassword"</span></div><div class="line">        <span class="attr">app:errorEnabled</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">app:counterEnabled</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">app:counterTextAppearance</span>=<span class="string">"@style/CounterText"</span></div><div class="line">        <span class="attr">app:counterOverflowTextAppearance</span>=<span class="string">"@style/CounterTextError"</span></div><div class="line">        <span class="attr">app:counterMaxLength</span>=<span class="string">"16"</span></div><div class="line">        <span class="attr">app:hintTextAppearance</span>=<span class="string">"@style/InputHint"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">EditText</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/et_password"</span></div><div class="line">            <span class="attr">android:hint</span>=<span class="string">"密码"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"@color/inputHint"</span></div><div class="line">            <span class="attr">android:inputType</span>=<span class="string">"textPassword"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.TextInputLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/btn_login"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"登录"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"20sp"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>样式：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"InputHint"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#0099CC<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textSize"</span>&gt;</span>15sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"CounterText"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#0099CC<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textSize"</span>&gt;</span>15sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"CounterTextError"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#FF6666<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textSize"</span>&gt;</span>20sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>用到的颜色值：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">"inputHint"</span>&gt;</span>#0099CC<span class="tag">&lt;/<span class="name">color</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="处理错误信息"><a href="#处理错误信息" class="headerlink" title="处理错误信息"></a>处理错误信息</h4><p>这里需要监听 EditText 的文本变化，所以需要实现 TextWatcher 的接口，重写三个方法。对了，这里说明一下，TextInputLayout 实际上是一个容器，里面只能放一个 EditText 控件。如果我们要获取这个 EditText 的实例并设置监听的话，其实很简单：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mInputLayout.getEditText().addTextChangedListener(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+<p>源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> top.omooo.testlogin;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.support.design.widget.TextInputLayout;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</div><div class="line"><span class="keyword">import</span> android.text.Editable;</div><div class="line"><span class="keyword">import</span> android.text.TextWatcher;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">TextWatcher</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> TextInputLayout mInputLayoutUsername;</div><div class="line">    <span class="keyword">private</span> TextInputLayout mInputLayoutPwd;</div><div class="line">    <span class="keyword">private</span> Button mButtonLogin;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</div><div class="line">        mInputLayoutUsername = findViewById(R.id.inputLayoutUsername);</div><div class="line">        mInputLayoutPwd = findViewById(R.id.inputLayoutPassword);</div><div class="line">        mButtonLogin = findViewById(R.id.btn_login);</div><div class="line">        mButtonLogin.setClickable(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">        <span class="comment">//开启监听</span></div><div class="line">        mInputLayoutUsername.getEditText().addTextChangedListener(<span class="keyword">this</span>);</div><div class="line">        mInputLayoutPwd.getEditText().addTextChangedListener(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeTextChanged</span><span class="params">(CharSequence charSequence, <span class="keyword">int</span> i, <span class="keyword">int</span> i1, <span class="keyword">int</span> i2)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTextChanged</span><span class="params">(CharSequence charSequence, <span class="keyword">int</span> i, <span class="keyword">int</span> i1, <span class="keyword">int</span> i2)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterTextChanged</span><span class="params">(Editable editable)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> hasErrorUsername;</div><div class="line">        <span class="keyword">boolean</span> hasErrorPwd;</div><div class="line">        <span class="keyword">int</span> counter = mInputLayoutUsername.getEditText().getText().toString().length();</div><div class="line">        <span class="keyword">if</span> (counter &lt; <span class="number">4</span>) &#123;</div><div class="line">            mInputLayoutUsername.setErrorEnabled(<span class="keyword">true</span>);</div><div class="line">            mInputLayoutUsername.setError(<span class="string">"用户名不能低于四位"</span>);</div><div class="line">            hasErrorUsername = <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (counter &gt; <span class="number">8</span>) &#123;</div><div class="line">            mInputLayoutUsername.setErrorEnabled(<span class="keyword">true</span>);</div><div class="line">            mInputLayoutUsername.setError(<span class="string">"用户名不能大于八位"</span>);</div><div class="line">            hasErrorUsername = <span class="keyword">true</span>;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            mInputLayoutUsername.setErrorEnabled(<span class="keyword">false</span>);</div><div class="line">            hasErrorUsername = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> counter1 = mInputLayoutPwd.getEditText().getText().toString().length();</div><div class="line">        <span class="keyword">if</span> (counter1 &lt; <span class="number">6</span>) &#123;</div><div class="line">            mInputLayoutPwd.setErrorEnabled(<span class="keyword">true</span>);</div><div class="line">            mInputLayoutPwd.setError(<span class="string">"密码不能低于六位"</span>);</div><div class="line">            hasErrorPwd = <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (counter1 &gt; <span class="number">16</span>) &#123;</div><div class="line">            mInputLayoutPwd.setErrorEnabled(<span class="keyword">true</span>);</div><div class="line">            mInputLayoutPwd.setError(<span class="string">"密码不能大于十六位"</span>);</div><div class="line">            hasErrorPwd = <span class="keyword">true</span>;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            mInputLayoutPwd.setErrorEnabled(<span class="keyword">false</span>);</div><div class="line">            hasErrorPwd = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (hasErrorPwd||hasErrorUsername) &#123;</div><div class="line">            mButtonLogin.setClickable(<span class="keyword">false</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            mButtonLogin.setClickable(<span class="keyword">true</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/09/Android -- TextInputLayout/" class="archive-article-date">
+  	<time datetime="2017-11-09T13:50:17.500Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/08/Java Web -- 初学Flag/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android -- TextInputLayout" data-title="" data-url="http://yoursite.com/2017/11/09/Android -- TextInputLayout/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
