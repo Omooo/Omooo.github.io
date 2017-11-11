@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — Fastjson前言最近看好多优秀项目中都集成了Fastjson，最开始并没在意。因为感觉Android系统自带的JSONObject解析还蛮简单呀，而且性能还可以。感觉唯一一点不好的就是数组嵌套数组的时候JSONObject和JSONArray相互转化会搞得我好乱。但是，那么多人用，那肯定有它的优点所在，又是BAT出品，绝对一试。看文档已经惊了，号称：
+
+目前 Java 语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/Android --- Fastjson/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — Fastjson前言最近看好多优秀项目中都集成了Fastjson，最开始并没在意。因为感觉Android系统自带的JSONObject解析还蛮简单呀，而且性能还可以。感觉唯一一点不好的就是数组嵌套数组的时候JSONObject和JSONArray相互转化会搞得我好乱。但是，那么多人用，那肯定有它的优点所在，又是BAT出品，绝对一试。看文档已经惊了，号称：
+
+目前 Java 语">
+<meta property="og:image" content="https://i.loli.net/2017/11/11/5a065af33a876.png">
+<meta property="og:updated_time" content="2017-11-11T02:18:06.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — Fastjson前言最近看好多优秀项目中都集成了Fastjson，最开始并没在意。因为感觉Android系统自带的JSONObject解析还蛮简单呀，而且性能还可以。感觉唯一一点不好的就是数组嵌套数组的时候JSONObject和JSONArray相互转化会搞得我好乱。但是，那么多人用，那肯定有它的优点所在，又是BAT出品，绝对一试。看文档已经惊了，号称：
+
+目前 Java 语">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/11/5a065af33a876.png">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://p1.bpimg.com/567571/eef62e94d2f3be42.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- Fastjson" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-Fastjson"><a href="#Android-—-Fastjson" class="headerlink" title="Android — Fastjson"></a>Android — Fastjson</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近看好多优秀项目中都集成了Fastjson，最开始并没在意。因为感觉Android系统自带的JSONObject解析还蛮简单呀，而且性能还可以。感觉唯一一点不好的就是数组嵌套数组的时候JSONObject和JSONArray相互转化会搞得我好乱。但是，那么多人用，那肯定有它的优点所在，又是BAT出品，绝对一试。看文档已经惊了，号称：</p>
+<blockquote>
+<p>目前 Java 语言中最快的 JSON 库</p>
+</blockquote>
+<p>就冲这句话，就一定要学了，就喜欢这种自信！官方文档介绍如下：</p>
+<blockquote>
+<p>Fastjson提供Android版本，和标准版本相比，Android版本去掉一些Android虚拟机dalvik不支持的功能，使得jar更小，同时针对dalvik做了很多性能优化，包括减少方法调用等。parse为JSONObject/JSONArray时比原生org.json速度快，序列化反序列化JavaBean性能比jackson/gson性能更好。</p>
+</blockquote>
+<p>但是很可惜，文档写的很一般。</p>
+<a id="more"></a>
+<h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>添加依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.alibaba:fastjson:1.1.65.android'</span></div></pre></td></tr></table></figure>
+<p>看 <a href="https://github.com/alibaba/fastjson/wiki/Samples-DataBind" target="_blank" rel="external">官方文档</a> ，里面给的例子是 JSON String 和 JavaBean 的相互转化。</p>
+<p>实践出真知，假如解析以下 JSON （<a href="http://fanyi.youdao.com/openapi.do?keyfrom=Skykai521&amp;key=977124034&amp;type=data&amp;doctype=json&amp;version=1.1&amp;q=test" target="_blank" rel="external">来自有道翻译 API</a>）：</p>
+<p><img src="https://i.loli.net/2017/11/11/5a065af33a876.png" alt=""></p>
+<p>解析翻译和释义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String jsonString = response.body().string();</div><div class="line">JSONObject object = JSON.parseObject(jsonString);</div><div class="line">JSONObject objectBasic = (JSONObject) object.get(<span class="string">"basic"</span>);</div><div class="line">JSONArray jsonArray = objectBasic.getJSONArray(<span class="string">"explains"</span>);</div><div class="line">JSONArray array = object.getJSONArray(<span class="string">"translation"</span>);</div><div class="line">String result = array.toJSONString() + jsonArray.toJSONString();</div></pre></td></tr></table></figure>
+<p>实际上和使用原生的 JSONObject / JSONArray 好像并没有什么区别，其实并不然。看官方文档，我们可得知，Fastjson 可以将 Json 数据转换为一个 JavaBean 对象。下面我们就用一个小例子来演示一下：</p>
+<p>首先创建 JavaBean:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class FastJsonGroup &#123;</div><div class="line">    private String query;</div><div class="line">    private long errorCodeQuery;</div><div class="line"></div><div class="line">    public String getQuery() &#123;</div><div class="line">        return query;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setQuery(String query) &#123;</div><div class="line">        this.query = query;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public long getErrorCodeQuery() &#123;</div><div class="line">        return errorCodeQuery;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setErrorCodeQuery(long errorCodeQuery) &#123;</div><div class="line">        this.errorCodeQuery = errorCodeQuery;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Json 数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">"query"</span>:<span class="string">"ill"</span>,<span class="string">"errorCode"</span>:<span class="number">0</span>&#125;</div></pre></td></tr></table></figure>
+<p>转换就很简单了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String test = <span class="string">"&#123;\"query\":\"ill\",\"errorCode\":0&#125;"</span>;</div><div class="line">                FastJsonGroup group = JSON.parseObject(test, FastJsonGroup.class);</div><div class="line">                System.out.println(<span class="string">"ErrorCode: "</span>+group.getErrorCodeQuery() +<span class="string">"  Query: "</span>+ group.getQuery());</div></pre></td></tr></table></figure>
+<p>最后，关于将 JavaBean 转换为 Json 可以查看官方文档，还是很好理解的，下面会给出链接。</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="https://github.com/alibaba/fastjson/wiki/Samples-DataBind" target="_blank" rel="external">https://github.com/alibaba/fastjson/wiki/Samples-DataBind</a></p>
+<p><a href="http://www.jianshu.com/p/013e89d8cf17" target="_blank" rel="external">http://www.jianshu.com/p/013e89d8cf17</a></p>
+<p><a href="http://www.jianshu.com/p/faadf4f1392e" target="_blank" rel="external">http://www.jianshu.com/p/faadf4f1392e</a></p>
+<p><a href="http://www.cnblogs.com/hsqdboke/p/5545183.html" target="_blank" rel="external">http://www.cnblogs.com/hsqdboke/p/5545183.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/11/Android --- Fastjson/" class="archive-article-date">
+  	<time datetime="2017-11-11T02:22:26.650Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-11</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/09/Android -- TextInputLayout/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- Fastjson" data-title="" data-url="http://yoursite.com/2017/11/11/Android --- Fastjson/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
