@@ -143,6 +143,44 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- BaseAdapter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-BaseAdapter-的使用以及优化"><a href="#Android-—-BaseAdapter-的使用以及优化" class="headerlink" title="Android — BaseAdapter 的使用以及优化"></a>Android — BaseAdapter 的使用以及优化</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>BaseAdapter数据适配器，连接数据源与视图界面的桥梁。BaseAdapter是一个抽象类，使用BaseAdapter必须写一个类继承它，并且实现它的四个方法。首先我们应该清楚流程，当系统绘制ListView的时候，首先调用getCount()方法，获取ListView的长度，然后再调用getView()方法，根据这个长度逐一绘制ListView的每一行。也就是说，如果getCount返回1，那么就只显示一行。而getItem()和getItemId()则需要处理和取得Adapter中的数据时调用。而数据量很大的时候就需要绘制很多行，极大的消耗资源，导致ListView滑动非常慢，那应该怎么优化呢？本节我们搭配ListView使用BaseAdapter，并逐渐来优化BaseAdapter。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/09/16/Android --- BaseAdapter/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/16/Android --- BaseAdapter/" class="archive-article-date">
+  	<time datetime="2017-09-16T00:54:08.217Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-16</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android ---  AsyncTask 异步加载" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -310,44 +348,6 @@
       
       <a href="/2017/07/14/长密码拒绝服务攻击/" class="archive-article-date">
   	<time datetime="2017-07-14T07:28:51.383Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-配置文件披露漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><h4 id="0X00"><a href="#0X00" class="headerlink" title="0X00"></a>0X00</h4><p>本文简述几个不是很常见的敏感信息泄露的途径，敏感信息的泄露可以帮助攻击者为高级的攻击做准备，而防护办法只有一个：删，删，删。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/配置文件披露漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/配置文件披露漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.376Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
