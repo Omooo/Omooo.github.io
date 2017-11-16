@@ -21,7 +21,7 @@ Activity 正常情况下的生命周期估计大家随口都能说出，那么�
 <meta property="og:image" content="https://i.loli.net/2017/11/15/5a0c392f57cbd.png">
 <meta property="og:image" content="https://i.loli.net/2017/11/15/5a0c3b3be32bc.png">
 <meta property="og:image" content="https://i.loli.net/2017/11/15/5a0c498311883.png">
-<meta property="og:updated_time" content="2017-11-15T14:22:51.797Z">
+<meta property="og:updated_time" content="2017-11-16T09:56:21.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
 <meta name="twitter:description" content="Android — Activity 异常情况下的生命周期前言看了任玉刚老师的 living 之后，只能说大牛就是大牛。怀着敬畏的态度研读他的著作 — 《Android 开发艺术探索》，毫不夸张的说这本书绝对算是 Android 进阶必读书了。本菜鸡看了第一章就收获颇丰，以下就是一些读书笔记，例子都是枪书上的，感谢任老师。
@@ -191,6 +191,39 @@ Activity 正常情况下的生命周期估计大家随口都能说出，那么�
 <li>后台 Activity ——已经被暂停的 Activity ，比如执行了 onStop，优先级最低。</li>
 </ol>
 <p>当系统内存不足时，系统会按照上述优先级去销毁目标 Activity 所在的进程 ，并在后续通过 onSaveInstanceState 和 onRestoreInstanceState 来存储和恢复数据。如果一个进程中没有四大组件在执行，那么这个进程很快就会被系统杀死。因此，一些后台工作不适合脱离四大组件独立运行在后台中，这样进程很快就会被杀死。比较好的办法是将后台工作放入 Service 中从而保证进程有一定的优先级，这样就不会轻易的被系统杀死。</p>
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>前面说过，在系统配置发生改变后，是可以不用重新创建 Activity 的。如果不想重新创建，可以给 Activity 指定configChanges 属性。比如不想让 Activity 在屏幕旋转的时候重新创建，就可以以下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:configChanges=<span class="string">"orientation"</span></div></pre></td></tr></table></figure>
+<p>如果我们想指定多值，可以用 | 分隔。以下列举一些常用的：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyboardHidden</td>
+<td>键盘的可访问性发生了改变，比如用户调出了键盘</td>
+</tr>
+<tr>
+<td>screenLayout</td>
+<td>屏幕布局发生了改变，很可能是用户激活了另外一个显示设备</td>
+</tr>
+<tr>
+<td>fontScale</td>
+<td>系统字体缩放比例发生了改变，比如用户选择了一个新字号</td>
+</tr>
+<tr>
+<td>uiMode</td>
+<td>用户界面模式发生了改变，比如用户开启了夜间模式（API 8 新添加）</td>
+</tr>
+<tr>
+<td>orientation</td>
+<td>屏幕方向发生了改变，这个是最常用的，比如旋转了手机屏幕</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
