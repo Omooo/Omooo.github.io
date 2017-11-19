@@ -143,6 +143,45 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- Activity启动模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-Activity-启动模式"><a href="#Android-—-Activity-启动模式" class="headerlink" title="Android — Activity 启动模式"></a>Android — Activity 启动模式</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>无意中看到一篇博客讲到 Activity 的启动模式，说实话，我之前还真的没了解这个知识点。之前讲的是 Activity 的生命周期、任务栈已经数据传递，对于启动模式还是遗漏了，今天就借他人博客来好好掌握这个知识点，原文链接：<a href="http://www.jianshu.com/p/1d5e7fc8cb2b">http://www.jianshu.com/p/1d5e7fc8cb2b</a></p>
+<p><img src="https://i.loli.net/2017/11/12/5a07a225e9432.png" alt=""></p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/11/12/Android --- Activity启动模式/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/12/Android --- Activity启动模式/" class="archive-article-date">
+  	<time datetime="2017-11-12T03:40:00.550Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-傻逼豫章书院" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -299,54 +338,6 @@
       
       <a href="/2017/11/08/Java Web -- 初学Flag/" class="archive-article-date">
   	<time datetime="2017-11-08T07:02:18.801Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-08</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android -- 初识自定义View" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-–-初识自定义View"><a href="#Android-–-初识自定义View" class="headerlink" title="Android – 初识自定义View"></a>Android – 初识自定义View</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>一直都想学习自定义View，之前也立Flag决心要学习，但是网上的视频资料都过于老套，最重要的是杂乱无章，然后就认为很难很深奥，没法循序渐进的学习这个知识点，然后就搁置了。今天看到一个公众号的分享，连载六篇文章，逐步学习自定义View，我只能说两个字：牛批！</p>
-<p>强力推荐：<a href="http://hencoder.com/ui-1-1/" target="_blank" rel="external">http://hencoder.com/ui-1-1/</a></p>
-<h4 id="自定义绘制知识的四个级别"><a href="#自定义绘制知识的四个级别" class="headerlink" title="自定义绘制知识的四个级别"></a>自定义绘制知识的四个级别</h4><ol>
-<li>Canvas 的 drawXXX() 系列方法以及 Paint 最常见的使用</li>
-<li>Paint 的完全攻略</li>
-<li>Canvas 对绘制的辅助 — 范围裁切和几何变换</li>
-<li>使用不同的绘制方法来控制绘制顺序</li>
-</ol>
-<p>先写一个简单的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">    <span class="comment">//设置画笔抗锯齿</span></div><div class="line">    mPaint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">    <span class="comment">//设置画笔颜色，就是绘制内容的颜色</span></div><div class="line">    mPaint.setColor(Color.BLACK);</div><div class="line">    <span class="comment">//设置绘制模式为画线模式</span></div><div class="line">    mPaint.setStyle(Paint.Style.STROKE);</div><div class="line">    <span class="comment">//设置线条宽度</span></div><div class="line">    mPaint.setStrokeWidth(<span class="number">20</span>);</div><div class="line">    <span class="comment">//绘制一个圆，参数以此是：圆心X坐标，圆心Y坐标，圆的半径，画笔。</span></div><div class="line">    canvas.drawCircle(<span class="number">100</span>, <span class="number">100</span>, <span class="number">50</span>, mPaint);</div><div class="line">    <span class="comment">//把整个画布区域填充为半透明红色</span></div><div class="line">    canvas.drawColor(Color.parseColor(<span class="string">"#88880000"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>绘制模式setStyle()具体来说有三种：FILL、STROKE 和 FILL_AND_STROKE。FILL 是填充模式，STROKE  是画线模式，FILL_AND_STROKE 是两种模式一并使用。默认模式是填充模式。当在 FILL 和 FILL_AND_STROKE 模式下，可以通过 setStrokeWidth(像素值) 来设置线条的宽度。</p>
-<p>emmmm，看完了八篇，感觉中间几篇用不到耶，学到的还是蛮多的，毕竟<strong>敢于</strong>面对自定义View了。自定义View的绘制部分算是讲完了，期待后面的布局和触摸反馈系列吧。相信学完之后就能：</p>
-<p><img src="https://i.loli.net/2017/11/06/5a001665d1529.png" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/06/Android -- 初识自定义View/" class="archive-article-date">
-  	<time datetime="2017-11-06T07:48:07.237Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-06</time>
 </a>
       
       
