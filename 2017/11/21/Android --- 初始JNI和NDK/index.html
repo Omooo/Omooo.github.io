@@ -6,14 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 初始 JNI 和 NDK前言最近热修复和插件化炒得火热，是时候头铁开始尝试学习了。那么他们有什么用途吗？
+在热修复出现之前，一个已经上线的 APP 如果出现了 Bug，即使是一个非常小的 Bug，不及时更新的话有可能存在风险，若要及时更新就得将 APP 重新打包发布到应用市场，让用户再一次下载，这就大大降低了用户体验，当热修复出现之后，这样的问题就不再是问题了。
+对于插件化，">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/11/21/Android --- 初始JNI和NDK/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 初始 JNI 和 NDK前言最近热修复和插件化炒得火热，是时候头铁开始尝试学习了。那么他们有什么用途吗？
+在热修复出现之前，一个已经上线的 APP 如果出现了 Bug，即使是一个非常小的 Bug，不及时更新的话有可能存在风险，若要及时更新就得将 APP 重新打包发布到应用市场，让用户再一次下载，这就大大降低了用户体验，当热修复出现之后，这样的问题就不再是问题了。
+对于插件化，">
+<meta property="og:image" content="https://i.loli.net/2017/11/21/5a13e82d642d4.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/11/21/5a13eaafcf210.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/11/21/5a140dc20f1d2.png">
+<meta property="og:updated_time" content="2017-11-21T11:35:00.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 初始 JNI 和 NDK前言最近热修复和插件化炒得火热，是时候头铁开始尝试学习了。那么他们有什么用途吗？
+在热修复出现之前，一个已经上线的 APP 如果出现了 Bug，即使是一个非常小的 Bug，不及时更新的话有可能存在风险，若要及时更新就得将 APP 重新打包发布到应用市场，让用户再一次下载，这就大大降低了用户体验，当热修复出现之后，这样的问题就不再是问题了。
+对于插件化，">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/21/5a13e82d642d4.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +155,120 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android --- 初始JNI和NDK" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <hr>
+<h2 id="Android-—-初始-JNI-和-NDK"><a href="#Android-—-初始-JNI-和-NDK" class="headerlink" title="Android — 初始 JNI 和 NDK"></a>Android — 初始 JNI 和 NDK</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近热修复和插件化炒得火热，是时候头铁开始尝试学习了。那么他们有什么用途吗？</p>
+<p>在热修复出现之前，一个已经上线的 APP 如果出现了 Bug，即使是一个非常小的 Bug，不及时更新的话有可能存在风险，若要及时更新就得将 APP 重新打包发布到应用市场，让用户再一次下载，这就大大降低了用户体验，当热修复出现之后，这样的问题就不再是问题了。</p>
+<p>对于插件化，如其名，一个程序划分为不同的部分，以插件的形式加载到应用中去，本质上它使用的技术还是热修复技术，只不过是加入了更多的工程实践，让它支持大规模的代码更新以及资源和 so 包的更新。</p>
+<p>然而要想更加容易理解热修复和插件化，还是要先学好 JNI 和 NDK 知识的。但是我对 JNI 和 NDK 完全不知呀，不慌不慌，撸会猫，然后一起学习。</p>
+<p><img src="https://i.loli.net/2017/11/21/5a13e82d642d4.jpg" alt=""></p>
+<a id="more"></a>
+<h4 id="什么是-JNI？"><a href="#什么是-JNI？" class="headerlink" title="什么是 JNI？"></a>什么是 JNI？</h4><p>全称是 Java native interface，Java 本地开发接口。JNI 是一个协议，这个协议用来沟通 Java 代码和外部的本地代码 ( C/C++ )，通过这个协议，Java 代码可以调用外部的 C/C++ 代码，外部的 C/C++ 代码也可以调用本地的 Java 代码。</p>
+<p><img src="https://i.loli.net/2017/11/21/5a13eaafcf210.jpg" alt=""></p>
+<h4 id="什么是-NDK？"><a href="#什么是-NDK？" class="headerlink" title="什么是 NDK？"></a>什么是 NDK？</h4><p>全称是 Native Development Kit。NDK 允许用户使用类似 C/C++ 之类的原生代码执行部分程序，NDK 包括了从 C/C++ 生成原生代码库所需的工具和 build files。NDK 是一系列工具的集合，能够帮助开发者快速开发 C/C++ 的动态库，并能自动将 so 和 java 应用一起打包成 apk。</p>
+<h4 id="为什么要用-NDK？"><a href="#为什么要用-NDK？" class="headerlink" title="为什么要用 NDK？"></a>为什么要用 NDK？</h4><ol>
+<li>代码的保护，由于 apk 的 java 层代码很容易被反编译，而 C/C++ 库被反编译的难度较大。</li>
+<li>在 NDK 中调用第三方 C/C++ 库，因为大部分的开源库都是用 C/C++ 代码编写的。</li>
+<li>便于移植，用 C/C++ 写的库可以方便在其他的嵌入式平台上再次使用。</li>
+<li>提升效率，Java 代码是跨平台的，不直接操作硬件。由 Dalvik 虚拟机解释执行，而 IOS 对 objectC 可直接操作硬件，可手动去释放内存，效率比较高。</li>
+</ol>
+<h4 id="配置-NDK-开发环境："><a href="#配置-NDK-开发环境：" class="headerlink" title="配置 NDK 开发环境："></a>配置 NDK 开发环境：</h4><p>Android Studio 目前有两种方式配置 NDK 的开发环境，传统模式和 CMake 方式。传统方式需要配置 Android,mk、Application.mk和gradle，这种方式复杂繁琐。下面介绍 CMake 方式 ( 在 Android Studio 3.0 上实验成功 )：</p>
+<ol>
+<li>在新建工程时选中 Include C++ support</li>
+<li>下载 CMake</li>
+</ol>
+<p>在执行一的时候，编译器会自动帮你检查是否有 NDK，点击下载就好了，但是最后还是报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error:Unable to get the CMake version located at:D:\\AndroidSDK\</div></pre></td></tr></table></figure>
+<p>它不会给你点击下载，所以 File –&gt; Settings –&gt; ↓</p>
+<p><img src="https://i.loli.net/2017/11/21/5a140dc20f1d2.png" alt=""></p>
+<p>然后运行项目，你就会看到：</p>
+<blockquote>
+<p>Hello from C++</p>
+</blockquote>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="https://mp.weixin.qq.com/s?__biz=MzI3OTU0MzI4MQ==&amp;mid=2247484266&amp;idx=1&amp;sn=b4f9390e0c45a04c331365b7faf8ef99&amp;chksm=eb476ff4dc30e6e2b80e431c89bec941907bf5b308431097bb725ece700771b73faff581ac5d&amp;scene=21#wechat_redirect" target="_blank" rel="external">NDK探究之旅《一》——对jni和NDK的认识</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI2OTc5ODk2Nw==&amp;mid=2247483856&amp;idx=1&amp;sn=3c438bec086c3e543ead7876bcddc226&amp;chksm=eadb9a88ddac139ef5580e906301ac7e21d842190c7ff9bedb6fbe04ee285813f1c0e4ad19e0&amp;scene=0#rd" target="_blank" rel="external">Android NDK底层开发初识介绍</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzI2OTQxMTM4OQ==&amp;mid=2247485417&amp;idx=1&amp;sn=a9ef03ae40c459efa8fe7b608053d7f8&amp;chksm=eae1f2bbdd967bad87bab0769fb68aa80ef4d711c418814062d94ee0cdbe9090ea39044290e0&amp;scene=0#rd" target="_blank" rel="external">热修复插件化学习流程</a></p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/21/Android --- 初始JNI和NDK/" class="archive-article-date">
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/21/Android --- 初始JNI和NDK/" class="archive-article-date">
   	<time datetime="2017-11-21T11:35:57.416Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-21</time>
 </a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+      
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/21/Java --- 类的加载过程/" class="archive-article-date">
-  	<time datetime="2017-11-21T05:02:01.247Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-21</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/19/拒绝浮躁/" class="archive-article-date">
-  	<time datetime="2017-11-19T02:08:04.704Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-19</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/21/Java --- 类的加载过程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/18/迷茫/" class="archive-article-date">
-  	<time datetime="2017-11-18T15:53:27.226Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-18</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/15/Android --- Activity 异常生命周期/" class="archive-article-date">
-  	<time datetime="2017-11-15T14:26:58.348Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-15</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/15/">15</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 初始JNI和NDK" data-title="" data-url="http://yoursite.com/2017/11/21/Android --- 初始JNI和NDK/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +291,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
