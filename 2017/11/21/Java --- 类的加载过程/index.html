@@ -8,33 +8,28 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="拒绝浮躁前言昨天还在说迷茫呢，今天就收到一个特别的推送，真的很感谢。迷茫的本质还是过于浮躁，所以有些事情想做但是又不想做。这句话可能有点难以理解吧。在迷茫的时候要保持头脑清晰，多看看别人的想法，虽然我很不喜欢鸡汤文，但是有时候鸡汤文能让你清醒。
+  <meta name="description" content="Java — 类的加载过程前言今天在看 DCL 单例模式实现的时候，看到了作者分析 DCL 可能失效的问题，实际上讨论的是类的加载过程。比如执行 SingleTon singleTon = new SingleTon() ，这里看起来是一句代码，但实际上并不是一个原子操作，这句代码最终会被编译成多条汇编指令，它大致做了三件事情：
 
-如果成为一个技术牛人？请不要做一个浮躁的程序猿
-
-
-不要放过任何一个看上去很简单的小问题 — 他们往往并不简单，或者可以引申出很多知识；不会举一反三你">
+给 SingleTon 的实例分配内存；
+调用SingleTon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/2017/11/19/拒绝浮躁/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/11/21/Java --- 类的加载过程/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
-<meta property="og:description" content="拒绝浮躁前言昨天还在说迷茫呢，今天就收到一个特别的推送，真的很感谢。迷茫的本质还是过于浮躁，所以有些事情想做但是又不想做。这句话可能有点难以理解吧。在迷茫的时候要保持头脑清晰，多看看别人的想法，虽然我很不喜欢鸡汤文，但是有时候鸡汤文能让你清醒。
+<meta property="og:description" content="Java — 类的加载过程前言今天在看 DCL 单例模式实现的时候，看到了作者分析 DCL 可能失效的问题，实际上讨论的是类的加载过程。比如执行 SingleTon singleTon = new SingleTon() ，这里看起来是一句代码，但实际上并不是一个原子操作，这句代码最终会被编译成多条汇编指令，它大致做了三件事情：
 
-如果成为一个技术牛人？请不要做一个浮躁的程序猿
-
-
-不要放过任何一个看上去很简单的小问题 — 他们往往并不简单，或者可以引申出很多知识；不会举一反三你">
-<meta property="og:image" content="https://i.loli.net/2017/11/19/5a10e73987045.gif">
-<meta property="og:updated_time" content="2017-11-19T02:07:42.961Z">
+给 SingleTon 的实例分配内存；
+调用SingleTon">
+<meta property="og:image" content="https://i.loli.net/2017/11/20/5a12ebdce5624.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/11/20/5a12e53200b08.png">
+<meta property="og:updated_time" content="2017-11-21T04:51:20.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
-<meta name="twitter:description" content="拒绝浮躁前言昨天还在说迷茫呢，今天就收到一个特别的推送，真的很感谢。迷茫的本质还是过于浮躁，所以有些事情想做但是又不想做。这句话可能有点难以理解吧。在迷茫的时候要保持头脑清晰，多看看别人的想法，虽然我很不喜欢鸡汤文，但是有时候鸡汤文能让你清醒。
+<meta name="twitter:description" content="Java — 类的加载过程前言今天在看 DCL 单例模式实现的时候，看到了作者分析 DCL 可能失效的问题，实际上讨论的是类的加载过程。比如执行 SingleTon singleTon = new SingleTon() ，这里看起来是一句代码，但实际上并不是一个原子操作，这句代码最终会被编译成多条汇编指令，它大致做了三件事情：
 
-如果成为一个技术牛人？请不要做一个浮躁的程序猿
-
-
-不要放过任何一个看上去很简单的小问题 — 他们往往并不简单，或者可以引申出很多知识；不会举一反三你">
-<meta name="twitter:image" content="https://i.loli.net/2017/11/19/5a10e73987045.gif">
+给 SingleTon 的实例分配内存；
+调用SingleTon">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/20/5a12ebdce5624.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -162,7 +157,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-拒绝浮躁" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java --- 类的加载过程" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -171,31 +166,74 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="拒绝浮躁"><a href="#拒绝浮躁" class="headerlink" title="拒绝浮躁"></a>拒绝浮躁</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>昨天还在说迷茫呢，今天就收到一个特别的推送，真的很感谢。迷茫的本质还是过于浮躁，所以有些事情想做但是又不想做。这句话可能有点难以理解吧。在迷茫的时候要保持头脑清晰，多看看别人的想法，虽然我很不喜欢鸡汤文，但是有时候鸡汤文能让你清醒。</p>
-<blockquote>
-<p>如果成为一个技术牛人？请不要做一个浮躁的程序猿</p>
-</blockquote>
+<h2 id="Java-—-类的加载过程"><a href="#Java-—-类的加载过程" class="headerlink" title="Java — 类的加载过程"></a>Java — 类的加载过程</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天在看 DCL 单例模式实现的时候，看到了作者分析 DCL 可能失效的问题，实际上讨论的是类的加载过程。比如执行 SingleTon singleTon = new SingleTon() ，这里看起来是一句代码，但实际上并不是一个原子操作，这句代码最终会被编译成多条汇编指令，它大致做了三件事情：</p>
 <ol>
-<li>不要放过任何一个看上去很简单的小问题 — 他们往往并不简单，或者可以引申出很多知识；不会举一反三你永远学不会。</li>
-<li>知道一点东西，并不能说明你会写应用，完整的应用是需要经验积累的。</li>
-<li>在任何时候都不要认为手中的书已经足够了。</li>
-<li>看得懂的书，请仔细看；看不懂的书，请硬着头皮看。</li>
-<li>别指望看第一遍书就能记住和掌握什么，请看第二遍第三遍。</li>
-<li>当你编程到一半却发现自己用的方法很拙劣时，请不要马上停手；尽快将余下的部分粗略的完成以保证这个代码的完整性，然后分析自己的错误并重新编写和工作。</li>
-<li>每学一个难点的时候，尝试着对别人讲解这个知识点并让他理解，你能讲清楚才说明你真的理解了。</li>
+<li>给 SingleTon 的实例分配内存；</li>
+<li>调用SingleTon 的构造函数，初始化成员字段；</li>
+<li>将 singleTon 对象指向分配的内存空间；</li>
 </ol>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>再次感谢 Java和Android架构 公众号。以上摘自：<a href="https://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&amp;mid=2649550749&amp;idx=1&amp;sn=f9619c9b9a6a365ec060f2b3030d4edc&amp;chksm=f11804e0c66f8df6bac03fc20a12d451137561a7e5487f1bafa0729828b7e32434a61aed8200&amp;scene=0#rd" target="_blank" rel="external">如何成为一个技术牛人？请不要做一个浮躁的程序员</a></p>
-<p>最后，我觉得昨天可能是听歌听太多了，把脑袋都听得胀胀的。睡了一晚，起来头脑就很清醒了。</p>
-<p>迷茫不可怕，怕在迷茫之后一直找不到路。</p>
-<p>Flighting，当当猫！</p>
-<p><img src="https://i.loli.net/2017/11/19/5a10e73987045.gif" alt=""></p>
+<p>实际上还是有点懵，既然都挑事了，那就说明白点，枪一些博文（逃</p>
+<p><img src="https://i.loli.net/2017/11/20/5a12ebdce5624.jpg" alt=""></p>
+<h4 id="类的加载过程概论"><a href="#类的加载过程概论" class="headerlink" title="类的加载过程概论"></a>类的加载过程概论</h4><p>类从被加载到虚拟机内存开始，知道卸载出内存，它的生命周期包含了：加载，验证，准备，解析，初始化，使用和卸载七个阶段。</p>
+<p><img src="https://i.loli.net/2017/11/20/5a12e53200b08.png" alt=""></p>
+<ol>
+<li><p><strong>加载</strong></p>
+<p>将该类的 .class 文件中二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class 对象，用来封装类在方法区内的数据结构。在这个阶段，会执行类中声明的静态代码块。也就是说类中的静态块执行时是不需要等到类的初始化完成。</p>
+</li>
+<li><p><strong>连接</strong></p>
+<p>类加载完成后就进入了类的连接阶段，在连接阶段，主要是将已经读到内存的类的二进制数据合并到虚拟机的运行时环境中去。连接阶段也分为三个过程：</p>
+<ul>
+<li><p>验证</p>
+<p>验证是连接阶段的第一步，这一阶段的目的是为了确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+</li>
+<li><p>准备</p>
+<p>准备阶段是正式为 <strong>类变量</strong> 分配内存并设置其初始值的时候，内存都是被分配到方法区中。准备阶段不会分配类中实例变量的内存，实例变量的内存将会在对象实例化的时候随着对象一起分配到 Java 内存中。例如：public static int value = 123 ;在准备阶段 value 的初始值为 0，在初始化阶段才会变为123。而对于 static final 类型的变量，在准备阶段就会被赋值为正确的值。</p>
+</li>
+<li><p>解析</p>
+<p>解析阶段是将符号引用转化为直接引用的过程。</p>
+<p>符号引用是用一组符号来表示所引用的类和接口的全限定名、字段的名字和类型、方法的名字和类型，只要使用时可以无歧义的定位即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。</p>
+<p>直接引用是直接指向目标的指针、相对偏移量和一个能间接定位到目标的句柄。直接引用于虚拟机的内存布局是相关的，有了直接引用，说明引用的目标已经在内存中。</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>插播一下，为什么要将类、方法或者变量声明为 final 呢？</p>
+</blockquote>
+<p>我们都知道，final 修饰的类不可继承，修饰的方法不可重写，修饰的变量不可重写赋值。但是说到优点，可能还真的说不上来。这就要提及的代码优化了，Java 编译器会寻找机会内联所有的 final 方法，内联对于提升 java 运行效率作用很大，平均能使性能提高 50%。</p>
+<p>参见自：<a href="http://www.codeceo.com/article/java-coding-performance.html" target="_blank" rel="external">35 个 Java 代码性能优化总结</a></p>
+<ol>
+<li><p><strong>初始化</strong></p>
+<blockquote>
+<p> 在这个阶段主要执行类的构造方法，并且为静态变量赋值为初始值，执行静态代码块。</p>
+</blockquote>
+<p>如果你仔细读了上面的文章的话，你是不是发现了一个问题，前后不一致？静态代码块到底是在加载的时候被执行了还是在初始化时被执行了？实际是是在初始化的时候执行的。我看的这个博客是有点问题的。</p>
+<p><strong>初始化阶段是执行类构造器&lt; clinit &gt;() 方法的过程。该方法是由编译器自动收集类中的类变量的赋值动作和静态语句块中的语句合并产生。</strong></p>
+<p>虚拟机会保证类的初始化在多线程环境中被正确的加锁、同步，即如果多个线程同时去初始化一个类，那么只有一个类去执行这个类的&lt; clinit &gt; 方法，其他线程都要阻塞等待，直至活动线程执行完该方法。因此如果在一个类的 &lt; clinit &gt;() 方法中有耗时的操作，那就可能造成多个进程阻塞。不过其他线程虽然会阻塞，但是执行完 &lt; clinit &gt;()  方法的那个线程退出&lt; clinit &gt;() 后，其他线程就不会再次进入 &lt; clinit &gt;() 方法。因为在同一个类加载器下，一个类只会初始化一次。也就是说初始化之前的阶段可以有多个线程执行，而初始化阶段只能有一个线程执行。</p>
+<p>类需要初始化的情况有以下几种：</p>
+<ul>
+<li>创建类的实例</li>
+<li>访问某个类或接口的静态变量，或者对该静态变量赋值</li>
+<li>调用类的静态方法</li>
+<li>反射</li>
+<li>初始化一个类的子类</li>
+<li>Java 虚拟机启动时被标明启动类的类</li>
+</ul>
+</li>
+</ol>
+<p>剩下的阶段就不用说了，最后附上参考链接，其中第一篇有些说法有误，第三篇博客是对该问题的详细阐述和证明。</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="http://www.jianshu.com/p/6c91e07c293f" target="_blank" rel="external">http://www.jianshu.com/p/6c91e07c293f</a></p>
+<p><a href="http://www.jianshu.com/p/79e0e9487b69" target="_blank" rel="external">http://www.jianshu.com/p/79e0e9487b69</a></p>
+<p><a href="http://blog.csdn.net/jiese1990/article/details/40154329" target="_blank" rel="external">http://blog.csdn.net/jiese1990/article/details/40154329</a></p>
+<p><a href="http://www.cnblogs.com/ivanfu/archive/2012/02/12/2347817.html" target="_blank" rel="external">http://www.cnblogs.com/ivanfu/archive/2012/02/12/2347817.html</a></p>
+<p>​    </p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/11/19/拒绝浮躁/" class="archive-article-date">
-  	<time datetime="2017-11-19T02:08:04.704Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-19</time>
+      <a href="/2017/11/21/Java --- 类的加载过程/" class="archive-article-date">
+  	<time datetime="2017-11-21T05:02:01.247Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-21</time>
 </a>
       
       
@@ -208,17 +246,8 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/21/Java --- 类的加载过程/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/18/迷茫/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/11/19/拒绝浮躁/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
@@ -253,7 +282,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="拒绝浮躁" data-title="" data-url="http://yoursite.com/2017/11/19/拒绝浮躁/"></div>
+	<div class="ds-thread" data-thread-key="Java --- 类的加载过程" data-title="" data-url="http://yoursite.com/2017/11/21/Java --- 类的加载过程/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
