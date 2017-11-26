@@ -143,6 +143,51 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- Activity 异常生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-Activity-异常情况下的生命周期"><a href="#Android-—-Activity-异常情况下的生命周期" class="headerlink" title="Android — Activity 异常情况下的生命周期"></a>Android — Activity 异常情况下的生命周期</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>看了任玉刚老师的 living 之后，只能说大牛就是大牛。怀着敬畏的态度研读他的著作 — 《Android 开发艺术探索》，毫不夸张的说这本书绝对算是 Android 进阶必读书了。本菜鸡看了第一章就收获颇丰，以下就是一些读书笔记，例子都是枪书上的，感谢任老师。</p>
+<p><img src="https://i.loli.net/2017/11/15/5a0c392f57cbd.png" alt=""></p>
+<p>Activity 正常情况下的生命周期估计大家随口都能说出，那么在异常情况下的生命周期你知道吗？首先，哪些是异常情况呢？emmmm，有以下常见的两种情况：</p>
+<ol>
+<li>资源相关的系统配置发生改变导致 Activity 被杀死并重新创建。</li>
+<li>资源内存不足导致低优先级的 Activity 被杀死</li>
+</ol>
+<p>对于情况一，乍一听可能有点懵，那就举一个实例 — 横竖屏的切换。我们知道，在这种情况下，Activity 是销毁后再重新创建的，当然，我们也可以阻止系统重新创建Activity 。但是，他不会是简单的销毁重建，为什么这么说呢？让我们页面上的视频时，看到一半我们切换到全屏，这时候它会保存我们的观看进度，那这是这么实现的呢？对于情况二，这个还真的不好模拟，那就只能理论分析咯。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/11/15/Android --- Activity 异常生命周期/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/15/Android --- Activity 异常生命周期/" class="archive-article-date">
+  	<time datetime="2017-11-15T14:26:58.348Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-15</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- SwipeRefreshLayout 下拉刷新" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -304,55 +349,9 @@
 
 
   
-    <article id="post-Android --- Fastjson" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-Fastjson"><a href="#Android-—-Fastjson" class="headerlink" title="Android — Fastjson"></a>Android — Fastjson</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近看好多优秀项目中都集成了Fastjson，最开始并没在意。因为感觉Android系统自带的JSONObject解析还蛮简单呀，而且性能还可以。感觉唯一一点不好的就是数组嵌套数组的时候JSONObject和JSONArray相互转化会搞得我好乱。但是，那么多人用，那肯定有它的优点所在，又是BAT出品，绝对一试。看文档已经惊了，号称：</p>
-<blockquote>
-<p>目前 Java 语言中最快的 JSON 库</p>
-</blockquote>
-<p>就冲这句话，就一定要学了，就喜欢这种自信！官方文档介绍如下：</p>
-<blockquote>
-<p>Fastjson提供Android版本，和标准版本相比，Android版本去掉一些Android虚拟机dalvik不支持的功能，使得jar更小，同时针对dalvik做了很多性能优化，包括减少方法调用等。parse为JSONObject/JSONArray时比原生org.json速度快，序列化反序列化JavaBean性能比jackson/gson性能更好。</p>
-</blockquote>
-<p>但是很可惜，文档写的很一般。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/11/11/Android --- Fastjson/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/11/Android --- Fastjson/" class="archive-article-date">
-  	<time datetime="2017-11-11T02:22:26.650Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-11</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
