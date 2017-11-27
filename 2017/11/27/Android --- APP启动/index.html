@@ -8,19 +8,35 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="育人先律己前言月初爆出南昌豫章书院“戒网瘾”学校（豫章书院修身专修学校）存在教师严重体罚、囚禁、暴力训练学生。一个学校活生生的被办成一所监狱，我庆幸自己没有遭遇这些黑暗，安慰自己这只是社会少许的黑暗面，然而现实狠狠的对我扇了一巴掌。
-触目惊心这个月的二十二号，朝阳区红黄蓝新天地幼儿园幼儿家长报警称，怀疑其孩子在幼儿园受到教师侵害。十一月二十五日，涉事幼儿园教师刘某某被依法刑拘。然而，你所以为的侵">
+  <meta name="description" content="Android — APP 启动时间优化前言如果你仔细观察自己写的APP第一次启动的时候，发现有时中间会有黑屏，有时是白屏。造成这样的情况是什么原因呢？如下图：
+
+那就要从APP启动方式开始说起。不过把握一点，那就是导致这种情况的主要原因就是因为APP启动时间过慢，导致View未被绘制完全。为了避免这种情况，我们要对APP启动做优化处理。所以，本篇文章的大致思路就是：
+
+APP 启动方式
+APP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/2017/11/26/三原色傻逼学校/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/11/27/Android --- APP启动/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
-<meta property="og:description" content="育人先律己前言月初爆出南昌豫章书院“戒网瘾”学校（豫章书院修身专修学校）存在教师严重体罚、囚禁、暴力训练学生。一个学校活生生的被办成一所监狱，我庆幸自己没有遭遇这些黑暗，安慰自己这只是社会少许的黑暗面，然而现实狠狠的对我扇了一巴掌。
-触目惊心这个月的二十二号，朝阳区红黄蓝新天地幼儿园幼儿家长报警称，怀疑其孩子在幼儿园受到教师侵害。十一月二十五日，涉事幼儿园教师刘某某被依法刑拘。然而，你所以为的侵">
-<meta property="og:updated_time" content="2017-11-26T14:15:15.833Z">
+<meta property="og:description" content="Android — APP 启动时间优化前言如果你仔细观察自己写的APP第一次启动的时候，发现有时中间会有黑屏，有时是白屏。造成这样的情况是什么原因呢？如下图：
+
+那就要从APP启动方式开始说起。不过把握一点，那就是导致这种情况的主要原因就是因为APP启动时间过慢，导致View未被绘制完全。为了避免这种情况，我们要对APP启动做优化处理。所以，本篇文章的大致思路就是：
+
+APP 启动方式
+APP">
+<meta property="og:image" content="https://i.loli.net/2017/11/27/5a1bb0d3a56a6.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/27/5a1b7e1f03941.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/27/5a1bb17f6223e.gif">
+<meta property="og:updated_time" content="2017-11-27T06:34:52.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
-<meta name="twitter:description" content="育人先律己前言月初爆出南昌豫章书院“戒网瘾”学校（豫章书院修身专修学校）存在教师严重体罚、囚禁、暴力训练学生。一个学校活生生的被办成一所监狱，我庆幸自己没有遭遇这些黑暗，安慰自己这只是社会少许的黑暗面，然而现实狠狠的对我扇了一巴掌。
-触目惊心这个月的二十二号，朝阳区红黄蓝新天地幼儿园幼儿家长报警称，怀疑其孩子在幼儿园受到教师侵害。十一月二十五日，涉事幼儿园教师刘某某被依法刑拘。然而，你所以为的侵">
+<meta name="twitter:description" content="Android — APP 启动时间优化前言如果你仔细观察自己写的APP第一次启动的时候，发现有时中间会有黑屏，有时是白屏。造成这样的情况是什么原因呢？如下图：
+
+那就要从APP启动方式开始说起。不过把握一点，那就是导致这种情况的主要原因就是因为APP启动时间过慢，导致View未被绘制完全。为了避免这种情况，我们要对APP启动做优化处理。所以，本篇文章的大致思路就是：
+
+APP 启动方式
+APP">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/27/5a1bb0d3a56a6.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -148,7 +164,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-三原色傻逼学校" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- APP启动" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -157,17 +173,59 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="育人先律己"><a href="#育人先律己" class="headerlink" title="育人先律己"></a>育人先律己</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>月初爆出南昌豫章书院“戒网瘾”学校（豫章书院修身专修学校）存在教师严重体罚、囚禁、暴力训练学生。一个学校活生生的被办成一所监狱，我庆幸自己没有遭遇这些黑暗，安慰自己这只是社会少许的黑暗面，然而现实狠狠的对我扇了一巴掌。</p>
-<h4 id="触目惊心"><a href="#触目惊心" class="headerlink" title="触目惊心"></a>触目惊心</h4><p>这个月的二十二号，朝阳区红黄蓝新天地幼儿园幼儿家长报警称，怀疑其孩子在幼儿园受到教师侵害。十一月二十五日，涉事幼儿园教师刘某某被依法刑拘。然而，你所以为的侵害是什么呢？实则是扎针、喂药片、裸体罚站，甚至是猥亵性侵！这还有一点人性吗？更为细思极恐的是，这所教育机构竟然是纽交所上市的大公司，可能是为了某些“国人形象”，现在的微博微信、知乎简书各种删文章。国内虐童事件鲜有发生，但这跟之前任何虐童案都不是一个量级的，这不是变态，也不是缺乏监管，而是利益！</p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>我只希望我们政府能看清现实顺从民意，不要想着隐藏什么，而是要采取实际行动把纯净美好的世界还给孩子，提高幼教老师的道德素养，把应有的尊重和信任还给还在用心照顾孩子的幼教教师。</p>
-<p>最后的最后，对于那些猥亵孩子的傻逼们，祝福你们出门被车撞死，不谢！</p>
+<h2 id="Android-—-APP-启动时间优化"><a href="#Android-—-APP-启动时间优化" class="headerlink" title="Android — APP 启动时间优化"></a>Android — APP 启动时间优化</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>如果你仔细观察自己写的APP第一次启动的时候，发现有时中间会有黑屏，有时是白屏。造成这样的情况是什么原因呢？如下图：</p>
+<p><img src="https://i.loli.net/2017/11/27/5a1bb0d3a56a6.gif" alt=""></p>
+<p>那就要从APP启动方式开始说起。不过把握一点，那就是导致这种情况的主要原因就是因为APP启动时间过慢，导致View未被绘制完全。为了避免这种情况，我们要对APP启动做优化处理。所以，本篇文章的大致思路就是：</p>
+<ol>
+<li>APP 启动方式</li>
+<li>APP 启动时间测量</li>
+<li>避免APP启动黑白屏</li>
+</ol>
+<p><img src="https://i.loli.net/2017/11/27/5a1b7e1f03941.gif" alt=""></p>
+<a id="more"></a>
+<h4 id="APP-启动方式"><a href="#APP-启动方式" class="headerlink" title="APP 启动方式"></a>APP 启动方式</h4><ol>
+<li><p>冷启动</p>
+<p>APP 启动之前，系统没有为此 APP 创建独立进程。比如：设备启动后，第一次启动或者 APP 被移除后台进程再重启。启动流程大致如下：</p>
+<blockquote>
+<p>点击 icon 加载 APP –&gt; 立即显示白屏或黑屏等 –&gt; Application onCreat –&gt; Activity Init –&gt; Activity onCreat –&gt; 初始化数据，填充显示 View –&gt; Activity onResume </p>
+</blockquote>
+</li>
+<li><p>热启动</p>
+<p>当启动 APP 时，后台存在该应用的进程，这时候从已有的进程中启动，而不需要创建和初始化 Application ，直接创建和初始化它的 Launch Activity。比如：APP 按返回键退出或者按 home 键。</p>
+</li>
+</ol>
+<p>这个时候也就能解释APP启动为什么会出现黑白屏了？那是因为已经进入Acticity，但是还没加载到布局文件，所以就会显示windows窗口的背景。黑屏/白屏就是显示的windoes背景（这个就是theme的设置）。</p>
+<h4 id="APP-启动时间测量"><a href="#APP-启动时间测量" class="headerlink" title="APP 启动时间测量"></a>APP 启动时间测量</h4><ol>
+<li>通过 adb 命令测量APP冷启动时间：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell am start -W [packageName]/[packageName.MainActivity]</div></pre></td></tr></table></figure>
+<p>​    不过这里，要先把 adb.exe 的路径放在环境变量 path下，然后就可以在 AS 终端输入命令查看了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">C:\Users\SSC\AndroidStudioProjects\Tools&gt;adb shell am start -W com.example.ssc.tools/com.example.ssc.tools.WelcomeActivity</div><div class="line">Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.ssc.tools/.WelcomeActivity &#125;</div><div class="line">Status: ok</div><div class="line">Activity: com.example.ssc.tools/.WelcomeActivity</div><div class="line">ThisTime: 141</div><div class="line">TotalTime: 141</div><div class="line">WaitTime: 149</div><div class="line">Complete</div></pre></td></tr></table></figure>
+<ol>
+<li>从 Android 4.4 (API 19) 开始，Logcat 自动帮我们打印出应用的启动时间。这个时间值从应用启动 (创建进程) 开始计算，到完成视图的第一次绘制 (即 Activity 内容对用户可见) 为止。如：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">11-27 00:23:12.091 593-617/system_process I/ActivityManager: Displayed com.example.ssc.tools/.MainActivity: +897ms</div></pre></td></tr></table></figure>
+<h4 id="拒绝黑白屏"><a href="#拒绝黑白屏" class="headerlink" title="拒绝黑白屏"></a>拒绝黑白屏</h4><p>比较友好的方式就是通过windowBackground 属性 设置一个自定义样式来替换黑白屏。效果如下：</p>
+<p><img src="https://i.loli.net/2017/11/27/5a1bb17f6223e.gif" alt=""></p>
+<p>emmm，其实这张图可以换成应用的Logo，可以参考网易云音乐APP的启动。</p>
+<p>首先新建一个名为 shape_launch.xml 的文件，内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">            <span class="attr">android:opacity</span>=<span class="string">"opaque"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--&lt;item android:drawable="@color/colorPrimary"/&gt;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">bitmap</span></span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@mipmap/launch"</span></div><div class="line">            <span class="attr">android:gravity</span>=<span class="string">"center"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后自定义一个主题样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;LaunchStyle&quot; parent=&quot;AppTheme&quot;&gt;</div><div class="line">    &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/shape_launch&lt;/item&gt;</div><div class="line">    &lt;!--&lt;item name=&quot;windowActionBar&quot;&gt;false&lt;/item&gt;--&gt;</div><div class="line">    &lt;!--&lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;--&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>之后在AndroidManifest文件中给启动的Activity设置这个主题样式。</p>
+<p>最后最后，再把布局文件加载前将主题还原到默认：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    setTheme(R.style.AppTheme);</div><div class="line">    setContentView(R.layout.activity_main);</div><div class="line">    initView();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="http://www.jianshu.com/p/1c9a18e49482" target="_blank" rel="external">http://www.jianshu.com/p/1c9a18e49482</a></p>
+<p><a href="http://www.jianshu.com/p/e69d22ec0582" target="_blank" rel="external">http://www.jianshu.com/p/e69d22ec0582</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4MTIzMjM3MA==&amp;mid=2247483848&amp;idx=1&amp;sn=1a34ada18572b2c5e3cb89285766cad6&amp;chksm=fd4bf255ca3c7b4308f97506fd490f0e276ec3aaa2700ce70d26c895b1bdaf234c8c1d59b222&amp;scene=0#rd" target="_blank" rel="external">APP 启动时间优化方法详解</a></p>
+<p><a href="http://www.jianshu.com/p/add0d4a03914" target="_blank" rel="external">http://www.jianshu.com/p/add0d4a03914</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/11/26/三原色傻逼学校/" class="archive-article-date">
-  	<time datetime="2017-11-26T14:15:45.760Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-26</time>
+      <a href="/2017/11/27/Android --- APP启动/" class="archive-article-date">
+  	<time datetime="2017-11-27T06:35:17.529Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-27</time>
 </a>
       
       
@@ -180,17 +238,8 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/27/Android --- APP启动/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/21/Android --- 初始JNI和NDK/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/11/26/三原色傻逼学校/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
@@ -225,7 +274,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="三原色傻逼学校" data-title="" data-url="http://yoursite.com/2017/11/26/三原色傻逼学校/"></div>
+	<div class="ds-thread" data-thread-key="Android --- APP启动" data-title="" data-url="http://yoursite.com/2017/11/27/Android --- APP启动/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
