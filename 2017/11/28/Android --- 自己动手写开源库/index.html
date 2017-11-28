@@ -6,14 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 自己动手写开源库前言用别人的开源库用多了，也想知道是怎么实现了。又因为Android Studio 一句话引入依赖，再也不用手动下载jar包了。那么就尝试自己动手写开源库吧。
+
+如何写 library 在本地依赖这个就不说了下面主要讲怎么使用 JitPack.io 来发布我们的 library。
+在  JitPack.io 发布自己的 library官方文档：Publish">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/page/12/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/11/28/Android --- 自己动手写开源库/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 自己动手写开源库前言用别人的开源库用多了，也想知道是怎么实现了。又因为Android Studio 一句话引入依赖，再也不用手动下载jar包了。那么就尝试自己动手写开源库吧。
+
+如何写 library 在本地依赖这个就不说了下面主要讲怎么使用 JitPack.io 来发布我们的 library。
+在  JitPack.io 发布自己的 library官方文档：Publish">
+<meta property="og:image" content="https://i.loli.net/2017/11/28/5a1cb3bd7a219.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/28/5a1cb75e0492f.png">
+<meta property="og:updated_time" content="2017-11-28T01:13:20.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 自己动手写开源库前言用别人的开源库用多了，也想知道是怎么实现了。又因为Android Studio 一句话引入依赖，再也不用手动下载jar包了。那么就尝试自己动手写开源库吧。
+
+如何写 library 在本地依赖这个就不说了下面主要讲怎么使用 JitPack.io 来发布我们的 library。
+在  JitPack.io 发布自己的 library官方文档：Publish">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/28/5a1cb3bd7a219.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +157,112 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android --- 自己动手写开源库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-自己动手写开源库"><a href="#Android-—-自己动手写开源库" class="headerlink" title="Android — 自己动手写开源库"></a>Android — 自己动手写开源库</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>用别人的开源库用多了，也想知道是怎么实现了。又因为Android Studio 一句话引入依赖，再也不用手动下载jar包了。那么就尝试自己动手写开源库吧。</p>
+<p><img src="https://i.loli.net/2017/11/28/5a1cb3bd7a219.png" alt=""></p>
+<p>如何写 library 在本地依赖这个就不说了下面主要讲怎么使用 JitPack.io 来发布我们的 library。</p>
+<h4 id="在-JitPack-io-发布自己的-library"><a href="#在-JitPack-io-发布自己的-library" class="headerlink" title="在  JitPack.io 发布自己的 library"></a>在  JitPack.io 发布自己的 library</h4><p>官方文档：<a href="https://jitpack.io/docs/ANDROID/" target="_blank" rel="external">Publish an Android library</a></p>
+<p>文档上说明的很清楚，只需要三步：</p>
+<ol>
+<li><p>在工程 build.gradle 文件中，添加如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buildscript &#123; </div><div class="line">  dependencies &#123;</div><div class="line">    classpath <span class="string">'com.github.dcendents:android-maven-gradle-plugin:2.0'</span> <span class="comment">// Add this line</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在 library 的 build.gradle 文件<strong>头部</strong>添加，类似如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'com.android.library'</span></div><div class="line">apply plugin: <span class="string">'com.github.dcendents.android-maven'</span></div><div class="line"></div><div class="line">group=<span class="string">'com.github.Omooo'</span></div></pre></td></tr></table></figure>
+<p>其中 Omooo 要替换成你 Github 的用户名。</p>
+</li>
+<li><p>将项目托管到 Github 并发布一个版本</p>
+</li>
+</ol>
+<p>以上就已经成功在  JitPack.io 发布了自己的 library。</p>
+<h4 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h4><p>官网：<a href="https://jitpack.io/" target="_blank" rel="external">https://jitpack.io/</a></p>
+<p>打开官网，贴入项目的 Github 地址，点击 get 就可以得到我们library以及如何依赖。如下：</p>
+<p><img src="https://i.loli.net/2017/11/28/5a1cb75e0492f.png" alt=""></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>当你都已经搞定了，这时候最重要的就是想想自己能写出什么。如果你没搞定，那么请详细看这篇博客：</p>
+<p><a href="http://www.jianshu.com/p/e443456bb506" target="_blank" rel="external">http://www.jianshu.com/p/e443456bb506</a></p>
+<p>emmmm，我就是看这篇博文学会的。（逃</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/28/Android --- 自己动手写开源库/" class="archive-article-date">
+  	<time datetime="2017-11-28T01:13:57.167Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-28</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/加密文件/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.288Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/分词/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.283Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/七天精通 ASP.NET MVC/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.277Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/27/Android --- APP启动/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/ZeroNet/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.272Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/XSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.267Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/11/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/10/">10</a><a class="page-number" href="/archives/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/archives/page/13/">13</a><a class="page-number" href="/archives/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/16/">16</a><a class="extend next" rel="next" href="/archives/page/13/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 自己动手写开源库" data-title="" data-url="http://yoursite.com/2017/11/28/Android --- 自己动手写开源库/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +285,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -143,6 +143,49 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android ---  AsyncTask 异步加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-AsyncTask-异步加载"><a href="#Android-—-AsyncTask-异步加载" class="headerlink" title="Android —  AsyncTask 异步加载"></a>Android —  AsyncTask 异步加载</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>我们知道，当Android程序启动的时候，会同时启动一个对应的主线程 （Main Thread），这个线程主要负责处理与UI相关的事件，我们也叫它UI线程。而Android UI操作并不是线程安全的并且这些操作都要在UI线程中执行。还有就是像一些耗时操作如网络操作不能在主线程中进行，一旦时间超过五秒，就会报ANR(应用程序无响应)异常。那么问题来了，如果我们要在非UI线程中操作UI该怎么做呢？这里就需要引入异步任务了，当然实现异步任务也不只是可以使用AsyncTask，这里我们先讲讲AsyncTask这个官方给我们封装好的轻量级异步类。</p>
+<h4 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h4><p>AsyncTask是一个抽象类，一般我们会定义一个类继承至AsyncTask，然后重写相关的方法。</p>
+<p>AsyncTask<Params,Progress,Result> 包含三个泛型参数：（不需要返回类型写 Void 即可）</p>
+<p>Params : 启动任务时输入的参数类型。</p>
+<p>Progress : 后台任务执行返回进度值得类型。</p>
+<p>Result : 后台任务执行完成后返回结果的类型。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/09/10/Android ---  AsyncTask 异步加载/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/10/Android ---  AsyncTask 异步加载/" class="archive-article-date">
+  	<time datetime="2017-09-10T14:34:47.598Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-10</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- Activity详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -305,44 +348,6 @@
       
       <a href="/2017/07/14/配置文件披露漏洞/" class="archive-article-date">
   	<time datetime="2017-07-14T07:28:51.376Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-计算机知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="计算机网络面试题总结"><a href="#计算机网络面试题总结" class="headerlink" title="计算机网络面试题总结"></a>计算机网络面试题总结</h2><h4 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h4><p>虽然我不是学这个的，但是多学点总没坏处。以下来自<a href="https://zhuanlan.zhihu.com/p/24001696">路人甲</a>，我只是一个勤劳的搬用工，随便自己码一遍加深印象，略有改动。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/计算机知识点总结/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/计算机知识点总结/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.370Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
