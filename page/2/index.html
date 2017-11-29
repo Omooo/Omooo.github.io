@@ -143,6 +143,102 @@
       <div class="body-wrap">
         
   
+    <article id="post-Java --- 类的加载过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Java-—-类的加载过程"><a href="#Java-—-类的加载过程" class="headerlink" title="Java — 类的加载过程"></a>Java — 类的加载过程</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天在看 DCL 单例模式实现的时候，看到了作者分析 DCL 可能失效的问题，实际上讨论的是类的加载过程。比如执行 SingleTon singleTon = new SingleTon() ，这里看起来是一句代码，但实际上并不是一个原子操作，这句代码最终会被编译成多条汇编指令，它大致做了三件事情：</p>
+<ol>
+<li>给 SingleTon 的实例分配内存；</li>
+<li>调用SingleTon 的构造函数，初始化成员字段；</li>
+<li>将 singleTon 对象指向分配的内存空间；</li>
+</ol>
+<p>实际上还是有点懵，既然都挑事了，那就说明白点，枪一些博文（逃</p>
+<p><img src="https://i.loli.net/2017/11/20/5a12ebdce5624.jpg" alt=""></p>
+<h4 id="类的加载过程概论"><a href="#类的加载过程概论" class="headerlink" title="类的加载过程概论"></a>类的加载过程概论</h4><p>类从被加载到虚拟机内存开始，知道卸载出内存，它的生命周期包含了：加载，验证，准备，解析，初始化，使用和卸载七个阶段。</p>
+<p><img src="https://i.loli.net/2017/11/20/5a12e53200b08.png" alt=""></p>
+<ol>
+<li><p><strong>加载</strong></p>
+<p>将该类的 .class 文件中二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class 对象，用来封装类在方法区内的数据结构。在这个阶段，会执行类中声明的静态代码块。也就是说类中的静态块执行时是不需要等到类的初始化完成。</p>
+</li>
+<li><p><strong>连接</strong></p>
+<p>类加载完成后就进入了类的连接阶段，在连接阶段，主要是将已经读到内存的类的二进制数据合并到虚拟机的运行时环境中去。连接阶段也分为三个过程：</p>
+<ul>
+<li><p>验证</p>
+<p>验证是连接阶段的第一步，这一阶段的目的是为了确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+</li>
+<li><p>准备</p>
+<p>准备阶段是正式为 <strong>类变量</strong> 分配内存并设置其初始值的时候，内存都是被分配到方法区中。准备阶段不会分配类中实例变量的内存，实例变量的内存将会在对象实例化的时候随着对象一起分配到 Java 内存中。例如：public static int value = 123 ;在准备阶段 value 的初始值为 0，在初始化阶段才会变为123。而对于 static final 类型的变量，在准备阶段就会被赋值为正确的值。</p>
+</li>
+<li><p>解析</p>
+<p>解析阶段是将符号引用转化为直接引用的过程。</p>
+<p>符号引用是用一组符号来表示所引用的类和接口的全限定名、字段的名字和类型、方法的名字和类型，只要使用时可以无歧义的定位即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。</p>
+<p>直接引用是直接指向目标的指针、相对偏移量和一个能间接定位到目标的句柄。直接引用于虚拟机的内存布局是相关的，有了直接引用，说明引用的目标已经在内存中。</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>插播一下，为什么要将类、方法或者变量声明为 final 呢？</p>
+</blockquote>
+<p>我们都知道，final 修饰的类不可继承，修饰的方法不可重写，修饰的变量不可重写赋值。但是说到优点，可能还真的说不上来。这就要提及的代码优化了，Java 编译器会寻找机会内联所有的 final 方法，内联对于提升 java 运行效率作用很大，平均能使性能提高 50%。</p>
+<p>参见自：<a href="http://www.codeceo.com/article/java-coding-performance.html" target="_blank" rel="external">35 个 Java 代码性能优化总结</a></p>
+<ol>
+<li><p><strong>初始化</strong></p>
+<blockquote>
+<p> 在这个阶段主要执行类的构造方法，并且为静态变量赋值为初始值，执行静态代码块。</p>
+</blockquote>
+<p>如果你仔细读了上面的文章的话，你是不是发现了一个问题，前后不一致？静态代码块到底是在加载的时候被执行了还是在初始化时被执行了？实际是是在初始化的时候执行的。我看的这个博客是有点问题的。</p>
+<p><strong>初始化阶段是执行类构造器&lt; clinit &gt;() 方法的过程。该方法是由编译器自动收集类中的类变量的赋值动作和静态语句块中的语句合并产生。</strong></p>
+<p>虚拟机会保证类的初始化在多线程环境中被正确的加锁、同步，即如果多个线程同时去初始化一个类，那么只有一个类去执行这个类的&lt; clinit &gt; 方法，其他线程都要阻塞等待，直至活动线程执行完该方法。因此如果在一个类的 &lt; clinit &gt;() 方法中有耗时的操作，那就可能造成多个进程阻塞。不过其他线程虽然会阻塞，但是执行完 &lt; clinit &gt;()  方法的那个线程退出&lt; clinit &gt;() 后，其他线程就不会再次进入 &lt; clinit &gt;() 方法。因为在同一个类加载器下，一个类只会初始化一次。也就是说初始化之前的阶段可以有多个线程执行，而初始化阶段只能有一个线程执行。</p>
+<p>类需要初始化的情况有以下几种：</p>
+<ul>
+<li>创建类的实例</li>
+<li>访问某个类或接口的静态变量，或者对该静态变量赋值</li>
+<li>调用类的静态方法</li>
+<li>反射</li>
+<li>初始化一个类的子类</li>
+<li>Java 虚拟机启动时被标明启动类的类</li>
+</ul>
+</li>
+</ol>
+<p>剩下的阶段就不用说了，最后附上参考链接，其中第一篇有些说法有误，第三篇博客是对该问题的详细阐述和证明。</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="http://www.jianshu.com/p/6c91e07c293f" target="_blank" rel="external">http://www.jianshu.com/p/6c91e07c293f</a></p>
+<p><a href="http://www.jianshu.com/p/79e0e9487b69" target="_blank" rel="external">http://www.jianshu.com/p/79e0e9487b69</a></p>
+<p><a href="http://blog.csdn.net/jiese1990/article/details/40154329" target="_blank" rel="external">http://blog.csdn.net/jiese1990/article/details/40154329</a></p>
+<p><a href="http://www.cnblogs.com/ivanfu/archive/2012/02/12/2347817.html" target="_blank" rel="external">http://www.cnblogs.com/ivanfu/archive/2012/02/12/2347817.html</a></p>
+<p>​    </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/21/Java --- 类的加载过程/" class="archive-article-date">
+  	<time datetime="2017-11-21T05:02:01.247Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-21</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-拒绝浮躁" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -303,45 +399,6 @@
       
       <a href="/2017/11/14/Android --- SwipeRefreshLayout 下拉刷新/" class="archive-article-date">
   	<time datetime="2017-11-14T15:22:04.224Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-每天欣喜的事" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="平静而美好的一天"><a href="#平静而美好的一天" class="headerlink" title="平静而美好的一天"></a>平静而美好的一天</h2><h4 id="静默"><a href="#静默" class="headerlink" title="静默"></a>静默</h4><p>今天中午在食堂吃坏了肚子，午休醒来，胃热，有点疼痛。室友都去上课了，安静的宿舍平静的循环放着纯音乐. 感觉好久没这么平静的心情了，时间慢慢在手边轻盈的流逝。想一下，每天生活快乐吗？平淡的眼神中透露了两个字：</p>
-<h4 id="美好"><a href="#美好" class="headerlink" title="美好"></a>美好</h4><p>每天坚持 Codeing，坚持 commit 。大学太自由了，有太多的时间做自己喜欢的事，肆意的为所欲为。为了每天点亮Github，不断坚持着，再说还有音乐一路陪伴呢。</p>
-<h4 id="可怜"><a href="#可怜" class="headerlink" title="可怜"></a>可怜</h4><p>上了大学了，几乎没了阅读，写作能力是真的可怜。本来感觉有好多话要说的，但是表达不出了，可怜！</p>
-<p><img src="https://ooo.0o0.ooo/2017/11/14/5a0a97c1da2e6.jpg" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/14/每天欣喜的事/" class="archive-article-date">
-  	<time datetime="2017-11-14T07:17:08.105Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-14</time>
 </a>
       
       
