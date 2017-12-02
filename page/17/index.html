@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/page/15/index.html">
+<meta property="og:url" content="http://yoursite.com/page/17/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-php+mysql" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-80端口被占用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,169 +152,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="SQL注入实战二之-PHP-MySql数据库注入"><a href="#SQL注入实战二之-PHP-MySql数据库注入" class="headerlink" title="SQL注入实战二之 PHP + MySql数据库注入"></a>SQL注入实战二之 PHP + MySql数据库注入</h2><p>看到标题是不是很激动？那就一起来日站吧。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/php+mysql/#more">more >></a>
-        </p>
+<h2 id="解决80端口被占用的尴尬处境"><a href="#解决80端口被占用的尴尬处境" class="headerlink" title="解决80端口被占用的尴尬处境"></a>解决80端口被占用的尴尬处境</h2><ol>
+<li><p>首先打开cmd输入命令netstat-ano查看80端口被占用情况，如果PID为4，这说明是hhtp服务占用了80端口，这时候输入命令net stop http服务。也可以输入taskkill / pid 4 /f或者ntsd -c q -p 4。如果是其他进程，查看PID之后在任务管理器里结束该进程。</p>
+</li>
+<li><p>打开注册表把start值改为零之后重启。（来自网上的办法，亲测没效，自己也可以试试）</p>
+</li>
+<li><p>如果你装了SQL，或许是SQL serve的某些进程占用了，这时候可以在计算机管理里面打开服务结束SQL Serve Reporting Services，或者在cmd中net stop ReportServe。</p>
+<p>​</p>
+</li>
+</ol>
+<h5 id="最后建议自己好好看看-Http-Serve-API"><a href="#最后建议自己好好看看-Http-Serve-API" class="headerlink" title="最后建议自己好好看看 Http Serve API "></a>最后建议自己好好看看 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364510" target="_blank" rel="external">Http Serve API </a></h5>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/php+mysql/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.225Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Typora-—-极简的-Markdown-编辑器"><a href="#Typora-—-极简的-Markdown-编辑器" class="headerlink" title="Typora — 极简的 Markdown 编辑器"></a>Typora — 极简的 Markdown 编辑器</h2><p><strong>Markdown</strong> 是一种用来自写作的轻量级<strong>标记语言</strong>，相比 HTML 真的是很简单，你可以只专心于文字内容而不是排版，字体设置等等繁琐事。今天我就带来一个 Markdown 草鸡好用的 IDE：<strong>Typora</strong>。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/Markdown/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Markdown/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.219Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-IOT" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="物联网当下的安全问题"><a href="#物联网当下的安全问题" class="headerlink" title="物联网当下的安全问题"></a>物联网当下的安全问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。</p>
-<h4 id="物联网安全概述"><a href="#物联网安全概述" class="headerlink" title="物联网安全概述"></a>物联网安全概述</h4><p>万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私、企业信息安全甚至国家关键设施的头号安全威胁。试想一下，无论家用或者企业级的互联网设备，如接入互联网的交通指示灯、恒温器或者医用监控设备遭到攻击，后果将会变得非常可怕。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IOT/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-IIS目录枚举漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="IIS-目录枚举漏洞"><a href="#IIS-目录枚举漏洞" class="headerlink" title="IIS 目录枚举漏洞"></a>IIS 目录枚举漏洞</h2><h4 id="Microsoft-IIS-tilde-directory-enumeration"><a href="#Microsoft-IIS-tilde-directory-enumeration" class="headerlink" title="Microsoft IIS tilde directory enumeration"></a>Microsoft IIS tilde directory enumeration</h4><p>当使用 IIS，你可以从某个目录中枚举所有短名的列表，这可能是一个大问题，如果你能设法猜测或者暴力破解这些短名称完整的文件或目录名。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IIS目录枚举漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HTML+CSS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p>​    说出来你可能不信啊，HTML 、CSS 作为前端最基础的知识，真的很简单。就我而言，前端给我带来的感觉就是和用户交互的更多，可以更加随心所意的排版，当然，形形色色的页面也比一个黑框好看。（滑稽脸）</p>
-<p>   如果你对 HTML + CSS 还没有任何认识的话，建议在<a href="http://www.imooc.com/learn/9" target="_blank" rel="external">慕课网 HTML + CSS 基础课程 </a>学习，一边看文档一边自己动手写。学完这个也可以再看看<a href="http://www.w3school.com.cn/h.asp" target="_blank" rel="external">W3School</a>上的文档加深记忆。</p>
-<p>  最后放上我的笔记，<a href="http://pan.baidu.com/s/1bQAVE2" target="_blank" rel="external">嘻嘻</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2017/07/14/80端口被占用/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.173Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -336,7 +189,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/16/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span>
     </nav>
   
 
