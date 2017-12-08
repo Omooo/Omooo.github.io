@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 节目直播案例开发前言现在直播行业可谓是如火如荼。本文是看慕课网视频 — Android节目直播案例开发 所学过程中记录的笔记。视频中用的是 Vitamio ，事实上，维他密虽然简单，但是已经几年没更新了。现在都用哔哩哔哩开源库 ijkplayer 做视频播放。ijkplayer 导入依赖包总是卡住，所以我使用了基于 ijkplayer 简单封装的开源库 jjdxm_ijkpl">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/page/9/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/12/08/Android --- 节目直播案例开发/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 节目直播案例开发前言现在直播行业可谓是如火如荼。本文是看慕课网视频 — Android节目直播案例开发 所学过程中记录的笔记。视频中用的是 Vitamio ，事实上，维他密虽然简单，但是已经几年没更新了。现在都用哔哩哔哩开源库 ijkplayer 做视频播放。ijkplayer 导入依赖包总是卡住，所以我使用了基于 ijkplayer 简单封装的开源库 jjdxm_ijkpl">
+<meta property="og:image" content="https://i.loli.net/2017/12/08/5a2a34fa6495c.gif">
+<meta property="og:updated_time" content="2017-12-08T06:48:29.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 节目直播案例开发前言现在直播行业可谓是如火如荼。本文是看慕课网视频 — Android节目直播案例开发 所学过程中记录的笔记。视频中用的是 Vitamio ，事实上，维他密虽然简单，但是已经几年没更新了。现在都用哔哩哔哩开源库 ijkplayer 做视频播放。ijkplayer 导入依赖包总是卡住，所以我使用了基于 ijkplayer 简单封装的开源库 jjdxm_ijkpl">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/08/5a2a34fa6495c.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +147,122 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android --- 节目直播案例开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-节目直播案例开发"><a href="#Android-—-节目直播案例开发" class="headerlink" title="Android — 节目直播案例开发"></a>Android — 节目直播案例开发</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>现在直播行业可谓是如火如荼。本文是看慕课网视频 — <a href="http://www.imooc.com/learn/919" target="_blank" rel="external">Android节目直播案例开发</a> 所学过程中记录的笔记。视频中用的是 Vitamio ，事实上，维他密虽然简单，但是已经几年没更新了。现在都用哔哩哔哩开源库 <a href="https://github.com/Bilibili/ijkplayer" target="_blank" rel="external">ijkplayer</a> 做视频播放。ijkplayer 导入依赖包总是卡住，所以我使用了基于 ijkplayer 简单封装的开源库 <a href="https://github.com/jjdxmashl/jjdxm_ijkplayer/" target="_blank" rel="external">jjdxm_ijkplayer</a> 。</p>
+<p>我从网上找一些直播源，做还是很简单的，主要是了解一些这方面的知识。</p>
+<p>效果如下：( 实际很高清 )</p>
+<p><img src="https://i.loli.net/2017/12/08/5a2a34fa6495c.gif" alt=""></p>
+<p>源码：<a href="https://github.com/Omooo/VitamioDemo" target="_blank" rel="external">https://github.com/Omooo/VitamioDemo</a></p>
+<a id="more"></a>
+<h4 id="直播原理以及协议"><a href="#直播原理以及协议" class="headerlink" title="直播原理以及协议"></a>直播原理以及协议</h4><p>直播本质：<strong>实时</strong>推送/拉取过来的音视频数据</p>
+<p>直播相关协议：</p>
+<ul>
+<li><p>RTMP ( Real Time Messaging Protocal ) 实时消息传输协议</p>
+<p>RTMP 协议是一个互联网 TCP/IP 五层体系结构中应用层协议</p>
+<p>RTMP 协议可以用来推送又可以用来直播</p>
+<p>RTMP 协议中基本的数据单元称为消息 ( Message )</p>
+<p>测试地址：香港卫视 rtmp://live.hkstv.hk.lxdns.com/live/hks</p>
+</li>
+<li><p>FLV ( Flash Video )</p>
+<p>FLV 协议是在大块的视频帧和音视频头部加入一些<strong>标记头信息</strong></p>
+<p>FLV 协议在延迟表现和大规模并发方面很成熟</p>
+<p>FLV 协议非常适合于手机端 APP 直播协议</p>
+<p>测试地址：CCTV4 <a href="http://flv106.v1.cn/cloud/20130604/605305.flv" target="_blank" rel="external">http://flv106.v1.cn/cloud/20130604/605305.flv</a></p>
+</li>
+<li><p>HLS ( HTTP Live Streaming )</p>
+<p>苹果推出的解决方案，将视频分成 5-10 秒的视频小分片，然后用 m3u8 索引表进行管理，HLS在iPhone和大部分Android手机浏览器上的支持非常好，常用于像QQ和微信朋友圈的URL分享。</p>
+<p>测试地址：湖南卫视 <a href="http://117.144.248.49/HDhnws.m3u8?authCode=07110409322147352675&amp;stbId=006001FF0018120000060019F0D49A1&amp;Contentid=6837496099179515295&amp;mos=jbjhhzstsl&amp;livemode=1&amp;channel-id=wasusyt" target="_blank" rel="external">http://117.144.248.49/HDhnws.m3u8?authCode=07110409322147352675&amp;stbId=006001FF0018120000060019F0D49A1&amp;Contentid=6837496099179515295&amp;mos=jbjhhzstsl&amp;livemode=1&amp;channel-id=wasusyt</a></p>
+<p><strong>m3u8 概念</strong>：以UTF-8编码格式的m3u文件，m3u文件记录了一个索引的纯文本文件，打开它时，播放软件并不是播放它，而是根据它里面的索引找到对应的音视频网络地址进行播放。</p>
+<p><strong>m3u8优点是什么？</strong></p>
+<p>主要是可以做多码率的适配，根据网络带宽，客户端会选择一个适合自己码率的文件进行播放，保证视频流的流畅。</p>
+<h4 id="直播源测试"><a href="#直播源测试" class="headerlink" title="直播源测试"></a>直播源测试</h4><p>直播源论坛：<a href="http://www.hdpfans.com/" target="_blank" rel="external">http://www.hdpfans.com/</a></p>
+<p>直播源测试：VLC</p>
+<h4 id="Vitamio-框架简介"><a href="#Vitamio-框架简介" class="headerlink" title="Vitamio 框架简介"></a>Vitamio 框架简介</h4><p>Android 平台音视频播放组件，支持播放主流格式的音视频、网络视频流 ( http/rtsp/mms )</p>
+<p>​</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/08/Android --- 节目直播案例开发/" class="archive-article-date">
+  	<time datetime="2017-12-08T06:48:54.336Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-08</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/Android ---  AsyncTask 异步加载/" class="archive-article-date">
-  	<time datetime="2017-09-10T14:34:47.598Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/Android --- Activity详解/" class="archive-article-date">
-  	<time datetime="2017-09-10T14:15:34.779Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/09/Android --- 有道翻译/" class="archive-article-date">
-  	<time datetime="2017-09-09T03:21:35.860Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-09</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/06/有些错误的确很难原谅/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/长密码拒绝服务攻击/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.383Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/配置文件披露漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.376Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/8/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/7/">7</a><a class="page-number" href="/archives/2017/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/2017/page/10/">10</a><a class="page-number" href="/archives/2017/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/17/">17</a><a class="extend next" rel="next" href="/archives/2017/page/10/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 节目直播案例开发" data-title="" data-url="http://yoursite.com/2017/12/08/Android --- 节目直播案例开发/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +285,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
