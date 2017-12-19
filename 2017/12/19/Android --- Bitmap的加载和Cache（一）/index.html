@@ -8,12 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Bitmap的加载和Cache（一）—  Bitmap的高效加载前言准备写一个系列，来逐步实现一个ImageLoader。图片加载一直都是Android知识体系的重点，因为内存的限制，我们要对图片进行压缩，防止OOM。又因为网络的限制，我们需要对图片进行缓存，避免无所谓的流量消耗。图片的显示实际上都是bitmap实现的，所以本篇文章主要讲解怎么高效加载一个Bitmap。
+一般加载在介绍Bitma">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/12/19/Android --- Bitmap的加载和Cache（一）/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Bitmap的加载和Cache（一）—  Bitmap的高效加载前言准备写一个系列，来逐步实现一个ImageLoader。图片加载一直都是Android知识体系的重点，因为内存的限制，我们要对图片进行压缩，防止OOM。又因为网络的限制，我们需要对图片进行缓存，避免无所谓的流量消耗。图片的显示实际上都是bitmap实现的，所以本篇文章主要讲解怎么高效加载一个Bitmap。
+一般加载在介绍Bitma">
+<meta property="og:updated_time" content="2017-12-19T04:51:01.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Bitmap的加载和Cache（一）—  Bitmap的高效加载前言准备写一个系列，来逐步实现一个ImageLoader。图片加载一直都是Android知识体系的重点，因为内存的限制，我们要对图片进行压缩，防止OOM。又因为网络的限制，我们需要对图片进行缓存，避免无所谓的流量消耗。图片的显示实际上都是bitmap实现的，所以本篇文章主要讲解怎么高效加载一个Bitmap。
+一般加载在介绍Bitma">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +148,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-Android --- Bitmap的加载和Cache（一）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- Bitmap的加载和Cache（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -156,9 +161,15 @@
 <h4 id="一般加载"><a href="#一般加载" class="headerlink" title="一般加载"></a>一般加载</h4><p>在介绍Bitmap的高效加载之前，我们先说一下如何加载一个Bitmap。Bitmap在Android中指的是一张图片，可以是png也可以是jpg等其他图片格式。那么如何加载一张图片呢？BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStream、decodeArray。分别支持从文件系统、资源、输入流和字节数组加载出一个Bitmap对象，其中decodeFile和decodeResource又是间接调用了decodeStream方法，这四类方法最终是在Android底层实现的。</p>
 <h4 id="高效加载"><a href="#高效加载" class="headerlink" title="高效加载"></a>高效加载</h4><p>那么如何高效的加载图片呢？核心思想也很简单，那就是采用BitmapFactory.Options来加载所需尺寸的图片。这里假设通过ImageView来显示图片，很多时候ImageView并没有图片的原始尺寸那么大，这个时候把原图直接加载进来显然有点多余，因为ImageView并没有办法显示原始照片。这时候可以通过BitmapFactory.Options就可以按一定采样率来加载缩小后的图片，将压缩后的图片设置给ImageView，这样就会降低内存占用从而在一定程度上避免OOM，提高了BItmap加载时的性能。BitmapFactory提供的加载图片的四种方法都支持BitmapFactory.Option参数，通过它就可以很方便的对一张图片进行采样缩放。</p>
 <p>通过BitmapFactory.Options来缩放图片，主要是用到了它的inSampleSize参数，即采样率。当inSampleSize为1时，采样后的图片为图片的原始大小；当inSampleSize为2时，那么采样后的图片其宽和高均为原图大小的1/2，而像素数为原图的1/4，其占用内存也为原图的1/4。拿一张1024 <em> 1024像素的图片来说，假定采用ARGB8888格式存储，那么它占用的内存为 1024 </em> 1024 * 4，即4M，如果inSampleSize为2，那么采样后的的图片占用内存只有1M。可以看出，只有当inSampleSize大于1才会有缩放效果。有一种特殊情况，当inSampleSize小于1时，其作用相当于1，即无缩放效果。inSampleSize的取值应该总是2的指数，比如1、2、4、8、16等等。如果外界传递inSampleSize的值不是2的指数，那么系统会向下取整并选择一个最接近2的指数来替代。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/12/19/Android --- Bitmap的加载和Cache（一）/#more">more >></a>
-        </p>
+<a id="more"></a>
+<h4 id="四个步骤"><a href="#四个步骤" class="headerlink" title="四个步骤"></a>四个步骤</h4><ol>
+<li>BitmapFactory.Options的inJustDecodeBounds参数设置为true并加载图片。</li>
+<li>从BitmapFactory.Options中取出图片原始的宽高，它们对应outWidth和outHeight参数。</li>
+<li>根据实际所需大小计算出inSimpleSize。</li>
+<li>将BitmapFactory.Options的inJustDecodeBounds参数设置为false并重新加载图片。</li>
+</ol>
+<p>这里的inJustDecodeBounds参数设置为true时，BitmapFactory只会解析图片原始的宽高信息，并不会真正的去加载图片，所以这个操作是轻量级的。另外需要注意的是，这个BitmapFactory获取的图片的宽高和图片的位置以及程序的设备有关。比如同一张图片放在不同的drawable目录下或者程序运行在不同屏幕密度的设备上，都有可能导致BitmapFactory获取到不同的结果。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public static Bitmap decodeSampleBitmap(Resources res, int resId, int reqWidth, int reqHeight) &#123;</div><div class="line">    final BitmapFactory.Options options = new BitmapFactory.Options();</div><div class="line">    //第一步</div><div class="line">    options.inJustDecodeBounds = true;</div><div class="line">    BitmapFactory.decodeResource(res, resId, options);</div><div class="line">    //第三步</div><div class="line">    options.inSampleSize = calcInSimpleSize(options, reqWidth, reqHeight);</div><div class="line">    //第四步</div><div class="line">    options.inJustDecodeBounds = false;</div><div class="line">    return BitmapFactory.decodeResource(res, resId, options);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int calcInSimpleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) &#123;</div><div class="line">    //第二步</div><div class="line">    final int height = options.outHeight;</div><div class="line">    final int width = options.outWidth;</div><div class="line">    int inSimpleSize = 1;</div><div class="line">    if (height &gt; reqHeight || width &gt; reqWidth) &#123;</div><div class="line">        final int halfHeight = height / 2;</div><div class="line">        final int halfWidth = width / 2;</div><div class="line">        while ((halfHeight / inSimpleSize) &gt;= reqHeight &amp;&amp; (halfWidth / width) &gt;= reqWidth) 		&#123;</div><div class="line">            inSimpleSize = inSimpleSize * 2;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return inSimpleSize;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <div class="article-info article-info-index">
@@ -174,227 +185,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Android --- 节目直播案例开发" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-节目直播案例开发"><a href="#Android-—-节目直播案例开发" class="headerlink" title="Android — 节目直播案例开发"></a>Android — 节目直播案例开发</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>现在直播行业可谓是如火如荼。本文是看慕课网视频 — <a href="http://www.imooc.com/learn/919">Android节目直播案例开发</a> 所学过程中记录的笔记。视频中用的是 Vitamio ，事实上，维他密虽然简单，但是已经几年没更新了。现在都用哔哩哔哩开源库 <a href="https://github.com/Bilibili/ijkplayer">ijkplayer</a> 做视频播放。ijkplayer 导入依赖包总是卡住，所以我使用了基于 ijkplayer 简单封装的开源库 <a href="https://github.com/jjdxmashl/jjdxm_ijkplayer/">jjdxm_ijkplayer</a> 。</p>
-<p>我从网上找一些直播源，做还是很简单的，主要是了解一些这方面的知识。</p>
-<p>效果如下：( 实际很高清 )</p>
-<p><img src="https://i.loli.net/2017/12/08/5a2a34fa6495c.gif" alt=""></p>
-<p>源码：<a href="https://github.com/Omooo/VitamioDemo">https://github.com/Omooo/VitamioDemo</a></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/12/08/Android --- 节目直播案例开发/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/12/08/Android --- 节目直播案例开发/" class="archive-article-date">
-  	<time datetime="2017-12-08T06:48:54.336Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-08</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-有些错误的确很难原谅" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="有些道理慢慢才会懂"><a href="#有些道理慢慢才会懂" class="headerlink" title="有些道理慢慢才会懂"></a>有些道理慢慢才会懂</h2><p><strong>果然，有些错误是无法被原谅的。</strong></p>
-<p>我又能怎么办呢？</p>
-<p><img src="https://i.loli.net/2017/12/06/5a27d0696fd62.png"></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/12/06/有些错误的确很难原谅/" class="archive-article-date">
-  	<time datetime="2017-12-06T11:30:26.375Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-06</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-新的一年又要到来了" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="新的一年又快到来了"><a href="#新的一年又快到来了" class="headerlink" title="新的一年又快到来了"></a>新的一年又快到来了</h2><h4 id="回首"><a href="#回首" class="headerlink" title="回首"></a>回首</h4><p>上一次说这句话的时候，还制定了一些年度计划：</p>
-<blockquote>
-<ol>
-<li>过了四级英语。</li>
-<li>认真看完五本书。</li>
-<li>系统学习前端，做个小项目。</li>
-<li>Rank ++</li>
-<li>沉默，专注。</li>
-<li>经济独立。</li>
-<li>卸载所有游戏。</li>
-<li>早起，吃早餐，锻炼身体，尽量不再熬夜。</li>
-</ol>
-</blockquote>
-<p>emmmm，看起来有点愧疚。过不过四级还不好说，这个月才考，差不多看完了五本书。对于 3 和 4 ，之前的定位是前端、渗透测试这方向，所以上学期也就是划划水。到了下学期，确定了Android开发方向，所以这些也就不复存在了。</p>
-<p>对于沉默、专注，上学期的事记得很少了，（我健忘症？？？）估计也是咸鱼状态。下学期毕竟已经明确方向了，这一点做的还是蛮好的。</p>
-<p>谈到经济独立，现在看来是不可能的了，之前是因为做兼职，每个月还能裹得住自己，现在已经弃职了，只能依靠老爸老妈了。</p>
-<p>卸载所有游戏？？？我怎么会有那么傻逼的想法。事实上，我已经卸载过好多次游戏了，不久之后又重装了，emmmm，卸是不可能卸的，这辈子都不可能卸的。</p>
-<p><img src="https://i.loli.net/2017/12/02/5a21f034cf57a.jpg" alt=""></p>
-<p>我现在基本上早上七点半左右起床，晚上十一点半睡觉。比以前随心所欲有规律多了，每周也会去操场跑跑步。跑步不仅能够强身健体，对我来说更大的作用是我能静下来思考我今天做了什么，明天要做什么，每天都会有一个计划。</p>
-<h4 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h4><p>这里是列举上半年的大体计划，因为下半年升大四了，又是一个重要的转折点。</p>
-<p><img src="https://i.loli.net/2017/12/02/5a21f1e26b20b.gif" alt=""></p>
-<ol>
-<li><p>坚持Android道路</p>
-<p>既然选择了，就只能一路向前。兴趣驱动编程，前景、钱景现在也没必要考虑，我相信，胡萝卜烂白菜才会没人要。</p>
-</li>
-<li><p>每天坚持 commit</p>
-<p>这可能是我这个学期最大的改变吧。每天都会记着一件事：今天绿了没？没有，那还不赶紧去写代码。</p>
-</li>
-<li><p>每天的小计划</p>
-<p>每天的小计划能让我知道今天我要做什么，这一点非常重要。计划制定在前一天晚上，可能前一天还没做完的事情接着做。当天早上刷一些大牛博客、公众号，就知道自己什么还不会，这一天的计划也就有了，当然，老师布置的实验作业什么的也可以写进去，总之就是要知道自己该做什么。每天的计划也会让我小有成就感，也会鼓励我继续做下去。</p>
-</li>
-<li><p>坚持早起早睡、锻炼身体</p>
-<p>身体真的很重要很重要很重要！</p>
-</li>
-<li><p>保持好奇心，享受孤独，勇于尝试</p>
-<p>事实上，这句话可能是我这学期说过最值得深思的话了，保持这样的心态会让我进步很快。</p>
-</li>
-</ol>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>谈谈我前后对一些看法的转变。</p>
-<ol>
-<li><p>要不要做兼职？</p>
-<p>我认为完全没必要做兼职。兼职是拿时间换取金钱的一种廉价的劳动力。如果是为了自力更生、减轻家庭负担我觉得还好，但是绝大多数兼职是赚钱奢靡自己。有人说兼职能积累很多社会经验，完全扯淡，无用的社交只能安慰自己空虚的心灵。不要再不该赚钱的阶段赚小钱而沾沾自喜，在该赚钱的阶段赚不到大钱而后悔莫及。</p>
-</li>
-<li><p>该不该卸载游戏？</p>
-<p>完全不应该！之前我总是卸载游戏逼迫自己不再玩游戏，从而强迫自己学习。实际上，我不仅没玩好游戏也没学好习，而是处于撕心裂肺的纠结中浑浑噩噩的度过了一天。想学习的时候有人拉我开黑我也不会去，想玩游戏的时候我甚至可以把一整天的计划定为打游戏！所以我们应该把游戏当做一种放松自己的方式，而不是堵住不学习的那条路强迫自己学习。emmmm，我就是喜欢打游戏。</p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2017/12/02/5a21fdf88aeef.jpg" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/12/02/新的一年又要到来了/" class="archive-article-date">
-  	<time datetime="2017-12-02T01:14:31.251Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hello IDEA" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Hello-IDEA"><a href="#Hello-IDEA" class="headerlink" title="Hello IDEA"></a>Hello IDEA</h2><p>其实久闻 IDEA，但是一直被老师牵制用Eclipse，然后慢慢就麻木了，懒得尝试其他IDE了。还好今天Eclipse突然崩溃，删了重装，装了三四次还是崩溃。没办法，逼上梁山，尝试IDEA。虽然没用过IDEA，但是用过AS啊，想着那么好用，就更下定决心要上手这个IDE了，更巧的是，我竟然搜到了网上下载使用IDEA的<strong>完整教程</strong>，而且教程也很新，是今年八月份出的。</p>
-<p>教程地址：<a href="http://how2j.cn/k/idea/idea-download-install/1348.html?tid=95" target="_blank" rel="external">http://how2j.cn/k/idea/idea-download-install/1348.html?tid=95</a></p>
-<p>我把上面的都看了一遍，也就发现了一个问题，就是在做 JavaWeb项目，配置 Tomcat的时候，运行不会报错，但是浏览器404.说明白点就是：</p>
-<blockquote>
-<p>比如我有个项目是AAA，用eclipse发到tomcat上，运行项目AAA中的index.jsp，路径应该是localhost:8080/AAA/index.jsp,但是到了使用了IDEA，那么访问localhost:8080/AAA/index.jsp就会报404的错误.但是编译出来的WAR直接丢到TOMCAT上又是正常的。</p>
-</blockquote>
-<p>以上有两种方法解决，参照：<a href="http://blog.csdn.net/taoli1986/article/details/52816681" target="_blank" rel="external">http://blog.csdn.net/taoli1986/article/details/52816681</a></p>
-<p>最后，一切顺利，顺便说句，勇于尝试，受益终身，毫不夸张。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/29/Hello IDEA/" class="archive-article-date">
-  	<time datetime="2017-11-29T14:24:51.654Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-29</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+    <a href="/2017/12/08/Android --- 节目直播案例开发/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- Bitmap的加载和Cache（一）" data-title="" data-url="http://yoursite.com/2017/12/19/Android --- Bitmap的加载和Cache（一）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -416,8 +264,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
