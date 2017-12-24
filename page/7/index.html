@@ -143,6 +143,49 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android -- 非UI线程更新UI？？？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="非UI线程可以更新UI？"><a href="#非UI线程可以更新UI？" class="headerlink" title="非UI线程可以更新UI？"></a>非UI线程可以更新UI？</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>我们都知道，不能在非UI线程中更新UI，但是今天再次接触Handle，实验的时候，发现了一个很奇妙的问题，于是记录一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        mTextView = (TextView) findViewById(R.id.tv_result);</div><div class="line">        new Thread()&#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                mTextView.setText(&quot;2333&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;.start();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>你猜猜执行会怎么着？竟然不会Crash，但是以下代码就会Crash。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        mTextView = (TextView) findViewById(R.id.tv_result);</div><div class="line">        new Thread()&#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                try &#123;</div><div class="line">                    Thread.sleep(2000);</div><div class="line">                    mTextView.setText(&quot;2333&quot;);</div><div class="line">                &#125; catch (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">//                mTextView.setText(&quot;2333&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;.start();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2017/10/27/59f2b7bb27321.jpg" alt=""></p>
+<p>难道说和线程休眠有关？也不会呀，休不休眠它还是在非UI线程之中呀。那问题出在哪里了呢？</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/10/27/Android -- 非UI线程更新UI？？？/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/10/27/Android -- 非UI线程更新UI？？？/" class="archive-article-date">
+  	<time datetime="2017-10-27T05:21:33.606Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-27</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-有感而发" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -305,61 +348,6 @@
       
       <a href="/2017/10/19/Android -- 计步器/" class="archive-article-date">
   	<time datetime="2017-10-19T02:47:09.228Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-19</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-香格里拉" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="香格里拉"><a href="#香格里拉" class="headerlink" title="香格里拉"></a>香格里拉</h2><p>我以为认真去做就能实现我的梦</p>
-<p>以为写首好歌走路就能抬起头</p>
-<p>以为骑摩托车旅行就能变英雄</p>
-<p>现在的我，失去了冲动</p>
-<p>有才华的人唾弃金光闪闪的奖座</p>
-<p>亲爱的Cobain是否也曾爱慕虚荣</p>
-<p>多希望有人冲破疑惑带我前走</p>
-<p>现在的我，变得好懦弱</p>
-<p>雨会下雨会停 这是不变的道理</p>
-<p>夜空中北极星 迷路的人不恐惧</p>
-<p>我唱歌你在听 一切风平又浪静</p>
-<p>G和弦的根音 抚平脆弱的心灵</p>
-<p>我只想牵着你 走到很远的梦里</p>
-<p>小木屋红屋顶 地址是一个秘密</p>
-<p>你抱着小猫咪 蓝眼睛不再忧郁</p>
-<p>香格里拉 让我们去找寻</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=297748&auto=1&height=66"></iframe>
-
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/10/15/香格里拉/" class="archive-article-date">
-  	<time datetime="2017-10-15T15:56:50.941Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-15</time>
 </a>
       
       

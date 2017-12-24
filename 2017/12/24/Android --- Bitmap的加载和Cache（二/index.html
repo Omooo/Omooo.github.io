@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Bitmap的加载和Cache（二）—  缓存策略前言ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/Android --- Bitmap的加载和Cache（二/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Bitmap的加载和Cache（二）—  缓存策略前言ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设">
+<meta property="og:image" content="https://i.loli.net/2017/12/24/5a3f1e5ba4e4e.gif">
+<meta property="og:updated_time" content="2017-12-24T03:27:21.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Bitmap的加载和Cache（二）—  缓存策略前言ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/24/5a3f1e5ba4e4e.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- Bitmap的加载和Cache（二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Bitmap的加载和Cache（二）—-缓存策略"><a href="#Bitmap的加载和Cache（二）—-缓存策略" class="headerlink" title="Bitmap的加载和Cache（二）—  缓存策略"></a>Bitmap的加载和Cache（二）—  缓存策略</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设备获取，存储设备没有，就从网上获取。这是因为从内存中加载图片比从存储设备上加载图片要快，这样不仅提高了程序的效率又为用户节省了不必要的流量开支。</p>
+<p>缓存策略包含缓存的添加、获取和删除。添加和获取很好理解，删除是因为缓存的大小是有限制的，当缓存容量满时，程序又要添加缓存，这个时候就要删除已有的缓存。如何定义缓存的新旧就是一种策略，不同的策略对应不同的缓存算法。目前比较常用的缓存算法是LRU（Least Recently Used），即近期最少使用算法。采用LRU算法的缓存有两种：LruCache和DiskLruCache。LruCache用于实现内存缓存，而DiskLruCache用于实现磁盘缓存。</p>
+<p>下面就开始慢慢享受精神食粮。</p>
+<p><img src="https://i.loli.net/2017/12/24/5a3f1e5ba4e4e.gif" alt=""></p>
+<a id="more"></a>
+<h4 id="LruCache"><a href="#LruCache" class="headerlink" title="LruCache"></a>LruCache</h4><p>LruCache是一个泛型类，它内部采用一个LinkedHashMap以强引用的方式存储外界的缓存对象，其提供了get和put方法来完成缓存的获取和添加。当缓存满时，LruCache会移除较早使用的缓存对象，然后再添加新的缓存对象。关于强弱引用之前也说过，这里再简单说下：</p>
+<ul>
+<li>强引用：直接的对象引用</li>
+<li>软引用：当一个对象只有软引用存在时，系统内存不足时此对象会被GC回收</li>
+<li>弱引用：当一个对象只有弱引用存在时，此对象会随时被GC回收</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> maxSize = (<span class="keyword">int</span>) (Runtime.getRuntime().maxMemory() / <span class="number">8</span>);</div><div class="line">mLruCache = <span class="keyword">new</span> LruCache&lt;String, Bitmap&gt;(maxSize)&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">sizeOf</span><span class="params">(String key, Bitmap value)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value.getByteCount();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>以当前应用程序最大内存的1/8作为内存缓存空间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//添加缓存</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">putBitmapToCache</span><span class="params">(Bitmap bitmap, String url)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (bitmap != <span class="keyword">null</span>) &#123;</div><div class="line">           mLruCache.put(url, bitmap);</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"><span class="comment">//获取缓存</span></div><div class="line"><span class="function"><span class="keyword">private</span> Bitmap <span class="title">getBitmapFromCache</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">       <span class="keyword">return</span> mLruCache.get(url);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h4 id="DiskLruCache"><a href="#DiskLruCache" class="headerlink" title="DiskLruCache"></a>DiskLruCache</h4><ol>
+<li><p>DiskLruCache的创建</p>
+<p>DiskLruCache并不能通过构造方法来创建，它提供了open方法用于创建自身，接口如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DiskLruCache <span class="title">open</span><span class="params">(File directory, <span class="keyword">int</span> appVersion, <span class="keyword">int</span> valueCount, <span class="keyword">long</span> maxSize)</span></span></div></pre></td></tr></table></figure>
+<p>四个参数依次表示：缓存目录、版本号、同一个key对应多少个缓存文件和缓存总大小。</p>
+<p>缓存目录通常是  /sdcard/Android/data/&lt; application package &gt;/cache，但是我们又要考虑如果这个手机没有SD卡，或者SD卡被移除的情况，因此我们需要专门写一个方法来获取缓存地址。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> DISK_CACHE_SIZE = <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">50</span>; <span class="comment">//50M</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"https://i.loli.net/2017/12/02/5a21fdf88aeef.jpg"</span>;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 返回一个DiskLruCache对象</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> DiskLruCache <span class="title">open</span><span class="params">(Context mContext)</span> </span>&#123;</div><div class="line">    DiskLruCache diskLruCache = <span class="keyword">null</span>;</div><div class="line">    File cacheDir = getDiskCacheDir(mContext, <span class="string">"bitmap"</span>);</div><div class="line">    <span class="keyword">if</span> (!cacheDir.exists()) &#123;</div><div class="line">        cacheDir.mkdirs();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        diskLruCache = DiskLruCache.open(cacheDir, <span class="number">1</span>, <span class="number">1</span>, DISK_CACHE_SIZE);</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> diskLruCache;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 获取缓存目录</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> File <span class="title">getDiskCacheDir</span><span class="params">(Context context, String uniqueName)</span> </span>&#123;</div><div class="line">    String cachePath;</div><div class="line">    <span class="comment">// SD卡存在或者SD卡不可被移除</span></div><div class="line">    <span class="keyword">if</span> (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) &#123;</div><div class="line">        <span class="comment">// 目录：/sdcard/Android/data/&lt;application package&gt;/cache</span></div><div class="line">        cachePath = context.getExternalCacheDir().getPath();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 目录：/data/data/&lt;application package&gt;/cache</span></div><div class="line">        cachePath = context.getCacheDir().getPath();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> File(cachePath + File.separator + uniqueName);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>DiskLruCache的添加</p>
+<p>写入操作是借助DiskLruCache.Editor这个类完成的。类似的，这个类也是不能通过new来实例化的，需要调用DiskLruCache的edit()方法来获取实例，接口如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public Editor edit(String key) throws IOException</div></pre></td></tr></table></figure>
+<p>这个方法接受一个参数key，这个key将会作为缓存文件的文件名，并且必须是要和图片的URL一一对应的。因为URL中可能有一些特殊符号，所以不适合用URL来作为key，因此最简单的办法就是用URL的MD5编码作为key。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将字符串进行MD5编码</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hashKeyForDisk</span><span class="params">(String key)</span> </span>&#123;</div><div class="line">    String cacheKey;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">final</span> MessageDigest mDigest = MessageDigest.getInstance(<span class="string">"MD5"</span>);</div><div class="line">        mDigest.update(key.getBytes());</div><div class="line">        cacheKey = bytesToHexString(mDigest.digest());</div><div class="line">    &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</div><div class="line">        cacheKey = String.valueOf(key.hashCode());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cacheKey;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">bytesToHexString</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bytes.length; i++) &#123;</div><div class="line">        String hex = Integer.toHexString(<span class="number">0xFF</span> &amp; bytes[i]);</div><div class="line">        <span class="keyword">if</span> (hex.length() == <span class="number">1</span>) &#123;</div><div class="line">            sb.append(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        sb.append(hex);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因此，现在我们可以得到一个DiskLruCache.Editor的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String imageUrl = <span class="string">"http://img.my.csdn.net/uploads/201309/01/1378037235_7476.jpg"</span>;  </div><div class="line">String key = hashKeyForDisk(imageUrl);  </div><div class="line">DiskLruCache.Editor editor = mDiskLruCache.edit(key);</div></pre></td></tr></table></figure>
+<p>有了DiskLruCache.Editor的实例之后，我们可以调用它的newOutputStream()方法来创建一个输出流，然后把它传入到downloadUrlToStream()中就能实现下载并写入缓存的功能。newOutputStream()方法接受一个index的参数，由于前面在设置valueCount的时候指定的是1，所以这里index传入0就可以了。在写入操作执行完之后，我们还需要调用commit()方法进行提交才能使写入生效，调用about()方法则表示放弃此次写入。不过下载时候需要在非UI线程中执行，所以这里用到了AsyncTask。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> Boolean <span class="title">doInBackground</span><span class="params">(Object... objects)</span> </span>&#123;</div><div class="line">    DiskLruCacheUtil util = <span class="keyword">new</span> DiskLruCacheUtil();</div><div class="line">    String key = util.hashKeyForDisk(util.url);</div><div class="line">    DiskLruCache diskLruCache = (DiskLruCache) objects[<span class="number">0</span>];</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        DiskLruCache.Editor editor = diskLruCache.edit(key);</div><div class="line">        <span class="keyword">if</span> (editor != <span class="keyword">null</span>) &#123;</div><div class="line">            OutputStream outputStream = editor.newOutputStream(<span class="number">0</span>);</div><div class="line">            <span class="keyword">if</span> (downloadUrlToStream(util.url, outputStream)) &#123;</div><div class="line">                publishProgress(<span class="string">""</span>);</div><div class="line">                editor.commit();</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                editor.abort();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 下载</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">downloadUrlToStream</span><span class="params">(String urlString, OutputStream outputStream)</span> </span>&#123;</div><div class="line">    HttpURLConnection urlConnection = <span class="keyword">null</span>;</div><div class="line">    BufferedOutputStream out = <span class="keyword">null</span>;</div><div class="line">    BufferedInputStream in = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">final</span> URL url = <span class="keyword">new</span> URL(urlString);</div><div class="line">        urlConnection = (HttpURLConnection) url.openConnection();</div><div class="line">        in = <span class="keyword">new</span> BufferedInputStream(urlConnection.getInputStream(), IO_BUFFER_SIZE);</div><div class="line">        out = <span class="keyword">new</span> BufferedOutputStream(outputStream, IO_BUFFER_SIZE);</div><div class="line">        <span class="keyword">int</span> b;</div><div class="line">        <span class="keyword">while</span> ((b = in.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            out.write(b);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        Log.e(TAG, <span class="string">"Error in downloadBitmap - "</span> + e);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="keyword">if</span> (urlConnection != <span class="keyword">null</span>) &#123;</div><div class="line">            urlConnection.disconnect();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (out != <span class="keyword">null</span>) &#123;</div><div class="line">                out.close();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</div><div class="line">                in.close();</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> IOException e) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行的时候传入DiskLruCache实例就好了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mDiskLruCache = <span class="keyword">new</span> DiskLruCacheUtil().open(MainActivity.<span class="keyword">this</span>);</div><div class="line"><span class="keyword">new</span> LoadAsyncTask(<span class="keyword">this</span>).execute(mDiskLruCache);</div></pre></td></tr></table></figure>
+</li>
+<li><p>DiskLruCache的读取</p>
+<p>读取相对于存储来说就很简单了，主要是借助DiskLruCache的get()方法来实现，接口如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Snapshot <span class="title">get</span><span class="params">(String key)</span> <span class="keyword">throws</span> IOException</span></div></pre></td></tr></table></figure>
+<p>传入的参数key就是将URL进行MD5编码后的值了，返回的是一个Snapshot快照对象，然后调用它的getInputStream就得到文件的输入流了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Bitmap <span class="title">getCacheFromDisk</span><span class="params">()</span> </span>&#123;</div><div class="line">    DiskLruCacheUtil util = <span class="keyword">new</span> DiskLruCacheUtil();</div><div class="line">    String key = util.hashKeyForDisk(util.url);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        DiskLruCache.Snapshot snapshot = mDiskLruCache.get(key);</div><div class="line">        <span class="keyword">if</span> (snapshot != <span class="keyword">null</span>) &#123;</div><div class="line">            InputStream in = snapshot.getInputStream(<span class="number">0</span>);</div><div class="line">            <span class="keyword">return</span> BitmapFactory.decodeStream(in);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>至此，整个DiskLruCache就已经实现完了。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>感谢郭神的博客对于DiskLruCache的详细解析，原文：<a href="http://blog.csdn.net/guolin_blog/article/details/28863651" target="_blank" rel="external">Android DiskLruCache完全解析，硬盘缓存的最佳方案</a> </p>
+<p>本篇文章全部代码：<a href="https://github.com/Omooo/CacheDemo" target="_blank" rel="external">https://github.com/Omooo/CacheDemo</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/24/Android --- Bitmap的加载和Cache（二/" class="archive-article-date">
+  	<time datetime="2017-12-24T03:28:25.227Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-24</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/19/Android --- Bitmap的加载和Cache（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- Bitmap的加载和Cache（二" data-title="" data-url="http://yoursite.com/2017/12/24/Android --- Bitmap的加载和Cache（二/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
