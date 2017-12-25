@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+<meta property="og:image" content="https://i.loli.net/2017/12/25/5a40a97d52654.gif">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-db98b5d3a266c24d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/584">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3462979-d5a75af13fbe51c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/454">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-05ac8d99f632c6c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/485">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-f3564647800ab93c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/490">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-27c645c7700f687b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3462979-1047c0775387c914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:updated_time" content="2017-12-25T10:38:31.518Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/25/5a40a97d52654.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Java --- 关于垃圾收集灵魂拷问三连（-）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Java-—-垃圾收集灵魂拷问三连"><a href="#Java-—-垃圾收集灵魂拷问三连" class="headerlink" title="Java — 垃圾收集灵魂拷问三连"></a>Java — 垃圾收集灵魂拷问三连</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。</p>
+<p><img src="https://i.loli.net/2017/12/25/5a40a97d52654.gif" alt=""></p>
+<p>今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分以及内存分配策略。本篇更偏向于理论和算法思想，所以看起来还是很有趣的。值得注意的是，我们只有在程序处于运行期间才知道创建了哪些对象，这部分内存的分配和回收是动态的，垃圾收集关注的也是这部分内存。学习GC通俗来说也就三个问题：</p>
+<ol>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>如何回收</li>
+</ol>
+<p>下面，我们也根据这三个问题来逐步了解GC。</p>
+<a id="more"></a>
+<h4 id="哪些内存需要回收？"><a href="#哪些内存需要回收？" class="headerlink" title="哪些内存需要回收？"></a>哪些内存需要回收？</h4><p>对象占用内存，所以不再使用的对象所占用的内存需要回收。那么，怎么判断对象不再使用呢？判断对象是否 “死亡” 有以下方法：</p>
+<ol>
+<li><p>引用计数算法</p>
+<p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器都为0的对象就是不可能在被使用的。引用计数算法实现简单，判断效率也很高，在大部分情况下都是一个不错的算法。但是，在Java中<strong>并没有选择</strong>引用计数算法来管理内存，其中最主要的原因是它很难解决对象之间的相互循环引用的问题。</p>
+</li>
+<li><p>根搜索算法</p>
+<p>Java中，是用根搜索算法来判断对象是否存活的。这个算法的思路就是通过一系列的名为 “GC Roots” 的对象作为起始点，从这个节点开始向下搜索，搜索所有走过的路径称为引用链（Reference Chain），当一个对象到了GC Roots没有任何引用链相连的时候（不可达），则说明此对象是不可用的，被判定为可回收对象。</p>
+<p>一图胜千言：（图是枪来的……）</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3789193-db98b5d3a266c24d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/584" alt=""></p>
+</li>
+<li><p>根据引用判断</p>
+<p>无论是通过引用计数算法判断对象的引用数量，还是通过根搜索算法判断对象的引用链是否可达，判断对象是否存活都与引用有关。</p>
+<ul>
+<li><p>强引用（Strong Reference）</p>
+<p>在代码中普遍存在，类似 Object obj = new Object() 。只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</p>
+</li>
+<li><p>软引用（Soft Reference）</p>
+<p>用来描述一些还有用，但并非必须的对象。对于软引用关联的对象，在系统将要发生OOM异常之前，将会把这些对象列进回收范围之中并进行第二次回收。如果这次回收还是没有足够的内存，才会抛出内存溢出异常。在JDK1.2之后，提供了SoftReference类实现软引用。</p>
+</li>
+<li><p>弱引用（Weak Reference）</p>
+<p>也是用来描述非必须对象，但是它的强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只有被弱引用关联的对象。在JDK1.2之后，提供了WeakReference类实现弱引用。</p>
+</li>
+<li><p>虚引用（Phantom Reference）</p>
+<p>它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是希望能在这个对象被收集器回收时收到一个系统通知。在JDK1.2之后，提供了PhantomReference类来实现虚引用。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="什么时候回收？"><a href="#什么时候回收？" class="headerlink" title="什么时候回收？"></a>什么时候回收？</h4><p>当一个对象不可达时，并不是马上就会被回收的。这里就要说一下finalize()方法，这个方法被调用有三种情况：</p>
+<ol>
+<li>所有对象被CG时自动调用，比如运行System.gc()的时候</li>
+<li>程序退出时为每个对象调用一次finalize方法</li>
+<li>显式的调用finalize方法</li>
+</ol>
+<p>再盗一张图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3462979-d5a75af13fbe51c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/454" alt=""></p>
+<blockquote>
+<p>JVM 能够保证一个对象在<strong>回收以前</strong>一定会调用<strong>一次</strong>它的finalize()方法。</p>
+</blockquote>
+<p>需要注意的是，你永远不知道它什么时候被调用甚至会不会调用，因为有些对象永远不会被回收的，或者被回收以前程序就已经结束了。但是如果它有必要执行finalize()的，那么在GC前一定调用一次且仅且一次，如果在第一次GC时没有被回收，那么以后在GC时就不会在调用finalize()。</p>
+<h4 id="如何回收？"><a href="#如何回收？" class="headerlink" title="如何回收？"></a>如何回收？</h4><p>那就要说说回收算法啦。</p>
+<ol>
+<li><p>标记清除算法（Mark-Sweep）</p>
+<p>算法分为标记和清除两个阶段，首先标记出所有需要回收的对象，在标记完成后统一回收掉被标记的对象。</p>
+<p>缺点：</p>
+<ul>
+<li>效率低下，标记和清除的效率都不高</li>
+<li>空间问题，标记清除后会产生大量不连续的内存碎片，空间碎片太多可能会导致需要分配大对象无法找到足够的连续内存而不得不提前触发另一次垃圾收集。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/3789193-05ac8d99f632c6c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/485" alt=""></p>
+</li>
+<li><p>复制算法（Copying）</p>
+<p>它将可用内存按容量划分为大小相等的两块，每次只使用其中一块。当这一块的内存用完了，就将还存活的对象复制到另外一块上面，然后再把已经使用过的内存空间一次清理掉。这样使得每次都是对其中的一块进行内存回收，内存分配也不用考虑内存碎片等复杂问题，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。</p>
+<p>当然，缺点也很明显，那就是要牺牲一半的内存代价。</p>
+<p>但是事实上，并不需要按1:1划分，而是将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor空间还存活的对象一次性的复制到另外一块Survivor空间上，最后清理掉Eden和刚刚用过的Survivor空间。HotSpot虚拟机默认Eden和Survivor的大小比例是8:1。但是，当对象存活率较高时就要执行较多的复制操作，效率将会变低。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3789193-f3564647800ab93c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/490" alt=""></p>
+</li>
+<li><p>标记-整理算法（Mark-Compact）</p>
+<p>此算法结合了标记清除和复制两个算法的优点，分为两个阶段：</p>
+<ol>
+<li>第一阶段从根节点开始标记所有被引用的对象</li>
+<li>第二阶段遍历整个堆，把清除未标记对象并且把存活的对象压缩到堆的其中一块，按顺序排放。此算法避免了标记清除的碎片问题，同时也避免了复制算法的空间问题。</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/3789193-27c645c7700f687b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511" alt=""></p>
+</li>
+<li><p>分代收集算法（Generational Collection）</p>
+<p>当前商业虚拟机的垃圾回收都采用分代收集算法，这种算法并没有什么新的思想，只是根据对象的存活周期将内存划分为几块。一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。在新生代中，每次垃圾回收都有大批对象死去，只有少量存活，那就选用复制算法，只要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高，没有额外的空间对它进行分配担保，那就使用标记清理或者标记整理算法来进行回收。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3462979-1047c0775387c914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
+<p>关于新生代和老年代的划分，我们在下下一篇文章内存分配策略中会讲到。</p>
+</li>
+</ol>
+<h4 id="更多参考："><a href="#更多参考：" class="headerlink" title="更多参考："></a>更多参考：</h4><p>本篇文章的的部分内容和图片采自以下博客，感谢！</p>
+<p><a href="https://www.jianshu.com/p/5261a62e4d29" target="_blank" rel="external">浅析JAVA的垃圾回收机制（GC）</a></p>
+<p><a href="https://www.jianshu.com/p/a67c3fdcc8e8" target="_blank" rel="external">GC及JVM参数</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/" class="archive-article-date">
+  	<time datetime="2017-12-25T10:39:44.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-25</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/24/Android --- ButterKnife使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java --- 关于垃圾收集灵魂拷问三连（-）" data-title="" data-url="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
