@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+  <meta name="description" content="Java — 垃圾收集灵魂拷问三连（一）前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
 
-今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（一）/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
-<meta property="og:description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+<meta property="og:description" content="Java — 垃圾收集灵魂拷问三连（一）前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
 
-今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代">
 <meta property="og:image" content="https://i.loli.net/2017/12/25/5a40a97d52654.gif">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-db98b5d3a266c24d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/584">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3462979-d5a75af13fbe51c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/454">
@@ -25,12 +25,12 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-f3564647800ab93c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/490">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3789193-27c645c7700f687b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/511">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3462979-1047c0775387c914.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
-<meta property="og:updated_time" content="2017-12-25T10:38:31.518Z">
+<meta property="og:updated_time" content="2017-12-25T10:43:12.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
-<meta name="twitter:description" content="Java — 垃圾收集灵魂拷问三连前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
+<meta name="twitter:description" content="Java — 垃圾收集灵魂拷问三连（一）前言说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。
 
-今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分">
+今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代">
 <meta name="twitter:image" content="https://i.loli.net/2017/12/25/5a40a97d52654.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
@@ -159,7 +159,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Java --- 关于垃圾收集灵魂拷问三连（-）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java --- 关于垃圾收集灵魂拷问三连（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -168,7 +168,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="Java-—-垃圾收集灵魂拷问三连"><a href="#Java-—-垃圾收集灵魂拷问三连" class="headerlink" title="Java — 垃圾收集灵魂拷问三连"></a>Java — 垃圾收集灵魂拷问三连</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。</p>
+<h2 id="Java-—-垃圾收集灵魂拷问三连（一）"><a href="#Java-—-垃圾收集灵魂拷问三连（一）" class="headerlink" title="Java — 垃圾收集灵魂拷问三连（一）"></a>Java — 垃圾收集灵魂拷问三连（一）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。</p>
 <p><img src="https://i.loli.net/2017/12/25/5a40a97d52654.gif" alt=""></p>
 <p>今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分以及内存分配策略。本篇更偏向于理论和算法思想，所以看起来还是很有趣的。值得注意的是，我们只有在程序处于运行期间才知道创建了哪些对象，这部分内存的分配和回收是动态的，垃圾收集关注的也是这部分内存。学习GC通俗来说也就三个问题：</p>
 <ol>
@@ -257,7 +257,7 @@
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/" class="archive-article-date">
+      <a href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（一）/" class="archive-article-date">
   	<time datetime="2017-12-25T10:39:44.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-25</time>
 </a>
       
@@ -307,7 +307,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Java --- 关于垃圾收集灵魂拷问三连（-）" data-title="" data-url="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/"></div>
+	<div class="ds-thread" data-thread-key="Java --- 关于垃圾收集灵魂拷问三连（一）" data-title="" data-url="http://yoursite.com/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（一）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

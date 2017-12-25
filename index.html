@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-Java --- 关于垃圾收集灵魂拷问三连（-）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Java --- 关于垃圾收集灵魂拷问三连（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,7 +152,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="Java-—-垃圾收集灵魂拷问三连"><a href="#Java-—-垃圾收集灵魂拷问三连" class="headerlink" title="Java — 垃圾收集灵魂拷问三连"></a>Java — 垃圾收集灵魂拷问三连</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。</p>
+<h2 id="Java-—-垃圾收集灵魂拷问三连（一）"><a href="#Java-—-垃圾收集灵魂拷问三连（一）" class="headerlink" title="Java — 垃圾收集灵魂拷问三连（一）"></a>Java — 垃圾收集灵魂拷问三连（一）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>说到GC，一直没有系统的看过。但是，很显然，是一个非常经典的知识点。毫不夸张的说，面试的时候问道GC而你一无所知的话，基本上是凉了。</p>
 <p><img src="https://i.loli.net/2017/12/25/5a40a97d52654.gif" alt=""></p>
 <p>今天拜读了JVM经典书《深入理解Java虚拟机》，对于GC讲的很详细。书中在第三章讲的是垃圾收集器与内存分配策略，我准备分三篇文章来记录这章的读书笔记，本篇介绍一下垃圾回收流程，第二篇介绍垃圾收集器，第三篇介绍新老生代的划分以及内存分配策略。本篇更偏向于理论和算法思想，所以看起来还是很有趣的。值得注意的是，我们只有在程序处于运行期间才知道创建了哪些对象，这部分内存的分配和回收是动态的，垃圾收集关注的也是这部分内存。学习GC通俗来说也就三个问题：</p>
 <ol>
@@ -162,13 +162,13 @@
 </ol>
 <p>下面，我们也根据这三个问题来逐步了解GC。</p>
         <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/#more">more >></a>
+          <a class="article-more-a"  href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（一）/#more">more >></a>
         </p>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（-）/" class="archive-article-date">
+      <a href="/2017/12/25/Java --- 关于垃圾收集灵魂拷问三连（一）/" class="archive-article-date">
   	<time datetime="2017-12-25T10:39:44.035Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-25</time>
 </a>
       
