@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Java — 关于垃圾收集灵魂拷问三连（三）前言这是本系列的最后一篇，主要讲解内存分配策略。在上一篇文章中，我们已经介绍了堆内存的分配区域，分为三种：新生代、老年代和持久代。而持久代对垃圾回收没有太大影响，所以在之后讨论基于分代算法的垃圾收集器是按新生代和老年代划分的。
+Java技术体系中所提倡的自动内存管理最终可以归结为自动化了解决了两个问题：给对象分配内存和回收分配给对象的内存。对于内存回收">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/2017/page/5/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/12/27/Java --- 关于垃圾收集灵魂拷问三连（三）/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Java — 关于垃圾收集灵魂拷问三连（三）前言这是本系列的最后一篇，主要讲解内存分配策略。在上一篇文章中，我们已经介绍了堆内存的分配区域，分为三种：新生代、老年代和持久代。而持久代对垃圾回收没有太大影响，所以在之后讨论基于分代算法的垃圾收集器是按新生代和老年代划分的。
+Java技术体系中所提倡的自动内存管理最终可以归结为自动化了解决了两个问题：给对象分配内存和回收分配给对象的内存。对于内存回收">
+<meta property="og:image" content="https://i.loli.net/2017/12/27/5a43122946b66.png">
+<meta property="og:updated_time" content="2017-12-27T03:49:48.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Java — 关于垃圾收集灵魂拷问三连（三）前言这是本系列的最后一篇，主要讲解内存分配策略。在上一篇文章中，我们已经介绍了堆内存的分配区域，分为三种：新生代、老年代和持久代。而持久代对垃圾回收没有太大影响，所以在之后讨论基于分代算法的垃圾收集器是按新生代和老年代划分的。
+Java技术体系中所提倡的自动内存管理最终可以归结为自动化了解决了两个问题：给对象分配内存和回收分配给对象的内存。对于内存回收">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/27/5a43122946b66.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +150,121 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Java --- 关于垃圾收集灵魂拷问三连（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Java-—-关于垃圾收集灵魂拷问三连（三）"><a href="#Java-—-关于垃圾收集灵魂拷问三连（三）" class="headerlink" title="Java — 关于垃圾收集灵魂拷问三连（三）"></a>Java — 关于垃圾收集灵魂拷问三连（三）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这是本系列的最后一篇，主要讲解内存分配策略。在上一篇文章中，我们已经介绍了堆内存的分配区域，分为三种：新生代、老年代和持久代。而持久代对垃圾回收没有太大影响，所以在之后讨论基于分代算法的垃圾收集器是按新生代和老年代划分的。</p>
+<p>Java技术体系中所提倡的自动内存管理最终可以归结为自动化了解决了两个问题：给对象分配内存和回收分配给对象的内存。对于内存回收、内存分配，之前都已经说过了，下面在深入一下内存分配，介绍内存分配策略。</p>
+<p>内存分配策略主要有以下三点：</p>
+<ol>
+<li>对象优先在Eden分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代</li>
+</ol>
+<p>下面分别介绍这三个分配策略。</p>
+<p><img src="https://i.loli.net/2017/12/27/5a43122946b66.png" alt=""></p>
+<a id="more"></a>
+<p><strong>对象优先在Eden分配</strong></p>
+<p>大多数情况下，对象在新生代Eden区分配。当Eden区没有足够的空间分配时，虚拟机将发起一次Minor GC。</p>
+<p>那么Minor GC和之前提到的Full GC有什么区别吗？</p>
+<ul>
+<li><p>新生代GC（Minor GC）</p>
+<p>指发生在新生代的垃圾收集，因为Java对象大多都具备朝生夕灭的特性，所以Minor GC非常频繁，一般回收速度也比较快。</p>
+</li>
+<li><p>老年代GC（Major GC / Full GC）</p>
+<p>指发生在老年代的GC，出现了Major GC，经常会伴随至少一次的Minor GC（并非绝对），Major GC的速度一般会比Minor GC慢十倍以上。</p>
+</li>
+</ul>
+<p><strong>大对象直接进入老年代</strong></p>
+<p>所谓大对象是指，需要大量连续内存空间的Java对象，最典型的大对象就是那些很长的字符串以及数组。大对象对虚拟机的内存分配来说是一个坏消息（比遇到一个大对象更恐怖的是遇到一个朝生夕灭的短命大对象），经常出现大对象容易导致内存还有不少空间时就提前触发垃圾收集以获取足够的连续空间来安置它们。</p>
+<p><strong>长期存活的对象将进入老年代</strong></p>
+<p>虚拟机既然采用了分代收集的思想来管理内存，那么内存回收就必须能识别哪些对象应该放在新生代，哪些对象放在老年代。为了做到这一点，虚拟机给每个对象定义一个对象年龄计数器。如果对象在Eden出生并经过一次Minor GC后仍然存活，并且能被Survivor容纳的话，将会被移动到Survivor空间，并将对象年龄加一。对象每在Survivor区熬过一次Minor GC，年龄就增加一，当它的年龄增加到一定程度时（默认是15），就会被晋升到老年代。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>到这里，灵魂拷问三连就结束啦，完结撒花 ~~~ 开心。</p>
+<p>期间，要感谢《深入理解Java虚拟机》的作者 — 周志明，还有在简书上看到的两篇非常nice的博文：</p>
+<p><a href="https://www.jianshu.com/p/5261a62e4d29" target="_blank" rel="external">https://www.jianshu.com/p/5261a62e4d29</a></p>
+<p><a href="https://www.jianshu.com/p/a67c3fdcc8e8" target="_blank" rel="external">https://www.jianshu.com/p/a67c3fdcc8e8</a></p>
+<p>感谢以上作者。</p>
+<p>在这个知识分享的时代，你没有任何理由感到惶恐焦虑！</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/27/Java --- 关于垃圾收集灵魂拷问三连（三）/" class="archive-article-date">
+  	<time datetime="2017-12-27T03:50:29.817Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-27</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/14/每天欣喜的事/" class="archive-article-date">
-  	<time datetime="2017-11-14T07:17:08.105Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/12/Android --- Activity启动模式/" class="archive-article-date">
-  	<time datetime="2017-11-12T03:40:00.550Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-12</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/12/傻逼豫章书院/" class="archive-article-date">
-  	<time datetime="2017-11-12T02:36:56.988Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-12</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/26/Java --- 关于垃圾收集灵魂拷问三连（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/11/Android --- Fastjson/" class="archive-article-date">
-  	<time datetime="2017-11-11T02:22:26.650Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-11</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/09/Android -- TextInputLayout/" class="archive-article-date">
-  	<time datetime="2017-11-09T13:50:17.500Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-09</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/4/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="page-number" href="/archives/2017/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2017/page/6/">6</a><a class="page-number" href="/archives/2017/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/18/">18</a><a class="extend next" rel="next" href="/archives/2017/page/6/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java --- 关于垃圾收集灵魂拷问三连（三）" data-title="" data-url="http://yoursite.com/2017/12/27/Java --- 关于垃圾收集灵魂拷问三连（三）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +287,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
