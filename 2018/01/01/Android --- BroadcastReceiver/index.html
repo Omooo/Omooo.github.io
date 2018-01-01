@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — BroadcastReceiver前言是时候展现真正的…..哦不，是时候学习一下BroadcastReceiver了。学习Android快半年了，在最开始的讲解四大组件，但是在实践时候也就用到了Activity和Service，Service也很少用。对于BroadcastReceiver和ContentProvider的了解也只限于了解。这次，就全面系统学习一下这个Broa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2018/01/01/Android --- BroadcastReceiver/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — BroadcastReceiver前言是时候展现真正的…..哦不，是时候学习一下BroadcastReceiver了。学习Android快半年了，在最开始的讲解四大组件，但是在实践时候也就用到了Activity和Service，Service也很少用。对于BroadcastReceiver和ContentProvider的了解也只限于了解。这次，就全面系统学习一下这个Broa">
+<meta property="og:image" content="https://i.loli.net/2017/12/30/5a4743cae477c.jpg">
+<meta property="og:updated_time" content="2018-01-01T14:49:12.098Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — BroadcastReceiver前言是时候展现真正的…..哦不，是时候学习一下BroadcastReceiver了。学习Android快半年了，在最开始的讲解四大组件，但是在实践时候也就用到了Activity和Service，Service也很少用。对于BroadcastReceiver和ContentProvider的了解也只限于了解。这次，就全面系统学习一下这个Broa">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/30/5a4743cae477c.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-BroadcastReceiver"><a href="#Android-—-BroadcastReceiver" class="headerlink" title="Android — BroadcastReceiver"></a>Android — BroadcastReceiver</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>是时候展现真正的…..哦不，是时候学习一下BroadcastReceiver了。学习Android快半年了，在最开始的讲解四大组件，但是在实践时候也就用到了Activity和Service，Service也很少用。对于BroadcastReceiver和ContentProvider的了解也只限于了解。这次，就全面系统学习一下这个BroadcastReceiver，并实践一下该用到何处。</p>
+<p>大致目录结构如下：</p>
+<ol>
+<li><p>简介</p>
+<p>1.1 广播发送者和广播接收者</p>
+<p>1.2 实现原理</p>
+</li>
+<li><p>发送广播</p>
+<p>2.1 自定义BroadcastReceiver</p>
+<p>2.2 BroadcastReceiver的注册类型</p>
+<p>2.3 BroadcastReceiver示例</p>
+</li>
+<li><p>有序广播</p>
+</li>
+<li><p>接收系统广播消息</p>
+</li>
+</ol>
+<p>emmmm，看完再动手写一下示例，基本上就OK了。</p>
+<p><img src="https://i.loli.net/2017/12/30/5a4743cae477c.jpg" alt=""></p>
+<a id="more"></a>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
+<li><p>广播发送者和广播接收者</p>
+<p>Android 广播可以分为两个方面：广播发送者和广播接收者。BroadcastReceiver指的就是广播接收者，用于异步接收广播Intent。广播Intent通过调用Context.sendBroadcast()实现发送广播、BroadcastReceiver()方法实现接收广播。通常，一个广播Intent可以被订阅了此Intent的多个广播接收者接收。</p>
+<p>广播接收器只能接收广播，对广播的通知做出响应，很多广播都产生于系统代码，如时区的变化、电池电量不足、用户改变了语言偏好或开机启动等等。</p>
+<p>广播接收器没有用户界面，但是它可以为接收到的信息启动一个Activity或者使用NotificationManager来通知用户。</p>
+<p>BroadcastReceiver接收广播的方式有两种：</p>
+<ol>
+<li>Normal Broadcasts（正常广播），调用Context.sendBroadcast()方法发送是完全异步的，它们都运行在一个未定义的顺序下，通常是在同一时间。</li>
+<li>Ordered Broadcasts（有序广播），调用Context.sendOrderdBroadcast()方法每次将广播发送到一个Receiver。所谓有序，就是每个Receiver执行后可以传播到下一个Receiver，也可以完全中止传播，即不传播给其他Receiver。而Receiver运行的顺序是可以通过matched intent-filter 里面的android:priority来控制，当priority优先级相同的时候，Receiver以任意顺序执行。</li>
+</ol>
+</li>
+<li><p>实现原理</p>
+</li>
+</ul>
+<p>  从实现的原理上来看，Android中的广播使用了观察者模式，即基于事件的发布/订阅事件模型。因此，从实现角度来看，Android中的广播将广播的发送和接收极大限度的解耦，使得系统能够很方便集成，更易扩展。具体实现流程如下：</p>
+<ol>
+<li>广播接收者BroadcastReceiver通过Binder机制向AMS（Activity Manager Service）进行注册。</li>
+<li>广播发送者通过Binder机制向AMS发送广播。</li>
+<li>AMS查找符合相应条件（IntentFilter/Permission等）的BroadcastReceiver，将广播发送到BroadcastReceiver（一般情况下是Activity）响应的消息循环队列中。</li>
+<li><p>消息循环执行接收到此广播，回调BroadcastReceiver中的onReceive()方法。</p>
+<p>对于不同的广播类型，以及不同的BroadcastReceiver注册方式，具体实现上会有不同，但是总体流程如上。</p>
+<p>由此，广播发送者和广播接收者分别属于观察者模式中的消息发布和订阅两端，AMS属于中间的处理中心。广播发送者和广播接收者的执行是异步的，发出去的广播不会关心有没有接收者，也不确定接收者到底何时才能接受到广播。</p>
+</li>
+</ol>
+<h4 id="发送广播"><a href="#发送广播" class="headerlink" title="发送广播"></a>发送广播</h4><ul>
+<li><p>自定义BroadcastReceiver</p>
+<p>自定义广播接收器需要继承基类BroadcastReceiver，并实现抽象方法onReceive(context,intent)方法。广播接收器接受到相应广播后，会自动调用onReceive()方法。默认情况下，广播接收器也是运行在UI线程中，因此，onReceive()方法中不能执行太过于耗时的操作，否则可能给导致ANR异常。</p>
+<p>一般情况下，根据实际业务需求，onReceive()方法中都会涉及与其他组件之间的交互，如发送Notification、启动service等等。</p>
+<p>需要注意的是，一个BroadcastReceiver对象只有在被调用onReceive(context,Intent)时才有效，当该函数返回时，该对象就无效了，从而结束生命周期。</p>
+<p>因此，从这个特性来看，在所调用的onReceive(Context,Intent)函数里，不能有过于耗时的操作，不能使用线程来执行。对于耗时的操作，应该在startService中完成。因为当得到其他异步操作所返回的结果时，BroadcastReceiver可能已经无效了。</p>
+</li>
+<li><p>BroadcastReceiver的注册类型</p>
+<p>BroadcastReceiver总体上可以分为两种注册类型：静态注册和动态注册。</p>
+<ol>
+<li><p>静态注册</p>
+<p>直接在AndroidManifest.xml文件中注册。</p>
+</li>
+<li><p>动态注册</p>
+<p>直接在代码中通过调用Context的registerReceiver函数，就可以在程序中动态注册BroadcastReceiver。</p>
+<p>动态注册的广播接收器可以自由的控制注册与注销，在灵活方面有很大的优势，但是它必须在程序启动之后才能接收广播，因为注册的逻辑是写在onCreat()中，所以没法在程序未启动的时候接收广播，这时候就需要使用静态广播，下面有示例。</p>
+</li>
+</ol>
+<p><strong>需要注意的是</strong> ，Android中所有与观察者模式有关的设计中，一旦涉及register，必定在相应的时机需要用到unregister。一般在Activity的onStart()方法中进行注册，在onStop()方法中进行注销，如果在Activity.onResume()方法中注册，就必须在Activity.onPause()方法中注销。</p>
+</li>
+<li><p>BroadcastReceiver示例</p>
+<p><strong>动态注册实现网络状态的监听：</strong></p>
+<p>写一个类MyBroadcast继承至BroadcastReceiver：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcast</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">        NetworkInfo networkInfo = manager.getActiveNetworkInfo();</div><div class="line">        <span class="keyword">if</span> (networkInfo != <span class="keyword">null</span> &amp;&amp; networkInfo.isAvailable()) &#123;</div><div class="line">            Toast.makeText(context, <span class="string">"网络连接成功"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            Toast.makeText(context, <span class="string">"网络连接失败"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后写一个测试Aactivity：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBroadcast</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> MyBroadcast mBroadcast;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_testbroadcast);</div><div class="line"></div><div class="line">        mBroadcast= <span class="keyword">new</span> MyBroadcast();</div><div class="line">        IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter();</div><div class="line">        intentFilter.addAction(<span class="string">"android.net.conn.CONNECTIVITY_CHANGE"</span>);</div><div class="line">        registerReceiver(mBroadcast, intentFilter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        unregisterReceiver(mBroadcast);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>采用动态注册，所以有注册就一定要有注销。我们想指定该广播接收器监听网络状态的变化，所以就添加对应的action。</p>
+<p><strong>静态注册实现开机启动</strong></p>
+<p>右键 new –&gt; Other –&gt; Broadcast Receiver 新建一个静态广播接收器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBootBroadcast</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">// <span class="doctag">TODO:</span> This method is called when the BroadcastReceiver is receiving</span></div><div class="line">        <span class="comment">// an Intent broadcast.</span></div><div class="line">        Toast.makeText(context, <span class="string">"开机啦"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"Not yet implemented"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>AS会自动在AndroidManifest中静态注册该广播。当然，我们要监听开机，所以还要添加Intent-filter所对应的Action。完善一下如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">".boradcast.MyBootBroadcast"</span></div><div class="line">    <span class="attr">android:enabled</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.LOCKED_BOOT_COMPLETED"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>还有，别忘了赋予用户权限：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.RECEIVE_BOOT_COMPLETED"</span>/&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="有序广播"><a href="#有序广播" class="headerlink" title="有序广播"></a>有序广播</h4><p>有序广播中的有序是针对广播接收者而言的，指的是发送出去的广播被BroadcastReceiver按照先后顺序接收。有序广播的定义过程与普通广播无异。只是其主要发送方式变为：sendOrderedBroadcast(Intent,receiverPermission,…)。</p>
+<p>对于有序广播，其主要特点如下：</p>
+<ol>
+<li>多个当前已经注册且有效的BroadcastReceiver接收有序广播时，是按照先后顺序接收的，先后顺序判定标准：将当前系统中所有有效的动态注册和静态注册的BroadcastReceiver按照Priority属性值从大到小排列，对于具有相同的Priority的动态广播和静态广播，动态广播会排在前面。</li>
+<li>先接收的BroadcastReceiver可以对有序广播进行截断，使后面的BroadcastReceiver不在接收到此广播，也可以对广播进行修改，使后面的BroadcastReceiver接受到广播后解析到错误的参数值。当然，一般情况下，不建议对有序广播进行此类操作，尤其是系统中的有序广播。</li>
+</ol>
+<h4 id="接收系统广播消息"><a href="#接收系统广播消息" class="headerlink" title="接收系统广播消息"></a>接收系统广播消息</h4><p>Android系统中内置了多个系统广播，只要涉及手机的基本操作，基本上都会发出相应的系统广播。如开机启动、网络状态改变、拍照、屏幕关闭与开启、电量不足等等。每个系统广播都具有特定的intent-filter，其中主要包括具体的action，系统广播发出后，将被相应的BroadcastReceiver接收。系统广播在系统内部有特定事件发生时，由系统自动发出。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>需要注意的是，广播在Android广播机制中并不是一种实体存在，而是以一种Intent来表示的，所以在广播的传输中我们可以让Intent携带数据传输给广播接收者。</p>
+<p>关于广播更多的实例可以参考：</p>
+<p><a href="https://www.jianshu.com/p/ced5f62b7d25" target="_blank" rel="external">https://www.jianshu.com/p/ced5f62b7d25</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/01/01/Android --- BroadcastReceiver/" class="archive-article-date">
+  	<time datetime="2018-01-01T14:49:41.279Z" itemprop="datePublished"><i class="icon-clock"></i>2018-01-01</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/30/2017总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- BroadcastReceiver" data-title="" data-url="http://yoursite.com/2018/01/01/Android --- BroadcastReceiver/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

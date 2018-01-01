@@ -143,6 +143,46 @@
       <div class="body-wrap">
         
   
+    <article id="post-我发现一个很严重的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="一个很严重的问题"><a href="#一个很严重的问题" class="headerlink" title="一个很严重的问题"></a>一个很严重的问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上个星期过的还是蛮充实的，毕竟刚开学，还是很想改变自己。每天都会码上几个小时，学到的是蛮多的。但是冷静分析，好像自己什么也没学到，为什么这样说呢？我写的 <a href="https://github.com/Omooo/Tools" target="_blank" rel="external">Tools</a> 所展示的信息都是从网上拿下来了，有API很好办，解析一下Json数据就好了，没有API的就用Joup解析一下也完事了。所以，我现在的定性思维就是我需要什么内容我就从网上拿，需要什么效果就找开源库。毕竟<strong>应用层</strong>的开发做这些就差不多了，正在这种很强的可替代性，导致所谓的Android开发人员饱和的原因吧。</p>
+<h4 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h4><p>那我要该怎么做出改变呢？</p>
+<p>有人说读Android源码，以我的水平完全达不到。但是我可以做的就是学习GitHub上的小项目，看看别人的代码风格甚至是布局。还有就是，不能不加思考的拿来主义，比如一些下拉刷新库，自己完全可以按照自己的想法来尝试实现一下基本的功能，然后就知道自己写的多么辣鸡，之后看看别人的设计就知道人家为什么要那么做。还有什么等等设计模式，我现在也是一概不通。学习之路也很漫长。</p>
+<h4 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h4><p>这个星期我要看看学习Android动画，不要任何开源库。造轮子？不存在的，写的基础根本无法称之为轮子，利此Flag !</p>
+<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="https://mp.weixin.qq.com/s?__biz=MzI0MjE3OTYwMg==&amp;mid=2649550390&amp;idx=1&amp;sn=f3f57bc4c9e429a27fc96e81e0dbbb04&amp;chksm=f118054bc66f8c5d4800ec68875008a131daeaf2f548ce8d89dcf064d32e45f733c905d6b1b4&amp;scene=0#rd" target="_blank" rel="external">有没有必要阅读Android源码？</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/09/25/我发现一个很严重的问题/" class="archive-article-date">
+  	<time datetime="2017-09-25T02:51:20.290Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-25</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-什么样的人比较可怕" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -309,63 +349,6 @@
 
 
   
-    <article id="post-Android --- Activity详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-Activity详解"><a href="#Android-—-Activity详解" class="headerlink" title="Android — Activity详解"></a>Android — Activity详解</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Activity作为四大组件之一，简单来说就是用来处理与用户交互的。本节我们简单讲解一下Activity的生命周期、任务栈以及数据传递，刚刚接触安卓，大佬轻拍。</p>
-<h4 id="Activity生命周期"><a href="#Activity生命周期" class="headerlink" title="Activity生命周期"></a>Activity生命周期</h4><p>onCreat() —&gt; onStart() —&gt; onResume() —&gt; onPause() —&gt; onStop() —&gt; onDestroy() 完整的生命周期。</p>
-<p>onResume()会使当前Activity获得焦点，当调用onPause()时，当前还是可见的，但失去焦点了，在调用onStop()后，该Activity已经变得不可见了。这时候可以调用onRestart()重新回到前台。</p>
-<h4 id="Activity任务栈"><a href="#Activity任务栈" class="headerlink" title="Activity任务栈"></a>Activity任务栈</h4><p>一个APP都是由多个Activity构成的，而在Android中给我提供了一个<strong>Task</strong> (任务)的概念，而在Android中实现了Task的数据结构就是<strong>Bask Stack</strong> (回退堆栈)，也就是后进先出。官方文档给出的流程图：</p>
-<p><img src="http://www.runoob.com/wp-content/uploads/2015/08/93537362.jpg" alt=""></p>
-<p><strong>总结：</strong></p>
-<p>Task是Activity的集合，是一个概念，实际上是使用Back Stack来存储Activity，可以有多个Task,但是同一时刻只有一个栈在最前面，其他的都在后台。那么栈是如何产生的呢？</p>
-<p>答：当我们新打开一个APP，此时会创建一个<strong>新</strong>的Task。举个例子：我们通过点击通信录APP的图标打开APP，这个时候会新建一个栈1，然后开始把新产生的Activity添加进来，可能我们在通讯录的APP中打开了短信APP的页面，但是此时不会新建一个栈，而是继续添加到栈1中，这是 Android推崇一种用户体验方式，即不同应用程序之间的切换能使用户感觉就像是同一个应用程序， 很连贯的用户体验，官方称其为seamless (无缝衔接）！ ——————这个时候假如我们点击Home键，回到主屏幕，此时栈1进入后台，我们可能有下述两种操作：<br>1）点击菜单键(正方形那个按钮)，点击打开刚刚的程序，然后栈1又回到前台了！ 又或者我们点击主屏幕上通信录的图标，打开APP，此时也不会创建新的栈，栈1回到前台！<br>2）如果此时我们点击另一个图标打开一个新的APP，那么此时则会创建一个新的栈2，栈2就会到前台， 而栈1继续呆在后台；<br>3) 后面也是这样…以此类推！</p>
-<h4 id="Activity数据传递"><a href="#Activity数据传递" class="headerlink" title="Activity数据传递"></a>Activity数据传递</h4><ol>
-<li>简单的数据传递（单个数据和多个数据的传递）</li>
-</ol>
-<p>保存数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">                String text = mEditText1.getText().toString().trim();</div><div class="line">                String sex=&quot;&quot;;</div><div class="line">//                //单个数据传递</div><div class="line">//                if (mRadioButton1.isChecked()) &#123;</div><div class="line">//                    sex = mRadioButton1.getText().toString();</div><div class="line">//                &#125;</div><div class="line">//                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);</div><div class="line">//                Log.i(&quot;2333&quot;, text);</div><div class="line">//                intent.putExtra(&quot;key&quot;, text);</div><div class="line">//                intent.putExtra(&quot;sex&quot;, sex);</div><div class="line">//                startActivity(intent);</div><div class="line">                //多个数据传递</div><div class="line">                for (int i = 0; i &lt; mRadioGroup1.getChildCount(); i++) &#123;</div><div class="line">                    RadioButton rb = (RadioButton) mRadioGroup1.getChildAt(i);</div><div class="line">                    if (rb.isChecked()) &#123;</div><div class="line">                        sex = rb.getText().toString();</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                Bundle bundle = new Bundle();</div><div class="line">                bundle.putString(&quot;username&quot;, text);</div><div class="line">                bundle.putInt(&quot;age&quot;, 18);</div><div class="line">                bundle.putString(&quot;sex&quot;, sex);</div><div class="line">                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);</div><div class="line">                intent.putExtras(bundle);</div><div class="line">                startActivity(intent);</div></pre></td></tr></table></figure>
-<p>获取数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">        mTextView1 = findViewById(R.id.textView2);</div><div class="line">        //获取单个数据</div><div class="line">//        Intent intent = getIntent();</div><div class="line">//        String username = intent.getStringExtra(&quot;key&quot;).toString();</div><div class="line">//        String sex = intent.getStringExtra(&quot;sex&quot;).toString();</div><div class="line">//        mTextView1.setText(username+sex);</div><div class="line">        //获取数据集</div><div class="line">        Intent intent = getIntent();</div><div class="line">        Bundle bundle = intent.getExtras();</div><div class="line">        String username = bundle.getString(&quot;username&quot;).toString();</div><div class="line">        String sex = bundle.getString(&quot;sex&quot;).toString();</div><div class="line">        int age = bundle.getInt(&quot;age&quot;);</div><div class="line">        mTextView1.setText(username+sex+age);</div></pre></td></tr></table></figure>
-<ol>
-<li>多个Activity之间的数据传递（后一个Activity回传给前一个Activity）</li>
-</ol>
-<p>在第一个Activity中启动第二个Activity的时候不用startActivity()方法了，改用startActivityForResult()方法。然后在第一个Activity中重写回调方法onActivityResult。然后在第二个Activity中存数据传入到第一个Activity。</p>
-<p>第一个Activity : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">    mButton1.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onClick(View view) &#123;</div><div class="line">            requestCode = 1;</div><div class="line">            Intent intent = new Intent(MainActivity.this, TestActivity.class);</div><div class="line">            startActivityForResult(intent,requestCode);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//回调方法</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</div><div class="line">    super.onActivityResult(requestCode, resultCode, data);</div><div class="line">    if (requestCode == 1 &amp;&amp; resultCode == 1) &#123;</div><div class="line"></div><div class="line">        Bundle bd = data.getExtras();</div><div class="line">        String text1 = bd.getString(&quot;text1&quot;);</div><div class="line">        mTextView1.setText(text1);</div><div class="line">        Log.i(&quot;2333&quot;, text1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>第二个Activity ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">    super.onCreate(savedInstanceState);</div><div class="line">    setContentView(R.layout.testactivity);</div><div class="line"></div><div class="line">    mButton3 = findViewById(R.id.button3);</div><div class="line">    requestCode = 1;</div><div class="line">    Intent intent = getIntent();</div><div class="line">    Bundle bundle = new Bundle();</div><div class="line">    bundle.putString(&quot;text1&quot;,&quot;辣鸡1&quot;);</div><div class="line">    bundle.putString(&quot;text2&quot;, &quot;辣鸡2&quot;);</div><div class="line">    intent.putExtras(bundle);</div><div class="line">    this.setResult(requestCode, intent);</div><div class="line"></div><div class="line">    mButton3.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onClick(View view) &#123;</div><div class="line">            TestActivity.this.finish();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/09/10/Android --- Activity详解/" class="archive-article-date">
-  	<time datetime="2017-09-10T14:15:34.779Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-10</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
@@ -378,7 +361,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Omooo
+    		&copy; 2018 Omooo
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
