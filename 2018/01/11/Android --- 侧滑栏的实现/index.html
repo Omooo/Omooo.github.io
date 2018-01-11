@@ -6,14 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现前言本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。
+ 
+学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/page/14/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/Android --- 侧滑栏的实现/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现前言本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。
+ 
+学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：">
+<meta property="og:image" content="https://i.loli.net/2018/01/11/5a5779f711ae7.gif">
+<meta property="og:image" content="https://i.loli.net/2018/01/11/5a577fbb82c9a.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/11/5a57806fc0a09.jpg">
+<meta property="og:updated_time" content="2018-01-11T15:21:45.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现前言本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。
+ 
+学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/11/5a5779f711ae7.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +155,113 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-Android --- 侧滑栏的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现"><a href="#Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现" class="headerlink" title="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现"></a>Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。</p>
+<p> <img src="https://i.loli.net/2018/01/11/5a5779f711ae7.gif" style="height:150px"></p>
+<p>学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：</p>
+<p><a href="https://www.jianshu.com/p/d70cfd724c7f" target="_blank" rel="external">https://www.jianshu.com/p/d70cfd724c7f</a></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里其实坑还是有的，需要注意以下几点：</p>
+<ol>
+<li><p>该Activity类需要继承至AppCompatActivity，而不是Activity。继承至Activity在写setSupportActionBar(mToolbar)会直接报错，emmmm，是时候要总结以下两者的区别的。</p>
+</li>
+<li><p>实例化NavigationView/Toolsbar的时候，需要加上前缀，即：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> android.support.design.widget.NavigationView mMenuView;</div><div class="line"><span class="keyword">private</span> android.support.v7.widget.Toolbar mToolbar;</div></pre></td></tr></table></figure>
+<p>兼容更多API版本。</p>
+</li>
+<li><p>NavigationView中的menu菜单的中的item只显示标题，不显示icon。网上找了一大堆，都是要重写onCreatOptionsMenu()方法，但是为什么我的不行呢。最后发现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将Icon显示为它本身的颜色竟然解决了不显示icon的问题</span></div><div class="line">mMenuView = findViewById(R.id.navigation_view);</div><div class="line">mMenuView.setItemIconTintList(<span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>我设置的icon也不是无色透明的呀。</p>
+</li>
+<li><p>想仿照网易云的侧滑栏，但是在NavigationView的布局下面添加布局是显示不出来的，所以这算是一个问题，网上写的侧滑栏也是类似以下：</p>
+<p><img src="https://i.loli.net/2018/01/11/5a577fbb82c9a.png" style="height:500px"></p>
+<p>网易云侧滑栏：</p>
+<p><img src="https://i.loli.net/2018/01/11/5a57806fc0a09.jpg" style="height:500px"></p>
+<p>如果你有什么想法，欢迎邮至869759698@qq.com，感激不尽。</p>
+<p>​</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/01/11/Android --- 侧滑栏的实现/" class="archive-article-date">
+  	<time datetime="2018-01-11T15:22:37.003Z" itemprop="datePublished"><i class="icon-clock"></i>2018-01-11</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/新年/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.332Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/文件上传漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.327Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/我的2016/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.322Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/05/Android --- Notification/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/微软0day？？？/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.316Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/小计俩耍耍/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.311Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/13/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/12/">12</a><a class="page-number" href="/archives/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/archives/page/15/">15</a><a class="page-number" href="/archives/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/20/">20</a><a class="extend next" rel="next" href="/archives/page/15/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 侧滑栏的实现" data-title="" data-url="http://yoursite.com/2018/01/11/Android --- 侧滑栏的实现/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +284,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
