@@ -143,6 +143,47 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- Bitmap的加载和Cache（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Bitmap的加载和Cache（一）—-Bitmap的高效加载"><a href="#Bitmap的加载和Cache（一）—-Bitmap的高效加载" class="headerlink" title="Bitmap的加载和Cache（一）—  Bitmap的高效加载"></a>Bitmap的加载和Cache（一）—  Bitmap的高效加载</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>准备写一个系列，来逐步实现一个ImageLoader。图片加载一直都是Android知识体系的重点，因为内存的限制，我们要对图片进行压缩，防止OOM。又因为网络的限制，我们需要对图片进行缓存，避免无所谓的流量消耗。图片的显示实际上都是bitmap实现的，所以本篇文章主要讲解怎么高效加载一个Bitmap。</p>
+<h4 id="一般加载"><a href="#一般加载" class="headerlink" title="一般加载"></a>一般加载</h4><p>在介绍Bitmap的高效加载之前，我们先说一下如何加载一个Bitmap。Bitmap在Android中指的是一张图片，可以是png也可以是jpg等其他图片格式。那么如何加载一张图片呢？BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStream、decodeArray。分别支持从文件系统、资源、输入流和字节数组加载出一个Bitmap对象，其中decodeFile和decodeResource又是间接调用了decodeStream方法，这四类方法最终是在Android底层实现的。</p>
+<h4 id="高效加载"><a href="#高效加载" class="headerlink" title="高效加载"></a>高效加载</h4><p>那么如何高效的加载图片呢？核心思想也很简单，那就是采用BitmapFactory.Options来加载所需尺寸的图片。这里假设通过ImageView来显示图片，很多时候ImageView并没有图片的原始尺寸那么大，这个时候把原图直接加载进来显然有点多余，因为ImageView并没有办法显示原始照片。这时候可以通过BitmapFactory.Options就可以按一定采样率来加载缩小后的图片，将压缩后的图片设置给ImageView，这样就会降低内存占用从而在一定程度上避免OOM，提高了BItmap加载时的性能。BitmapFactory提供的加载图片的四种方法都支持BitmapFactory.Option参数，通过它就可以很方便的对一张图片进行采样缩放。</p>
+<p>通过BitmapFactory.Options来缩放图片，主要是用到了它的inSampleSize参数，即采样率。当inSampleSize为1时，采样后的图片为图片的原始大小；当inSampleSize为2时，那么采样后的图片其宽和高均为原图大小的1/2，而像素数为原图的1/4，其占用内存也为原图的1/4。拿一张1024 <em> 1024像素的图片来说，假定采用ARGB8888格式存储，那么它占用的内存为 1024 </em> 1024 * 4，即4M，如果inSampleSize为2，那么采样后的的图片占用内存只有1M。可以看出，只有当inSampleSize大于1才会有缩放效果。有一种特殊情况，当inSampleSize小于1时，其作用相当于1，即无缩放效果。inSampleSize的取值应该总是2的指数，比如1、2、4、8、16等等。如果外界传递inSampleSize的值不是2的指数，那么系统会向下取整并选择一个最接近2的指数来替代。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/12/19/Android --- Bitmap的加载和Cache（一）/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/19/Android --- Bitmap的加载和Cache（一）/" class="archive-article-date">
+  	<time datetime="2017-12-19T04:52:28.994Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- 节目直播案例开发" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -330,49 +371,6 @@
       
       <a href="/2017/11/29/Hello IDEA/" class="archive-article-date">
   	<time datetime="2017-11-29T14:24:51.654Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-29</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 反编译只服 jadx" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-反编译只服-jadx"><a href="#Android-—-反编译只服-jadx" class="headerlink" title="Android — 反编译只服 jadx"></a>Android — 反编译只服 jadx</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>反编译虽然不是一件什么光荣的事，但是有时候还是很有用的。怀着敬畏学习的心态去探索一个APP里的秘密。之前用过APKTool，我只能说很麻烦很不好用，今天就介绍一款很好用的反编译工具。</p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><a href="https://sourceforge.net/projects/jadx/files/" target="_blank" rel="external">https://sourceforge.net/projects/jadx/files/</a></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>打开bin目录下的jadx-gui.bat批处理文件，直接拖拽APK到里面，他就会自动开始反编译。效果如下：</p>
-<p><img src="https://i.loli.net/2017/11/29/5a1e4993777a6.png" alt=""></p>
-<p>这是没有混搅的APK反编译后的，所有一切都很清楚。而，混搅代码后的APK，可以</p>
-<p>Tools —&gt; Deobfusation ，也会对混搅后的代码进行很明显的区分。</p>
-<p><strong>详细可见：</strong></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzIxNjc0ODExMA==&amp;mid=2247484970&amp;idx=1&amp;sn=294718936b3abc713c07db94e1101414&amp;chksm=97851f0ba0f2961d34f95eba431f9960fdf0ead45ba1460cdd2468f647a5b7eb219c6199b164&amp;scene=0#rd" target="_blank" rel="external">Android 反编译利器，jadx 的高级技巧</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/29/Android --- 反编译只服 jadx/" class="archive-article-date">
-  	<time datetime="2017-11-29T05:49:51.699Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-29</time>
 </a>
       
       
