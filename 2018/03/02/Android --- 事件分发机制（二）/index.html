@@ -8,12 +8,31 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 事件分发机制（二）前言上一篇我们其实已经知道事件分发机制的大概内容了，也是参考了郭大叔的两篇博文总结的。但是隐约感觉有点乱，要是真自己说说事件分发机制，又似乎无从谈起。本篇文章则是侧重总结性，在参考一些较新的博文来慢慢阐述，与上一篇最大的不同的是，本篇还是很建议大家阅读的，虽然我很菜。
+
+参考以下：
+安卓自定义View进阶-事件分发机制原理
+安卓自定义View进阶-事件分发机">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/02/Android --- 事件分发机制（二）/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 事件分发机制（二）前言上一篇我们其实已经知道事件分发机制的大概内容了，也是参考了郭大叔的两篇博文总结的。但是隐约感觉有点乱，要是真自己说说事件分发机制，又似乎无从谈起。本篇文章则是侧重总结性，在参考一些较新的博文来慢慢阐述，与上一篇最大的不同的是，本篇还是很建议大家阅读的，虽然我很菜。
+
+参考以下：
+安卓自定义View进阶-事件分发机制原理
+安卓自定义View进阶-事件分发机">
+<meta property="og:image" content="https://i.loli.net/2018/02/02/5a741a9645386.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005Xtdi2jw1f8r8jg9mw5j308y07mglw.jpg">
+<meta property="og:updated_time" content="2018-02-02T10:17:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 事件分发机制（二）前言上一篇我们其实已经知道事件分发机制的大概内容了，也是参考了郭大叔的两篇博文总结的。但是隐约感觉有点乱，要是真自己说说事件分发机制，又似乎无从谈起。本篇文章则是侧重总结性，在参考一些较新的博文来慢慢阐述，与上一篇最大的不同的是，本篇还是很建议大家阅读的，虽然我很菜。
+
+参考以下：
+安卓自定义View进阶-事件分发机制原理
+安卓自定义View进阶-事件分发机">
+<meta name="twitter:image" content="https://i.loli.net/2018/02/02/5a741a9645386.jpg">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +160,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-Android --- 事件分发机制（二）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- 事件分发机制（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -295,195 +312,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Android --- 事件分发机制（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-事件分发机制（一）"><a href="#Android-—-事件分发机制（一）" class="headerlink" title="Android — 事件分发机制（一）"></a>Android — 事件分发机制（一）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>事件分发机制对于Android开发人员可以说是一个非常敏感的词汇，现在网上关于事件分发机制的讲解很多都是参考郭大叔的博客以及《Android开发艺术探索》。所以学习事件分发机制还是推荐看一下博文：</p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9097463">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
-<p><strong>强烈希望大家看以上博文，而忽略本文。</strong></p>
-<p> 本菜鸡只是记录一下学习过程中比较重要的知识点。</p>
-<p><img src="https://i.loli.net/2018/01/31/5a71752997a97.jpg" width="200" hight="500" align="center" ></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/02/Android --- 事件分发机制（一）/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/02/Android --- 事件分发机制（一）/" class="archive-article-date">
-  	<time datetime="2018-03-02T13:47:36.087Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 开发中的正确姿势" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-开发中的正确姿势"><a href="#Android-—-开发中的正确姿势" class="headerlink" title="Android — 开发中的正确姿势"></a>Android — 开发中的正确姿势</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Android开发中要注重的细节很多，本文则是来总结一下开发过程中非常实用的小技巧。我都是站在巨人的肩膀上才能了解这些技巧的存在，写作本文的灵感来源于Frank Lee的博文：<a href="http://liyuyu.cn/2017/03/21/AndroidDevelopTips/#more">Android 开发中的那些正确姿态</a> 。 文章中有些知识讲的并不是很仔细，我则按照他的思路在学习实践并总结一下，目录如下：</p>
-<ol>
-<li>Android 布局优化之&lt; include &gt;、&lt; merge &gt;、ViewStub</li>
-<li>使用LinearLayout自带的分割线divider属性来代替1dp View方案</li>
-<li>使用 android.support.v4.widget.Space轻量级控件来占据一定的空间</li>
-<li>使用shape减少图片资源占比以及色彩渐变的坑</li>
-<li>LinearLayout 中 android:weightSum 和 android:layout_weight 一起使用更配哦。</li>
-<li>使用 android:descendantFocusability 解决 ViewGroup 与 Children View 之间的焦点占用问题。</li>
-<li>使用 android:fillViewport=”true” 可以将 ScrollView 填满屏幕</li>
-<li>Elevation 实现控件阴影效果</li>
-</ol>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/01/Android --- 开发中的正确姿势/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/01/Android --- 开发中的正确姿势/" class="archive-article-date">
-  	<time datetime="2018-03-01T14:32:38.978Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-01</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-寒假总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="寒假小结"><a href="#寒假小结" class="headerlink" title="寒假小结"></a>寒假小结</h2><h4 id="惊喜"><a href="#惊喜" class="headerlink" title="惊喜"></a>惊喜</h4><p>首先要说，今年的寒假还是满惊喜的。家里下了很厚的大雪，感觉已经好久家里冬天没下雪了，还是蛮意外的。</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>以后在往家里带书，我是狗！</p>
-<p>很显然，书是没看。但是，学了一个自定义View系列，收获还是蛮多的，写了一个知乎日报。</p>
-<p>也在准备写一个完整的电商类APP。</p>
-<p>还有，越来越感觉写博客效率低下，虽然能加深印象，但是学习更深的东西能够在相同时间上受益更多。</p>
-<p>没了</p>
-<p><img src="https://i.loli.net/2018/02/28/5a96c1b9984d4.gif" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/02/28/寒假总结/" class="archive-article-date">
-  	<time datetime="2018-02-28T14:50:15.777Z" itemprop="datePublished"><i class="icon-clock"></i>2018-02-28</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-寒假开始" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="美好的寒假生活就要开始了"><a href="#美好的寒假生活就要开始了" class="headerlink" title="美好的寒假生活就要开始了"></a>美好的寒假生活就要开始了</h2><h4 id="总想说几句"><a href="#总想说几句" class="headerlink" title="总想说几句"></a>总想说几句</h4><p>寒假到了，今天晚上就要回家了，还是蛮开心的，毕竟再也不用吃外卖了。</p>
-<p><img src="https://i.loli.net/2018/01/15/5a5c61dcc217e.gif" style="height:150px"></p>
-<p>回家也就意味着博客要停更了，博客看出来是Hexo本地搭建，迁移好麻烦的说。最重要的是，反正又没人看。</p>
-<p>还有呢，带回去几本书，希望回来写寒假总结的时候不会太失望。</p>
-<p>对了，其实寒假我想多看看面试经验，根据面试经验上的知识点逐个学习掌握。</p>
-<p>最后，提前祝大家新年快乐。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/01/15/寒假开始/" class="archive-article-date">
-  	<time datetime="2018-01-15T08:17:19.391Z" itemprop="datePublished"><i class="icon-clock"></i>2018-01-15</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+    <a href="/2018/03/02/Android --- 事件分发机制（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 事件分发机制（二）" data-title="" data-url="http://yoursite.com/2018/03/02/Android --- 事件分发机制（二）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -505,8 +391,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
