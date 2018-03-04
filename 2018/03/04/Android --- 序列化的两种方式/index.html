@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — 序列化的两种方式前言在看一些面试题的时候，竟然把序列化划分为基础知识。真是没接触就不知道它有多简单！本篇就来揭开序列化的神秘面纱，目录如下：
+
+序列化是什么？
+为什么要进行序列化？
+Android中的两种序列化方式概况
+Serializable 和 Parcelable 的区别
+Serializable 的使用
+Parcelable 的使用
+更多参考
+
+国际惯例，先放张图，Q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/Android --- 序列化的两种方式/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 序列化的两种方式前言在看一些面试题的时候，竟然把序列化划分为基础知识。真是没接触就不知道它有多简单！本篇就来揭开序列化的神秘面纱，目录如下：
+
+序列化是什么？
+为什么要进行序列化？
+Android中的两种序列化方式概况
+Serializable 和 Parcelable 的区别
+Serializable 的使用
+Parcelable 的使用
+更多参考
+
+国际惯例，先放张图，Q">
+<meta property="og:image" content="https://i.loli.net/2018/02/20/5a8bad57c9e2d.jpg">
+<meta property="og:updated_time" content="2018-02-20T07:35:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 序列化的两种方式前言在看一些面试题的时候，竟然把序列化划分为基础知识。真是没接触就不知道它有多简单！本篇就来揭开序列化的神秘面纱，目录如下：
+
+序列化是什么？
+为什么要进行序列化？
+Android中的两种序列化方式概况
+Serializable 和 Parcelable 的区别
+Serializable 的使用
+Parcelable 的使用
+更多参考
+
+国际惯例，先放张图，Q">
+<meta name="twitter:image" content="https://i.loli.net/2018/02/20/5a8bad57c9e2d.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- 序列化的两种方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-序列化的两种方式"><a href="#Android-—-序列化的两种方式" class="headerlink" title="Android — 序列化的两种方式"></a>Android — 序列化的两种方式</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在看一些面试题的时候，竟然把序列化划分为基础知识。真是没接触就不知道它有多简单！本篇就来揭开序列化的神秘面纱，目录如下：</p>
+<ol>
+<li>序列化是什么？</li>
+<li>为什么要进行序列化？</li>
+<li>Android中的两种序列化方式概况</li>
+<li>Serializable 和 Parcelable 的区别</li>
+<li>Serializable 的使用</li>
+<li>Parcelable 的使用</li>
+<li>更多参考</li>
+</ol>
+<p>国际惯例，先放张图，QwQ</p>
+<p><img src="https://i.loli.net/2018/02/20/5a8bad57c9e2d.jpg" alt=""></p>
+<a id="more"></a>
+<h4 id="序列化是什么？"><a href="#序列化是什么？" class="headerlink" title="序列化是什么？"></a>序列化是什么？</h4><p>序列化是指把 Java 对象转化为字节序列并存储到一个存储媒介的过程。反之，把字节序列恢复到 Java 对象的过程则称为反序列化。</p>
+<h4 id="为什么要序列化？"><a href="#为什么要序列化？" class="headerlink" title="为什么要序列化？"></a>为什么要序列化？</h4><p>Java 对象存在的一个前提是 JVM 有在运行。因此，如果 JVM 没有运行或者在其他机器的 JVM 上是不可能获取到指定 Java 对象的，而序列化操作则是把 Java 对象信息保存到存储媒介，可以在以上不可能的情况下仍然可以使用 Java 对象。</p>
+<p>所以，序列化的主要作用是：</p>
+<ul>
+<li>永久保存对象，保存对象的字节序列到本地文件中</li>
+<li>通过序列化对象在网络中传递对象</li>
+<li>通过序列化在进程间传递对象</li>
+</ul>
+<h4 id="Android中的两种序列化方式概况"><a href="#Android中的两种序列化方式概况" class="headerlink" title="Android中的两种序列化方式概况"></a>Android中的两种序列化方式概况</h4><p>在Android开发中，经常需要再多个部件（Activity、Fragement）之间通过 Intent 传递一些数据，如果是一些普通类型的数据可以通过putExtra()进行传递，如果是对象的话就要先进行序列化才能传递了。在Android中有两种序列化的接口，Serializable 和 Parcelable。</p>
+<h4 id="Serializable-和-Parcelable-的区别"><a href="#Serializable-和-Parcelable-的区别" class="headerlink" title="Serializable 和 Parcelable 的区别"></a>Serializable 和 Parcelable 的区别</h4><p>Serializable 是 Java的序列化接口。特点是简单，直接实现该接口就行了，其他工作都被系统完成了，但是对于内存开销大，序列化和反序列化需要很多的 I/O 流操作。</p>
+<p>Parcelable 是Android的序列化方式，主要用于在内存序列化上，采用该方法需要实现该接口并且手动实现序列化过程，相对复杂点。如果序列化到存储设备（文件等）或者网络传输，比较复杂，建议用Serializable 方式。</p>
+<p><strong>最大的区别就是存储媒介的不同：</strong>Serializable 使用IO读写存储在硬盘上，Parcelable 是直接在内存中读写，内存读写速度远大于IO读写，所以Parcelable 更加高效。Serializable在序列化过程中会产生大量的临时变量，会引起频繁的GC，效率低下。</p>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>Serializable</th>
+<th>Parcelable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>所属API</td>
+<td>Java API</td>
+<td>Android SDK API</td>
+</tr>
+<tr>
+<td>原理</td>
+<td>反射，需要大量的I/O操作</td>
+<td>不需要大量的I/O操作</td>
+</tr>
+<tr>
+<td>开销</td>
+<td>大</td>
+<td>小</td>
+</tr>
+<tr>
+<td>效率</td>
+<td>低</td>
+<td>很高</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>序列化到本地或者通过网络传输</td>
+<td>内存序列化</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Serializable-的使用"><a href="#Serializable-的使用" class="headerlink" title="Serializable 的使用"></a>Serializable 的使用</h4><p>使用很简单，只需要实现 Serializable 接口即可。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentBean</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="comment">//添加 transient 关键字不会被序列化</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StudentBean</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line">	<span class="comment">// 省去 get/set 方法</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>序列化<strong>到本地</strong>和反序列：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</div><div class="line">        <span class="comment">//序列化</span></div><div class="line"><span class="comment">//        writeBean();</span></div><div class="line">        <span class="comment">//反序列化</span></div><div class="line">        StudentBean bean = readBean();</div><div class="line">        System.out.println(bean.toString());</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> StudentBean <span class="title">readBean</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</div><div class="line">        ObjectInputStream inputStream = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"D://addons/bean.txt"</span>)));</div><div class="line">        StudentBean bean = (StudentBean) inputStream.readObject();</div><div class="line">        <span class="keyword">return</span> bean;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeBean</span><span class="params">()</span> </span>&#123;</div><div class="line">        StudentBean bean = <span class="keyword">new</span> StudentBean(<span class="string">"Omooo"</span>, <span class="number">21</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"D://addons/bean.txt"</span>)));</div><div class="line">            outputStream.writeObject(bean);</div><div class="line">            outputStream.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>即通过 ObjectOutputStream/ObjectInputStream 实现序列化和反序列。</p>
+<p><strong>在Android的运用：</strong></p>
+<p>即通过 Intent 传递序列化后对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">    StudentBean user = <span class="keyword">new</span> StudentBean();</div><div class="line">    user.setName(<span class="string">"Omooo"</span>);</div><div class="line">    user.setAge(<span class="number">20</span>);</div><div class="line"></div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SecondActivity.class);</div><div class="line">    <span class="comment">//传输的第一种方法：直接调用putExtra()方法</span></div><div class="line">    intent.putExtra(<span class="string">"user"</span>, user);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     //传输的第二种方法：Intent利用putExtras（注意s）传入bundle</div><div class="line">     Bundle bundle = new Bundle();</div><div class="line">     bundle.putSerializable("user", user);</div><div class="line">     intent.putExtras(bundle);</div><div class="line">     */</div><div class="line">    startActivity(intent);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在跳转的Activity：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = getIntent();</div><div class="line">StudentBean user = (StudentBean) intent.getSerializableExtra(<span class="string">"user"</span>);</div><div class="line">mView.setText(user.getName() + <span class="string">" "</span> + user.getAge());</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li>序列化前、后的对象内容完全一致，但不是同一个对象</li>
+<li>静态成员变量属于类，不会参与序列化过程</li>
+<li>用 transient 关键字修饰的成员变量不参与序列化过程</li>
+<li>可重写 writeObject()、readObject()来改变系统默认的序列化过程</li>
+<li>可使用此类的子类 Externalizable 对序列化进行自定义控制</li>
+</ol>
+<h4 id="Parcelable-的使用"><a href="#Parcelable-的使用" class="headerlink" title="Parcelable 的使用"></a>Parcelable 的使用</h4><ol>
+<li>继承 Parcelable 接口</li>
+<li>重写 describeContents()、writeToParcel()方法（Implement methods) </li>
+<li>添加 Parcel形参的构造函数，公有静态常量CREATOR（Add Parcelable Implementation）</li>
+</ol>
+<p><strong>Android Studio 插件：Android Parcelable code generator</strong></p>
+<p><strong>写完实体类，Generate界面（Alt + Insert键）选择Parcelable一键生成。</strong></p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//省去 get/set 方法</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest, <span class="keyword">int</span> flags)</span> </span>&#123;</div><div class="line">        dest.writeString(<span class="keyword">this</span>.name);</div><div class="line">        dest.writeInt(<span class="keyword">this</span>.age);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">User</span><span class="params">(Parcel in)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = in.readString();</div><div class="line">        <span class="keyword">this</span>.age = in.readInt();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Creator&lt;User&gt; CREATOR = <span class="keyword">new</span> Creator&lt;User&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> User <span class="title">createFromParcel</span><span class="params">(Parcel source)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User(source);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> User[] newArray(<span class="keyword">int</span> size) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User[size];</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在传递序列化后对象的时候和用Serializable一样，唯一不同的就是取对象的时候是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = getIntent();</div><div class="line">User user = intent.getParcelableExtra(<span class="string">"user"</span>);</div><div class="line">mView.setText(user.getName() + <span class="string">"\n"</span> + user.getAge());</div></pre></td></tr></table></figure>
+<p>也就是 getSerializableExtra / getParcelableExtra 的区别。</p>
+<h4 id="更多参考"><a href="#更多参考" class="headerlink" title="更多参考"></a>更多参考</h4><p><a href="https://www.jianshu.com/p/74a70fae99fb" target="_blank" rel="external">https://www.jianshu.com/p/74a70fae99fb</a></p>
+<p><a href="https://www.jianshu.com/p/ed01c4b7a14d" target="_blank" rel="external">https://www.jianshu.com/p/ed01c4b7a14d</a></p>
+<p><a href="https://www.jianshu.com/p/287acb9e396f" target="_blank" rel="external">https://www.jianshu.com/p/287acb9e396f</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/04/Android --- 序列化的两种方式/" class="archive-article-date">
+  	<time datetime="2018-03-04T01:50:25.227Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/02/Android --- 事件分发机制（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 序列化的两种方式" data-title="" data-url="http://yoursite.com/2018/03/04/Android --- 序列化的两种方式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
