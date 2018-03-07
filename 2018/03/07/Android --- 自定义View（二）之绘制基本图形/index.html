@@ -8,12 +8,51 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 自定义View（二）之绘制基本图形前言回顾第一篇，我们主要讲了View的坐标系以及绘制自定义View的流程等基础知识。这篇文章主要讲用Canvas绘制一些以基本图形图形，目录如下：
+
+Canvas简介
+Canvas常用操作表
+Canvas操作详解
+Paint简介
+实例之制作一个饼状图
+
+那准备开始了吗？
+
+Canvas简介Canvas即画布，我们能够在上面绘制各种东西，是An">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/07/Android --- 自定义View（二）之绘制基本图形/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 自定义View（二）之绘制基本图形前言回顾第一篇，我们主要讲了View的坐标系以及绘制自定义View的流程等基础知识。这篇文章主要讲用Canvas绘制一些以基本图形图形，目录如下：
+
+Canvas简介
+Canvas常用操作表
+Canvas操作详解
+Paint简介
+实例之制作一个饼状图
+
+那准备开始了吗？
+
+Canvas简介Canvas即画布，我们能够在上面绘制各种东西，是An">
+<meta property="og:image" content="https://i.loli.net/2018/01/26/5a6aa2759bc49.gif">
+<meta property="og:image" content="https://i.loli.net/2018/01/24/5a688a58d7246.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/25/5a695e58f22ab.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/26/5a6aa11babf0d.png">
+<meta property="og:updated_time" content="2018-01-28T06:24:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 自定义View（二）之绘制基本图形前言回顾第一篇，我们主要讲了View的坐标系以及绘制自定义View的流程等基础知识。这篇文章主要讲用Canvas绘制一些以基本图形图形，目录如下：
+
+Canvas简介
+Canvas常用操作表
+Canvas操作详解
+Paint简介
+实例之制作一个饼状图
+
+那准备开始了吗？
+
+Canvas简介Canvas即画布，我们能够在上面绘制各种东西，是An">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/26/5a6aa2759bc49.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +180,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-Android --- 自定义View（二）之绘制基本图形" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- 自定义View（二）之绘制基本图形" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -269,423 +306,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-Android --- 自定义View（一）之基础知识" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-自定义View（一）之基础知识"><a href="#Android-—-自定义View（一）之基础知识" class="headerlink" title="Android — 自定义View（一）之基础知识"></a>Android — 自定义View（一）之基础知识</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>记得之前写过一篇自定义View的文章，当时也是尝尝鲜。今天看到一篇自定义View系列文章，也是蛮新的，决定要认认真真的系统学习一遍。原文地址：<a href="http://www.gcssloop.com/customview/CustomViewIndex/" target="_blank" rel="external">http://www.gcssloop.com/customview/CustomViewIndex/</a> 当然，系列中有些东西我觉得很没必要，我想学最实用的知识。（可能我的看法有些片面）还有文章中讲的有些我不明白的地方，我在看看别的博客在加上自己的理解写了这篇博客。这篇文章再详细记录一下学习中非常重要的知识点和要注意的东西。整体目录如下：</p>
-<ol>
-<li>View坐标系</li>
-<li>自定义View绘制流程概述</li>
-<li>总结流程关键字以及作用</li>
-</ol>
-<p>那准备好了吗？</p>
-<p><img src="https://i.loli.net/2018/01/26/5a6aa1f4bc282.gif" height="170" width="200"></p>
-<h4 id="View-坐标系"><a href="#View-坐标系" class="headerlink" title="View 坐标系"></a>View 坐标系</h4><p>首先要明确的是：Android中的坐标系统是以左上角为坐标原点，向右是X轴正方向，向下是Y轴正方向。<strong>View的坐标系统是相对于父控件而言的。</strong></p>
-<p><strong>View 获取自身宽高：</strong></p>
-<ul>
-<li>getHeight()    获取View自身高度</li>
-<li>getWidth()      获取View自身宽度</li>
-</ul>
-<p><strong>View 自身坐标：</strong></p>
-<ul>
-<li>getTop()      获取View自身顶边到其父布局顶边的距离</li>
-<li>getLeft()    获取View自身左边到其父布局左边的距离</li>
-<li>getRight()    获取View自身右边到其父布局左边的距离</li>
-<li>getBottom()     获取View自身底边到其父布局顶边的距离</li>
-</ul>
-<p><strong>MotionEvent提供的方法：</strong></p>
-<ul>
-<li>getX()     获取点击事件距离控件左边的距离，即视图坐标</li>
-<li>getY()     获取点击事件距离控件顶边的距离，即视图坐标</li>
-<li>getRawX()     获取点击事件距离整个屏幕左边距离，即绝对坐标</li>
-<li>getRawY()     获取点击事件距离整个屏幕顶边的距离，即绝对坐标</li>
-</ul>
-<p>说了那么多，还是来一图胜千言吧。</p>
-<p><img src="http://img.blog.csdn.net/20160221170553904" height="650" width="500" align="center"></p>
-<h4 id="自定义View绘制流程"><a href="#自定义View绘制流程" class="headerlink" title="自定义View绘制流程"></a>自定义View绘制流程</h4><p>盗一张图：</p>
-<p><img src="http://ww4.sinaimg.cn/large/005Xtdi2jw1f638wreu74j30fc0heaay.jpg" alt=""></p>
-<p><strong>几个非常重要的函数：</strong></p>
-<ul>
-<li><p>构造函数</p>
-<p>构造函数是View的入口，可以用于初始化一些内容，和获取自定义属性。View的构造函数有四种重载，而有四个参数的构造函数在API21的时候才添加上，暂不考虑。而有三个参数的构造方法中第三个参数是默认的Style，这里默认的Style是指它在当前Application或Activity所用Theme中的默认Style，且只有在明确调用的时候才会生效。</p>
-<p>需要注意的是，即使你在View中使用了Style这个属性也不会调用三个参数的构造方法，所以调用的依旧是两个参数的构造方法。</p>
-<p>调用一个参数的构造方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CustomView view = <span class="keyword">new</span> CustomView(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
-<p>调用两个参数的构造方法：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在layout文件中 - 格式为： 包名.View名</div><div class="line"><span class="tag">&lt;<span class="name">top.omooo.CustomView</span></span></div><div class="line">  <span class="attr">android:layout_width</span>"<span class="attr">wrap_content</span>"</div><div class="line">  <span class="attr">android:layout_height</span>"<span class="attr">wrap_content</span>"/&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>onMeasure() 测量View大小</p>
-<pre><code>View的大小不仅由自身所决定，同时也会受到父控件的影响，为了我们的控件能更好的适应各种情况，一般我们会自己进行测量。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">    <span class="comment">//获取宽度的确切数值</span></div><div class="line">    <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">    <span class="comment">//获取宽度的测量模式</span></div><div class="line">    <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>onMeasure()函数中有两个参数，很显然它们是和宽高相关的，**但是实际上它们不是宽和高** ，而是由宽高和各自方向上对应的测量模式来合成的一个值。
-
-测量模式一共有三种，被定义在Android中的View类的一个内部类View.MeasureSpec中。
-
-注意，如果对View的宽高进行修改了，不要调用super.onMeasure()；而是调用setMeasuredDimension() 这个函数。
-</code></pre></li>
-<li><p>onSizeChanged()  确定View的大小</p>
-<pre><code>为什么View的大小测量完了，还要再次确定View的大小呢？这是因为View的大小不仅由View本身控制，而且还受父控件的影响。所以我们在确定View的大小的时候最好使用系统提供的onSizeChanged()回调函数。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> w   View最终的宽</div><div class="line">* <span class="doctag">@param</span> h   View最终的高</div><div class="line">* <span class="doctag">@param</span> oldw 上一次宽</div><div class="line">* <span class="doctag">@param</span> oldh  上一次高</div><div class="line">*/</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>onLayout()   确定子View布局位置</p>
-<pre><code>在自定义ViewGroup中的时候，会用它确定子View的位置。onLayout() 一般是循环取出子View，然后计算各个子View的坐标值，然后用以下函数设置子View的位置。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">          <span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> l getLeft()</div><div class="line">* <span class="doctag">@param</span> t getTop()</div><div class="line">* <span class="doctag">@param</span> r getRight()</div><div class="line">* <span class="doctag">@param</span> b getBottom()</div><div class="line">*/</div></pre></td></tr></table></figure>
-<pre><code>@Override
-public void layout(int l, int t, int r, int b) {
-    super.layout(l, t, r, b);
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-</li>
-<li><p>onDraw() 绘制内容</p>
-<p>   是实际绘制的部分，使用的是Canvas绘图。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>另外</p>
-<pre><code>自定义View之后，一般会对外暴露一些接口，用于控制View的状态或监听View的变化等等。
-</code></pre></li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>关键字</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>构造函数</td>
-<td>View初始化</td>
-</tr>
-<tr>
-<td>2</td>
-<td>onMeasure()</td>
-<td>测量View大小</td>
-</tr>
-<tr>
-<td>3</td>
-<td>onSizeChanged()</td>
-<td>确定View大小</td>
-</tr>
-<tr>
-<td>4</td>
-<td>onLayout()</td>
-<td>确定子View布局</td>
-</tr>
-<tr>
-<td>5</td>
-<td>onDraw()</td>
-<td>实际绘制内容</td>
-</tr>
-<tr>
-<td>6</td>
-<td>提供接口</td>
-<td>控制View或监听View状态</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/05/Android --- 自定义View（一）之基础知识/" class="archive-article-date">
-  	<time datetime="2018-03-05T13:41:19.580Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-05</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 序列化的两种方式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-序列化的两种方式"><a href="#Android-—-序列化的两种方式" class="headerlink" title="Android — 序列化的两种方式"></a>Android — 序列化的两种方式</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在看一些面试题的时候，竟然把序列化划分为基础知识。真是没接触就不知道它有多简单！本篇就来揭开序列化的神秘面纱，目录如下：</p>
-<ol>
-<li>序列化是什么？</li>
-<li>为什么要进行序列化？</li>
-<li>Android中的两种序列化方式概况</li>
-<li>Serializable 和 Parcelable 的区别</li>
-<li>Serializable 的使用</li>
-<li>Parcelable 的使用</li>
-<li>更多参考</li>
-</ol>
-<p>国际惯例，先放张图，QwQ</p>
-<p><img src="https://i.loli.net/2018/02/20/5a8bad57c9e2d.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/04/Android --- 序列化的两种方式/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/04/Android --- 序列化的两种方式/" class="archive-article-date">
-  	<time datetime="2018-03-04T01:50:25.227Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-04</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 事件分发机制（二）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-事件分发机制（二）"><a href="#Android-—-事件分发机制（二）" class="headerlink" title="Android — 事件分发机制（二）"></a>Android — 事件分发机制（二）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一篇我们其实已经知道事件分发机制的大概内容了，也是参考了郭大叔的两篇博文总结的。但是隐约感觉有点乱，要是真自己说说事件分发机制，又似乎无从谈起。本篇文章则是侧重总结性，在参考一些较新的博文来慢慢阐述，与上一篇最大的不同的是，本篇还是很建议大家阅读的，虽然我很菜。</p>
-<p><img src="https://i.loli.net/2018/02/02/5a741a9645386.jpg" alt=""></p>
-<p><strong>参考以下：</strong></p>
-<p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-theory" target="_blank" rel="external">安卓自定义View进阶-事件分发机制原理</a></p>
-<p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-source" target="_blank" rel="external">安卓自定义View进阶-事件分发机制详解</a></p>
-<h4 id="事件分发、拦截与消费"><a href="#事件分发、拦截与消费" class="headerlink" title="事件分发、拦截与消费"></a>事件分发、拦截与消费</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>相关方法</th>
-<th>Activity</th>
-<th>ViewGroup</th>
-<th>View</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>事件分发</td>
-<td>dispatchTouchEvent()</td>
-<td>有</td>
-<td>有</td>
-<td>有</td>
-</tr>
-<tr>
-<td>事件拦截</td>
-<td>onInterceptTouchEvent()</td>
-<td>无</td>
-<td>有</td>
-<td>无</td>
-</tr>
-<tr>
-<td>事件消费</td>
-<td>onTouchEvent()</td>
-<td>有</td>
-<td>有</td>
-<td>有</td>
-</tr>
-</tbody>
-</table>
-<p>从上表可以看出，Activity和View都是没有事件拦截功能的，这是因为：</p>
-<ul>
-<li>Activity作为原始的事件分发者，如果Activity拦截了事件就会导致整个屏幕都无法相应事件，那么之前给控件注册事件就显得画蛇添足。</li>
-<li>View作为事件传递的最末端，要么消费掉事件，要么不处理进行回传，根本没必要进行事件拦截。</li>
-</ul>
-<h4 id="事件分发流程"><a href="#事件分发流程" class="headerlink" title="事件分发流程"></a>事件分发流程</h4><p>事件收集之后最先传递给Activity，然后依次向下传递，大致如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Activity --&gt; PhoneWindow --&gt; DecorView --&gt; ViewGroup --&gt; ··· --&gt; View</div></pre></td></tr></table></figure>
-<p>如果最后分发给了View，View也没有处理事件会怎么办？那么事件就会反方向回传，最终传給Activity，如果最后Activity也没有处理，那么事件才会被抛弃：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Activity &lt;-- PhoneWindow &lt;-- DecorView &lt;-- ViewGroup &lt;-- ··· &lt;-- View</div></pre></td></tr></table></figure>
-<p>这就是非常经典的<strong>责任链模式</strong> ，如果我能处理就拦截下来自己干，如果处理不了就交给责任链中的下一个对象。</p>
-<h4 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h4><p>先了解一下常见的几种事件，根据面向对象的思想，事件都被封装成了MotionEvent对象，本篇重点不在于此，所以只会涉及几个与手指触摸相关的常见事件：</p>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>简介</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ACTION_DOWN</td>
-<td>手指 初次接触到屏幕 时触发</td>
-</tr>
-<tr>
-<td>ACTION_MOVE</td>
-<td>手指 在屏幕上滑动 时触发，往往会触发多次</td>
-</tr>
-<tr>
-<td>ACTION_UP</td>
-<td>手指 离开屏幕 时触发</td>
-</tr>
-<tr>
-<td>ACTION_CANCEL</td>
-<td>时间 被上层拦截 时触发</td>
-</tr>
-</tbody>
-</table>
-<h4 id="事件分发、拦截与消费-1"><a href="#事件分发、拦截与消费-1" class="headerlink" title="事件分发、拦截与消费"></a>事件分发、拦截与消费</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>相关方法</th>
-<th>ViewGroup</th>
-<th>View</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>事件分发</td>
-<td>dispatchTouchEvent()</td>
-<td>有</td>
-<td>有</td>
-</tr>
-<tr>
-<td>事件拦截</td>
-<td>onInterceptTouchEvent()</td>
-<td>有</td>
-<td>无</td>
-</tr>
-<tr>
-<td>事件消费</td>
-<td>onTouchEvent()</td>
-<td>有</td>
-<td>有</td>
-</tr>
-</tbody>
-</table>
-<p>dispatchTouchEvent() 是事件分发机制的核心，所有的事件调度都归他管。ViewGroup有很多子View需要管理，需要事件分发也说得过去，但是为什么View也要有事件分发呢？</p>
-<p>那是因为View可以注册很多事件监听器：onClick()、onLongClick()、onTouch()，并且View自身也有onTouchEvent()方法，那么多事件方法肯定要有dispatchTouchEvent()来管理咯。</p>
-<p><strong>事件调度顺序：</strong></p>
-<p><img src="http://ww2.sinaimg.cn/large/005Xtdi2jw1f8r8jg9mw5j308y07mglw.jpg" alt=""></p>
-<h4 id="ViewGroup相关"><a href="#ViewGroup相关" class="headerlink" title="ViewGroup相关"></a>ViewGroup相关</h4><ol>
-<li><p>ViewGroup中可能有多个ChildView，如何判断应该分配给哪一个呢？</p>
-<p>把所有ChildView遍历一遍，如果手指触摸点在ChildView区域内就分给这个View。</p>
-</li>
-<li><p>当该点的ChildView有重叠时应该如何分配呢？</p>
-<p>当ChildView重叠时，一般会分配给显示在最上面的ChildView。那如何判断哪个是显示在最上面的呢？后面加载的一般会覆盖掉之前的，所以显示在最上面的是最后加载的。</p>
-</li>
-<li><p>ViewGroup和ChildView同时注册了事件监听器，哪个会先执行？</p>
-<p>事件优先给ChildView，会被ChildView消费掉，ViewGroup不会相应。</p>
-</li>
-<li><p>所有事件都应该被同一View消费。</p>
-<p>同一次点击事件只能被一个View消费。View中onClick事件需要同时接受到ACTION_DOWN和ACTION_UP才能触发，如果分配给了不同的View，那么onClick将无法被正确触发。</p>
-<p>Android为了保证所有的事件都是被一个View消费的，对第一次事件（ACTION_DOWN）进行了特殊判断，View只有消费了ACTION_DOWN事件，才能接受到后续的事件（可点击控件默认会消费所有事件），并且会将后续所有事件传递过来，不会再传递给其他View，除非上层View进行了拦截。如果上层View拦截了当前正在处理的事件，会收到一个ACTION_CANCEL，表示当前事件已经结束，后续事件不会再传递过来。</p>
-</li>
-<li><p>一次触摸流程中产生事件应被同一个View消费，全部接受或者全部拒绝。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/02/Android --- 事件分发机制（二）/" class="archive-article-date">
-  	<time datetime="2018-03-02T13:49:16.471Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 事件分发机制（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-事件分发机制（一）"><a href="#Android-—-事件分发机制（一）" class="headerlink" title="Android — 事件分发机制（一）"></a>Android — 事件分发机制（一）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>事件分发机制对于Android开发人员可以说是一个非常敏感的词汇，现在网上关于事件分发机制的讲解很多都是参考郭大叔的博客以及《Android开发艺术探索》。所以学习事件分发机制还是推荐看一下博文：</p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9097463">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
-<p><strong>强烈希望大家看以上博文，而忽略本文。</strong></p>
-<p> 本菜鸡只是记录一下学习过程中比较重要的知识点。</p>
-<p><img src="https://i.loli.net/2018/01/31/5a71752997a97.jpg" width="200" hight="500" align="center" ></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/02/Android --- 事件分发机制（一）/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/02/Android --- 事件分发机制（一）/" class="archive-article-date">
-  	<time datetime="2018-03-02T13:47:36.087Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+    <a href="/2018/03/05/Android --- 自定义View（一）之基础知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 自定义View（二）之绘制基本图形" data-title="" data-url="http://yoursite.com/2018/03/07/Android --- 自定义View（二）之绘制基本图形/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -707,8 +385,8 @@ public void layout(int l, int t, int r, int b) {
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
