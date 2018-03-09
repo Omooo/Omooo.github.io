@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/01/26/5a6aa1f4bc282.gif">
 <meta property="og:image" content="http://img.blog.csdn.net/20160221170553904">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/005Xtdi2jw1f638wreu74j30fc0heaay.jpg">
-<meta property="og:updated_time" content="2018-01-26T03:36:44.000Z">
+<meta property="og:updated_time" content="2018-03-09T03:24:25.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
 <meta name="twitter:description" content="Android — 自定义View（一）之基础知识前言记得之前写过一篇自定义View的文章，当时也是尝尝鲜。今天看到一篇自定义View系列文章，也是蛮新的，决定要认认真真的系统学习一遍。原文地址：http://www.gcssloop.com/customview/CustomViewIndex/ 当然，系列中有些东西我觉得很没必要，我想学最实用的知识。（可能我的看法有些片面）还有文章中讲的有些">
@@ -201,34 +201,44 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在layout文件中 - 格式为： 包名.View名</div><div class="line"><span class="tag">&lt;<span class="name">top.omooo.CustomView</span></span></div><div class="line">  <span class="attr">android:layout_width</span>"<span class="attr">wrap_content</span>"</div><div class="line">  <span class="attr">android:layout_height</span>"<span class="attr">wrap_content</span>"/&gt;</div></pre></td></tr></table></figure>
 </li>
 <li><p>onMeasure() 测量View大小</p>
-<pre><code>View的大小不仅由自身所决定，同时也会受到父控件的影响，为了我们的控件能更好的适应各种情况，一般我们会自己进行测量。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">    <span class="comment">//获取宽度的确切数值</span></div><div class="line">    <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">    <span class="comment">//获取宽度的测量模式</span></div><div class="line">    <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>onMeasure()函数中有两个参数，很显然它们是和宽高相关的，**但是实际上它们不是宽和高** ，而是由宽高和各自方向上对应的测量模式来合成的一个值。
+<p>View的大小不仅由自身所决定，同时也会受到父控件的影响，为了我们的控件能更好的适应各种情况，一般我们会自己进行测量。</p>
+</li>
+</ul>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">                 <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">                 <span class="comment">//获取宽度的确切数值</span></div><div class="line">                 <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">                 <span class="comment">//获取宽度的测量模式</span></div><div class="line">                 <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">             &#125;</div></pre></td></tr></table></figure>
+
+onMeasure()函数中有两个参数，很显然它们是和宽高相关的，**但是实际上它们不是宽和高** ，而是由宽高和各自方向上对应的测量模式来合成的一个值。
 
 测量模式一共有三种，被定义在Android中的View类的一个内部类View.MeasureSpec中。
 
 注意，如果对View的宽高进行修改了，不要调用super.onMeasure()；而是调用setMeasuredDimension() 这个函数。
-</code></pre></li>
+</code></pre><ul>
 <li><p>onSizeChanged()  确定View的大小</p>
-<pre><code>为什么View的大小测量完了，还要再次确定View的大小呢？这是因为View的大小不仅由View本身控制，而且还受父控件的影响。所以我们在确定View的大小的时候最好使用系统提供的onSizeChanged()回调函数。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> w   View最终的宽</div><div class="line">* <span class="doctag">@param</span> h   View最终的高</div><div class="line">* <span class="doctag">@param</span> oldw 上一次宽</div><div class="line">* <span class="doctag">@param</span> oldh  上一次高</div><div class="line">*/</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>为什么View的大小测量完了，还要再次确定View的大小呢？这是因为View的大小不仅由View本身控制，而且还受父控件的影响。所以我们在确定View的大小的时候最好使用系统提供的onSizeChanged()回调函数。</p>
 </li>
+</ul>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> w   View最终的宽</div><div class="line">* <span class="doctag">@param</span> h   View最终的高</div><div class="line">* <span class="doctag">@param</span> oldw 上一次宽</div><div class="line">* <span class="doctag">@param</span> oldh  上一次高</div><div class="line">*/</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</code></pre><ul>
 <li><p>onLayout()   确定子View布局位置</p>
-<pre><code>在自定义ViewGroup中的时候，会用它确定子View的位置。onLayout() 一般是循环取出子View，然后计算各个子View的坐标值，然后用以下函数设置子View的位置。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">          <span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> l getLeft()</div><div class="line">* <span class="doctag">@param</span> t getTop()</div><div class="line">* <span class="doctag">@param</span> r getRight()</div><div class="line">* <span class="doctag">@param</span> b getBottom()</div><div class="line">*/</div></pre></td></tr></table></figure>
-<pre><code>@Override
-public void layout(int l, int t, int r, int b) {
-    super.layout(l, t, r, b);
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<p>在自定义ViewGroup中的时候，会用它确定子View的位置。onLayout() 一般是循环取出子View，然后计算各个子View的坐标值，然后用以下函数设置子View的位置。</p>
 </li>
+</ul>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> l getLeft()</div><div class="line">* <span class="doctag">@param</span> t getTop()</div><div class="line">* <span class="doctag">@param</span> r getRight()</div><div class="line">* <span class="doctag">@param</span> b getBottom()</div><div class="line">*/</div></pre></td></tr></table></figure>
+
+    @Override
+    public void layout(int l, int t, int r, int b) {
+        super.layout(l, t, r, b);
+    }
+​
+</code></pre><ul>
 <li><p>onDraw() 绘制内容</p>
-<p>   是实际绘制的部分，使用的是Canvas绘图。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是实际绘制的部分，使用的是Canvas绘图。</p>
 </li>
+</ul>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><ul>
 <li><p>另外</p>
-<pre><code>自定义View之后，一般会对外暴露一些接口，用于控制View的状态或监听View的变化等等。
-</code></pre></li>
+<p>自定义View之后，一般会对外暴露一些接口，用于控制View的状态或监听View的变化等等。</p>
+</li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
 <thead>
