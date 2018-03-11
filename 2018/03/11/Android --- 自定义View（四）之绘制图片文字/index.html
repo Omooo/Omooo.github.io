@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — 自定义View（四）之绘制图片文字前言回顾一下上一篇的内容，主要介绍了画布的几种操作：位移（translate）、缩放（scale）、旋转（rotate）、错切（skew），还有画布的保存（save）和回滚（restore）等等。知道这些方法参数的含义以及方法实现的效果就行了。而这篇文章主要是介绍怎样绘制图片文字，这篇文章过后，基本上大部分的自定义View都能实现了，想想是不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/Android --- 自定义View（四）之绘制图片文字/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 自定义View（四）之绘制图片文字前言回顾一下上一篇的内容，主要介绍了画布的几种操作：位移（translate）、缩放（scale）、旋转（rotate）、错切（skew），还有画布的保存（save）和回滚（restore）等等。知道这些方法参数的含义以及方法实现的效果就行了。而这篇文章主要是介绍怎样绘制图片文字，这篇文章过后，基本上大部分的自定义View都能实现了，想想是不">
+<meta property="og:image" content="https://i.loli.net/2018/01/27/5a6c0aed9f841.jpg">
+<meta property="og:updated_time" content="2018-01-28T05:37:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 自定义View（四）之绘制图片文字前言回顾一下上一篇的内容，主要介绍了画布的几种操作：位移（translate）、缩放（scale）、旋转（rotate）、错切（skew），还有画布的保存（save）和回滚（restore）等等。知道这些方法参数的含义以及方法实现的效果就行了。而这篇文章主要是介绍怎样绘制图片文字，这篇文章过后，基本上大部分的自定义View都能实现了，想想是不">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/27/5a6c0aed9f841.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- 自定义View（四）之绘制图片文字" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-自定义View（四）之绘制图片文字"><a href="#Android-—-自定义View（四）之绘制图片文字" class="headerlink" title="Android — 自定义View（四）之绘制图片文字"></a>Android — 自定义View（四）之绘制图片文字</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>回顾一下上一篇的内容，主要介绍了画布的几种操作：位移（translate）、缩放（scale）、旋转（rotate）、错切（skew），还有画布的保存（save）和回滚（restore）等等。知道这些方法参数的含义以及方法实现的效果就行了。而这篇文章主要是介绍怎样绘制图片文字，这篇文章过后，基本上大部分的自定义View都能实现了，想想是不是很刺激？当然，这也不是终点，后面还有更加酷炫的效果。先来看看本节的目录：</p>
+<ol>
+<li>绘制图片<ul>
+<li>drawPicture（矢量图）<ul>
+<li>使用Picture提供的draw方法绘制</li>
+<li>使用Canvas提供的drawPicture方法绘制</li>
+<li>将Picture包装成PictureDrawable，使用PictureDrawable的draw方法绘制</li>
+</ul>
+</li>
+<li>drawBitmap（位图）</li>
+</ul>
+</li>
+<li>绘制文字<ul>
+<li>drawText()</li>
+<li>drawPosText()</li>
+<li>drawTextOnPath()</li>
+</ul>
+</li>
+</ol>
+<p>其实我感觉绘制图片用的比较少，绘制文字还是很重要的，可以直接跳到绘制文字部分看，当然，适当了解一下绘制图片还是很有必要的，毕竟学这些东西只是脑子里有一个印象，到用着的时候也知道看什么，不是吗？那就开始今天的讲解了。</p>
+<p><img src="https://i.loli.net/2018/01/27/5a6c0aed9f841.jpg" alt=""></p>
+<a id="more"></a>
+<h4 id="绘制图片"><a href="#绘制图片" class="headerlink" title="绘制图片"></a>绘制图片</h4><p>绘制图片有两种方式，即drawPicture（矢量图）、和drawBitmap（位图）。</p>
+<ul>
+<li><p>drawPicture</p>
+<p><strong>使用Picture前请关闭硬件加速，以免引起不必要的问题。</strong></p>
+<p>在AndroidMenifest文件中application节点下添加android:hardwareAccelerated=”false”以关闭整个应用的硬件加速。</p>
+<p><strong>我们可以把Picture看做一个录制Canvas操作的录像机。</strong></p>
+<p>相关API：</p>
+<p>| 相关方法                                     | 简介                                       |<br>| —————————————- | —————————————- |<br>| public int getWidth()                    | 获取宽度                                     |<br>| public int getHeight()                   | 获取高度                                     |<br>| public Canvas beginRecording(int width,int height) | 开始录制（返回一个Canvas，在Canvas中所有的绘制都会存储在Picture中） |<br>| public void endRecording()               | 结束录制                                     |<br>| public void draw(Canvas canvas)          | 将Picture中内容绘制到Canvas中                    |</p>
+<p>beginRecording()和endRecording()是成对出现的，开始录制和结束录制之间的操作会记录在Picture中。</p>
+<p>录制内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recording</span><span class="params">()</span> </span>&#123;</div><div class="line">    mPicture = <span class="keyword">new</span> Picture();</div><div class="line">    <span class="comment">//开始录制</span></div><div class="line">    Canvas canvas = mPicture.beginRecording(mWidth, mHeight);</div><div class="line">    canvas.drawCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, mPaint);</div><div class="line">    <span class="comment">//结束录制</span></div><div class="line">    mPicture.endRecording();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>录制内容只是将一些Canvas操作用Picture保存起来，录制内容并不会显示在屏幕上。那怎么样要才能显示出来呢？你肯定会说：那还用你说？肯定用上面Picture提供的draw方法绘制出来呀。</p>
+<p>emmmm，说的有道理，但是我们想要把Picture中录制的操作绘制出来的话，有三种方法：</p>
+<ul>
+<li>使用Picture提供的draw方法绘制</li>
+<li>使用Canvas提供的drawPicture方法绘制</li>
+<li>将Pictur包装成PictureDrawable，使用PictureDrawable的draw方法绘制</li>
+</ul>
+<p>但是第一种方法对Canvas有影响，我们一般不使用，第三种方法有太繁琐，我建议使用第二种方法。</p>
+<p>绘制内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">    canvas.translate(mWidth / <span class="number">2</span>, mHeight / <span class="number">2</span>);</div><div class="line">    recording();</div><div class="line">    canvas.drawPicture(mPicture);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际上，recording()方法也可以放在构造方法中，只要是在绘制内容之前调用就行。</p>
+</li>
+<li><p>drawBitmap</p>
+<p>获取Bitmap就不多说了，四种方法。关于绘制Bitmap有三种方法，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Matrix matrix, Paint paint)</span></span></div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, <span class="keyword">float</span> left, <span class="keyword">float</span> top, Paint paint)</span></div><div class="line"><span class="comment">// 第三种</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Rect src, Rect dst, Paint paint)</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBitmap</span> <span class="params">(Bitmap bitmap, Rect src, RectF dst, Paint paint)</span></div></pre></td></tr></table></figure>
+<p>第一种方法中的Matrix参数是用来在绘制的时候对图片进行变换，如果只是将图片的内容绘制出来的话直接new Matrix()实例化一个就行了。关于Matrix后面会详解的。</p>
+<p>第二种方法中间两个参数则是指定了图片左上角的坐标。</p>
+<p>第三种方法就比较逗了，中间两个参数分别制定了两个矩形，第一个矩形指定绘制图片的区域，第二个矩形指定图片在屏幕上显示（绘制）的局域。</p>
+</li>
+</ul>
+<h4 id="绘制文字"><a href="#绘制文字" class="headerlink" title="绘制文字"></a>绘制文字</h4><p>绘制文字有三类方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一类</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(String text, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(String text, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(CharSequence text, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawText</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">float</span> x, <span class="keyword">float</span> y, Paint paint)</span></div><div class="line"></div><div class="line"><span class="comment">// 第二类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPosText</span> <span class="params">(String text, <span class="keyword">float</span>[] pos, Paint paint)</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawPosText</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, <span class="keyword">float</span>[] pos, Paint paint)</span></div><div class="line"></div><div class="line"><span class="comment">// 第三类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawTextOnPath</span> <span class="params">(String text, Path path, <span class="keyword">float</span> hOffset, <span class="keyword">float</span> vOffset, Paint paint)</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawTextOnPath</span> <span class="params">(<span class="keyword">char</span>[] text, <span class="keyword">int</span> index, <span class="keyword">int</span> count, Path path, <span class="keyword">float</span> hOffset, <span class="keyword">float</span> vOffset, Paint paint)</span></div></pre></td></tr></table></figure>
+<p>第一类：指定文本基线开始绘制（基线X默认在字符串左侧，基线Y默认在字符串下方）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String text = <span class="string">"Omooo"</span>;</div><div class="line">canvas.drawText(text, <span class="number">0</span>, <span class="number">0</span>, mPaint);</div><div class="line"><span class="comment">//文本、开始截取位置、结束截取位置、基线X、基线Y、画笔</span></div><div class="line">canvas.drawText(text, <span class="number">0</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">100</span>, mPaint);</div></pre></td></tr></table></figure>
+<p>在截取字符串的时候是<strong>前闭后开</strong>。</p>
+<p>第二类：分别指定每个文字的位置</p>
+<p>这一类不怎么常用，毕竟要指定每个字符的坐标值，过于繁琐。</p>
+<p>第三类：指定一个路径，根据路径绘制文字</p>
+<p>这个就比较厉害了，用到了Path，emmmm，下一篇再讲。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/11/Android --- 自定义View（四）之绘制图片文字/" class="archive-article-date">
+  	<time datetime="2018-03-11T15:30:20.019Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-11</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/09/Android --- 自定义View（三）之画布操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 自定义View（四）之绘制图片文字" data-title="" data-url="http://yoursite.com/2018/03/11/Android --- 自定义View（四）之绘制图片文字/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

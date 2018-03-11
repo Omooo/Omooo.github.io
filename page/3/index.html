@@ -143,6 +143,65 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- 侧滑栏的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现"><a href="#Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现" class="headerlink" title="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现"></a>Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。</p>
+<p> <img src="https://i.loli.net/2018/01/11/5a5779f711ae7.gif" style="height:150px"></p>
+<p>学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：</p>
+<p><a href="https://www.jianshu.com/p/d70cfd724c7f" target="_blank" rel="external">https://www.jianshu.com/p/d70cfd724c7f</a></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里其实坑还是有的，需要注意以下几点：</p>
+<ol>
+<li><p>该Activity类需要继承至AppCompatActivity，而不是Activity。继承至Activity在写setSupportActionBar(mToolbar)会直接报错，emmmm，是时候要总结以下两者的区别的。</p>
+</li>
+<li><p>实例化NavigationView/Toolsbar的时候，需要加上前缀，即：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> android.support.design.widget.NavigationView mMenuView;</div><div class="line"><span class="keyword">private</span> android.support.v7.widget.Toolbar mToolbar;</div></pre></td></tr></table></figure>
+<p>兼容更多API版本。</p>
+</li>
+<li><p>NavigationView中的menu菜单的中的item只显示标题，不显示icon。网上找了一大堆，都是要重写onCreatOptionsMenu()方法，但是为什么我的不行呢。最后发现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将Icon显示为它本身的颜色竟然解决了不显示icon的问题</span></div><div class="line">mMenuView = findViewById(R.id.navigation_view);</div><div class="line">mMenuView.setItemIconTintList(<span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>我设置的icon也不是无色透明的呀。</p>
+</li>
+<li><p>想仿照网易云的侧滑栏，但是在NavigationView的布局下面添加布局是显示不出来的，所以这算是一个问题，网上写的侧滑栏也是类似以下：</p>
+<p><img src="https://i.loli.net/2018/01/11/5a577fbb82c9a.png" style="height:500px"></p>
+<p>网易云侧滑栏：</p>
+<p><img src="https://i.loli.net/2018/01/11/5a57806fc0a09.jpg" style="height:500px"></p>
+<p>如果你有什么想法，欢迎邮至869759698@qq.com，感激不尽。</p>
+<p>​</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/01/11/Android --- 侧滑栏的实现/" class="archive-article-date">
+  	<time datetime="2018-01-11T15:22:37.003Z" itemprop="datePublished"><i class="icon-clock"></i>2018-01-11</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- Notification" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -333,56 +392,9 @@
 
 
   
-    <article id="post-2017总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="2017，你怎么走的这么快？"><a href="#2017，你怎么走的这么快？" class="headerlink" title="2017，你怎么走的这么快？"></a>2017，你怎么走的这么快？</h2><h4 id="可能荒废了"><a href="#可能荒废了" class="headerlink" title="可能荒废了"></a>可能荒废了</h4><p>这可能是这一年最后一篇博客了，回顾一下这半年都做了什么呢？</p>
-<p>讲真，为什么我感觉什么也没学到呢？</p>
-<p>我是从暑假的时候开始学习的Android，那两个月基本上是把Android的基础学完了，也能做出一些小东西。</p>
-<p>到了学校，又慢慢深入学习Android，看别人公众号分享的文章慢慢学习，有的讲的太深入我看不懂就把它添加到微信收藏了，然后就再也没动过。</p>
-<p>我就是一个垃圾，没有专研精神，遇到难点就容易三天打鱼两天晒网，不了了之。而且，学习的知识也很零碎，这学一点那学一点，无法把学到的知识融会贯通。学的范围广了，也就体现学的没有深度。</p>
-<p>所以，我感觉自己现在还是一个初学者，菜鸡！</p>
-<p>在这半年了，又回忆的过多，可怜。</p>
-<p>总结一下，看书、务实基础、早睡早起很重要，能不能做到得看自己有没有决心了。</p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>其实我很想出去玩玩，总感觉总是呆在宿舍很窝囊。</p>
-<p>而且，不能把局限仅限于Android。</p>
-<p>emmmm，就这样，一次很不开心的写作。</p>
-<p><img src="https://i.loli.net/2017/12/30/5a47064320e84.jpg" alt=""></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/12/30/2017总结/" class="archive-article-date">
-  	<time datetime="2017-12-30T03:25:27.925Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-30</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 

