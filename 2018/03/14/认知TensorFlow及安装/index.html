@@ -8,12 +8,24 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
+↓ ↓ ↓ 高能预警 ↓ ↓ ↓
+TensorFlow中文社区">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/page/21/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/认知TensorFlow及安装/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
+↓ ↓ ↓ 高能预警 ↓ ↓ ↓
+TensorFlow中文社区">
+<meta property="og:image" content="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif">
+<meta property="og:updated_time" content="2018-03-14T05:25:46.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
+↓ ↓ ↓ 高能预警 ↓ ↓ ↓
+TensorFlow中文社区">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +153,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-IOT" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-认知TensorFlow及安装" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,17 +162,43 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="物联网当下的安全问题"><a href="#物联网当下的安全问题" class="headerlink" title="物联网当下的安全问题"></a>物联网当下的安全问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。</p>
-<h4 id="物联网安全概述"><a href="#物联网安全概述" class="headerlink" title="物联网安全概述"></a>物联网安全概述</h4><p>万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私、企业信息安全甚至国家关键设施的头号安全威胁。试想一下，无论家用或者企业级的互联网设备，如接入互联网的交通指示灯、恒温器或者医用监控设备遭到攻击，后果将会变得非常可怕。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IOT/#more">more >></a>
-        </p>
+<h2 id="TensorFlow框架特性与安装"><a href="#TensorFlow框架特性与安装" class="headerlink" title="TensorFlow框架特性与安装"></a>TensorFlow框架特性与安装</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。</p>
+<p><strong>↓ ↓ ↓ 高能预警 ↓ ↓ ↓</strong></p>
+<p><a href="http://www.tensorfly.cn/" target="_blank" rel="external">TensorFlow中文社区</a></p>
+<p>本文目录：</p>
+<ol>
+<li>简介</li>
+<li>TensorFlow特性</li>
+<li>TensorFlow安装</li>
+<li>小结</li>
+</ol>
+<a id="more"></a>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TensorFlow是一个采用<strong>数据流图（data flow graphs）</strong>，用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。它灵活的架构让你可以在多种平台上展开计算，例如台式计算机的一个或多个CPU（或GPU），服务器，移动设备等等。</p>
+<p><img src="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif" alt=""></p>
+<p>以上就是数据流图，数据流图用结点和线的有向图来描述数学计算。节点一般用来表示施加的数学操作，但也可以表示数据输入的起点/输出的终点，或者是读取/写入持久变量的终点。线则表示节点之间的输入/输出关系。这些数据线可以输运 size 可动态调整的多维数据数组，即张量。张量从图中流过的直观图像是这个工具取名为TensorFlow的原因。一旦输入端的所以张量准备好，节点将被分配到各种计算设备完成异步并行地执行运算。</p>
+<h4 id="TensorFlow的特性"><a href="#TensorFlow的特性" class="headerlink" title="TensorFlow的特性"></a>TensorFlow的特性</h4><ul>
+<li><p>真正的可移植性</p>
+<p>TensorFlow在CPU和GPU上都可以运行，比如说可以运行在台式机、服务器、移动设备等等。</p>
+</li>
+<li><p>自动求微分</p>
+<p>基于梯度的机器学习算法会受益于TensorFlow自动求微分的能力。这个在下一节就能清楚明白了。</p>
+</li>
+<li><p>看的见的训练</p>
+<p>TensorFlow有一个比较友好的组件，它可以让工作人员在训练网络的过程中通过仪表盘看到网络目前的表现情况。</p>
+<p>在TensorFlow中你只需要通过非常简单的配置命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 启动</div><div class="line">tensorboard --logdir=path/to/logs</div></pre></td></tr></table></figure>
+<p>就能将它读取的位置指向日志路径，这样就可以读取其中的日志信息并做可视化显示。默认的Web界面位置在 <a href="http://localhost:6006" target="_blank" rel="external">http://localhost:6006</a> 。从界面上可以看到一个训练模型的准确率以及损失函数的大小变化趋势。</p>
+</li>
+</ul>
+<h4 id="TensorFlow的安装"><a href="#TensorFlow的安装" class="headerlink" title="TensorFlow的安装"></a>TensorFlow的安装</h4><p>参见：<a href="http://blog.csdn.net/sb19931201/article/details/53648615" target="_blank" rel="external">Win10 TensorFlow（gpu）安装详解</a></p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>既然有官方文档，那我就不用多说了。多看官方文档，进步很快。</p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2018/03/14/认知TensorFlow及安装/" class="archive-article-date">
+  	<time datetime="2018-03-14T05:26:48.890Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-14</time>
 </a>
       
       
@@ -172,177 +208,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-IIS目录枚举漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="IIS-目录枚举漏洞"><a href="#IIS-目录枚举漏洞" class="headerlink" title="IIS 目录枚举漏洞"></a>IIS 目录枚举漏洞</h2><h4 id="Microsoft-IIS-tilde-directory-enumeration"><a href="#Microsoft-IIS-tilde-directory-enumeration" class="headerlink" title="Microsoft IIS tilde directory enumeration"></a>Microsoft IIS tilde directory enumeration</h4><p>当使用 IIS，你可以从某个目录中枚举所有短名的列表，这可能是一个大问题，如果你能设法猜测或者暴力破解这些短名称完整的文件或目录名。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IIS目录枚举漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HTML+CSS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p>​    说出来你可能不信啊，HTML 、CSS 作为前端最基础的知识，真的很简单。就我而言，前端给我带来的感觉就是和用户交互的更多，可以更加随心所意的排版，当然，形形色色的页面也比一个黑框好看。（滑稽脸）</p>
-<p>   如果你对 HTML + CSS 还没有任何认识的话，建议在<a href="http://www.imooc.com/learn/9" target="_blank" rel="external">慕课网 HTML + CSS 基础课程 </a>学习，一边看文档一边自己动手写。学完这个也可以再看看<a href="http://www.w3school.com.cn/h.asp" target="_blank" rel="external">W3School</a>上的文档加深记忆。</p>
-<p>  最后放上我的笔记，<a href="http://pan.baidu.com/s/1bQAVE2" target="_blank" rel="external">嘻嘻</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="史上最浅显易懂的-Git-教程"><a href="#史上最浅显易懂的-Git-教程" class="headerlink" title="史上最浅显易懂的 Git 教程"></a>史上最浅显易懂的 Git 教程</h2><p><strong>写在前面</strong></p>
-<p>讲道理，这次不是标题党。没错，就是这么猖狂。我为什么敢这么说？看完就懂了，彩蛋在文末。</p>
-<h4 id="Git-简介"><a href="#Git-简介" class="headerlink" title="Git 简介"></a>Git 简介</h4><p>Git 是目前世界最先进的分布式版本控制系统（没有之一）。那什么是版本控制？简单来说就是能记录文件的每次改动。那为什么有分布式一说？这里就要先说集中式版本控制系统了。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/git/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/git/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.198Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="使用Docker打造自己的渗透测试容器之—理论篇"><a href="#使用Docker打造自己的渗透测试容器之—理论篇" class="headerlink" title="使用Docker打造自己的渗透测试容器之—理论篇"></a>使用Docker打造自己的渗透测试容器之—理论篇</h2><p><strong>00x0 Docker简介</strong></p>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。几乎没有性能开销，可以很容易地在机器和数据中心中运行。最重要的是，他们不依赖任何语言、框架，甚至操作系统。</p>
-<p><img src="http://i4.buimg.com/588926/2bf24bbe9e78cff3.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/Docker/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Docker/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/22/">Next &raquo;</a>
-    </nav>
+    <a href="/2018/03/13/认识深度学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="认知TensorFlow及安装" data-title="" data-url="http://yoursite.com/2018/03/14/认知TensorFlow及安装/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -364,8 +287,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
