@@ -8,24 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
-↓ ↓ ↓ 高能预警 ↓ ↓ ↓
-TensorFlow中文社区">
+  <meta name="description" content="Android — 自定义View（五）之Path操作前言同样的，回顾一下上一篇学的知识。在上一篇中，着重讲解了用Canvas绘制图片和文字。绘制图片有两种方式：drawPicture和drawBitmap，对于drawPicture来说，我们形象化的把它比喻成录像机，能够记录Canvas一系列操作并将它保存到Picture中，再把录制的内容绘制出来的话虽然有三种方法，但是我们推荐用Canvas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/2018/03/14/认知TensorFlow及安装/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/Android --- 自定义View（五）之Path基本操作/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
-<meta property="og:description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
-↓ ↓ ↓ 高能预警 ↓ ↓ ↓
-TensorFlow中文社区">
-<meta property="og:image" content="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif">
-<meta property="og:updated_time" content="2018-03-14T05:25:46.857Z">
+<meta property="og:description" content="Android — 自定义View（五）之Path操作前言同样的，回顾一下上一篇学的知识。在上一篇中，着重讲解了用Canvas绘制图片和文字。绘制图片有两种方式：drawPicture和drawBitmap，对于drawPicture来说，我们形象化的把它比喻成录像机，能够记录Canvas一系列操作并将它保存到Picture中，再把录制的内容绘制出来的话虽然有三种方法，但是我们推荐用Canvas">
+<meta property="og:image" content="https://i.loli.net/2018/01/28/5a6d7dc3cc5bf.gif">
+<meta property="og:image" content="https://i.loli.net/2018/01/29/5a6ed406e1cfd.png">
+<meta property="og:updated_time" content="2018-01-29T08:00:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
-<meta name="twitter:description" content="TensorFlow框架特性与安装前言很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。
-↓ ↓ ↓ 高能预警 ↓ ↓ ↓
-TensorFlow中文社区">
-<meta name="twitter:image" content="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif">
+<meta name="twitter:description" content="Android — 自定义View（五）之Path操作前言同样的，回顾一下上一篇学的知识。在上一篇中，着重讲解了用Canvas绘制图片和文字。绘制图片有两种方式：drawPicture和drawBitmap，对于drawPicture来说，我们形象化的把它比喻成录像机，能够记录Canvas一系列操作并将它保存到Picture中，再把录制的内容绘制出来的话虽然有三种方法，但是我们推荐用Canvas">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/28/5a6d7dc3cc5bf.gif">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -153,7 +148,7 @@ TensorFlow中文社区">
 </nav>
 
       <div class="body-wrap">
-        <article id="post-认知TensorFlow及安装" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- 自定义View（五）之Path基本操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -162,43 +157,165 @@ TensorFlow中文社区">
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="TensorFlow框架特性与安装"><a href="#TensorFlow框架特性与安装" class="headerlink" title="TensorFlow框架特性与安装"></a>TensorFlow框架特性与安装</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。</p>
-<p><strong>↓ ↓ ↓ 高能预警 ↓ ↓ ↓</strong></p>
-<p><a href="http://www.tensorfly.cn/" target="_blank" rel="external">TensorFlow中文社区</a></p>
-<p>本文目录：</p>
+<h2 id="Android-—-自定义View（五）之Path操作"><a href="#Android-—-自定义View（五）之Path操作" class="headerlink" title="Android — 自定义View（五）之Path操作"></a>Android — 自定义View（五）之Path操作</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>同样的，回顾一下上一篇学的知识。在上一篇中，着重讲解了用Canvas绘制图片和文字。绘制图片有两种方式：drawPicture和drawBitmap，对于drawPicture来说，我们形象化的把它比喻成录像机，能够记录Canvas一系列操作并将它保存到Picture中，再把录制的内容绘制出来的话虽然有三种方法，但是我们推荐用Canvas提供的drawPicture方法，主要是因为它不会对后续Canvas造成影响，而且可控性更强。然后是绘制图片的第二种方式，即drawBitmap，这个也没什么好说了，知道Bitmap的四种来源方式以及drawBitmap方法中参数的含义就OK了。接着我们讲到绘制文字，绘制文字还是很简单，也提供了三种方法来绘制：drawText()、drawPosText()、drawTextOnPath()。drawText()方法可以对绘制的文本进行截取，记住是前闭后开；drawPosText()我们不建议使用，毕竟要确定文本中每个字符的坐标值，而drawTextOnPath()我们则是遗留下来了，这篇文章就是来讲解Path的使用。目录如下：</p>
 <ol>
-<li>简介</li>
-<li>TensorFlow特性</li>
-<li>TensorFlow安装</li>
-<li>小结</li>
+<li>Path的作用和含义</li>
+<li>Path常用方法表</li>
+<li>Path常用方法详解</li>
+<li>实战之绘制雷达图（蜘蛛网图）</li>
 </ol>
+<p>感觉还不错吧，那就接着往下看吧，啦啦啦</p>
+<p><img src="https://i.loli.net/2018/01/28/5a6d7dc3cc5bf.gif" alt=""></p>
 <a id="more"></a>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>TensorFlow是一个采用<strong>数据流图（data flow graphs）</strong>，用于数值计算的开源软件库。节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。它灵活的架构让你可以在多种平台上展开计算，例如台式计算机的一个或多个CPU（或GPU），服务器，移动设备等等。</p>
-<p><img src="https://i.loli.net/2018/03/14/5aa8ab640e3af.gif" alt=""></p>
-<p>以上就是数据流图，数据流图用结点和线的有向图来描述数学计算。节点一般用来表示施加的数学操作，但也可以表示数据输入的起点/输出的终点，或者是读取/写入持久变量的终点。线则表示节点之间的输入/输出关系。这些数据线可以输运 size 可动态调整的多维数据数组，即张量。张量从图中流过的直观图像是这个工具取名为TensorFlow的原因。一旦输入端的所以张量准备好，节点将被分配到各种计算设备完成异步并行地执行运算。</p>
-<h4 id="TensorFlow的特性"><a href="#TensorFlow的特性" class="headerlink" title="TensorFlow的特性"></a>TensorFlow的特性</h4><ul>
-<li><p>真正的可移植性</p>
-<p>TensorFlow在CPU和GPU上都可以运行，比如说可以运行在台式机、服务器、移动设备等等。</p>
+<h4 id="Path的作用和含义"><a href="#Path的作用和含义" class="headerlink" title="Path的作用和含义"></a>Path的作用和含义</h4><p>作用：</p>
+<p>​    我们之前绘制的图形都是一些简单图形，比如扇形、矩形、圆形等等，而对于一些复杂的图形是没法绘制的，如心形、五角星等等。而使用Path不仅能够绘制一些简单图形，也能绘制一些复杂的图形。另外，根据路径绘制文本和裁剪画布都会用到Path。</p>
+<p>含义：</p>
+<p>​    Path封装了有直线和曲线（二次、三次贝塞尔曲线）构成的几何路径。你能用Canvas的drawPath来把这条路径绘制出来，也可以用来根据路径绘制文本和裁剪画布。有时我们会用Path来描述一个图像的轮廓，所以也会称Path为为轮廓线，当然，两者并不等价。另外，路径有开放和闭合的区别。</p>
+<h4 id="Path常用方法表"><a href="#Path常用方法表" class="headerlink" title="Path常用方法表"></a>Path常用方法表</h4><table>
+<thead>
+<tr>
+<th>作用</th>
+<th>相关方法</th>
+<th>备注</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动起点</td>
+<td>moveTo()</td>
+<td>移动下一次操作的起点位置</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>设置终点</td>
+<td>setLastPoint()</td>
+<td>重置当前Path中最后一个点的位置，如果在绘制之前调用，效果和moveTo()相同</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>连接直线</td>
+<td>lineTo()</td>
+<td>添加上一个点到当前点之间的直线到Path</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>闭合路径</td>
+<td>close()</td>
+<td>连接第一个点到最后一个点，形成一个闭合区域</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>添加内容</td>
+<td>addRect()、addRoundRect()、addOval()、addCircle()、addPath()、addArc()、arcTo()</td>
+<td>添加矩形、圆角矩形、椭圆、圆、路径、圆弧到当前Path（注意addArc和arcTo的区别）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>判空</td>
+<td>isEmpty()</td>
+<td>判断Path是否为空</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>是否为矩形</td>
+<td>isRect()</td>
+<td>判断Path是否是一个矩形</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>替换路径</td>
+<td>set()</td>
+<td>用新的路径替换当前路径所有内容</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>偏移路径</td>
+<td>offset()</td>
+<td>对当前路径之前的操作进行偏移，不会影响之后的操作</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>贝塞尔曲线</td>
+<td>quadTo()、cubicTo()</td>
+<td>分别为二阶、三阶贝塞尔曲线方法</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>填充模式</td>
+<td>setFillType()、getFillType()、isInverseFillType()、toggleInverseFillType()</td>
+<td>设置、获取、判断和切换填充模式</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>布尔操作</td>
+<td>op()</td>
+<td>对两个Path进行布尔运算（即取交集、并集等操作）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>计算边界</td>
+<td>computeBounds()</td>
+<td>计算Path的边界</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>重置路径</td>
+<td>reset()、rewind()</td>
+<td>消除Path中的内容 reset()不保留内部数据结构，但会保留FillType，rewind()会保留内部结构，但不保留Fillype</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>矩阵操作</td>
+<td>transform()</td>
+<td>矩阵变换</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="Path常用方法详解"><a href="#Path常用方法详解" class="headerlink" title="Path常用方法详解"></a>Path常用方法详解</h4><ul>
+<li><p>moveTo()、setLastPoint()、lineTo()、close()</p>
+<p>首先要注意的就是moveTo()和setLastPoint()的区别：</p>
+<p>| 方法名            | 简介             | 是否影响之前的操作 | 是否影响之后的操作 |<br>| ————– | ————– | ——— | ——— |<br>| moveTo()       | 移动下一次操作的起点位置   | 否         | 是         |<br>| setLastPoint() | 设置之前操作的最后一个点位置 | <strong>是</strong>     | 是         |</p>
+<p>简单的来说就是，<strong>moveTo()只改变下次操作的起点，而setLastPoint()是重置上一次操作的最后一个点。</strong></p>
+<p>还有需要注意的是：lineTo()的起点坐标是上次绘制完的终点坐标，如果没有，则是原点坐标。</p>
+<p>close()方法也有需要注意的一点，close()作用是封闭路径，与连接当前最后一个点和第一个点并不等价，如果连接了第一个点和最后一个点仍然无法形成封闭图形，则close()方法什么也不做。</p>
 </li>
-<li><p>自动求微分</p>
-<p>基于梯度的机器学习算法会受益于TensorFlow自动求微分的能力。这个在下一节就能清楚明白了。</p>
-</li>
-<li><p>看的见的训练</p>
-<p>TensorFlow有一个比较友好的组件，它可以让工作人员在训练网络的过程中通过仪表盘看到网络目前的表现情况。</p>
-<p>在TensorFlow中你只需要通过非常简单的配置命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 启动</div><div class="line">tensorboard --logdir=path/to/logs</div></pre></td></tr></table></figure>
-<p>就能将它读取的位置指向日志路径，这样就可以读取其中的日志信息并做可视化显示。默认的Web界面位置在 <a href="http://localhost:6006" target="_blank" rel="external">http://localhost:6006</a> 。从界面上可以看到一个训练模型的准确率以及损失函数的大小变化趋势。</p>
+<li><p>addXxx()</p>
+<p>这部分内容主要是在Path添加基本图形，我们依照矩形简单做一下示例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRect</span> <span class="params">(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom, Path.Direction dir)</span></span></div></pre></td></tr></table></figure>
+<p>重点在该方法的最后一个参数：Path.Direction.dir，Direction是一个枚举类型，里面只有两个枚举常量：</p>
+<p>| 类型   | 释义                | 翻译   |<br>| —- | —————– | —- |<br>| CW   | clockwise         | 顺时针  |<br>| CCW  | counter-clockwise | 逆时针  |</p>
+<p>讲到这，就涉及到一些Path的存储问题了，对于矩形的存储，简单的就是记录坐标点，如果只记录参数中的两个坐标点的话，还需要多余一个参数来记录这是一个矩形，显然在解析的时候会很麻烦。所以索性就将矩形的四个点全部记录下来，在绘制的时候连接四个点即可，这就要决定是用顺时针还是逆时针来连接这四个点了，<strong>起点是左上角的点</strong>。</p>
 </li>
 </ul>
-<h4 id="TensorFlow的安装"><a href="#TensorFlow的安装" class="headerlink" title="TensorFlow的安装"></a>TensorFlow的安装</h4><p>参见：<a href="http://blog.csdn.net/sb19931201/article/details/53648615" target="_blank" rel="external">Win10 TensorFlow（gpu）安装详解</a></p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>既然有官方文档，那我就不用多说了。多看官方文档，进步很快。</p>
+<h4 id="实战之绘制雷达图"><a href="#实战之绘制雷达图" class="headerlink" title="实战之绘制雷达图"></a>实战之绘制雷达图</h4><p>效果图：</p>
+<p><img src="https://i.loli.net/2018/01/29/5a6ed406e1cfd.png" alt=""></p>
+<p>只要熟练上面所讲的Path的基本操作，画一个雷达图还是很easy的。这个雷达图可以定制，由用户决定是多几边形、数据等等。</p>
+<p><strong>源码：</strong></p>
+<p><a href="https://github.com/Omooo/ChartsDemo" target="_blank" rel="external">https://github.com/Omooo/ChartsDemo</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2018/03/14/认知TensorFlow及安装/" class="archive-article-date">
-  	<time datetime="2018-03-14T05:26:48.890Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-14</time>
+      <a href="/2018/03/15/Android --- 自定义View（五）之Path基本操作/" class="archive-article-date">
+  	<time datetime="2018-03-15T11:58:53.357Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-15</time>
 </a>
       
       
@@ -211,17 +328,8 @@ TensorFlow中文社区">
   
 <nav id="article-nav">
   
-    <a href="/2018/03/15/Android --- 自定义View（五）之Path基本操作/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/13/认识深度学习/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/14/认知TensorFlow及安装/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
@@ -256,7 +364,7 @@ TensorFlow中文社区">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="认知TensorFlow及安装" data-title="" data-url="http://yoursite.com/2018/03/14/认知TensorFlow及安装/"></div>
+	<div class="ds-thread" data-thread-key="Android --- 自定义View（五）之Path基本操作" data-title="" data-url="http://yoursite.com/2018/03/15/Android --- 自定义View（五）之Path基本操作/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

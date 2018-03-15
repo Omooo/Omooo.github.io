@@ -143,6 +143,53 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android -- TextInputLayout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-TextInputLayout"><a href="#Android-—-TextInputLayout" class="headerlink" title="Android — TextInputLayout"></a>Android — TextInputLayout</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近看到一个蛮实用的 “效果” ，一图胜前言：（刷新页面重新看）</p>
+<p><img src="https://i.loli.net/2017/11/08/5a03180cb9777.gif" alt=""></p>
+<p>我以为作者写的呢，今天无意试了一下Android Studio 内置登录页面，运行一看，哇，效果一模一样，最后发现是 Android 特喵的有这么一个控件。。。控件。。。可能是我过于挑剔吧，看着还是有点丑陋，只是一个 hint 上移的动画感觉很一般。深入了解一下，emmmm，发现这个控件不简单，可以做到一下几点：</p>
+<ol>
+<li>自定义样式，拒绝原本简单丑陋的动画</li>
+<li>实时错误检查，并自定义错误提示</li>
+</ol>
+<p>实现效果如下：</p>
+<p><img src="https://i.loli.net/2017/11/09/5a04571d3d5ea.gif" alt=""></p>
+<p>当有错误的时候，把 Button 设置为不可点击。感觉效果不错，实用性也很强。那么，下面就记录记录一下这个控件的使用。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/11/09/Android -- TextInputLayout/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/09/Android -- TextInputLayout/" class="archive-article-date">
+  	<time datetime="2017-11-09T13:50:17.500Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Java Web -- 初学Flag" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -304,49 +351,6 @@
       
       <a href="/2017/10/31/Kotlin -- 小栗子/" class="archive-article-date">
   	<time datetime="2017-10-31T10:56:28.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-31</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android -- Intent过滤器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-–-Intent-过滤器"><a href="#Android-–-Intent-过滤器" class="headerlink" title="Android – Intent 过滤器"></a>Android – Intent 过滤器</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>我们知道，Intent有两种启动方式，显式和隐式启动。显式启动去下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">startActivity(<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,SecondActivity.class));</div></pre></td></tr></table></figure>
-<p>显式启动没什么好说的，今天主要是说说隐式启动。一个简单的例子如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(&quot;http://www.omooo.top&quot;);</div><div class="line">Intent intent = new Intent(Intent.ACTION_VIEW,uri);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
-<p>以上示例并没有明确指定要启动的组件，而是由系统决定。系统需要通过某种匹配规则来寻找需要启动的目标组件，这种匹配规则就依赖于Intent的过滤器实现。Intent过滤器是根据Intent中的动作（action）、类别（category）、数据（data）内容，对目标组件进行匹配和筛选的机制。当Intent匹配到一个过滤器上，系统就会启动相应的组件并传递给相应的Intent对象；如果匹配出了多个过滤器，系统会弹出对话框，由用户进行选择。下面就开始深入了解过滤规则。</p>
-<p><img src="https://i.loli.net/2017/10/30/59f6b808b5646.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/10/30/Android -- Intent过滤器/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/10/30/Android -- Intent过滤器/" class="archive-article-date">
-  	<time datetime="2017-10-30T13:38:32.386Z" itemprop="datePublished"><i class="icon-clock"></i>2017-10-30</time>
 </a>
       
       
