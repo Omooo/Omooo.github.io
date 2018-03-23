@@ -8,12 +8,28 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — 自定义Dialog的一些坑填坑本来今天开开心心拿到资源，准备轻轻松松写个自定义Dialog，说白了就是Dialog.setContentView(view);这个方法。
+
+但是遇到了一个大坑，不仅View错位，圆角效果也没有。
+如果你也遇到过这样的问题，可以接着看了。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/page/19/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/Android --- 自定义Dialog的一些坑/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 自定义Dialog的一些坑填坑本来今天开开心心拿到资源，准备轻轻松松写个自定义Dialog，说白了就是Dialog.setContentView(view);这个方法。
+
+但是遇到了一个大坑，不仅View错位，圆角效果也没有。
+如果你也遇到过这样的问题，可以接着看了。">
+<meta property="og:image" content="https://i.loli.net/2018/03/23/5ab4d5384d27d.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/23/5ab4d24091144.png">
+<meta property="og:updated_time" content="2018-03-23T10:24:00.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 自定义Dialog的一些坑填坑本来今天开开心心拿到资源，准备轻轻松松写个自定义Dialog，说白了就是Dialog.setContentView(view);这个方法。
+
+但是遇到了一个大坑，不仅View错位，圆角效果也没有。
+如果你也遇到过这样的问题，可以接着看了。">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/23/5ab4d5384d27d.png">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +157,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-分词" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- 自定义Dialog的一些坑" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,18 +166,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="听了那么多逼哥，逼哥到底再讲什么？"><a href="#听了那么多逼哥，逼哥到底再讲什么？" class="headerlink" title="听了那么多逼哥，逼哥到底再讲什么？"></a>听了那么多逼哥，逼哥到底再讲什么？</h2><p><strong>00x1 前言</strong></p>
-<p>作为逼粉，不想多逼逼，用逼哥的歌词来分析逼哥到底在讲什么，歌曲都是大家熟知的那些歌，大约1.2W字吧。做这个主要是想玩玩分词，第三方类库 Jieba。其实可以爬网易云上的，但是我为什么没有这样做呢？因为不会。。。</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/07/590f356bdeb8e.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/分词/#more">more >></a>
-        </p>
+<h2 id="Android-—-自定义Dialog的一些坑"><a href="#Android-—-自定义Dialog的一些坑" class="headerlink" title="Android — 自定义Dialog的一些坑"></a>Android — 自定义Dialog的一些坑</h2><h4 id="填坑"><a href="#填坑" class="headerlink" title="填坑"></a>填坑</h4><p>本来今天开开心心拿到资源，准备轻轻松松写个自定义Dialog，说白了就是Dialog.setContentView(view);这个方法。</p>
+<p><img src="https://i.loli.net/2018/03/23/5ab4d5384d27d.png" alt=""></p>
+<p>但是遇到了一个大坑，不仅View错位，圆角效果也没有。</p>
+<p>如果你也遇到过这样的问题，可以接着看了。</p>
+<a id="more"></a>
+<p>写完布局预览一下，感觉还不错，然而实际运行懵了 :生气！</p>
+<p><img src="https://i.loli.net/2018/03/23/5ab4d24091144.png" alt=""></p>
+<p>生气了呀，网上仔细找了一些方法，试了一下，分两步可以完美解决该问题：</p>
+<h4 id="Dialog构造方法里填入一个样式"><a href="#Dialog构造方法里填入一个样式" class="headerlink" title="Dialog构造方法里填入一个样式"></a>Dialog构造方法里填入一个样式</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"CustomDialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFullscreen"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@drawable/shape_dialog<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowContentOverlay"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>背景定义成圆角，需要自己写shape。</p>
+<h4 id="获取Dialog的窗体设置宽高"><a href="#获取Dialog的窗体设置宽高" class="headerlink" title="获取Dialog的窗体设置宽高"></a>获取Dialog的窗体设置宽高</h4><p>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一步：构造方法中设置样式</span></div><div class="line">Dialog dialog = <span class="keyword">new</span> Dialog(mContext,R.style.CustomDialog);</div><div class="line">View view = LayoutInflater.from(mContext).inflate(R.layout.view_keeper_custom_dialog_layout, <span class="keyword">null</span>);</div><div class="line">dialog.setContentView(view);</div><div class="line"><span class="comment">/**</span></div><div class="line">* 省略获取控件并设置点击事件等等</div><div class="line">*/</div><div class="line"><span class="comment">//第二步：获取Dialog的窗口并设置宽高</span></div><div class="line">Window window = dialog.getWindow();</div><div class="line">WindowManager.LayoutParams layoutParams = window.getAttributes();</div><div class="line">layoutParams.height = DensityUtil.dip2px(mContext, <span class="number">250</span>);</div><div class="line">layoutParams.width = DensityUtil.dip2px(mContext, <span class="number">260</span>);</div><div class="line">layoutParams.gravity = Gravity.CENTER;</div><div class="line">window.setAttributes(layoutParams);</div><div class="line">dialog.show();</div></pre></td></tr></table></figure>
+<p>然后没了</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.jianshu.com/p/5b813fa204dc" target="_blank" rel="external">https://www.jianshu.com/p/5b813fa204dc</a></p>
+<p><a href="https://www.jianshu.com/p/64446940eccf" target="_blank" rel="external">https://www.jianshu.com/p/64446940eccf</a></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/分词/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.283Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2018/03/23/Android --- 自定义Dialog的一些坑/" class="archive-article-date">
+  	<time datetime="2018-03-23T10:24:23.674Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-23</time>
 </a>
       
       
@@ -173,209 +197,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-七天精通 ASP.NET MVC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC"><a href="#七天玩转-ASP-NET-MVC-之深入理解-ASP-NET-MVC" class="headerlink" title="七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC"></a>七天玩转 ASP.NET MVC 之深入理解 ASP.NET MVC</h2><p>MVC 是用于构建 web 应用程序的一种框架，使用 MVC(Model View Controller) 设计：</p>
-<ul>
-<li>Model (模型) : 表示应用程序的核心 (比如数据库记录列表)</li>
-<li>View (视图) : 对数据 (数据库记录) 进行显示</li>
-<li>Controller (控制器) 处理输入 (写入数据库记录)</li>
-</ul>
-<p>MVC 模型同时提供对 HTML、CSS、以及Javascript 的完整控制。</p>
-<p>MVC 模型通过三个逻辑层来定义 web 应用程序 :</p>
-<ul>
-<li>business layer （业务层、模型逻辑）</li>
-<li>display layer （显示层、视图逻辑）</li>
-<li>input control （输入控件、控制器逻辑）</li>
-</ul>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/七天精通 ASP.NET MVC/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/七天精通 ASP.NET MVC/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.277Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ZeroNet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ZeroNet"><a href="#ZeroNet" class="headerlink" title="ZeroNet"></a>ZeroNet</h1><p><em>ZeroNet</em>是一个基于比特币加密技术和BT网络技术的去中心化的开放开源的网络和交流系统。</p>
-<h4 id="为什么要用它？（官方介绍）"><a href="#为什么要用它？（官方介绍）" class="headerlink" title="为什么要用它？（官方介绍）"></a>为什么要用它？（官方介绍）</h4><ol>
-<li><p>我们想要开放的，自由的未经审查的网络和交流。</p>
-</li>
-<li><p>永远在线：只要还有一个节点存在内容，就不会消失。</p>
-</li>
-<li><p>不用花钱买主机，内容都存在访问者电脑上。</p>
-</li>
-<li><p>不可能关闭：哪里都找不到它，因为它无处不在。</p>
-</li>
-<li><p>速度快且可以离线浏览：你可以在甚至没有网络的情况下访问这些节点。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/ZeroNet/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/ZeroNet/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.272Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-XSS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="跨站脚本攻击"><a href="#跨站脚本攻击" class="headerlink" title="跨站脚本攻击"></a>跨站脚本攻击</h2><p>XSS 是一种既热门又不太重视的Web攻击手法，原因有下：</p>
-<ol>
-<li><p>耗时间</p>
-</li>
-<li><p>有一定几率不成功</p>
-</li>
-<li><p>没有相应的软件来完成自动化攻击</p>
-</li>
-<li><p>前期需要基本的 HTML、JS 功底，后期需要扎实的 HTML、JS、Actionscript2/3.0 等语言的功底</p>
-</li>
-<li><p>是一种被动的攻击手法</p>
-</li>
-<li><p>对 website 有 http-only、crossdomain.xml 没有用   </p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/XSS/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/XSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.267Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-WordCloud" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="WordCloud-—-词云"><a href="#WordCloud-—-词云" class="headerlink" title="WordCloud — 词云"></a>WordCloud — 词云</h2><p><strong>00x0 前言</strong></p>
-<p>上一篇其实还有一些微小的工作没做完，做完分词之后可以生成词云的。那什么是词云呢？词云又名文字云，是对文本数据中出现频率较高的关键字在视觉上的突出呈现，形成关键字的渲染形成类似云一样的彩色图片，从而可以一眼领略文本数据表达的意思。例如一下：</p>
-<p><img src="https://ooo.0o0.ooo/2017/05/08/591012b229819.jpg" alt=""></p>
-<p>从技术上来说，词云是一种数据可视化方法，下面我们用python可以很简单的实现。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/WordCloud/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/WordCloud/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.262Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/18/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/20/">Next &raquo;</a>
-    </nav>
+    <a href="/2018/03/16/认知前馈神经网络/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 自定义Dialog的一些坑" data-title="" data-url="http://yoursite.com/2018/03/23/Android --- 自定义Dialog的一些坑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -397,8 +276,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -143,6 +143,48 @@
       <div class="body-wrap">
         
   
+    <article id="post-傻逼豫章书院" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="致傻逼学校-—-豫章书院"><a href="#致傻逼学校-—-豫章书院" class="headerlink" title="致傻逼学校 — 豫章书院"></a>致傻逼学校 — 豫章书院</h2><p>暴走大事件被下架了，因为曝光了傻逼学校，现在豫章书院<strong>非法拘禁、殴打未成年人</strong>的行为都已经做实，但是后台硬啊。对于傻逼学校，emmmm，只说一句：</p>
+<p><img src="https://i.loli.net/2017/11/12/5a07b10300abd.png" alt=""></p>
+<blockquote>
+<p>阳光照射到了高塔里的污垢，这束光便有了罪。</p>
+</blockquote>
+<p>最后，放上最新一期被下架的视频：</p>
+<p><a href="http://pan.baidu.com/s/1c1OhXk8" target="_blank" rel="external">http://pan.baidu.com/s/1c1OhXk8</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/11/12/傻逼豫章书院/" class="archive-article-date">
+  	<time datetime="2017-11-12T02:36:56.988Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- Fastjson" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -305,59 +347,6 @@
       
       <a href="/2017/11/06/Android -- 初识自定义View/" class="archive-article-date">
   	<time datetime="2017-11-06T07:48:07.237Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-06</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android -- 计步传感器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-–-计步传感器"><a href="#Android-–-计步传感器" class="headerlink" title="Android – 计步传感器"></a>Android – 计步传感器</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前写过一篇关于计步器（<a href="http://omooo.top/2017/10/19/Android%20--%20%E8%AE%A1%E6%AD%A5%E5%99%A8/" target="_blank" rel="external">–&gt; Android – 计步器的实现 &lt;–</a>）的文章，里面只是简单的介绍了一下原理，其实最重要的是看了大牛的各种优化，源码地址也放进去了。不得不说，大佬就是大佬。</p>
-<p><img src="https://i.loli.net/2017/11/04/59fd1e0af1862.gif" alt=""></p>
-<p>本文主要是记录一下传感器该怎么玩，大佬请拍砖。</p>
-<p>首先要在要在manifest中声明需要的软硬件特性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;!--计步传感器--&gt;</div><div class="line">   &lt;uses-feature</div><div class="line">       android:name=&quot;android.hardware.sensor.stepcounter&quot;</div><div class="line">       android:required=&quot;true&quot; /&gt;</div><div class="line">   &lt;!--步行检测传感器--&gt;</div><div class="line">   &lt;uses-feature</div><div class="line">       android:name=&quot;android.hardware.sensor.stepdetector&quot;</div><div class="line">       android:required=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>emmm，这里我还想在啰嗦几句。计步传感器返回的是从开机至当前的步数，当重启手机后清零，因为是硬件传感器，所以精度高且低功耗，不需要后台保活。步行检测传感器只是用来检测走步，每次返回 1 或 0 。需要长时间计步建议使用计步传感器。</p>
-<p>代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">public class ToolsTodayStep extends Activity implements SensorEventListener &#123;</div><div class="line"></div><div class="line">    private TextView mTextViewStepNumber;</div><div class="line">    private SensorManager mSensorManager;</div><div class="line">    private Sensor mSensorCounter;</div><div class="line">    private Sensor mSensorDetector;</div><div class="line">    private int counterStep = 0;</div><div class="line">    private int counterDetector = 0;</div><div class="line"></div><div class="line">    @Override</div><div class="line"></div><div class="line">    protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.tools_today_step);</div><div class="line">        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);</div><div class="line">        mSensorCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);</div><div class="line">        mSensorDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);</div><div class="line">        initView();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        /**</div><div class="line">         * 注册传感器的三个参数说明</div><div class="line">         * 1. 接收信号的Listener实例</div><div class="line">         * 2. 传感器类型</div><div class="line">         * 3. 接收频度</div><div class="line">         */</div><div class="line">        mSensorManager.registerListener(this, mSensorCounter, SensorManager.SENSOR_DELAY_UI);</div><div class="line">        mSensorManager.registerListener(this, mSensorDetector, SensorManager.SENSOR_DELAY_UI);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initView() &#123;</div><div class="line">        mTextViewStepNumber = findViewById(R.id.tv_stepNumber);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onSensorChanged(SensorEvent sensorEvent) &#123;</div><div class="line">        //当传感器值发生变化时</div><div class="line">        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_COUNTER) &#123;</div><div class="line">            //启动可能需要十步</div><div class="line">            counterStep = (int) sensorEvent.values[0] + 10;</div><div class="line">        &#125; else if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_DETECTOR) &#123;</div><div class="line">            counterDetector++;</div><div class="line">        &#125;</div><div class="line">        mTextViewStepNumber.setText(&quot;当前走了 &quot; + counterDetector + &quot; 步&quot; + &quot; ,总共走了 &quot; + counterStep + &quot; 步&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onAccuracyChanged(Sensor sensor, int i) &#123;</div><div class="line">        //当传感器精度发生变化时</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>布局就不放了，就一个TextView。实践了一下，如果APP停留后台的话，可一直看到当前步数和总步数变化，还是很准确的。当关闭APP之后，当前步数就清零了，但总步数还在累加。</p>
-<p>需要优化的还很多，本菜鸡还在看大佬源码。。。</p>
-<p><img src="https://i.loli.net/2017/11/04/59fd6949be537.jpg" alt=""></p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/qq_21051503/article/details/73127662" target="_blank" rel="external">http://blog.csdn.net/qq_21051503/article/details/73127662</a></p>
-<p><a href="http://blog.csdn.net/fukaimei/article/details/78306097" target="_blank" rel="external">http://blog.csdn.net/fukaimei/article/details/78306097</a></p>
-<p><a href="http://www.jianshu.com/p/5d57f7fd84fa" target="_blank" rel="external">http://www.jianshu.com/p/5d57f7fd84fa</a></p>
-<p><a href="http://blog.csdn.net/WTunique/article/details/54581476" target="_blank" rel="external">http://blog.csdn.net/WTunique/article/details/54581476</a></p>
-<p><a href="http://blog.csdn.net/niuzhucedenglu/article/details/53378265" target="_blank" rel="external">http://blog.csdn.net/niuzhucedenglu/article/details/53378265</a></p>
-<p><a href="http://blog.csdn.net/niuzhucedenglu/article/details/53379385" target="_blank" rel="external">http://blog.csdn.net/niuzhucedenglu/article/details/53379385</a></p>
-<p><a href="http://www.jianshu.com/p/cfc2a200e46d" target="_blank" rel="external">http://www.jianshu.com/p/cfc2a200e46d</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/04/Android -- 计步传感器/" class="archive-article-date">
-  	<time datetime="2017-11-04T07:17:25.020Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-04</time>
 </a>
       
       
