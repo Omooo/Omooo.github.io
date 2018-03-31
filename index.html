@@ -143,6 +143,57 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- Lottie的一些坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-Lottie初探及跳坑"><a href="#Android-—-Lottie初探及跳坑" class="headerlink" title="Android — Lottie初探及跳坑"></a>Android — Lottie初探及跳坑</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Lottie早就听过，但是由于播放动画的资源（Json文件）来源于AE，所以也就简单了解一下也没在继续下去了。今天我无意间看到一篇介绍Lottie的，随便看下吧，哇，赚！</p>
+<p>不是自己没法用AE导出Json文件吗？不用怕，网上有人分享，Airbnb专门建立一个网站用来大家分享自己的Json，并且能预览动画：</p>
+<p><a href="https://www.lottiefiles.com/" target="_blank" rel="external">https://www.lottiefiles.com/</a></p>
+<p>既然有资源了，那就从官方文档开始尝试了：</p>
+<p><a href="http://airbnb.io/lottie/android/android.html#getting-started" target="_blank" rel="external">http://airbnb.io/lottie/android/android.html#getting-started</a></p>
+<p>文档也很详细就不多说了，只记录一下可能遇到的问题吧。</p>
+<h4 id="跳坑"><a href="#跳坑" class="headerlink" title="跳坑"></a>跳坑</h4><p>依赖的时候遇到了我们用开源库经常碰到的v4包重复依赖的情况：DexException Multiple dex files define</p>
+<p>通常的做法是在重复依赖的库中去掉v4包，即：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">compile ('com.airbnb.android:lottie:2.5.1')&#123;</div><div class="line">    exclude group: 'com.android.support'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这样并不能解决我的问题，网上搜了一下，可能需要分包，于是试了一下，还真行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.android.support:multidex:1.0.3&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  defaultConfig &#123;</div><div class="line">/****/</div><div class="line">      multiDexEnabled true</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>添加分包支持就行了，总之这种问题就是哪几种解决办法，挨着试一遍就行了。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://blog.csdn.net/zgd826237710/article/details/79456202" target="_blank" rel="external">https://blog.csdn.net/zgd826237710/article/details/79456202</a></p>
+<p><a href="https://www.jianshu.com/p/f769ea6db2c1" target="_blank" rel="external">https://www.jianshu.com/p/f769ea6db2c1</a></p>
+<p><a href="https://www.jianshu.com/p/0431a6c9c650" target="_blank" rel="external">https://www.jianshu.com/p/0431a6c9c650</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/31/Android --- Lottie的一些坑/" class="archive-article-date">
+  	<time datetime="2018-03-31T05:18:22.106Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-31</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- 自定义Dialog的一些坑" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -304,64 +355,6 @@
       
       <a href="/2018/03/14/认知TensorFlow及安装/" class="archive-article-date">
   	<time datetime="2018-03-14T05:26:48.890Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-认识深度学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="从零开始认知深度学习"><a href="#从零开始认知深度学习" class="headerlink" title="从零开始认知深度学习"></a>从零开始认知深度学习</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一节我们学了机器学习相关的知识，感觉还是蛮好理解的，也很有意思。这节就开始认识一下深度学习了。这一节也是偏重于理论知识，理解起来也很简单。对了，push上去的时候，发现网页并没有解析MarkDown里面的数据表达式，这就很僵了。</p>
-<p>对于上一篇可见：<a href="https://www.jianshu.com/p/336df1f98730">从零开始认知机器学习</a></p>
-<p>图片一个一个截的，蛮麻烦的。之后可能就不截图了，反正也没人看。</p>
-<p>提供下载：<a href="http://www.wooyun.site/DeepLearningNote/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AE%A4%E7%9F%A5%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.md">从零开始认知机器学习</a></p>
-<p>我尽可能的把写完的放在服务器上吧。</p>
-<p>本节目录如下：</p>
-<ol>
-<li>神经网络是什么？<ul>
-<li>神经元</li>
-<li>激励函数</li>
-<li>神经网络</li>
-</ul>
-</li>
-<li>深度神经网络</li>
-<li>深度学习为什么这么强？<ul>
-<li>不用再提取特征</li>
-<li>处理线性不可分</li>
-</ul>
-</li>
-<li>小结</li>
-</ol>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/13/认识深度学习/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/13/认识深度学习/" class="archive-article-date">
-  	<time datetime="2018-03-13T08:58:28.974Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-13</time>
 </a>
       
       
