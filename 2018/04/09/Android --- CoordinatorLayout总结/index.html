@@ -8,12 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Android — CoordinatorLayout总结CoordinatorLayoutCoordinatorLayout 即协调布局，它作为Layout的最外一层布局，可以协调子View做出特定响应动作的一个容器，这些响应动作是通过Behavior来指定的，比如用于协调AppbarLayout与ScrollView滑动的Behavior，如下：
+1234567891011&amp;lt;andro">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/page/22/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/Android --- CoordinatorLayout总结/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — CoordinatorLayout总结CoordinatorLayoutCoordinatorLayout 即协调布局，它作为Layout的最外一层布局，可以协调子View做出特定响应动作的一个容器，这些响应动作是通过Behavior来指定的，比如用于协调AppbarLayout与ScrollView滑动的Behavior，如下：
+1234567891011&amp;lt;andro">
+<meta property="og:updated_time" content="2018-04-09T03:49:52.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — CoordinatorLayout总结CoordinatorLayoutCoordinatorLayout 即协调布局，它作为Layout的最外一层布局，可以协调子View做出特定响应动作的一个容器，这些响应动作是通过Behavior来指定的，比如用于协调AppbarLayout与ScrollView滑动的Behavior，如下：
+1234567891011&amp;lt;andro">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,9 +148,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-IOT" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Android --- CoordinatorLayout总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,17 +157,40 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="物联网当下的安全问题"><a href="#物联网当下的安全问题" class="headerlink" title="物联网当下的安全问题"></a>物联网当下的安全问题</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>突然想到几个月前在傻蛋上撸的几个弱口令摄像头，今天又在FreeBuf上看到关于物联网安全的文章，忍不住，于是有了本篇文章。</p>
-<h4 id="物联网安全概述"><a href="#物联网安全概述" class="headerlink" title="物联网安全概述"></a>物联网安全概述</h4><p>万物互连（IoT）时代已经到来，随着智能硬件创业的兴起，大量智能家居和可穿戴设备进去了我们的生活，全球IoT物联网设备数量在疯狂的增长。但是由于安全标准的滞后，以及智能设备制造商缺乏安全意识和投入，物联网已经埋下了极大的隐患，是个人隐私、企业信息安全甚至国家关键设施的头号安全威胁。试想一下，无论家用或者企业级的互联网设备，如接入互联网的交通指示灯、恒温器或者医用监控设备遭到攻击，后果将会变得非常可怕。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IOT/#more">more >></a>
-        </p>
+<h2 id="Android-—-CoordinatorLayout总结"><a href="#Android-—-CoordinatorLayout总结" class="headerlink" title="Android — CoordinatorLayout总结"></a>Android — CoordinatorLayout总结</h2><h4 id="CoordinatorLayout"><a href="#CoordinatorLayout" class="headerlink" title="CoordinatorLayout"></a>CoordinatorLayout</h4><p>CoordinatorLayout 即协调布局，它作为Layout的最外一层布局，可以协调子View做出特定响应动作的一个容器，这些响应动作是通过Behavior来指定的，比如用于协调AppbarLayout与ScrollView滑动的Behavior，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.NestedScrollView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span></div><div class="line">        &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_margin</span>=<span class="string">"18dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"@string/large_text"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.v4.widget.NestedScrollView</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="AppbarLayout"><a href="#AppbarLayout" class="headerlink" title="AppbarLayout"></a>AppbarLayout</h4><p>继承至LinearLayout，严重依赖于CoordinatorLayout ，必须用于CoordinatorLayout 的直接子View。它可以让你定制当某个可滑动的View滑动手势发生改变时，内部View响应一些动作。这些动作通过 app:layout_scrollFlags 来指定。</p>
+<p>该值有以下几种：</p>
+<ol>
+<li>scroll    这个View会随着可滚动View一起滚动，就好像该子View属于ScrollView的一部分一样。</li>
+<li>enterAlways        当ScrollView向下滚动时，子View将直接向下滚动而不管ScrollView是否在滚动，要与 scroll 搭配使用，否则不能滑动。</li>
+<li>enterAlwaysCollapsed        当ScrollView向下滚动时，子View下滑至折叠的高度，当ScrollView到达滑动范围的结束值的时候，滑动View剩下的部分开始滑动，这个折叠的高度是通过View的minHeight（最小高度）指定的。必须要搭配 scroll|enterAlways一起使用。</li>
+<li>exitUntilCollapsed         当ScrollView滑出屏幕时，滑动View先响应滑动事件，滑动至折叠高度，也就是通过 minHeight设置的最小高度后，就固定不动了，再把滑动事件交给ScrollView继续滑动，需要搭配 srcoll 使用。</li>
+<li>snap 在滚动结束后，如果view只是部分可见，它将滑动到最近的边界。比如，如果View的底部只有49%可见，它将滚动离开屏幕，而如果底部有51%可见，它将滚动到完全显示。同样需要搭配 scroll 使用。</li>
+</ol>
+<h4 id="CollapsingToolbarLayout"><a href="#CollapsingToolbarLayout" class="headerlink" title="CollapsingToolbarLayout"></a>CollapsingToolbarLayout</h4><p>是对Toolbar的包装并且实现了折叠app bar效果，使用时，要作为AppbarLayout的直接子View。有以下特性：</p>
+<ol>
+<li><p>Collapsing title（折叠标题）当布局全部可见的时候，title是最大的，当布局开始滑出屏幕，title将变得越来越小，可以通过setTitle来设置要显示的标题。</p>
+<p>但是当Toolbar和CollapsingToolbarLayout 同时设置了title时，不会显示Toolbar的title，如果要显示Toolbar的title，可以 collapsingToolbarLayout.setTitle(“”);</p>
+</li>
+<li><p>Content scrim（内容纱布）当CollapsingToolbarLayout 滑动到一个确定的阈值时将显示会隐藏内容纱布，可以通过setContentScriom(Drawable)来设置内容纱布的图片。内容纱布也可以是颜色值 app:contentScrim=”@color/colorPrimary”。</p>
+</li>
+<li><p>Status bar scrim（状态栏纱布）当CollapsingToolbarLayout 滑动到一个确定的阈值时，状态栏显示或隐藏纱布，可以通过 setStatusBarScrim(Drawable)来设置纱布图片。同内容纱布一样，状态栏纱布也可以是一个颜色值，在xml 中用statusBarScrim 属性指定。</p>
+</li>
+<li><p>Parallax scrolling children （有视差的滚动子View）让CollapsingToolbarLayout 的子View可以有视差的滚动，需要在xml中通过app:layout_collapseMode=”parallax”指定。</p>
+</li>
+<li><p>Pinned position children（固定子View的位置）子View可以固定在全局空间内，这对于实现了折叠并且允许通过滚动布局来固定Toolbar这种情况非常实用，通过 app:layout_collapseMode=”pin”来指定。</p>
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>CoordinatorLayout是协调子View的，通过Behavior指定子View动作。AppbarLayout就是一个竖直方向的LinearLayout，只不过它可以定制子View的滑动。CollapsingToolbarLayout 是对Toolbar的包装，它有五个特性。AppbarLayout要作为CoordinatorLayout的直接子View使用，而CollapsingToolbarLayout要作为AppbarLayout的直接子View使用。</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>没什么多说的，直接Fork：<a href="https://github.com/pinguo-zhouwei/MaterialDesignSamples" target="_blank" rel="external">https://github.com/pinguo-zhouwei/MaterialDesignSamples</a></p>
+
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/IOT/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.214Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2018/04/09/Android --- CoordinatorLayout总结/" class="archive-article-date">
+  	<time datetime="2018-04-09T03:50:14.583Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-09</time>
 </a>
       
       
@@ -172,177 +200,64 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-IIS目录枚举漏洞" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="IIS-目录枚举漏洞"><a href="#IIS-目录枚举漏洞" class="headerlink" title="IIS 目录枚举漏洞"></a>IIS 目录枚举漏洞</h2><h4 id="Microsoft-IIS-tilde-directory-enumeration"><a href="#Microsoft-IIS-tilde-directory-enumeration" class="headerlink" title="Microsoft IIS tilde directory enumeration"></a>Microsoft IIS tilde directory enumeration</h4><p>当使用 IIS，你可以从某个目录中枚举所有短名的列表，这可能是一个大问题，如果你能设法猜测或者暴力破解这些短名称完整的文件或目录名。
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/IIS目录枚举漏洞/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/IIS目录枚举漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.209Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HTML+CSS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p>​    说出来你可能不信啊，HTML 、CSS 作为前端最基础的知识，真的很简单。就我而言，前端给我带来的感觉就是和用户交互的更多，可以更加随心所意的排版，当然，形形色色的页面也比一个黑框好看。（滑稽脸）</p>
-<p>   如果你对 HTML + CSS 还没有任何认识的话，建议在<a href="http://www.imooc.com/learn/9" target="_blank" rel="external">慕课网 HTML + CSS 基础课程 </a>学习，一边看文档一边自己动手写。学完这个也可以再看看<a href="http://www.w3school.com.cn/h.asp" target="_blank" rel="external">W3School</a>上的文档加深记忆。</p>
-<p>  最后放上我的笔记，<a href="http://pan.baidu.com/s/1bQAVE2" target="_blank" rel="external">嘻嘻</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/HTML+CSS/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.203Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="史上最浅显易懂的-Git-教程"><a href="#史上最浅显易懂的-Git-教程" class="headerlink" title="史上最浅显易懂的 Git 教程"></a>史上最浅显易懂的 Git 教程</h2><p><strong>写在前面</strong></p>
-<p>讲道理，这次不是标题党。没错，就是这么猖狂。我为什么敢这么说？看完就懂了，彩蛋在文末。</p>
-<h4 id="Git-简介"><a href="#Git-简介" class="headerlink" title="Git 简介"></a>Git 简介</h4><p>Git 是目前世界最先进的分布式版本控制系统（没有之一）。那什么是版本控制？简单来说就是能记录文件的每次改动。那为什么有分布式一说？这里就要先说集中式版本控制系统了。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/git/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/git/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.198Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="使用Docker打造自己的渗透测试容器之—理论篇"><a href="#使用Docker打造自己的渗透测试容器之—理论篇" class="headerlink" title="使用Docker打造自己的渗透测试容器之—理论篇"></a>使用Docker打造自己的渗透测试容器之—理论篇</h2><p><strong>00x0 Docker简介</strong></p>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。几乎没有性能开销，可以很容易地在机器和数据中心中运行。最重要的是，他们不依赖任何语言、框架，甚至操作系统。</p>
-<p><img src="http://i4.buimg.com/588926/2bf24bbe9e78cff3.jpg" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/14/Docker/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/14/Docker/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.193Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/21/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/23/">Next &raquo;</a>
-    </nav>
+    <a href="/2018/03/31/Android --- Lottie的一些坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- CoordinatorLayout总结" data-title="" data-url="http://yoursite.com/2018/04/09/Android --- CoordinatorLayout总结/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -364,8 +279,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

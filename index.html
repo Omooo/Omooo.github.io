@@ -143,6 +143,68 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- CoordinatorLayout总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-CoordinatorLayout总结"><a href="#Android-—-CoordinatorLayout总结" class="headerlink" title="Android — CoordinatorLayout总结"></a>Android — CoordinatorLayout总结</h2><h4 id="CoordinatorLayout"><a href="#CoordinatorLayout" class="headerlink" title="CoordinatorLayout"></a>CoordinatorLayout</h4><p>CoordinatorLayout 即协调布局，它作为Layout的最外一层布局，可以协调子View做出特定响应动作的一个容器，这些响应动作是通过Behavior来指定的，比如用于协调AppbarLayout与ScrollView滑动的Behavior，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.NestedScrollView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span></div><div class="line">        &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_margin</span>=<span class="string">"18dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"@string/large_text"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.v4.widget.NestedScrollView</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="AppbarLayout"><a href="#AppbarLayout" class="headerlink" title="AppbarLayout"></a>AppbarLayout</h4><p>继承至LinearLayout，严重依赖于CoordinatorLayout ，必须用于CoordinatorLayout 的直接子View。它可以让你定制当某个可滑动的View滑动手势发生改变时，内部View响应一些动作。这些动作通过 app:layout_scrollFlags 来指定。</p>
+<p>该值有以下几种：</p>
+<ol>
+<li>scroll    这个View会随着可滚动View一起滚动，就好像该子View属于ScrollView的一部分一样。</li>
+<li>enterAlways        当ScrollView向下滚动时，子View将直接向下滚动而不管ScrollView是否在滚动，要与 scroll 搭配使用，否则不能滑动。</li>
+<li>enterAlwaysCollapsed        当ScrollView向下滚动时，子View下滑至折叠的高度，当ScrollView到达滑动范围的结束值的时候，滑动View剩下的部分开始滑动，这个折叠的高度是通过View的minHeight（最小高度）指定的。必须要搭配 scroll|enterAlways一起使用。</li>
+<li>exitUntilCollapsed         当ScrollView滑出屏幕时，滑动View先响应滑动事件，滑动至折叠高度，也就是通过 minHeight设置的最小高度后，就固定不动了，再把滑动事件交给ScrollView继续滑动，需要搭配 srcoll 使用。</li>
+<li>snap 在滚动结束后，如果view只是部分可见，它将滑动到最近的边界。比如，如果View的底部只有49%可见，它将滚动离开屏幕，而如果底部有51%可见，它将滚动到完全显示。同样需要搭配 scroll 使用。</li>
+</ol>
+<h4 id="CollapsingToolbarLayout"><a href="#CollapsingToolbarLayout" class="headerlink" title="CollapsingToolbarLayout"></a>CollapsingToolbarLayout</h4><p>是对Toolbar的包装并且实现了折叠app bar效果，使用时，要作为AppbarLayout的直接子View。有以下特性：</p>
+<ol>
+<li><p>Collapsing title（折叠标题）当布局全部可见的时候，title是最大的，当布局开始滑出屏幕，title将变得越来越小，可以通过setTitle来设置要显示的标题。</p>
+<p>但是当Toolbar和CollapsingToolbarLayout 同时设置了title时，不会显示Toolbar的title，如果要显示Toolbar的title，可以 collapsingToolbarLayout.setTitle(“”);</p>
+</li>
+<li><p>Content scrim（内容纱布）当CollapsingToolbarLayout 滑动到一个确定的阈值时将显示会隐藏内容纱布，可以通过setContentScriom(Drawable)来设置内容纱布的图片。内容纱布也可以是颜色值 app:contentScrim=”@color/colorPrimary”。</p>
+</li>
+<li><p>Status bar scrim（状态栏纱布）当CollapsingToolbarLayout 滑动到一个确定的阈值时，状态栏显示或隐藏纱布，可以通过 setStatusBarScrim(Drawable)来设置纱布图片。同内容纱布一样，状态栏纱布也可以是一个颜色值，在xml 中用statusBarScrim 属性指定。</p>
+</li>
+<li><p>Parallax scrolling children （有视差的滚动子View）让CollapsingToolbarLayout 的子View可以有视差的滚动，需要在xml中通过app:layout_collapseMode=”parallax”指定。</p>
+</li>
+<li><p>Pinned position children（固定子View的位置）子View可以固定在全局空间内，这对于实现了折叠并且允许通过滚动布局来固定Toolbar这种情况非常实用，通过 app:layout_collapseMode=”pin”来指定。</p>
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>CoordinatorLayout是协调子View的，通过Behavior指定子View动作。AppbarLayout就是一个竖直方向的LinearLayout，只不过它可以定制子View的滑动。CollapsingToolbarLayout 是对Toolbar的包装，它有五个特性。AppbarLayout要作为CoordinatorLayout的直接子View使用，而CollapsingToolbarLayout要作为AppbarLayout的直接子View使用。</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>没什么多说的，直接Fork：<a href="https://github.com/pinguo-zhouwei/MaterialDesignSamples" target="_blank" rel="external">https://github.com/pinguo-zhouwei/MaterialDesignSamples</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/04/09/Android --- CoordinatorLayout总结/" class="archive-article-date">
+  	<time datetime="2018-04-09T03:50:14.583Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- Lottie的一些坑" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -308,53 +370,6 @@
       
       <a href="/2018/03/15/Android --- 自定义View（五）之Path基本操作/" class="archive-article-date">
   	<time datetime="2018-03-15T11:58:53.357Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-15</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-认知TensorFlow及安装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="TensorFlow框架特性与安装"><a href="#TensorFlow框架特性与安装" class="headerlink" title="TensorFlow框架特性与安装"></a>TensorFlow框架特性与安装</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>很多时候，我们都是站在巨人的肩膀上做开发探索，所以选择一个好的深度学习框架也是非常必要的。TensorFlow作为Google重要的开源项目，还是很值得信赖的。而且，我是一个英语渣，有中文文档可能是非常值得欣慰的，也足以看出使用人之多。当然，做过Android开发的人，自然就亲近Google。</p>
-<p><strong>↓ ↓ ↓ 高能预警 ↓ ↓ ↓</strong></p>
-<p><a href="http://www.tensorfly.cn/">TensorFlow中文社区</a></p>
-<p>本文目录：</p>
-<ol>
-<li>简介</li>
-<li>TensorFlow特性</li>
-<li>TensorFlow安装</li>
-<li>小结</li>
-</ol>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/14/认知TensorFlow及安装/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/14/认知TensorFlow及安装/" class="archive-article-date">
-  	<time datetime="2018-03-14T05:26:48.890Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-14</time>
 </a>
       
       
