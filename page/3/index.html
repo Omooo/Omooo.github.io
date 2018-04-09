@@ -143,6 +143,57 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- 自定义View（三）之画布操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-自定义View（三）之画布操作"><a href="#Android-—-自定义View（三）之画布操作" class="headerlink" title="Android — 自定义View（三）之画布操作"></a>Android — 自定义View（三）之画布操作</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>同样的，我们回顾一下上一篇所学的知识，讲解了线段、圆、扇形、圆弧等等的基本图形的绘制。最后实现了一个饼状图，还是很有成就感的。不知道你有没有注意到，在绘制饼状图的时候，我们把坐标原点移动到了屏幕中心，其实这就是画布操作的一种，那下面我们就着重讲解一下画布操作。</p>
+<blockquote>
+<p>合理的使用画布操作可以帮你用更加容易理解的方式去实现你要的效果，这也是画布操作存在的原因。<strong>所有的画布操作都只影响后续的绘制，对之前已经绘制的内容没有影响。</strong></p>
+</blockquote>
+<p>目录如下：</p>
+<ol>
+<li>位移（translate）</li>
+<li>缩放（scale）</li>
+<li>旋转（rorate）</li>
+<li>错切（skew）</li>
+<li>快照（save）和回滚（restore）</li>
+</ol>
+<p>抱紧我的大腿！</p>
+<p><img src="https://i.loli.net/2018/01/26/5a6ad9eb84d9f.jpg" alt=""></p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2018/03/09/Android --- 自定义View（三）之画布操作/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/09/Android --- 自定义View（三）之画布操作/" class="archive-article-date">
+  	<time datetime="2018-03-09T03:22:12.598Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- 自定义View（二）之绘制基本图形" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -539,49 +590,6 @@ onMeasure()函数中有两个参数，很显然它们是和宽高相关的，**�
       
       <a href="/2018/03/02/Android --- 事件分发机制（二）/" class="archive-article-date">
   	<time datetime="2018-03-02T13:49:16.471Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 事件分发机制（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-事件分发机制（一）"><a href="#Android-—-事件分发机制（一）" class="headerlink" title="Android — 事件分发机制（一）"></a>Android — 事件分发机制（一）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>事件分发机制对于Android开发人员可以说是一个非常敏感的词汇，现在网上关于事件分发机制的讲解很多都是参考郭大叔的博客以及《Android开发艺术探索》。所以学习事件分发机制还是推荐看一下博文：</p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9097463">Android事件分发机制完全解析，带你从源码的角度彻底理解(上)</a></p>
-<p><a href="http://blog.csdn.net/guolin_blog/article/details/9153747">Android事件分发机制完全解析，带你从源码的角度彻底理解(下)</a></p>
-<p><strong>强烈希望大家看以上博文，而忽略本文。</strong></p>
-<p> 本菜鸡只是记录一下学习过程中比较重要的知识点。</p>
-<p><img src="https://i.loli.net/2018/01/31/5a71752997a97.jpg" width="200" hight="500" align="center" ></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/02/Android --- 事件分发机制（一）/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/02/Android --- 事件分发机制（一）/" class="archive-article-date">
-  	<time datetime="2018-03-02T13:47:36.087Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
 </a>
       
       

@@ -143,6 +143,51 @@
       <div class="body-wrap">
         
   
+    <article id="post-知乎2017总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="我的知乎-—-2017"><a href="#我的知乎-—-2017" class="headerlink" title="我的知乎 — 2017"></a>我的知乎 — 2017</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>一年一度的知乎年度总结又出来，今年或许有点恐怖，水的太多。</p>
+<p><img src="https://i.loli.net/2017/12/28/5a44b555ccb8d.png" alt=""></p>
+<p>事实上，自己并没有学到什么，完全是吹逼划水，无聊翻翻看有什么新鲜刺激的问题。</p>
+<p>还记得刚入住知乎的时候，感觉里面个个都是人才，回答问题干货很多，思维刁钻新奇，知识面覆盖之广，不禁感叹大佬太多，自己多么多么渣。</p>
+<p>但是，渐渐地，在这个娱乐泛化的时代，知乎的问题中开始引入大量社会问题以及娱乐圈的破事，回答中也充斥着调侃段子，质量固然下降。</p>
+<p>emmmm，现在，我认为，学习知识最好看一些优秀的博文比较好，讲的比较详细又附有代码，推荐CSDN、简书和掘金。</p>
+<p>CSDN说实话有点过气了，不过里面还有很多以前博主写的文章，至今看起来也是干货满满。</p>
+<p>而简书真可谓是在博文写作平台中脱颖而出，简单优雅的页面排版，绝对是写作的好去处。当然，在最近的傻逼饱什么豚事件，着实导致了一大批程序猿用户的流失。</p>
+<p>掘金嘛，也很不错，分享技术没的说，但是在写作上面来说，稍逊于简书。</p>
+<p>学习选一个可以参考的平台很重要，但是真想学好，别说Google，百度都能帮你解决很多问题。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/28/知乎2017总结/" class="archive-article-date">
+  	<time datetime="2017-12-28T09:34:08.658Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-28</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Java --- 关于垃圾收集灵魂拷问三连（三）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -298,47 +343,6 @@
       
       <a href="/2017/12/24/Android --- ButterKnife使用/" class="archive-article-date">
   	<time datetime="2017-12-24T12:58:46.287Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-24</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- Bitmap的加载和Cache（二" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Bitmap的加载和Cache（二）—-缓存策略"><a href="#Bitmap的加载和Cache（二）—-缓存策略" class="headerlink" title="Bitmap的加载和Cache（二）—  缓存策略"></a>Bitmap的加载和Cache（二）—  缓存策略</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设备获取，存储设备没有，就从网上获取。这是因为从内存中加载图片比从存储设备上加载图片要快，这样不仅提高了程序的效率又为用户节省了不必要的流量开支。</p>
-<p>缓存策略包含缓存的添加、获取和删除。添加和获取很好理解，删除是因为缓存的大小是有限制的，当缓存容量满时，程序又要添加缓存，这个时候就要删除已有的缓存。如何定义缓存的新旧就是一种策略，不同的策略对应不同的缓存算法。目前比较常用的缓存算法是LRU（Least Recently Used），即近期最少使用算法。采用LRU算法的缓存有两种：LruCache和DiskLruCache。LruCache用于实现内存缓存，而DiskLruCache用于实现磁盘缓存。</p>
-<p>下面就开始慢慢享受精神食粮。</p>
-<p><img src="https://i.loli.net/2017/12/24/5a3f1e5ba4e4e.gif" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/12/24/Android --- Bitmap的加载和Cache（二/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/12/24/Android --- Bitmap的加载和Cache（二/" class="archive-article-date">
-  	<time datetime="2017-12-24T03:28:25.227Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-24</time>
 </a>
       
       

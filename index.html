@@ -143,6 +143,48 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- 自定义Behavior实现Toolbar颜色渐变" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-自定义Behavior实现Toolbar颜色渐变"><a href="#Android-—-自定义Behavior实现Toolbar颜色渐变" class="headerlink" title="Android — 自定义Behavior实现Toolbar颜色渐变"></a>Android — 自定义Behavior实现Toolbar颜色渐变</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一篇中了解了协调布局CoordinatorLayout，可以协调子View之间的交互，那么它是怎么协调的呢？核心就是Behavior。同样的，上一节中，在处理AppbarLayout与NestedScrollView联动的时候，我们给NestedScrollView设置了一个Behavior，即：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:layout_behavior="@string/appbar_scrolling_view_behavior"</div></pre></td></tr></table></figure>
+<p>这个Behavior是系统内置的。</p>
+<p>这一节就自定义Behavior实现Toolbar颜色渐变，一图胜前言：</p>
+<p><img src="https://i.loli.net/2018/04/09/5acb02947e2ef.gif" alt=""></p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2018/04/09/Android --- 自定义Behavior实现Toolbar颜色渐变/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/04/09/Android --- 自定义Behavior实现Toolbar颜色渐变/" class="archive-article-date">
+  	<time datetime="2018-04-09T06:16:17.526Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- CoordinatorLayout总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -324,52 +366,6 @@
       
       <a href="/2018/03/16/认知前馈神经网络/" class="archive-article-date">
   	<time datetime="2018-03-16T02:17:00.089Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-16</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 自定义View（五）之Path基本操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-自定义View（五）之Path操作"><a href="#Android-—-自定义View（五）之Path操作" class="headerlink" title="Android — 自定义View（五）之Path操作"></a>Android — 自定义View（五）之Path操作</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>同样的，回顾一下上一篇学的知识。在上一篇中，着重讲解了用Canvas绘制图片和文字。绘制图片有两种方式：drawPicture和drawBitmap，对于drawPicture来说，我们形象化的把它比喻成录像机，能够记录Canvas一系列操作并将它保存到Picture中，再把录制的内容绘制出来的话虽然有三种方法，但是我们推荐用Canvas提供的drawPicture方法，主要是因为它不会对后续Canvas造成影响，而且可控性更强。然后是绘制图片的第二种方式，即drawBitmap，这个也没什么好说了，知道Bitmap的四种来源方式以及drawBitmap方法中参数的含义就OK了。接着我们讲到绘制文字，绘制文字还是很简单，也提供了三种方法来绘制：drawText()、drawPosText()、drawTextOnPath()。drawText()方法可以对绘制的文本进行截取，记住是前闭后开；drawPosText()我们不建议使用，毕竟要确定文本中每个字符的坐标值，而drawTextOnPath()我们则是遗留下来了，这篇文章就是来讲解Path的使用。目录如下：</p>
-<ol>
-<li>Path的作用和含义</li>
-<li>Path常用方法表</li>
-<li>Path常用方法详解</li>
-<li>实战之绘制雷达图（蜘蛛网图）</li>
-</ol>
-<p>感觉还不错吧，那就接着往下看吧，啦啦啦</p>
-<p><img src="https://i.loli.net/2018/01/28/5a6d7dc3cc5bf.gif" alt=""></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2018/03/15/Android --- 自定义View（五）之Path基本操作/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/15/Android --- 自定义View（五）之Path基本操作/" class="archive-article-date">
-  	<time datetime="2018-03-15T11:58:53.357Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-15</time>
 </a>
       
       

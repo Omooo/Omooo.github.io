@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>沐小晨曦 | Omooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android — 自定义Behavior实现Toolbar颜色渐变前言上一篇中了解了协调布局CoordinatorLayout，可以协调子View之间的交互，那么它是怎么协调的呢？核心就是Behavior。同样的，上一节中，在处理AppbarLayout与NestedScrollView联动的时候，我们给NestedScrollView设置了一个Behavior，即：
+1app:layout_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="沐小晨曦 | Omooo">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/Android --- 自定义Behavior实现Toolbar颜色渐变/index.html">
+<meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="Android — 自定义Behavior实现Toolbar颜色渐变前言上一篇中了解了协调布局CoordinatorLayout，可以协调子View之间的交互，那么它是怎么协调的呢？核心就是Behavior。同样的，上一节中，在处理AppbarLayout与NestedScrollView联动的时候，我们给NestedScrollView设置了一个Behavior，即：
+1app:layout_">
+<meta property="og:image" content="https://i.loli.net/2018/04/09/5acb02947e2ef.gif">
+<meta property="og:updated_time" content="2018-04-09T06:15:45.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="Android — 自定义Behavior实现Toolbar颜色渐变前言上一篇中了解了协调布局CoordinatorLayout，可以协调子View之间的交互，那么它是怎么协调的呢？核心就是Behavior。同样的，上一节中，在处理AppbarLayout与NestedScrollView联动的时候，我们给NestedScrollView设置了一个Behavior，即：
+1app:layout_">
+<meta name="twitter:image" content="https://i.loli.net/2018/04/09/5acb02947e2ef.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Omooo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+		        
+					<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Omooo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="https://i.loli.net/2017/12/12/5a2fe2576c8a2.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Omooo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">现实告诉我： 保持好奇心，享受孤独</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/omooo" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/mu-mu-44-79-46" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:869759698@qq.com" title="mail">mail</a>
+			        
+						<a class="linkedin" target="_blank" href="http://www.linkedin.com/nhome/?trk=360-mainlink" title="linkedin">linkedin</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Android --- 自定义Behavior实现Toolbar颜色渐变" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-自定义Behavior实现Toolbar颜色渐变"><a href="#Android-—-自定义Behavior实现Toolbar颜色渐变" class="headerlink" title="Android — 自定义Behavior实现Toolbar颜色渐变"></a>Android — 自定义Behavior实现Toolbar颜色渐变</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一篇中了解了协调布局CoordinatorLayout，可以协调子View之间的交互，那么它是怎么协调的呢？核心就是Behavior。同样的，上一节中，在处理AppbarLayout与NestedScrollView联动的时候，我们给NestedScrollView设置了一个Behavior，即：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app:layout_behavior="@string/appbar_scrolling_view_behavior"</div></pre></td></tr></table></figure>
+<p>这个Behavior是系统内置的。</p>
+<p>这一节就自定义Behavior实现Toolbar颜色渐变，一图胜前言：</p>
+<p><img src="https://i.loli.net/2018/04/09/5acb02947e2ef.gif" alt=""></p>
+<a id="more"></a>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><p>实现起来也很简单，一句话概述就是根据偏移值来对Toolbar的背景色设置透明度。</p>
+<p>自定义Behavior需要继承该类并重写相关方法。以下是几个比较重要的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 表示是否给应用了Behavior 的View 指定一个依赖的布局，通常，当依赖的View 布局发生变化时</div><div class="line">     * 不管被被依赖View 的顺序怎样，被依赖的View也会重新布局</div><div class="line">     * <span class="doctag">@param</span> parent</div><div class="line">     * <span class="doctag">@param</span> child 绑定behavior 的View</div><div class="line">     * <span class="doctag">@param</span> dependency   依赖的view</div><div class="line">     * <span class="doctag">@return</span> 如果child 是依赖的指定的View 返回true,否则返回false</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">layoutDependsOn</span><span class="params">(CoordinatorLayout parent, View child, View dependency)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.layoutDependsOn(parent, child, dependency);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 当被依赖的View 状态（如：位置、大小）发生变化时，这个方法被调用</div><div class="line">     * <span class="doctag">@param</span> parent</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> dependency</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDependentViewChanged</span><span class="params">(CoordinatorLayout parent, View child, View dependency)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onDependentViewChanged(parent, child, dependency);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  当coordinatorLayout 的子View试图开始嵌套滑动的时候被调用。当返回值为true的时候表明</div><div class="line">     *  coordinatorLayout 充当nested scroll parent 处理这次滑动，需要注意的是只有当返回值为true</div><div class="line">     *  的时候，Behavior 才能收到后面的一些nested scroll 事件回调（如：onNestedPreScroll、onNestedScroll等）</div><div class="line">     *  这个方法有个重要的参数nestedScrollAxes，表明处理的滑动的方向。</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout 和Behavior 绑定的View的父CoordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child  和Behavior 绑定的View</div><div class="line">     * <span class="doctag">@param</span> directTargetChild</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     * <span class="doctag">@param</span> nestedScrollAxes 嵌套滑动 应用的滑动方向，看 &#123;<span class="doctag">@link</span> ViewCompat#SCROLL_AXIS_HORIZONTAL&#125;,</div><div class="line">     *                         &#123;<span class="doctag">@link</span> ViewCompat#SCROLL_AXIS_VERTICAL&#125;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, <span class="keyword">int</span> nestedScrollAxes)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 嵌套滚动发生之前被调用</div><div class="line">     * 在nested scroll child 消费掉自己的滚动距离之前，嵌套滚动每次被nested scroll child</div><div class="line">     * 更新都会调用onNestedPreScroll。注意有个重要的参数consumed，可以修改这个数组表示你消费</div><div class="line">     * 了多少距离。假设用户滑动了100px,child 做了90px 的位移，你需要把 consumed［1］的值改成90，</div><div class="line">     * 这样coordinatorLayout就能知道只处理剩下的10px的滚动。</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     * <span class="doctag">@param</span> dx  用户水平方向的滚动距离</div><div class="line">     * <span class="doctag">@param</span> dy  用户竖直方向的滚动距离</div><div class="line">     * <span class="doctag">@param</span> consumed</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedPreScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy, <span class="keyword">int</span>[] consumed)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 进行嵌套滚动时被调用</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     * <span class="doctag">@param</span> dxConsumed target 已经消费的x方向的距离</div><div class="line">     * <span class="doctag">@param</span> dyConsumed target 已经消费的y方向的距离</div><div class="line">     * <span class="doctag">@param</span> dxUnconsumed x 方向剩下的滚动距离</div><div class="line">     * <span class="doctag">@param</span> dyUnconsumed y 方向剩下的滚动距离</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">int</span> dxConsumed, <span class="keyword">int</span> dyConsumed, <span class="keyword">int</span> dxUnconsumed, <span class="keyword">int</span> dyUnconsumed)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *  嵌套滚动结束时被调用，这是一个清除滚动状态等的好时机。</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStopNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStopNestedScroll(coordinatorLayout, child, target);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * onStartNestedScroll返回true才会触发这个方法，接受滚动处理后回调，可以在这个</div><div class="line">     * 方法里做一些准备工作，如一些状态的重置等。</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> directTargetChild</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     * <span class="doctag">@param</span> nestedScrollAxes</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedScrollAccepted</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, <span class="keyword">int</span> nestedScrollAxes)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onNestedScrollAccepted(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 用户松开手指并且会发生惯性动作之前调用，参数提供了速度信息，可以根据这些速度信息</div><div class="line">     * 决定最终状态，比如滚动Header，是让Header处于展开状态还是折叠状态。返回true 表</div><div class="line">     * 示消费了fling.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> coordinatorLayout</div><div class="line">     * <span class="doctag">@param</span> child</div><div class="line">     * <span class="doctag">@param</span> target</div><div class="line">     * <span class="doctag">@param</span> velocityX x 方向的速度</div><div class="line">     * <span class="doctag">@param</span> velocityY y 方向的速度</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onNestedPreFling</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">float</span> velocityX, <span class="keyword">float</span> velocityY)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//可以重写这个方法对子View 进行重新布局</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onLayoutChild</span><span class="params">(CoordinatorLayout parent, View child, <span class="keyword">int</span> layoutDirection)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onLayoutChild(parent, child, layoutDirection);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">作者：依然范特稀西</div><div class="line">链接：https:<span class="comment">//www.jianshu.com/p/82d18b0d18f4</span></div><div class="line">來源：简书</div><div class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</div></pre></td></tr></table></figure>
+<p>了解之后，代码就很好写了，首先是布局文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/toolbar_home"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"@color/colorHomeHeaderBg"</span></div><div class="line">        <span class="attr">app:layout_behavior</span>=<span class="string">"top.omooo.blackfish.utils.ToolbarAlphaBehavior"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span>&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                <span class="attr">android:scaleType</span>=<span class="string">"fitXY"</span></div><div class="line">                <span class="attr">android:layout_alignParentBottom</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:layout_marginBottom</span>=<span class="string">"10dp"</span></div><div class="line">                <span class="attr">android:src</span>=<span class="string">"@drawable/icon_home_header_fish_logo"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"70dp"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"23dp"</span>/&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"小黑鱼"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/splash_main_title_color"</span></div><div class="line">                <span class="attr">android:layout_centerHorizontal</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:layout_alignParentBottom</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:layout_marginBottom</span>=<span class="string">"10dp"</span></div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"16sp"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/iv_home_header_msg"</span></div><div class="line">                <span class="attr">android:src</span>=<span class="string">"@drawable/icon_home_header_msg_white"</span></div><div class="line">                <span class="attr">android:layout_alignParentBottom</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:layout_marginBottom</span>=<span class="string">"10dp"</span></div><div class="line">                <span class="attr">android:layout_alignParentEnd</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:layout_marginEnd</span>=<span class="string">"20dp"</span></div><div class="line">                <span class="attr">android:scaleType</span>=<span class="string">"fitXY"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span>/&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.Toolbar</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>ToolbarAlphaBehavior.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToolbarAlphaBehavior</span> <span class="keyword">extends</span> <span class="title">CoordinatorLayout</span>.<span class="title">Behavior</span>&lt;<span class="title">Toolbar</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"ToolbarAlphaBehavior"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> offset = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> startOffset = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> endOffset = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ToolbarAlphaBehavior</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        <span class="keyword">this</span>.mContext = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartNestedScroll</span><span class="params">(@NonNull CoordinatorLayout coordinatorLayout, @NonNull Toolbar child, @NonNull View directTargetChild, @NonNull View target, <span class="keyword">int</span> axes, <span class="keyword">int</span> type)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedScroll</span><span class="params">(@NonNull CoordinatorLayout coordinatorLayout, @NonNull Toolbar child, @NonNull View target, <span class="keyword">int</span> dxConsumed, <span class="keyword">int</span> dyConsumed, <span class="keyword">int</span> dxUnconsumed, <span class="keyword">int</span> dyUnconsumed, <span class="keyword">int</span> type)</span> </span>&#123;</div><div class="line">        endOffset = child.getHeight();</div><div class="line">        offset += dyConsumed;</div><div class="line">        RelativeLayout relativeLayout = (RelativeLayout) child.getChildAt(<span class="number">0</span>);</div><div class="line">        ImageView imageLogo = (ImageView) relativeLayout.getChildAt(<span class="number">0</span>);</div><div class="line">        TextView textTitle = (TextView) relativeLayout.getChildAt(<span class="number">1</span>);</div><div class="line">        ImageView imageMsg = (ImageView) relativeLayout.getChildAt(<span class="number">2</span>);</div><div class="line"></div><div class="line">        <span class="comment">// <span class="doctag">TODO:</span> 2018/4/1 imageMsg从白变黑，而不是从有到无 </span></div><div class="line">        <span class="keyword">if</span> (offset &lt;= startOffset) &#123;  <span class="comment">//alpha为0</span></div><div class="line">            child.getBackground().setAlpha(<span class="number">0</span>);</div><div class="line">            Log.i(TAG, <span class="string">"onNestedScroll: "</span> + textTitle.getText());</div><div class="line">            textTitle.setAlpha(<span class="number">0</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offset &gt; startOffset &amp;&amp; offset &lt; endOffset) &#123; <span class="comment">//alpha为0到255</span></div><div class="line">            imageLogo.setImageDrawable(mContext.getDrawable(R.drawable.icon_home_header_fish_logo));</div><div class="line">            imageMsg.setImageDrawable(mContext.getDrawable(R.drawable.icon_home_header_msg_white));</div><div class="line">            <span class="keyword">float</span> precent = (<span class="keyword">float</span>) (offset - startOffset) / endOffset;</div><div class="line">            <span class="keyword">int</span> alpha = Math.round(precent * <span class="number">255</span>);</div><div class="line">            child.getBackground().setAlpha(alpha);</div><div class="line"></div><div class="line">            textTitle.setVisibility(View.VISIBLE);</div><div class="line">            textTitle.setAlpha(precent);</div><div class="line"></div><div class="line">            imageLogo.getDrawable().setAlpha(<span class="number">1</span> - alpha);</div><div class="line">            imageMsg.getDrawable().setAlpha(<span class="number">1</span>-alpha);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offset &gt;= endOffset) &#123;  <span class="comment">//alpha为255</span></div><div class="line">            child.getBackground().setAlpha(<span class="number">255</span>);</div><div class="line">            textTitle.setVisibility(View.VISIBLE);</div><div class="line">            textTitle.setAlpha(<span class="number">1</span>);</div><div class="line">            imageMsg.setImageDrawable(mContext.getDrawable(R.drawable.icon_home_header_msg_black));</div><div class="line">            imageMsg.setAlpha(<span class="number">1f</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，要在布局初始化的时候把Toolbar背景色设置为全透明。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mToolbar = findView(R.id.toolbar_home);</div><div class="line">mToolbar.getBackground().setAlpha(<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<p>完。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>当然，Behavior还是很多好玩的东西，可以看看这些文章：</p>
+<p><a href="https://www.jianshu.com/p/82d18b0d18f4" target="_blank" rel="external">Material Design 之 Behavior的使用和自定义Behavior</a></p>
+<p><a href="https://www.jianshu.com/p/f86c8734954b" target="_blank" rel="external">关于BottomSheetBehavior、BottomSheetDialog和SwipeDismissBehavior</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/04/09/Android --- 自定义Behavior实现Toolbar颜色渐变/" class="archive-article-date">
+  	<time datetime="2018-04-09T06:16:17.526Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-09</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/09/Android --- CoordinatorLayout总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android --- 自定义Behavior实现Toolbar颜色渐变" data-title="" data-url="http://yoursite.com/2018/04/09/Android --- 自定义Behavior实现Toolbar颜色渐变/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 Omooo
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="https://www.vicicode.com/">一只废喵喵</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.changwei.me/">他的真名叫昌维</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">我们一直都向往，面朝大海，春暖花开。
+但是几人能做到，心中有爱，四季不败？</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -143,6 +143,47 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- Bitmap的加载和Cache（二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Bitmap的加载和Cache（二）—-缓存策略"><a href="#Bitmap的加载和Cache（二）—-缓存策略" class="headerlink" title="Bitmap的加载和Cache（二）—  缓存策略"></a>Bitmap的加载和Cache（二）—  缓存策略</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>ImageLoader系列第二篇，也是实现一个ImageLoader的核心。总体思想如下：当程序第一次从网上加载图片后，就将其缓存到设备上，这样下次使用这张图片的时候就不用从网络上重新下载，这样就为用户节省了流量。很多时候为了提高应用的用户体验，往往还会在内存中缓存一份，这样当应用打算显示一张图片，首先会从内存中获取，如果内存中没有就从存储设备获取，存储设备没有，就从网上获取。这是因为从内存中加载图片比从存储设备上加载图片要快，这样不仅提高了程序的效率又为用户节省了不必要的流量开支。</p>
+<p>缓存策略包含缓存的添加、获取和删除。添加和获取很好理解，删除是因为缓存的大小是有限制的，当缓存容量满时，程序又要添加缓存，这个时候就要删除已有的缓存。如何定义缓存的新旧就是一种策略，不同的策略对应不同的缓存算法。目前比较常用的缓存算法是LRU（Least Recently Used），即近期最少使用算法。采用LRU算法的缓存有两种：LruCache和DiskLruCache。LruCache用于实现内存缓存，而DiskLruCache用于实现磁盘缓存。</p>
+<p>下面就开始慢慢享受精神食粮。</p>
+<p><img src="https://i.loli.net/2017/12/24/5a3f1e5ba4e4e.gif" alt=""></p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/12/24/Android --- Bitmap的加载和Cache（二/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/12/24/Android --- Bitmap的加载和Cache（二/" class="archive-article-date">
+  	<time datetime="2017-12-24T03:28:25.227Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-24</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- Bitmap的加载和Cache（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -328,49 +369,6 @@
       
       <a href="/2017/12/02/新的一年又要到来了/" class="archive-article-date">
   	<time datetime="2017-12-02T01:14:31.251Z" itemprop="datePublished"><i class="icon-clock"></i>2017-12-02</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hello IDEA" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Hello-IDEA"><a href="#Hello-IDEA" class="headerlink" title="Hello IDEA"></a>Hello IDEA</h2><p>其实久闻 IDEA，但是一直被老师牵制用Eclipse，然后慢慢就麻木了，懒得尝试其他IDE了。还好今天Eclipse突然崩溃，删了重装，装了三四次还是崩溃。没办法，逼上梁山，尝试IDEA。虽然没用过IDEA，但是用过AS啊，想着那么好用，就更下定决心要上手这个IDE了，更巧的是，我竟然搜到了网上下载使用IDEA的<strong>完整教程</strong>，而且教程也很新，是今年八月份出的。</p>
-<p>教程地址：<a href="http://how2j.cn/k/idea/idea-download-install/1348.html?tid=95" target="_blank" rel="external">http://how2j.cn/k/idea/idea-download-install/1348.html?tid=95</a></p>
-<p>我把上面的都看了一遍，也就发现了一个问题，就是在做 JavaWeb项目，配置 Tomcat的时候，运行不会报错，但是浏览器404.说明白点就是：</p>
-<blockquote>
-<p>比如我有个项目是AAA，用eclipse发到tomcat上，运行项目AAA中的index.jsp，路径应该是localhost:8080/AAA/index.jsp,但是到了使用了IDEA，那么访问localhost:8080/AAA/index.jsp就会报404的错误.但是编译出来的WAR直接丢到TOMCAT上又是正常的。</p>
-</blockquote>
-<p>以上有两种方法解决，参照：<a href="http://blog.csdn.net/taoli1986/article/details/52816681" target="_blank" rel="external">http://blog.csdn.net/taoli1986/article/details/52816681</a></p>
-<p>最后，一切顺利，顺便说句，勇于尝试，受益终身，毫不夸张。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/11/29/Hello IDEA/" class="archive-article-date">
-  	<time datetime="2017-11-29T14:24:51.654Z" itemprop="datePublished"><i class="icon-clock"></i>2017-11-29</time>
 </a>
       
       
