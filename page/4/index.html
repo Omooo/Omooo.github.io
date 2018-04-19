@@ -143,6 +143,168 @@
       <div class="body-wrap">
         
   
+    <article id="post-Android --- 事件分发机制（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Android-—-事件分发机制（二）"><a href="#Android-—-事件分发机制（二）" class="headerlink" title="Android — 事件分发机制（二）"></a>Android — 事件分发机制（二）</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一篇我们其实已经知道事件分发机制的大概内容了，也是参考了郭大叔的两篇博文总结的。但是隐约感觉有点乱，要是真自己说说事件分发机制，又似乎无从谈起。本篇文章则是侧重总结性，在参考一些较新的博文来慢慢阐述，与上一篇最大的不同的是，本篇还是很建议大家阅读的，虽然我很菜。</p>
+<p><img src="https://i.loli.net/2018/02/02/5a741a9645386.jpg" alt=""></p>
+<p><strong>参考以下：</strong></p>
+<p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-theory" target="_blank" rel="external">安卓自定义View进阶-事件分发机制原理</a></p>
+<p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-source" target="_blank" rel="external">安卓自定义View进阶-事件分发机制详解</a></p>
+<h4 id="事件分发、拦截与消费"><a href="#事件分发、拦截与消费" class="headerlink" title="事件分发、拦截与消费"></a>事件分发、拦截与消费</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>相关方法</th>
+<th>Activity</th>
+<th>ViewGroup</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件分发</td>
+<td>dispatchTouchEvent()</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>事件拦截</td>
+<td>onInterceptTouchEvent()</td>
+<td>无</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>事件消费</td>
+<td>onTouchEvent()</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+</tbody>
+</table>
+<p>从上表可以看出，Activity和View都是没有事件拦截功能的，这是因为：</p>
+<ul>
+<li>Activity作为原始的事件分发者，如果Activity拦截了事件就会导致整个屏幕都无法相应事件，那么之前给控件注册事件就显得画蛇添足。</li>
+<li>View作为事件传递的最末端，要么消费掉事件，要么不处理进行回传，根本没必要进行事件拦截。</li>
+</ul>
+<h4 id="事件分发流程"><a href="#事件分发流程" class="headerlink" title="事件分发流程"></a>事件分发流程</h4><p>事件收集之后最先传递给Activity，然后依次向下传递，大致如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Activity --&gt; PhoneWindow --&gt; DecorView --&gt; ViewGroup --&gt; ··· --&gt; View</div></pre></td></tr></table></figure>
+<p>如果最后分发给了View，View也没有处理事件会怎么办？那么事件就会反方向回传，最终传給Activity，如果最后Activity也没有处理，那么事件才会被抛弃：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Activity &lt;-- PhoneWindow &lt;-- DecorView &lt;-- ViewGroup &lt;-- ··· &lt;-- View</div></pre></td></tr></table></figure>
+<p>这就是非常经典的<strong>责任链模式</strong> ，如果我能处理就拦截下来自己干，如果处理不了就交给责任链中的下一个对象。</p>
+<h4 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h4><p>先了解一下常见的几种事件，根据面向对象的思想，事件都被封装成了MotionEvent对象，本篇重点不在于此，所以只会涉及几个与手指触摸相关的常见事件：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACTION_DOWN</td>
+<td>手指 初次接触到屏幕 时触发</td>
+</tr>
+<tr>
+<td>ACTION_MOVE</td>
+<td>手指 在屏幕上滑动 时触发，往往会触发多次</td>
+</tr>
+<tr>
+<td>ACTION_UP</td>
+<td>手指 离开屏幕 时触发</td>
+</tr>
+<tr>
+<td>ACTION_CANCEL</td>
+<td>时间 被上层拦截 时触发</td>
+</tr>
+</tbody>
+</table>
+<h4 id="事件分发、拦截与消费-1"><a href="#事件分发、拦截与消费-1" class="headerlink" title="事件分发、拦截与消费"></a>事件分发、拦截与消费</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>相关方法</th>
+<th>ViewGroup</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件分发</td>
+<td>dispatchTouchEvent()</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>事件拦截</td>
+<td>onInterceptTouchEvent()</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>事件消费</td>
+<td>onTouchEvent()</td>
+<td>有</td>
+<td>有</td>
+</tr>
+</tbody>
+</table>
+<p>dispatchTouchEvent() 是事件分发机制的核心，所有的事件调度都归他管。ViewGroup有很多子View需要管理，需要事件分发也说得过去，但是为什么View也要有事件分发呢？</p>
+<p>那是因为View可以注册很多事件监听器：onClick()、onLongClick()、onTouch()，并且View自身也有onTouchEvent()方法，那么多事件方法肯定要有dispatchTouchEvent()来管理咯。</p>
+<p><strong>事件调度顺序：</strong></p>
+<p><img src="http://ww2.sinaimg.cn/large/005Xtdi2jw1f8r8jg9mw5j308y07mglw.jpg" alt=""></p>
+<h4 id="ViewGroup相关"><a href="#ViewGroup相关" class="headerlink" title="ViewGroup相关"></a>ViewGroup相关</h4><ol>
+<li><p>ViewGroup中可能有多个ChildView，如何判断应该分配给哪一个呢？</p>
+<p>把所有ChildView遍历一遍，如果手指触摸点在ChildView区域内就分给这个View。</p>
+</li>
+<li><p>当该点的ChildView有重叠时应该如何分配呢？</p>
+<p>当ChildView重叠时，一般会分配给显示在最上面的ChildView。那如何判断哪个是显示在最上面的呢？后面加载的一般会覆盖掉之前的，所以显示在最上面的是最后加载的。</p>
+</li>
+<li><p>ViewGroup和ChildView同时注册了事件监听器，哪个会先执行？</p>
+<p>事件优先给ChildView，会被ChildView消费掉，ViewGroup不会相应。</p>
+</li>
+<li><p>所有事件都应该被同一View消费。</p>
+<p>同一次点击事件只能被一个View消费。View中onClick事件需要同时接受到ACTION_DOWN和ACTION_UP才能触发，如果分配给了不同的View，那么onClick将无法被正确触发。</p>
+<p>Android为了保证所有的事件都是被一个View消费的，对第一次事件（ACTION_DOWN）进行了特殊判断，View只有消费了ACTION_DOWN事件，才能接受到后续的事件（可点击控件默认会消费所有事件），并且会将后续所有事件传递过来，不会再传递给其他View，除非上层View进行了拦截。如果上层View拦截了当前正在处理的事件，会收到一个ACTION_CANCEL，表示当前事件已经结束，后续事件不会再传递过来。</p>
+</li>
+<li><p>一次触摸流程中产生事件应被同一个View消费，全部接受或者全部拒绝。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/02/Android --- 事件分发机制（二）/" class="archive-article-date">
+  	<time datetime="2018-03-02T13:49:16.471Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-02</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Android --- 事件分发机制（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -317,68 +479,9 @@
 
 
   
-    <article id="post-Android --- 侧滑栏的实现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现"><a href="#Android-—-DrawerLayout-NavigationView-ToolsBar-侧滑栏的实现" class="headerlink" title="Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现"></a>Android — DrawerLayout/NavigationView/ToolsBar 侧滑栏的实现</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本来在新建项目的时候有侧滑栏模板可以选择，但是用到了很多作为比较常见的MD风格的控件，还是需要自己写一遍。实现一个侧滑栏不仅可以学习以上三个布局/控件，还能学到沉浸式状态栏的实现，还是很有价值的，同时也踩踩坑。</p>
-<p> <img src="https://i.loli.net/2018/01/11/5a5779f711ae7.gif" style="height:150px"></p>
-<p>学习的过程中主要是参考了以下这篇博文，讲的是非常详细，还是很nice的：</p>
-<p><a href="https://www.jianshu.com/p/d70cfd724c7f" target="_blank" rel="external">https://www.jianshu.com/p/d70cfd724c7f</a></p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里其实坑还是有的，需要注意以下几点：</p>
-<ol>
-<li><p>该Activity类需要继承至AppCompatActivity，而不是Activity。继承至Activity在写setSupportActionBar(mToolbar)会直接报错，emmmm，是时候要总结以下两者的区别的。</p>
-</li>
-<li><p>实例化NavigationView/Toolsbar的时候，需要加上前缀，即：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> android.support.design.widget.NavigationView mMenuView;</div><div class="line"><span class="keyword">private</span> android.support.v7.widget.Toolbar mToolbar;</div></pre></td></tr></table></figure>
-<p>兼容更多API版本。</p>
-</li>
-<li><p>NavigationView中的menu菜单的中的item只显示标题，不显示icon。网上找了一大堆，都是要重写onCreatOptionsMenu()方法，但是为什么我的不行呢。最后发现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将Icon显示为它本身的颜色竟然解决了不显示icon的问题</span></div><div class="line">mMenuView = findViewById(R.id.navigation_view);</div><div class="line">mMenuView.setItemIconTintList(<span class="keyword">null</span>);</div></pre></td></tr></table></figure>
-<p>我设置的icon也不是无色透明的呀。</p>
-</li>
-<li><p>想仿照网易云的侧滑栏，但是在NavigationView的布局下面添加布局是显示不出来的，所以这算是一个问题，网上写的侧滑栏也是类似以下：</p>
-<p><img src="https://i.loli.net/2018/01/11/5a577fbb82c9a.png" style="height:500px"></p>
-<p>网易云侧滑栏：</p>
-<p><img src="https://i.loli.net/2018/01/11/5a57806fc0a09.jpg" style="height:500px"></p>
-<p>如果你有什么想法，欢迎邮至869759698@qq.com，感激不尽。</p>
-<p>​</p>
-</li>
-</ol>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/01/11/Android --- 侧滑栏的实现/" class="archive-article-date">
-  	<time datetime="2018-01-11T15:22:37.003Z" itemprop="datePublished"><i class="icon-clock"></i>2018-01-11</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
