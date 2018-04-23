@@ -6,14 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 沐小晨曦 | Omooo</title>
+  <title>沐小晨曦 | Omooo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="抢红包算法，了解一下？问题描述emmmm，就是我们平常的抢红包金额分配问题。按照正常的思路，就是每次抢到的金额为随机区间（0，剩余金额）。但是问题也很明显，这样先抢的人就会有很大的优势，越到后面区间就越小，那么怎么保证每个人抢到的金额几率相等呢？
+二倍均值法即每次抢到的金额为区间：（0，平均值x2），例如：
+假设10个人抢100元
+第一个人抢到的金额随机区间为：(0,100/10*2) –&amp;gt">
+<meta property="og:type" content="article">
 <meta property="og:title" content="沐小晨曦 | Omooo">
-<meta property="og:url" content="http://yoursite.com/archives/page/21/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/如何实现抢红包算法？/index.html">
 <meta property="og:site_name" content="沐小晨曦 | Omooo">
+<meta property="og:description" content="抢红包算法，了解一下？问题描述emmmm，就是我们平常的抢红包金额分配问题。按照正常的思路，就是每次抢到的金额为随机区间（0，剩余金额）。但是问题也很明显，这样先抢的人就会有很大的优势，越到后面区间就越小，那么怎么保证每个人抢到的金额几率相等呢？
+二倍均值法即每次抢到的金额为区间：（0，平均值x2），例如：
+假设10个人抢100元
+第一个人抢到的金额随机区间为：(0,100/10*2) –&amp;gt">
+<meta property="og:updated_time" content="2018-04-23T05:44:30.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="沐小晨曦 | Omooo">
+<meta name="twitter:description" content="抢红包算法，了解一下？问题描述emmmm，就是我们平常的抢红包金额分配问题。按照正常的思路，就是每次抢到的金额为随机区间（0，剩余金额）。但是问题也很明显，这样先抢的人就会有很大的优势，越到后面区间就越小，那么怎么保证每个人抢到的金额几率相等呢？
+二倍均值法即每次抢到的金额为区间：（0，平均值x2），例如：
+假设10个人抢100元
+第一个人抢到的金额随机区间为：(0,100/10*2) –&amp;gt">
   
     <link rel="alternative" href="/atom.xml" title="沐小晨曦 | Omooo" type="application/atom+xml">
   
@@ -141,131 +154,106 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-  
+        <article id="post-如何实现抢红包算法？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="抢红包算法，了解一下？"><a href="#抢红包算法，了解一下？" class="headerlink" title="抢红包算法，了解一下？"></a>抢红包算法，了解一下？</h2><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>emmmm，就是我们平常的抢红包金额分配问题。按照正常的思路，就是每次抢到的金额为随机区间（0，剩余金额）。但是问题也很明显，这样先抢的人就会有很大的优势，越到后面区间就越小，那么怎么保证每个人抢到的金额几率相等呢？</p>
+<h4 id="二倍均值法"><a href="#二倍均值法" class="headerlink" title="二倍均值法"></a>二倍均值法</h4><p>即每次抢到的金额为区间：（0，平均值x2），例如：</p>
+<p>假设10个人抢100元</p>
+<p>第一个人抢到的金额随机区间为：(0,100/10*2) –&gt; (0,20) 均值为10</p>
+<p>假设第一个人抢到10元，那么第二个人抢到的随机区间为：(0,90/9*2) –&gt; (0,20) 均值为10</p>
+<p>这样也就保证了每个人抢到的金额均值一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title">divider</span><span class="params">(<span class="keyword">int</span> totalMoney, <span class="keyword">int</span> totalPeople)</span> </span>&#123;</div><div class="line">    List&lt;Integer&gt; amountList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    <span class="keyword">int</span> restMoney = totalMoney;</div><div class="line">    <span class="keyword">int</span> restPeople = totalPeople;</div><div class="line">    Random random = <span class="keyword">new</span> Random();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; totalPeople - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">int</span> amount = random.nextInt(restMoney / restPeople * <span class="number">2</span>) + <span class="number">1</span>;</div><div class="line">        restMoney -= amount;</div><div class="line">        restPeople--;</div><div class="line">        amountList.add(amount);</div><div class="line">    &#125;</div><div class="line">    amountList.add(restMoney);</div><div class="line">    <span class="keyword">return</span> amountList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实现起来也并不是很难。</p>
+<p>想法来源于@小灰</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&amp;mid=2653193719&amp;idx=1&amp;sn=64f184d36af9ef6393998fe5ea79329c&amp;chksm=8c99f72dbbee7e3b3f00e067613c15144ce3624782161bd668ac57943d6aa198f1cebed8a050&amp;scene=0#rd" target="_blank" rel="external">漫画：如何实现抢红包算法？</a></p>
+<p>但是你仔细阅读文章的话，还是能注意到一个地方是有问题的。那就是“除了最后一次，任何一次抢到的金额都要小于人均金额的两倍”。</p>
+<p>事实上并不是如此，因为如果第一个人抢到的值不是10，而是5，就会导致第二人抢到的均值大于10。</p>
+<p>我们再看看知乎对这个问题的一个高票讨论，</p>
+<p><a href="https://www.zhihu.com/question/22625187/answer/85530416" target="_blank" rel="external">微信红包的随机算法是怎样实现的？</a></p>
+<p>实现也是差不多的，还有就是有人说到抢到的金额应该是服从正态分布的，大多数人抢到的值应该在均值附近。</p>
+<p>关于架构方面可以看上面一篇文章。</p>
+<p>看来一个小问题仔细思考还是有点东西的。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/04/23/如何实现抢红包算法？/" class="archive-article-date">
+  	<time datetime="2018-04-23T05:45:15.490Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-23</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/Webmagic/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.256Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/TCP 空闲扫描/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.251Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/ST2 漏洞/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.246Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/19/Android --- 自定义View（六）之Path 贝塞尔曲线/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/sql注入/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.241Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/14/smtp/" class="archive-article-date">
-  	<time datetime="2017-07-14T07:28:51.236Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/20/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/19/">19</a><a class="page-number" href="/archives/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/archives/page/22/">22</a><a class="page-number" href="/archives/page/23/">23</a><a class="page-number" href="/archives/page/24/">24</a><a class="extend next" rel="next" href="/archives/page/22/">Next &raquo;</a>
-    </nav>
-  
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="如何实现抢红包算法？" data-title="" data-url="http://yoursite.com/2018/04/23/如何实现抢红包算法？/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Omooo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -288,8 +276,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
