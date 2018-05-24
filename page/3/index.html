@@ -143,6 +143,64 @@
       <div class="body-wrap">
         
   
+    <article id="post-认识深度学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="从零开始认知深度学习"><a href="#从零开始认知深度学习" class="headerlink" title="从零开始认知深度学习"></a>从零开始认知深度学习</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>上一节我们学了机器学习相关的知识，感觉还是蛮好理解的，也很有意思。这节就开始认识一下深度学习了。这一节也是偏重于理论知识，理解起来也很简单。对了，push上去的时候，发现网页并没有解析MarkDown里面的数据表达式，这就很僵了。</p>
+<p>对于上一篇可见：<a href="https://www.jianshu.com/p/336df1f98730">从零开始认知机器学习</a></p>
+<p>图片一个一个截的，蛮麻烦的。之后可能就不截图了，反正也没人看。</p>
+<p>提供下载：<a href="http://www.wooyun.site/DeepLearningNote/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AE%A4%E7%9F%A5%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.md">从零开始认知机器学习</a></p>
+<p>我尽可能的把写完的放在服务器上吧。</p>
+<p>本节目录如下：</p>
+<ol>
+<li>神经网络是什么？<ul>
+<li>神经元</li>
+<li>激励函数</li>
+<li>神经网络</li>
+</ul>
+</li>
+<li>深度神经网络</li>
+<li>深度学习为什么这么强？<ul>
+<li>不用再提取特征</li>
+<li>处理线性不可分</li>
+</ul>
+</li>
+<li>小结</li>
+</ol>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2018/03/13/认识深度学习/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/03/13/认识深度学习/" class="archive-article-date">
+  	<time datetime="2018-03-13T08:58:28.974Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-13</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-认识机器学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -326,164 +384,6 @@
       
       <a href="/2018/03/07/Android --- 自定义View（二）之绘制基本图形/" class="archive-article-date">
   	<time datetime="2018-03-07T12:06:41.241Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-07</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- 自定义View（一）之基础知识" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-自定义View（一）之基础知识"><a href="#Android-—-自定义View（一）之基础知识" class="headerlink" title="Android — 自定义View（一）之基础知识"></a>Android — 自定义View（一）之基础知识</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>记得之前写过一篇自定义View的文章，当时也是尝尝鲜。今天看到一篇自定义View系列文章，也是蛮新的，决定要认认真真的系统学习一遍。原文地址：<a href="http://www.gcssloop.com/customview/CustomViewIndex/" target="_blank" rel="external">http://www.gcssloop.com/customview/CustomViewIndex/</a> 当然，系列中有些东西我觉得很没必要，我想学最实用的知识。（可能我的看法有些片面）还有文章中讲的有些我不明白的地方，我在看看别的博客在加上自己的理解写了这篇博客。这篇文章再详细记录一下学习中非常重要的知识点和要注意的东西。整体目录如下：</p>
-<ol>
-<li>View坐标系</li>
-<li>自定义View绘制流程概述</li>
-<li>总结流程关键字以及作用</li>
-</ol>
-<p>那准备好了吗？</p>
-<p><img src="https://i.loli.net/2018/01/26/5a6aa1f4bc282.gif" height="170" width="200"></p>
-<h4 id="View-坐标系"><a href="#View-坐标系" class="headerlink" title="View 坐标系"></a>View 坐标系</h4><p>首先要明确的是：Android中的坐标系统是以左上角为坐标原点，向右是X轴正方向，向下是Y轴正方向。<strong>View的坐标系统是相对于父控件而言的。</strong></p>
-<p><strong>View 获取自身宽高：</strong></p>
-<ul>
-<li>getHeight()    获取View自身高度</li>
-<li>getWidth()      获取View自身宽度</li>
-</ul>
-<p><strong>View 自身坐标：</strong></p>
-<ul>
-<li>getTop()      获取View自身顶边到其父布局顶边的距离</li>
-<li>getLeft()    获取View自身左边到其父布局左边的距离</li>
-<li>getRight()    获取View自身右边到其父布局左边的距离</li>
-<li>getBottom()     获取View自身底边到其父布局顶边的距离</li>
-</ul>
-<p><strong>MotionEvent提供的方法：</strong></p>
-<ul>
-<li>getX()     获取点击事件距离控件左边的距离，即视图坐标</li>
-<li>getY()     获取点击事件距离控件顶边的距离，即视图坐标</li>
-<li>getRawX()     获取点击事件距离整个屏幕左边距离，即绝对坐标</li>
-<li>getRawY()     获取点击事件距离整个屏幕顶边的距离，即绝对坐标</li>
-</ul>
-<p>说了那么多，还是来一图胜千言吧。</p>
-<p><img src="http://img.blog.csdn.net/20160221170553904" height="650" width="500" align="center"></p>
-<h4 id="自定义View绘制流程"><a href="#自定义View绘制流程" class="headerlink" title="自定义View绘制流程"></a>自定义View绘制流程</h4><p>盗一张图：</p>
-<p><img src="http://ww4.sinaimg.cn/large/005Xtdi2jw1f638wreu74j30fc0heaay.jpg" alt=""></p>
-<p><strong>几个非常重要的函数：</strong></p>
-<ul>
-<li><p>构造函数</p>
-<p>构造函数是View的入口，可以用于初始化一些内容，和获取自定义属性。View的构造函数有四种重载，而有四个参数的构造函数在API21的时候才添加上，暂不考虑。而有三个参数的构造方法中第三个参数是默认的Style，这里默认的Style是指它在当前Application或Activity所用Theme中的默认Style，且只有在明确调用的时候才会生效。</p>
-<p>需要注意的是，即使你在View中使用了Style这个属性也不会调用三个参数的构造方法，所以调用的依旧是两个参数的构造方法。</p>
-<p>调用一个参数的构造方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CustomView view = <span class="keyword">new</span> CustomView(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
-<p>调用两个参数的构造方法：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//在layout文件中 - 格式为： 包名.View名</div><div class="line"><span class="tag">&lt;<span class="name">top.omooo.CustomView</span></span></div><div class="line">  <span class="attr">android:layout_width</span>"<span class="attr">wrap_content</span>"</div><div class="line">  <span class="attr">android:layout_height</span>"<span class="attr">wrap_content</span>"/&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>onMeasure() 测量View大小</p>
-<p>View的大小不仅由自身所决定，同时也会受到父控件的影响，为了我们的控件能更好的适应各种情况，一般我们会自己进行测量。</p>
-</li>
-</ul>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">                 <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">                 <span class="comment">//获取宽度的确切数值</span></div><div class="line">                 <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">                 <span class="comment">//获取宽度的测量模式</span></div><div class="line">                 <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">             &#125;</div></pre></td></tr></table></figure>
-
-onMeasure()函数中有两个参数，很显然它们是和宽高相关的，**但是实际上它们不是宽和高** ，而是由宽高和各自方向上对应的测量模式来合成的一个值。
-
-测量模式一共有三种，被定义在Android中的View类的一个内部类View.MeasureSpec中。
-
-注意，如果对View的宽高进行修改了，不要调用super.onMeasure()；而是调用setMeasuredDimension() 这个函数。
-</code></pre><ul>
-<li><p>onSizeChanged()  确定View的大小</p>
-<p>为什么View的大小测量完了，还要再次确定View的大小呢？这是因为View的大小不仅由View本身控制，而且还受父控件的影响。所以我们在确定View的大小的时候最好使用系统提供的onSizeChanged()回调函数。</p>
-</li>
-</ul>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> w   View最终的宽</div><div class="line">* <span class="doctag">@param</span> h   View最终的高</div><div class="line">* <span class="doctag">@param</span> oldw 上一次宽</div><div class="line">* <span class="doctag">@param</span> oldh  上一次高</div><div class="line">*/</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>onLayout()   确定子View布局位置</p>
-<p>在自定义ViewGroup中的时候，会用它确定子View的位置。onLayout() 一般是循环取出子View，然后计算各个子View的坐标值，然后用以下函数设置子View的位置。</p>
-</li>
-</ul>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* <span class="doctag">@param</span> l getLeft()</div><div class="line">* <span class="doctag">@param</span> t getTop()</div><div class="line">* <span class="doctag">@param</span> r getRight()</div><div class="line">* <span class="doctag">@param</span> b getBottom()</div><div class="line">*/</div></pre></td></tr></table></figure>
-
-    @Override
-    public void layout(int l, int t, int r, int b) {
-        super.layout(l, t, r, b);
-    }
-​
-</code></pre><ul>
-<li><p>onDraw() 绘制内容</p>
-<p>是实际绘制的部分，使用的是Canvas绘图。</p>
-</li>
-</ul>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>另外</p>
-<p>自定义View之后，一般会对外暴露一些接口，用于控制View的状态或监听View的变化等等。</p>
-</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>关键字</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>构造函数</td>
-<td>View初始化</td>
-</tr>
-<tr>
-<td>2</td>
-<td>onMeasure()</td>
-<td>测量View大小</td>
-</tr>
-<tr>
-<td>3</td>
-<td>onSizeChanged()</td>
-<td>确定View大小</td>
-</tr>
-<tr>
-<td>4</td>
-<td>onLayout()</td>
-<td>确定子View布局</td>
-</tr>
-<tr>
-<td>5</td>
-<td>onDraw()</td>
-<td>实际绘制内容</td>
-</tr>
-<tr>
-<td>6</td>
-<td>提供接口</td>
-<td>控制View或监听View状态</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/05/Android --- 自定义View（一）之基础知识/" class="archive-article-date">
-  	<time datetime="2018-03-05T13:41:19.580Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-05</time>
 </a>
       
       

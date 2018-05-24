@@ -143,6 +143,82 @@
       <div class="body-wrap">
         
   
+    <article id="post-第一讲" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Java-核心技术-36-讲（一）"><a href="#Java-核心技术-36-讲（一）" class="headerlink" title="Java 核心技术 36 讲（一）"></a>Java 核心技术 36 讲（一）</h3><h4 id="谈谈你对Java平台的理解？“Java是解释执行”，这句话正确吗？"><a href="#谈谈你对Java平台的理解？“Java是解释执行”，这句话正确吗？" class="headerlink" title="谈谈你对Java平台的理解？“Java是解释执行”，这句话正确吗？"></a>谈谈你对Java平台的理解？“Java是解释执行”，这句话正确吗？</h4><p><strong>典型回答</strong></p>
+<p>Java本身是一种面向对象的语言，最显著的特性有两个方面，一是所谓的“一次书写，到处运行”（Write once,run anywhere），能够非常容易的获得跨平台能力；另外就是垃圾收集（GC），Java通过垃圾收集器回收分配内存，大部分情况下，程序猿不需要自己操心内存的分配和回收。</p>
+<p>我们日常会接触到JRE或者JDK。JRE即Java运行环境，包含了JVM和Java类库，以及一些模块等。而JDK可以看做是JRE的一个超集，提供了更多工具，比如编译器、各种诊断工具等。</p>
+<p>对于“Java是解释执行”这句话，这个说法不太准确。我们开发的Java源代码，首先通过Javac编译成字节码，然后在运行时，通过JVM内嵌的解释器将字节码转换为最终的机器码。但是常见的JVM，比如我们大多数情况下使用的Oracle JDK提供的Hotspot JVM，都提供了JIT（Just -In -Time）编译器，也就是通常所说的动态编译器，JIT能够在运行时将热点代码编译成机器码，这种情况下部分热点代码就属于<strong>编译执行</strong>，而不是解释执行了。</p>
+<p><strong>知识扩展</strong></p>
+<p>对于Java平台的理解，可以从很多方面简明扼要的谈一下，例如：Java语言特性，包括泛型、Lambda等语言特性；基础类库，包括集合、IO/NIO、网络、并发、安全等基础类库。</p>
+<p>或者谈谈JVM的一些基础概念和机制，比如类加载机制、垃圾收集的基本原理等等。</p>
+<p>当然还有JDK包含的一些工具如编译器、运行时环境、安全工具、诊断和监控工具等等。</p>
+<p><img src="https://i.loli.net/2018/05/24/5b0608ac04127.png" alt=""></p>
+<p>然后再回到解释执行和编译执行的问题。</p>
+<p>众所周知，我们通常把Java分为编译器和运行时，这里说的Java编译和C/C++是有着不同的意义的，Javac的编译，编译Java源码生成字节码，而不是可以直接执行的机器码。Java通过字节码和JVM这种跨平台的抽象，屏蔽了操作系统和硬件的细节，这也是实现“一次编写，到处执行”的基础。</p>
+<p>在运行时，JVM会通过类加载器加载字节码，解释或者编译执行。在主流的Java版本中，如JDK8实际是解释和编译混合的一种模式，即所谓的混合模式（-Xmixed）。通常运行在Server模式的JVM，会进行上万次调用以收集足够的信息进行高效的编译，client模式这个门限是1500次。Oracle Hotspot JVM内置了两个不同的JIT compiler，C1对应前面说的client模式，适用于对于启动速度敏感的应用，比如普通的Java桌面应用；C2对应server模式，它的优化是为长时间运行的服务器端应用设计的。默认采用所谓的分层编译。</p>
+<p>Java虚拟机启动时，可以指定不同的参数对运行模式进行选择。比如，指定“-Xint”，就是告诉JVM只进行解释执行，不对代码进行编译，这种模式抛弃了JIT可能带来的性能优势。毕竟解释器是逐条读入，逐条解释运行的。与其相对应的，还有一个“-Xcomp”参数，这是告诉JVM关闭解释器，不要进行解释执行，或者叫做最大优化级别。那这种模式是不是高效呢？简单来说，还真未必。“-Xcomp”会导致JVM启动变慢非常多。</p>
+<p>除了我们日常最常见的Java使用模式，其实还有一种新的编译方式，即所谓的AOT（Ahead -of - Time），直接将字节码编译成机器代码，这样就避免了JIT预热等各方面的开销，比如Oracle JDK 9就引入了实验性的AOT特性。</p>
+<p>另外，JVM作为一个强大的平台，不仅仅只有Java语言可以运行在JVM上，本质上合规的字节码都可以运行，Java语言自身也为此提供了便利，可以看到类似Scala、Groovy等大量JVM语言，活跃在不同的场景。</p>
+<p><strong>更多声音</strong></p>
+<p>Java的跨平台特性与JVM的存在密不可分。Java语言本身与其他编程语言没有特别大的差异，也不是说Java语言可以跨平台，而是在不同的平台都有可以让Java语言运行的环境而已，所有才有了一些编写，到处运行的说法。</p>
+<p>程序从源代码到运行的三个阶段：编码 — 编译 — 运行 —- 调试。Java在编译阶段则体现了跨平台的特点。编译过程大概是这样的：首先将Java源代码转化为.class文件字节码，这是第一次编译。.class文件就是可以到处运行的文件，然后java字节码会被转化为目标机器码，这是由JVM来执行的，即Java的第二次编译。</p>
+<p>“到处运行”的关键和前提在于JVM。因为在第二次编译中JVM起着关键性作用，在可以运行Java虚拟机的地方都内含一个JVM操作系统。从而使Java提供了各种不同平台上的虚拟机制，因此实现了“到处运行”的效果。</p>
+<p>C/C++编程是面向操作系统的，需要开发者极大的关系不同操作系统之间的差异性；而Java平台通过虚拟机屏蔽了操作系统的底层细节，使得开发者不需过多关注不同操作系统之间的差异性。</p>
+<p>通过一个间接的中间层来进行解耦，是计算机领域非常常用的一种艺术手法，虚拟机是这样，操作系统是这样，HTTP也是这样。</p>
+<p>写个程序直接执行字节码就是解释执行；写个程序运行时把字节码动态翻译成机器码就是JIT；写个程序把Java源代码直接翻译成机器码就是AOT；造个CPU直接执行字节码，字节码就是机器码。</p>
+<p>解释执行和编译执行的区别，类别一下，一个是同声传译，一个是放录音。</p>
+<p><strong>参考</strong></p>
+<p>以上都是参考自<a href="https://time.geekbang.org/column/article/6845" target="_blank" rel="external">谈谈你对Java平台的理解？</a></p>
+<p>越读越有味道的文章。</p>
+<p><strong>Android层面的扩展</strong></p>
+<p>上面提到了JIT和AOT，实际上这也是ART虚拟机与Dalvik虚拟机之间的区别。</p>
+<p>Dalvik是Google设计用于Android平台的Java虚拟机。Dalvik与JVM之间最大的区别在于虚拟机架构不同。<strong>JVM基于栈架构</strong>，程序在运行时虚拟机需要频繁的从栈上读写数据，这个过程需要更多的指令分配和内存访问次数，会耗费不少CPU时间，而且对于手机设备这种资源有限的条件下。是相当一大笔开销。<strong>Dalvik基于寄存器架构</strong>，数据访问通过寄存器直接传递，这样的访问方式比基于栈方式要快很多。</p>
+<p>ART即Android Runtime，其处理应用程序执行的方式完全不同于Dalvik，Dalvik是依靠一个JIT编译器去解释字节码。开发者编译后的应用代码需要通过一个解释器在用户设备上运行，这一机制并不高效，但能让应用更容易的在不同硬件和架构上运行。ART则完全改变了这套做法，在应用安装时就预编译字节码到机器码，这一机制就是AOT编译。在移除解释代码这一过程中，应用程序执行将更有效率，启动更快。</p>
+<p>ART优点：</p>
+<ol>
+<li>系统性能显著提升</li>
+<li>应用启动更快、运行更快、体验更加流畅、触摸反馈更加及时</li>
+<li>更长的电池续航能力</li>
+<li>支持更低的硬件</li>
+</ol>
+<p>ART缺点：</p>
+<ol>
+<li>更大的存储空间占用，可能会增加10%-20%</li>
+<li>更长的应用安装时间</li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2018/05/24/第一讲/" class="archive-article-date">
+  	<time datetime="2018-05-24T14:58:52.864Z" itemprop="datePublished"><i class="icon-clock"></i>2018-05-24</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-如何实现抢红包算法？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -326,57 +402,6 @@
       
       <a href="/2018/04/09/Android --- CoordinatorLayout总结/" class="archive-article-date">
   	<time datetime="2018-04-09T03:50:14.583Z" itemprop="datePublished"><i class="icon-clock"></i>2018-04-09</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android --- Lottie的一些坑" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="Android-—-Lottie初探及跳坑"><a href="#Android-—-Lottie初探及跳坑" class="headerlink" title="Android — Lottie初探及跳坑"></a>Android — Lottie初探及跳坑</h2><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Lottie早就听过，但是由于播放动画的资源（Json文件）来源于AE，所以也就简单了解一下也没在继续下去了。今天我无意间看到一篇介绍Lottie的，随便看下吧，哇，赚！</p>
-<p>不是自己没法用AE导出Json文件吗？不用怕，网上有人分享，Airbnb专门建立一个网站用来大家分享自己的Json，并且能预览动画：</p>
-<p><a href="https://www.lottiefiles.com/" target="_blank" rel="external">https://www.lottiefiles.com/</a></p>
-<p>既然有资源了，那就从官方文档开始尝试了：</p>
-<p><a href="http://airbnb.io/lottie/android/android.html#getting-started" target="_blank" rel="external">http://airbnb.io/lottie/android/android.html#getting-started</a></p>
-<p>文档也很详细就不多说了，只记录一下可能遇到的问题吧。</p>
-<h4 id="跳坑"><a href="#跳坑" class="headerlink" title="跳坑"></a>跳坑</h4><p>依赖的时候遇到了我们用开源库经常碰到的v4包重复依赖的情况：DexException Multiple dex files define</p>
-<p>通常的做法是在重复依赖的库中去掉v4包，即：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">compile ('com.airbnb.android:lottie:2.5.1')&#123;</div><div class="line">    exclude group: 'com.android.support'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是这样并不能解决我的问题，网上搜了一下，可能需要分包，于是试了一下，还真行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.android.support:multidex:1.0.3&apos;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  defaultConfig &#123;</div><div class="line">/****/</div><div class="line">      multiDexEnabled true</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<p>添加分包支持就行了，总之这种问题就是哪几种解决办法，挨着试一遍就行了。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://blog.csdn.net/zgd826237710/article/details/79456202" target="_blank" rel="external">https://blog.csdn.net/zgd826237710/article/details/79456202</a></p>
-<p><a href="https://www.jianshu.com/p/f769ea6db2c1" target="_blank" rel="external">https://www.jianshu.com/p/f769ea6db2c1</a></p>
-<p><a href="https://www.jianshu.com/p/0431a6c9c650" target="_blank" rel="external">https://www.jianshu.com/p/0431a6c9c650</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2018/03/31/Android --- Lottie的一些坑/" class="archive-article-date">
-  	<time datetime="2018-03-31T05:18:22.106Z" itemprop="datePublished"><i class="icon-clock"></i>2018-03-31</time>
 </a>
       
       
